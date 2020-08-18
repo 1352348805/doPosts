@@ -5,4 +5,5 @@ package com.doposts.dao.interfaces;
  * @author dx_hualuo
  */
 public interface PostClassDao {
+
 }

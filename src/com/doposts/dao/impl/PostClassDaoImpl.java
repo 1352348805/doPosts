@@ -11,7 +11,7 @@ import com.dxhualuo.database.impl.MySQL_C3P0;
  */
 public class PostClassDaoImpl extends MySQL_C3P0<PostClass> implements PostClassDao {
     public PostClassDaoImpl(){
-        super(DatabaseConfig.getUrl(), DatabaseConfig.getPort(), DatabaseConfig.getDatabase(), DatabaseConfig.getUserName(), DatabaseConfig.getPassword(), "post");
+        super("post");
     }
 
 }

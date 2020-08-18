@@ -49,6 +49,11 @@ public class User {
      */
     private String status;
 
+    /**
+     *  创建此楼的用户Id
+     */
+    private Integer createUserId;
+
     public Integer getUserId() {
         return userId;
     }
@@ -103,5 +108,19 @@ public class User {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", userLoginName='" + userLoginName + '\'' +
+                ", userPassword='" + userPassword + '\'' +
+                ", group='" + group + '\'' +
+                ", favicon='" + favicon + '\'' +
+                ", status='" + status + '\'' +
+                ", createUserId=" + createUserId +
+                '}';
     }
 }

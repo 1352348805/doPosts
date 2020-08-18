@@ -7,7 +7,9 @@ import com.doposts.dao.interfaces.*;
  *  数据库实体类
  * @author dx_hualuo
  */
+@SuppressWarnings("unused")
 public class PostItDatabase {
+    //初始化顺序不要动，C3P0连接配置在第一个FloorDaoImpl类中
     static {
         FLOOR_DAO = new FloorDaoImpl();
         POST_CLASS_DAO = new PostClassDaoImpl();

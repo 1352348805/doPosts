@@ -93,4 +93,16 @@ public class Floor {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
+    @Override
+    public String toString() {
+        return "Floor{" +
+                "floorId=" + floorId +
+                ", postId=" + postId +
+                ", postFloor=" + postFloor +
+                ", postContent='" + postContent + '\'' +
+                ", sendDate=" + sendDate +
+                ", imageUrl='" + imageUrl + '\'' +
+                '}';
+    }
 }

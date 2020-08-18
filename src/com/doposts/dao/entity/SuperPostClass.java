@@ -3,7 +3,7 @@ package com.doposts.dao.entity;
 import com.dxhualuo.database.annotation.PrimaryKey;
 
 /**
- *  递归查询帖子分类的实体类
+ *  递归查询帖子分类的超级实体类
  * @author dx_hualuo
  */
 @SuppressWarnings("unused")

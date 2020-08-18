@@ -11,7 +11,11 @@ import com.dxhualuo.database.impl.MySQL_C3P0;
  */
 public class UserDaoImpl extends MySQL_C3P0<User> implements UserDao {
     public UserDaoImpl(){
-        super(DatabaseConfig.getUrl(), DatabaseConfig.getPort(), DatabaseConfig.getDatabase(), DatabaseConfig.getUserName(), DatabaseConfig.getPassword(), "post");
+        super("post");
     }
 
+    @Override
+    public User selectUserByUserNameAndPassword(String userName, String password) {
+        return null;
+    }
 }
