@@ -1,16 +1,16 @@
 package com.doposts.dao.impl;
 
 import com.doposts.dao.DatabaseConfig;
-import com.doposts.dao.interfaces.PostDao;
-import com.doposts.entity.Post;
+import com.doposts.dao.interfaces.PostClassDao;
+import com.doposts.entity.PostClass;
 import com.dxhualuo.database.impl.MySQL_C3P0;
 
 /**
- *  帖子DAO的实现
+ *  帖子类型的实现
  * @author dx_hualuo
  */
-public class PostDaoImpl extends MySQL_C3P0<Post> implements PostDao {
-    public PostDaoImpl(){
+public class PostClassDaoImpl extends MySQL_C3P0<PostClass> implements PostClassDao {
+    public PostClassDaoImpl(){
         super(DatabaseConfig.getUrl(), DatabaseConfig.getPort(), DatabaseConfig.getDatabase(), DatabaseConfig.getUserName(), DatabaseConfig.getPassword(), "post");
     }
 
