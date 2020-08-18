@@ -1,4 +1,4 @@
-package com.doposts.dao.interfaces;
+package com.doposts.dao.impl;
 
 import com.doposts.dao.DatabaseConfig;
 import com.doposts.dao.interfaces.PostDao;
