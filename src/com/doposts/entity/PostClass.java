@@ -11,7 +11,7 @@ import com.dxhualuo.database.annotation.TableMapping;
  * @email 1352348805@qq.com
  */
 @TableMapping("post_classification")
-public class Classification {
+public class PostClass {
 
     /**
      * 分类id
