@@ -13,6 +13,19 @@ public interface UserDao {
      * @param password 密码
      * @return 查询结果
      */
-    User selectUserByUserNameAndPassword(String userName, String password);
+    User selectUserByUserLoginNameAndPassword(String userName, String password);
 
+    /**
+     *  通过登录名来查询用户
+     * @param loginName 登录名
+     * @return User实体类
+     */
+    User selectUserByLoginName(String loginName);
+
+    /**
+     *  插入一个新的用户
+     * @param entity User实体类
+     * @return 受影响行数
+     */
+    int insertUserByUser(User entity);
 }

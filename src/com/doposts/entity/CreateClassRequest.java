@@ -1,5 +1,6 @@
 package com.doposts.entity;
 
+import com.dxhualuo.database.annotation.AutoIncrement;
 import com.dxhualuo.database.annotation.PrimaryKey;
 import com.dxhualuo.database.annotation.TableMapping;
 
@@ -15,6 +16,7 @@ public class CreateClassRequest {
      *  新建分类请求的绝对id
      */
     @PrimaryKey
+    @AutoIncrement
     private Integer requestId;
     /**
      *  请求新建分类的用户id

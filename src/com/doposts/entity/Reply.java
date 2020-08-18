@@ -1,5 +1,6 @@
 package com.doposts.entity;
 
+import com.dxhualuo.database.annotation.AutoIncrement;
 import com.dxhualuo.database.annotation.PrimaryKey;
 import com.dxhualuo.database.annotation.TableMapping;
 
@@ -19,6 +20,7 @@ public class Reply {
      * 回复的绝对id
      */
     @PrimaryKey
+    @AutoIncrement
     private Integer replyId;
 
     /**
