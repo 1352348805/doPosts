@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * 基础DAO
+ */
 public class BaseDao {
 
 	private Connection conn;

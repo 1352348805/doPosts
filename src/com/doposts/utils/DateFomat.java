@@ -4,6 +4,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * 日期格式转换
+ * @author xiao jun
+ */
 public class DateFomat {
 
     public static Date fomat(String date){
