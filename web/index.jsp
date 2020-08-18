@@ -17,10 +17,9 @@
         try {
            con = DatabaseUtil.getConnection();
             out.print("连接数据库成功：" + con);
+            DatabaseUtil.close(con);
         } catch (Exception e) {
             out.print("数据库连接错误，请检查配置文件！！！");
-        } finally {
-            DatabaseUtil.close(con);
         }
 
     %>
