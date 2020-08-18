@@ -78,7 +78,7 @@
     <!--    <audio id="myAudio" src="/music/ちゃお.mp3" controls></audio>-->
     <div class="layui-trans layadmin-user-login-footer">
 
-        <p>© 2020 <a href="http://www.beian.miit.gov.cn/" target="_blank">帖子项目组</a></p>
+        <p>© 2020 <a href="http://www.beian.miit.gov.cn/" target="_blank">来贴项目组</a></p>
 
     </div>
 
