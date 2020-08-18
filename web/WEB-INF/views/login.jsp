@@ -80,7 +80,7 @@
         </form>
     </div>
 
-    <jsp:include page="common/footer.jsp" />
+    <jsp:include page="common/admin/footer.jsp" />
 
     <!--<div class="ladmin-user-login-theme">
       <script type="text/html" template>

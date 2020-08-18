@@ -10,12 +10,12 @@
 </head>
 <body>
 <!--头部-->
-    <%@include file="../common/head.jsp"%>
+    <%@include file="../common/admin/head.jsp"%>
 <!--时间-->
-<%@include file="../common/time.jsp"%>
+<%@include file="../common/admin/time.jsp"%>
  <!--主体内容-->
  <section class="publicMian ">
-     <%@include file="../common/leftnav.jsp"%>
+     <%@include file="../common/admin/leftnav.jsp"%>
      <input type="hidden" id="path" name="path" value="${pageContext.request.contextPath }"/>
 	<div class="right">
         <img class="wColck" src="<%=path%>/static/images/admin/clock.jpg" alt=""/>
