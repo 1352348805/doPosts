@@ -12,16 +12,6 @@
     <title>test-page</title>
 </head>
 <body>
-    <%
-        Connection con = null;
-        try {
-           con = DatabaseUtil.getConnection();
-            out.print("连接数据库成功：" + con);
-            DatabaseUtil.close(con);
-        } catch (Exception e) {
-            out.print("数据库连接错误，请检查配置文件！！！");
-        }
-
-    %>
+test!!!
 </body>
 </html>
