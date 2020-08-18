@@ -65,4 +65,14 @@ public class PostClass {
     public void setClassFatherId(Integer classFatherId) {
         this.classFatherId = classFatherId;
     }
+
+    @Override
+    public String toString() {
+        return "PostClass{" +
+                "classId=" + classId +
+                ", className='" + className + '\'' +
+                ", classLevel=" + classLevel +
+                ", classFatherId=" + classFatherId +
+                '}';
+    }
 }

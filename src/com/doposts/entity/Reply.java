@@ -106,4 +106,17 @@ public class Reply {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
+    @Override
+    public String toString() {
+        return "Reply{" +
+                "replyId=" + replyId +
+                ", floorId=" + floorId +
+                ", replyContent='" + replyContent + '\'' +
+                ", replyUserId=" + replyUserId +
+                ", repliedUserId=" + repliedUserId +
+                ", replyDate=" + replyDate +
+                ", imageUrl='" + imageUrl + '\'' +
+                '}';
+    }
 }

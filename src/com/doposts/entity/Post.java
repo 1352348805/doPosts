@@ -81,6 +81,14 @@ public class Post {
         this.createDate = createDate;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Post{" +
+                "postId=" + postId +
+                ", postName='" + postName + '\'' +
+                ", postClassId=" + postClassId +
+                ", createUserId=" + createUserId +
+                ", createDate=" + createDate +
+                '}';
+    }
 }
