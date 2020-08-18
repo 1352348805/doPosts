@@ -49,12 +49,7 @@ public class User {
     /**
      * 状态，-1 删除 0 封禁 1正常
      */
-    private String status;
-
-    /**
-     *  创建此楼的用户Id
-     */
-    private Integer createUserId;
+    private Integer status;
 
     public Integer getUserId() {
         return userId;
@@ -104,11 +99,11 @@ public class User {
         this.favicon = favicon;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -122,7 +117,6 @@ public class User {
                 ", group='" + group + '\'' +
                 ", favicon='" + favicon + '\'' +
                 ", status='" + status + '\'' +
-                ", createUserId=" + createUserId +
                 '}';
     }
 }
