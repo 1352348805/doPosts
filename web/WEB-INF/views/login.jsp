@@ -31,7 +31,7 @@
 <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
     <div class="layadmin-user-login-main">
         <div class="layadmin-user-login-box layadmin-user-login-header">
-            <h2>.来吧.</h2>
+            <h2>.来贴.</h2>
             <p>一个有趣的论坛</p>
         </div>
         <form action="<%=path%>/user" method="post" class="layadmin-user-login-box layadmin-user-login-body layui-form">
@@ -61,6 +61,11 @@
                 <input type="checkbox" name="remember" lay-skin="primary" title="记住密码">
                 <!--          <a href="forget.html" class="layadmin-user-jump-change layadmin-link" style="margin-top: 7px;">忘记密码？</a>-->
             </div>
+
+            <div style="padding-top: 0px;" class="layui-trans layui-form-item layadmin-user-login-other">
+                <a href="<%=path%>/user?action=toRegister" class="layadmin-user-jump-change layadmin-link layui-hide-xs">没有账号?点击去注册</a>
+            </div>
+
             <div class="layui-form-item">
                 <button id="login-submit" class="layui-btn layui-btn-fluid">登 入</button>
             </div>
@@ -75,12 +80,7 @@
         </form>
     </div>
 
-    <!--    <audio id="myAudio" src="/music/ちゃお.mp3" controls></audio>-->
-    <div class="layui-trans layadmin-user-login-footer">
-
-        <p>© 2020 <a href="http://www.beian.miit.gov.cn/" target="_blank">来贴项目组</a></p>
-
-    </div>
+    <jsp:include page="common/footer.jsp" />
 
     <!--<div class="ladmin-user-login-theme">
       <script type="text/html" template>

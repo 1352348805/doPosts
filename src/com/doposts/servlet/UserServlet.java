@@ -26,6 +26,13 @@ public class UserServlet extends AbstractServlet{
         return "login";
     }
 
+    /**
+     * 跳转到登录页面
+     */
+    public String toRegister(HttpServletRequest request, HttpServletResponse response) {
+        return "register";
+    }
+
     public String login(HttpServletRequest request, HttpServletResponse response) {
         //TODO 登录验证
 

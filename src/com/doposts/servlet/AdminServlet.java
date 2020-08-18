@@ -18,5 +18,11 @@ public class AdminServlet extends AbstractServlet{
         return AdminServlet.class;
     }
 
+    /**
+     * 跳转后台主页
+     */
+    public String index(HttpServletRequest request, HttpServletResponse response) {
+        return "admin/index";
+    }
 
 }
