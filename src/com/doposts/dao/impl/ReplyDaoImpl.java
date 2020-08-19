@@ -10,7 +10,7 @@ import com.dxhualuo.database.impl.MySQL_C3P0;
  */
 public class ReplyDaoImpl extends MySQL_C3P0<ReplyDaoImpl> implements ReplyDao {
     public ReplyDaoImpl(){
-        super("post");
+        super(DatabaseConfig.getUrl(), DatabaseConfig.getPort(), DatabaseConfig.getDatabase(), DatabaseConfig.getUserName(), DatabaseConfig.getPassword(), "post");
     }
 
 
