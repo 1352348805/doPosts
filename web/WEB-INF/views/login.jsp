@@ -31,7 +31,7 @@
 <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
     <div class="layadmin-user-login-main">
         <div class="layadmin-user-login-box layadmin-user-login-header">
-            <h2>.来贴.</h2>
+            <h2 style="color: #b8b8b8">.来贴吧.</h2>
             <p>一个有趣的论坛</p>
         </div>
         <form action="<%=path%>/user" method="post" class="layadmin-user-login-box layadmin-user-login-body layui-form">
@@ -99,6 +99,15 @@
 <input id="path" type="hidden" value="<%=path%>" />
 <script src="<%=path%>/static/layuiadmin/layui/layui.js"></script>
 <script src="<%=path%>/static/js/jquery.js"></script>
+<script type="text/javascript">
+    var bodyBgs = [];
+    bodyBgs[0] = "<%=path%>/static/images/backgroundList/bg1.jpg";
+    bodyBgs[1] = "<%=path%>/static/images/backgroundList/bg2.jpg";
+    bodyBgs[1] = "<%=path%>/static/images/backgroundList/bg3.jpg";
+    bodyBgs[1] = "<%=path%>/static/images/backgroundList/bg4.jpg";
+    var randomBgIndex = Math.round( Math.random() * 1 );
+    document.write('<div class="col-left" style="background: url(' + bodyBgs[randomBgIndex] + ') no-repeat"></div>');
+</script>
 <script>
 
     $(function () {
