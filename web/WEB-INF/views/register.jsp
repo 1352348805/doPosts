@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="<%=path%>/static/layuiadmin/style/admin.css" media="all">
     <link rel="stylesheet" href="<%=path%>/static/layuiadmin/style/login.css" media="all">
 </head>
+<script src="<%=path%>/static/js/jquery.js"></script>
 <body>
 <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
     <div class="layadmin-user-login-main">
@@ -25,7 +26,7 @@
         <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
             <div class="layui-form-item">
                 <label class="layadmin-user-login-icon layui-icon layui-icon-username"></label>
-                <input type="text" name="userLoginName" placeholder="用户名" class="layui-input">
+                <input type="text" name="userLoginName" id="LAY-user-login-userName" placeholder="用户名" class="layui-input">
             </div>
             <div class="layui-form-item">
                 <label class="layadmin-user-login-icon layui-icon layui-icon-password" for="LAY-user-login-password"></label>
@@ -43,7 +44,7 @@
                 <input type="checkbox" name="agreement" lay-skin="primary" title="同意用户协议" checked>
             </div>
             <div class="layui-form-item">
-                <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="LAY-user-reg-submit">注 册</button>
+                <button id="but-register" class="layui-btn layui-btn-fluid" lay-submit lay-filter="LAY-user-reg-submit">注 册</button>
             </div>
             <div class="layui-trans layui-form-item layadmin-user-login-other">
                 <label>社交账号注册</label>
@@ -55,9 +56,31 @@
     </div>
 
     <jsp:include page="common/admin/footer.jsp" />
-
 </div>
 
+<script>
+    $(function () {
+        $("#but-register").click(function () {
+           $.ajax({
+               url:"<%=path%>/user",
+               type:"post",
+               data:{
+                   action:"registerUser",
+                   loginName:$("#LAY-user-login-userName").val(),
+                   password:$("#LAY-user-login-password").val(),
+                   repass:$("#LAY-user-login-repass").val(),
+                   name:$("#LAY-user-login-nickname").val()
+               },
+               success: function (jsonStr) {
+                   var result=eval("("+jsonStr+")")
+                   showMessage(result.message);
+
+               }
+           })
+        })
+    })
+    
+</script>
 <script src="<%=path%>/static/layuiadmin/layui/layui.js"></script>
 <%--<script>--%>
 <%--    layui.config({--%>

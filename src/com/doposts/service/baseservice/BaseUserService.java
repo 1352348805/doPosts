@@ -2,6 +2,8 @@ package com.doposts.service.baseservice;
 
 import com.doposts.dao.PostItDatabase;
 import com.doposts.entity.User;
+
+import java.util.List;
 import java.util.Objects;
 
 /**

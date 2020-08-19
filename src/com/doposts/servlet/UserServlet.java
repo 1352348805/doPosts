@@ -3,11 +3,12 @@ package com.doposts.servlet;
 import com.doposts.entity.User;
 import com.doposts.service.UserService;
 import com.doposts.to.CommonResult;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+
 
 /**
  * 用户控制器
@@ -62,4 +63,20 @@ public class UserServlet extends AbstractServlet{
         return new CommonResult().success("");
     }
 
+    /**
+     * 注册用户
+     * @param request
+     * @param response
+     * @return 是否成功
+     */
+    public Object registerUser(HttpServletRequest request,HttpServletResponse response){
+        String userLoginName=request.getParameter("userLoginName");
+        String userPassword=request.getParameter("userPassword");
+        String userName=request.getParameter("userName");
+        boolean register =userService.register(userLoginName,userPassword,userName);
+        if (!register){
+            return new CommonResult().failed();
+        }
+        return new CommonResult().success("");
+    }
 }
