@@ -10,13 +10,14 @@
 %>
 <html>
 <head>
+    <meta charset="utf-8">
     <title>注册 </title>
     <link rel="stylesheet" href="<%=path%>/static/layuiadmin/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="<%=path%>/static/layuiadmin/style/admin.css" media="all">
     <link rel="stylesheet" href="<%=path%>/static/layuiadmin/style/login.css" media="all">
 </head>
 <script src="<%=path%>/static/js/jquery.js"></script>
-<body>
+
 <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
     <div class="layadmin-user-login-main">
         <div class="layadmin-user-login-box layadmin-user-login-header">
@@ -54,12 +55,41 @@
             </div>
         </div>
     </div>
-
     <jsp:include page="common/admin/footer.jsp" />
 </div>
-
+<script src="<%=path%>/static/layuiadmin/layui/layui.js"></script>
 <script>
-    $(function () {
+    function CheckInput(){
+        let userLoginName=$("#LAY-user-login-userName").val();
+        let userPassword=$("#LAY-user-login-password").val();
+        let repass=$("#LAY-user-login-repass").val();
+        let nike=$("#LAY-user-login-nickname").val();
+        if (userLoginName==null || userLoginName.length==0){
+            layer.msg('请输入用户名',{
+                time:2000
+            });
+            return false;
+        }
+        if (userPassword==null || userPassword.length==0){
+            layer.msg('请输入密码',{
+                time:2000
+            });
+            return false;
+        }
+        if (nike==null || nike.length==0){
+            layer.msg('请输入昵称--《例如:李阳是猪、李阳小贱人、、等等》',{
+                time:2000
+            })
+            return false;
+        }
+        if (userPassword != repass){
+            layer.msg('两次密码不一致',{
+                time:2000
+            })
+            return false;
+        }
+        return true;
+    }
         $("#but-register").click(function () {
            $.ajax({
                url:"<%=path%>/user",
@@ -72,16 +102,21 @@
                    name:$("#LAY-user-login-nickname").val()
                },
                success: function (jsonStr) {
-                   var result=eval("("+jsonStr+")")
-                   showMessage(result.message);
-
-               }
+                   if (jsonStr.code===200){
+                       location.href="<%=path%>/views/register.jsp ";
+                   }else if (jsonStr.code===500){
+                       layer.msg('注册失败！',{
+                           icon: 6,btn:['OK'],
+                       })
+                   }
+                   console.log(jsonStr);
+               },
+               dataType:"json"
            })
+            return false;
         })
-    })
-    
 </script>
-<script src="<%=path%>/static/layuiadmin/layui/layui.js"></script>
+
 <%--<script>--%>
 <%--    layui.config({--%>
 <%--        base: '../../layuiadmin/' //静态资源所在路径--%>
