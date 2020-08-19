@@ -1,6 +1,7 @@
 package com.doposts.dao.interfaces;
 
 import com.doposts.dao.entity.SuperPostClass;
+import com.doposts.entity.PostClass;
 
 import java.util.List;
 
@@ -10,9 +11,22 @@ import java.util.List;
  */
 public interface PostClassDao {
     /**
-     *  获得所有分类
+     *  获得一级分类
      * @return SuperPostClass
      */
-    List<SuperPostClass> getAllPostClass();
+    List<PostClass> getOneLevelPostClass();
 
+    /**
+     *  获得一个分类的子分类
+     * @param postClass 分类
+     * @return 子分类列表
+     */
+    List<PostClass> getSubPostClass(PostClass postClass);
+
+    /**
+     *  获得指定Id的分类
+     * @param id id
+     * @return 分类
+     */
+    PostClass getPostClassById(int id);
 }
