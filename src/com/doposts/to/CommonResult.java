@@ -4,18 +4,38 @@ import com.alibaba.fastjson.JSON;
 
 /**
  * 通用返回对象
+ * @author asuk
+ * @date 2020/8/19 15:30
+ * @phone 18579133013
+ * @email 1352348805@qq.com
  */
 public class CommonResult {
-    //操作成功
+
+    /**
+     * 操作成功
+     */
     public static final int SUCCESS = 200;
-    //操作失败
+
+    /**
+     * 操作失败
+     */
     public static final int FAILED = 500;
-    //参数校验失败
+
+    /**
+     * 参数校验失败
+     */
     public static final int VALIDATE_FAILED = 404;
-    //未认证
+
+    /**
+     * 未认证
+     */
     public static final int UNAUTHORIZED = 401;
-    //未授权
+
+    /**
+     * 未授权
+     */
     public static final int  FORBIDDEN = 403;
+
     private int code;
     private String message;
     private Object data;
