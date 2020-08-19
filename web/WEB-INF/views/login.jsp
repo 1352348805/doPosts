@@ -20,7 +20,6 @@
     <link rel="stylesheet" href="<%=path%>/static/layuiadmin/style/login.css" media="all">
     <style>
         body {
-            background-image: url("<%=path%>/static/images/backgroundList/bg4.jpg");
             background-size: cover;
             background-repeat: no-repeat;
         }
@@ -106,7 +105,7 @@
     bodyBgs[2] = "<%=path%>/static/images/backgroundList/bg3.jpg";
     bodyBgs[3] = "<%=path%>/static/images/backgroundList/bg4.jpg";
     var randomBgIndex = Math.round( Math.random() * 3 );
-    document.write('<div class="col-left" style="background: url(' + bodyBgs[randomBgIndex] + ') no-repeat"></div>');
+    $("body").css("background-image","url("+bodyBgs[randomBgIndex]+")");
 </script>
 <script>
 
