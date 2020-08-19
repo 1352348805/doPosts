@@ -2,7 +2,6 @@ package com.doposts.service;
 
 import com.doposts.dao.PostItDatabase;
 import com.doposts.entity.User;
-import com.doposts.service.baseservice.BaseUserServiceImpl;
 import com.doposts.service.interfaces.UserService;
 
 import java.util.Objects;
