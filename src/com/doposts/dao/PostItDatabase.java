@@ -19,6 +19,7 @@ public class PostItDatabase {
         REPLY_DAO = new ReplyDaoImpl();
         USER_DAO = new UserDaoImpl();
         CREATE_CLASS_REQUEST_DAO = new CreateClassRequestDaoImpl();
+        DEFAULT_DAO = new DefaultDaoImpl();
     }
     public static final FloorDao FLOOR_DAO;
     public static final PostClassDao POST_CLASS_DAO;
@@ -26,4 +27,5 @@ public class PostItDatabase {
     public static final ReplyDao REPLY_DAO;
     public static final UserDao USER_DAO;
     public static final CreateClassRequestDao CREATE_CLASS_REQUEST_DAO;
+    public static final DefaultDao DEFAULT_DAO;
 }

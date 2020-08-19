@@ -32,14 +32,12 @@ public class Page<T> {
     private List<T> data;
 
     public int getCurrPageNo() {
-        if (totalPageCount == 0)
-            return 0;
+        if (totalPageCount == 0) { return 0; }
         return currPageNo;
     }
 
     public void setCurrPageNo(int currPageNo) {
-        if (currPageNo > 0)
-            this.currPageNo = currPageNo;
+        if (currPageNo > 0) {this.currPageNo = currPageNo;}
     }
 
     public int getPageSize() {
@@ -47,8 +45,7 @@ public class Page<T> {
     }
 
     public void setPageSize(int pageSize) {
-        if (pageSize > 0)
-            this.pageSize = pageSize;
+        if (pageSize > 0) {this.pageSize = pageSize;}
     }
 
     public int getTotalCount() {

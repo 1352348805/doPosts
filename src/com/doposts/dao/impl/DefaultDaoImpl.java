@@ -1,17 +1,15 @@
 package com.doposts.dao.impl;
 
 import com.doposts.dao.DatabaseConfig;
-import com.doposts.dao.interfaces.FloorDao;
-import com.doposts.entity.Floor;
+import com.doposts.dao.interfaces.DefaultDao;
 import com.dxhualuo.database.impl.MySQL_C3P0;
 
 /**
- *  楼层的DAO实现
+ *  基本的Dao
  * @author dx_hualuo
  */
-public class FloorDaoImpl extends MySQL_C3P0<Floor> implements FloorDao {
-    public FloorDaoImpl(){
+public class DefaultDaoImpl extends MySQL_C3P0<Object> implements DefaultDao {
+    public DefaultDaoImpl() {
         super(DatabaseConfig.getUrl(), DatabaseConfig.getPort(), DatabaseConfig.getDatabase(), DatabaseConfig.getUserName(), DatabaseConfig.getPassword(), "post");
     }
-
 }
