@@ -22,9 +22,11 @@ public class EncodingFilter implements Filter{
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest request = (HttpServletRequest)req;
         HttpServletResponse response = (HttpServletResponse) resp;
-        request.setCharacterEncoding(encoding);
-        response.setCharacterEncoding(encoding);
-        response.setContentType("text/html;charset="+encoding);
+        if (!request.getRequestURI().contains("/static")) {
+            request.setCharacterEncoding(encoding);
+            response.setCharacterEncoding(encoding);
+            response.setContentType("text/html;charset="+encoding);
+        }
         chain.doFilter(request, response);
     }
 
