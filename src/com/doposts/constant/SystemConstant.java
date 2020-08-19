@@ -9,6 +9,9 @@ package com.doposts.constant;
  */
 public class SystemConstant {
 
+    /**
+     * 分类菜单key
+     */
     public static final String CATEGORY_MENU_KEY = "category_menu";
 
 }
