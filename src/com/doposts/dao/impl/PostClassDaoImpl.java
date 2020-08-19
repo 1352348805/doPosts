@@ -70,4 +70,26 @@ public class PostClassDaoImpl extends MySQL_C3P0<PostClass> implements PostClass
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * 删除指定id的分类
+     *
+     * @param id id
+     * @return 受影响的行数
+     */
+    @Override
+    public Integer deletePostClassById(int id) {
+        return null;
+    }
+
+    /**
+     * 以分类id获取其子分类的记录数
+     *
+     * @param id id
+     * @return 记录数
+     */
+    @Override
+    public Integer getPostClasschildrenCountById(int id) {
+        return null;
+    }
 }
