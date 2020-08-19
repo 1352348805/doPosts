@@ -32,5 +32,5 @@ public interface PostClassService {
      * @param id 分类id
      * @return 子分类数量
      */
-    int getPostClasschildrenCountById(int id);
+    Integer getPostClasschildrenCountById(int id);
 }

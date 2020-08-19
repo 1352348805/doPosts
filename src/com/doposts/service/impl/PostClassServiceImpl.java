@@ -47,7 +47,7 @@ public class PostClassServiceImpl implements PostClassService {
      * @return 子分类数量
      */
     @Override
-    public int getPostClasschildrenCountById(int id) {
+    public Integer getPostClasschildrenCountById(int id) {
         return PostItDatabase.POST_CLASS_DAO.getPostClasschildrenCountById(id);
     }
 
