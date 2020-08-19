@@ -10,7 +10,7 @@ public class ConfigManager {
 		String value = "";
 		Properties params = new Properties();
 		String  configFile = "database.properties";
-		InputStream is = BaseDao.class.getClassLoader().getResourceAsStream(configFile);
+		InputStream is = ConfigManager.class.getClassLoader().getResourceAsStream(configFile);
 		try {
 			params.load(is);
 		} catch (IOException e) {
