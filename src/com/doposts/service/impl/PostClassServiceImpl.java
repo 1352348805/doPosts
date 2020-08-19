@@ -30,6 +30,28 @@ public class PostClassServiceImpl implements PostClassService {
     }
 
     /**
+     * 以id删除分类
+     *
+     * @param id 分类id
+     * @return 是否删除成功
+     */
+    @Override
+    public boolean deletePostClassById(int id) {
+        return PostItDatabase.POST_CLASS_DAO.deletePostClassById(id) > 0 ? true : false;
+    }
+
+    /**
+     * 以分类id获取其子分类的数量
+     *
+     * @param id 分类id
+     * @return 子分类数量
+     */
+    @Override
+    public int getPostClasschildrenCountById(int id) {
+        return PostItDatabase.POST_CLASS_DAO.getPostClasschildrenCountById(id);
+    }
+
+    /**
      * 递归获取菜单分类
      * @param parentId 父级分类id
      * @param postClassWithChildren 该分类的子分类集合

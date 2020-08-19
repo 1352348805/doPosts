@@ -1,5 +1,6 @@
 package com.doposts.service.interfaces;
 
+import com.doposts.to.CommonResult;
 import com.doposts.vo.PostClassWithChildren;
 
 import java.util.List;
@@ -18,4 +19,18 @@ public interface PostClassService {
      * @return 菜单数据,一级分类的集合
      */
     List<PostClassWithChildren> getMenu();
+
+    /**
+     * 以id删除分类
+     * @param id 分类id
+     * @return 是否删除成功
+     */
+    boolean deletePostClassById(int id);
+
+    /**
+     * 以分类id获取其子分类的数量
+     * @param id 分类id
+     * @return 子分类数量
+     */
+    int getPostClasschildrenCountById(int id);
 }

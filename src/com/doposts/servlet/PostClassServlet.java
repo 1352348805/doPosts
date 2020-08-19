@@ -33,11 +33,18 @@ public class PostClassServlet extends AbstractServlet{
     }
 
     /**
-     * 获取菜单数据
+     * 获取分类数据
      */
     public CommonResult getClassList(HttpServletRequest request, HttpServletResponse response) {
         List<PostClassWithChildren> menu = postClassService.getMenu();
         return new CommonResult().success(menu);
+    }
+
+    /**
+     * 跳转分类添加页面
+     */
+    public String toAdd(HttpServletRequest request, HttpServletResponse response) {
+        return "admin/category/category_add";
     }
 
 

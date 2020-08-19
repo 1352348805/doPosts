@@ -27,4 +27,18 @@ public interface PostClassDao {
      * @return 分类
      */
     PostClass getPostClassById(int id);
+
+    /**
+     * 删除指定id的分类
+     * @param id id
+     * @return 受影响的行数
+     */
+    Integer deletePostClassById(int id);
+
+    /**
+     * 以分类id获取其子分类的记录数
+     * @param id id
+     * @return  记录数
+     */
+    Integer getPostClasschildrenCountById(int id);
 }
