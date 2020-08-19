@@ -13,5 +13,4 @@ public class FloorDaoImpl extends MySQL_C3P0<Floor> implements FloorDao {
     public FloorDaoImpl(){
         super(DatabaseConfig.getUrl(), DatabaseConfig.getPort(), DatabaseConfig.getDatabase(), DatabaseConfig.getUserName(), DatabaseConfig.getPassword(), "post");
     }
-
 }

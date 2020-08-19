@@ -10,6 +10,7 @@
 %>
 <html>
 <head>
+    <link rel="shortcut icon" href="<%=path%>/static/images/head/500415.ico" />
     <meta charset="utf-8">
     <title>登入 - @asuk</title>
     <meta name="renderer" content="webkit">
@@ -26,12 +27,11 @@
     </style>
 </head>
 <body>
-<div>
 <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
-    <div class="layadmin-user-login-main" position:absolute>
+    <div class="layadmin-user-login-main" style="background-color: white;opacity: 0.5; margin-top: 100px;margin-right: 440px;" position:absolute>
         <div class="layadmin-user-login-box layadmin-user-login-header">
-            <h2 style= "font-family:Stencil ; color: white" >.来贴吧.</h2>
-            <p style="color: #ebf4f9">一个有趣的论坛</p>
+            <h2 style= "color:green" >.来贴吧.</h2>
+            <p style="color:green">一个有趣的论坛</p>
         </div>
         <form action="<%=path%>/user" method="post" class="layadmin-user-login-box layadmin-user-login-body layui-form">
             <input type="hidden" name="action" value="login" />
@@ -94,8 +94,6 @@
         </ul>
       </script>
     </div>-->
-
-</div>
 <input id="path" type="hidden" value="<%=path%>" />
 <script src="<%=path%>/static/layuiadmin/layui/layui.js"></script>
 <script src="<%=path%>/static/js/jquery.js"></script>

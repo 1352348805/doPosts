@@ -1,6 +1,5 @@
 package com.doposts.dao.interfaces;
 
-import com.doposts.dao.entity.SuperPost;
 
 /**
  *  帖子的接口，在此添加方法以实现接口

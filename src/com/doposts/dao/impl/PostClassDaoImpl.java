@@ -1,10 +1,10 @@
 package com.doposts.dao.impl;
 
-import com.doposts.dao.entity.SuperPostClass;
+import com.doposts.dao.DatabaseConfig;
 import com.doposts.dao.interfaces.PostClassDao;
 import com.doposts.entity.PostClass;
 import com.dxhualuo.database.impl.MySQL_C3P0;
-
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -13,25 +13,40 @@ import java.util.List;
  */
 public class PostClassDaoImpl extends MySQL_C3P0<PostClass> implements PostClassDao {
     public PostClassDaoImpl(){
-        super("post");
+        super(DatabaseConfig.getUrl(), DatabaseConfig.getPort(), DatabaseConfig.getDatabase(), DatabaseConfig.getUserName(), DatabaseConfig.getPassword(), "post");
     }
 
+    /**
+     *  获得一级分类
+     * @return SuperPostClass
+     */
     @Override
     public List<PostClass> getOneLevelPostClass() {
-        SuperPostClass superPostClass = new SuperPostClass();
-        List<PostClass> postClassList = select(PostClass.class);
-
-        return null;
+        PostClass ps = new PostClass();
+        ps.setClassLevel(1);
+        try {
+            return select(PostClass.class, ps);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
      * 获得一个分类的子分类
-     *
      * @param postClass 分类
      * @return 子分类列表
      */
     @Override
     public List<PostClass> getSubPostClass(PostClass postClass) {
+        if(postClass != null){
+            PostClass ps = new PostClass();
+            ps.setClassFatherId(postClass.getClassId());
+            try {
+                return select(PostClass.class, ps);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
         return null;
     }
 
@@ -43,10 +58,16 @@ public class PostClassDaoImpl extends MySQL_C3P0<PostClass> implements PostClass
      */
     @Override
     public PostClass getPostClassById(int id) {
-        return null;
-    }
-
-    private SuperPostClass getSuperPostClass(SuperPostClass postClass){
-        return null;
+        PostClass ps = new PostClass();
+        ps.setClassId(id);
+        try {
+            List<PostClass> postClasses = select(PostClass.class, ps);
+            if(postClasses.size() == 1){
+                return postClasses.get(0);
+            }
+            return null;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
