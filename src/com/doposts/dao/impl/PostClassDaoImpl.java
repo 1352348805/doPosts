@@ -4,6 +4,8 @@ import com.doposts.dao.DatabaseConfig;
 import com.doposts.dao.interfaces.PostClassDao;
 import com.doposts.entity.PostClass;
 import com.dxhualuo.database.impl.MySQL_C3P0;
+
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -73,23 +75,35 @@ public class PostClassDaoImpl extends MySQL_C3P0<PostClass> implements PostClass
 
     /**
      * 删除指定id的分类
-     *
      * @param id id
      * @return 受影响的行数
      */
     @Override
     public Integer deletePostClassById(int id) {
-        return null;
+        PostClass postClass = new PostClass();
+        postClass.setClassId(id);
+        try {
+            return delete(postClass);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
      * 以分类id获取其子分类的记录数
-     *
      * @param id id
      * @return 记录数
      */
     @Override
     public Integer getPostClasschildrenCountById(int id) {
+        try {
+            ResultSet rs = executeQuery("SELECT COUNT(1) as 'count' FROM `post_classification` where `classFatherId`=?", id);
+            if(rs.next()){
+                return rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return null;
     }
 }

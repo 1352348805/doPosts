@@ -13,6 +13,6 @@ import java.util.List;
 @SuppressWarnings("RedundantThrows")
 public class Run {
     public static void main(String[] args) throws Exception{
-        System.out.println(PostItDatabase.POST_DAO.getPostPageByClassId(12, 0, 2));
+        System.out.println(PostItDatabase.POST_CLASS_DAO.getPostClasschildrenCountById(1));
     }
 }
