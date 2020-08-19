@@ -40,7 +40,6 @@ public class PostClassDaoImpl extends MySQL_C3P0<PostClass> implements PostClass
     public List<PostClass> getSubPostClass(PostClass postClass) {
         if(postClass != null){
             PostClass ps = new PostClass();
-            ps.setClassLevel(postClass.getClassLevel() + 1);
             ps.setClassFatherId(postClass.getClassId());
             try {
                 return select(PostClass.class, ps);
