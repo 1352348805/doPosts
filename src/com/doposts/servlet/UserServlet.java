@@ -23,6 +23,7 @@ public class UserServlet extends AbstractServlet{
      * 跳转登录页面
      */
     public String toLogin(HttpServletRequest request, HttpServletResponse response) {
+        request.getParameter("login")
         return "login";
     }
 
