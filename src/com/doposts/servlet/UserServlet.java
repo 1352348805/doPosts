@@ -1,5 +1,10 @@
 package com.doposts.servlet;
 
+import com.doposts.entity.User;
+import com.doposts.service.UserService;
+import com.doposts.to.CommonResult;
+
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,16 +19,22 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/user")
 public class UserServlet extends AbstractServlet{
 
+    UserService userService;
+
     @Override
     public Class getServletClass() {
         return UserServlet.class;
+    }
+
+    @Override
+    public void init() throws ServletException {
+        userService = new UserService();
     }
 
     /**
      * 跳转登录页面
      */
     public String toLogin(HttpServletRequest request, HttpServletResponse response) {
-        request.getParameter("login")
         return "login";
     }
 
@@ -34,10 +45,21 @@ public class UserServlet extends AbstractServlet{
         return "register";
     }
 
-    public String login(HttpServletRequest request, HttpServletResponse response) {
-        //TODO 登录验证
-
-        return "admin/index";
+    /**
+     * 登录验证 + 跳转
+     * @param request
+     * @param response
+     * @return
+     */
+    public Object login(HttpServletRequest request, HttpServletResponse response) {
+        String userName = request.getParameter("username");
+        String password = request.getParameter("password");
+        User user = userService.login(userName, password);
+        if(user == null){
+            return new CommonResult().failed();
+        }
+        request.getSession().setAttribute("user", user);
+        return new CommonResult().success("");
     }
 
 }
