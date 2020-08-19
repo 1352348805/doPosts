@@ -36,7 +36,7 @@ public class UserServlet extends AbstractServlet{
     public String login(HttpServletRequest request, HttpServletResponse response) {
         //TODO 登录验证
 
-        return "";
+        return "admin/index";
     }
 
 }

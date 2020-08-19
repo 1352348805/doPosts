@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="<%=path%>/static/layuiadmin/style/login.css" media="all">
     <style>
         body {
-            background-image: url("<%=path%>/static/images/timg.png");
+            background-image: url("<%=path%>/static/images/backgroundList/bg4.jpg");
             background-size: cover;
             background-repeat: no-repeat;
         }
@@ -125,8 +125,21 @@
       }
 
       $("#login-submit").click(CheckInput);
-
     });
+$("#login-submit").click(
+    function () {
+        $.ajax({
+            url:"/user",
+            method:"post",
+            data:{
+                action:"login"
+            },
+            success:function (jsonStr) {
+                alert(jsonStr)
+            }
+        })
+    }
+)
 
 
 </script>
