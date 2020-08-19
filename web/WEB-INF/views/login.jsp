@@ -26,9 +26,8 @@
     </style>
 </head>
 <body>
-
 <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
-    <div class="layadmin-user-login-main">
+    <div class="layadmin-user-login-main" style="background-color: white;opacity: 0.5; margin-top: 100px;margin-right: 440px;" position:absolute>
         <div class="layadmin-user-login-box layadmin-user-login-header">
             <h2 style= "font-family:Stencil ; color: white" >.来贴吧.</h2>
             <p style="color: #ebf4f9">一个有趣的论坛</p>
@@ -78,6 +77,7 @@
             <!--        </div>-->
         </form>
     </div>
+</div>
 
     <jsp:include page="common/admin/footer.jsp" />
 
@@ -93,8 +93,6 @@
         </ul>
       </script>
     </div>-->
-
-</div>
 <input id="path" type="hidden" value="<%=path%>" />
 <script src="<%=path%>/static/layuiadmin/layui/layui.js"></script>
 <script src="<%=path%>/static/js/jquery.js"></script>

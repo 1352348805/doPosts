@@ -1,7 +1,7 @@
 package com.doposts.servlet;
 
 import com.doposts.entity.User;
-import com.doposts.service.UserServiceImpl;
+import com.doposts.service.impl.UserServiceImpl;
 import com.doposts.to.CommonResult;
 
 import javax.servlet.ServletException;

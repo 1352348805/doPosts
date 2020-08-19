@@ -1,4 +1,4 @@
-package com.doposts.service;
+package com.doposts.service.impl;
 
 import com.doposts.dao.PostItDatabase;
 import com.doposts.entity.User;
