@@ -30,8 +30,8 @@
 <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
     <div class="layadmin-user-login-main">
         <div class="layadmin-user-login-box layadmin-user-login-header">
-            <h2 style="color: #b8b8b8">.来贴吧.</h2>
-            <p>一个有趣的论坛</p>
+            <h2 style= "font-family:Stencil ; color: white" >.来贴吧.</h2>
+            <p style="color: #ebf4f9">一个有趣的论坛</p>
         </div>
         <form action="<%=path%>/user" method="post" class="layadmin-user-login-box layadmin-user-login-body layui-form">
             <input type="hidden" name="action" value="login" />

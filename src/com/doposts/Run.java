@@ -1,6 +1,6 @@
 package com.doposts;
 
-import com.doposts.service.baseservice.BaseUserService;
+import com.doposts.service.baseservice.BaseUserServiceImpl;
 
 /**
  *  测试用的主方法
@@ -9,7 +9,7 @@ import com.doposts.service.baseservice.BaseUserService;
 @SuppressWarnings("RedundantThrows")
 public class Run {
     public static void main(String[] args) throws Exception{
-        BaseUserService userService = new BaseUserService();
+        BaseUserServiceImpl userService = new BaseUserServiceImpl();
         System.out.println(userService.login("admin", "123456"));
     }
 }
