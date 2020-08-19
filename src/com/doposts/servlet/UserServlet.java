@@ -1,7 +1,7 @@
 package com.doposts.servlet;
 
 import com.doposts.entity.User;
-import com.doposts.service.UserService;
+import com.doposts.service.UserServiceImpl;
 import com.doposts.to.CommonResult;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +20,7 @@ import java.util.List;
 @WebServlet("/user")
 public class UserServlet extends AbstractServlet{
 
-    UserService userService;
+    UserServiceImpl userService;
 
     @Override
     public Class getServletClass() {
@@ -29,7 +29,7 @@ public class UserServlet extends AbstractServlet{
 
     @Override
     public void init() throws ServletException {
-        userService = new UserService();
+        userService = new UserServiceImpl();
     }
 
     /**
