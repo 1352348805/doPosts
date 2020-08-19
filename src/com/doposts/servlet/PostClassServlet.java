@@ -1,5 +1,6 @@
 package com.doposts.servlet;
 
+import com.doposts.constant.SystemConstant;
 import com.doposts.service.impl.PostClassServiceImpl;
 import com.doposts.service.interfaces.PostClassService;
 import com.doposts.to.CommonResult;
@@ -36,7 +37,7 @@ public class PostClassServlet extends AbstractServlet{
      * 获取分类数据
      */
     public CommonResult getClassList(HttpServletRequest request, HttpServletResponse response) {
-        List<PostClassWithChildren> menu = postClassService.getMenu();
+        List<PostClassWithChildren> menu = postClassService.getMenu(request);
         return new CommonResult().success(menu);
     }
 
@@ -71,6 +72,8 @@ public class PostClassServlet extends AbstractServlet{
         }
         boolean b = postClassService.deletePostClassById(classId);
         if (b) {
+            //菜单缓存失效
+            request.getServletContext().setAttribute(SystemConstant.CATEGORY_MENU_KEY,null);
             return new CommonResult().success(null);
         }
         return new CommonResult().failed("删除失败!");

@@ -25,6 +25,7 @@ public class PostClassTest {
 
     @Test
     public void getMenu() {
+        PostClassServiceImpl postClassService = new PostClassServiceImpl();
         List<PostClassWithChildren> menu = postClassService.getMenu();
         menu.forEach(oneClass -> {
             //一级

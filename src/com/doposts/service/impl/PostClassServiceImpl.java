@@ -1,10 +1,13 @@
 package com.doposts.service.impl;
 
+import com.doposts.constant.SystemConstant;
 import com.doposts.dao.PostItDatabase;
 import com.doposts.entity.PostClass;
 import com.doposts.service.interfaces.PostClassService;
 import com.doposts.vo.PostClassWithChildren;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
@@ -18,11 +21,31 @@ import java.util.concurrent.atomic.AtomicReference;
 public class PostClassServiceImpl implements PostClassService {
 
     /**
-     * 获取分类菜单
-     *
+     * 去缓存中查询菜单分类
      * @return 菜单数据 当前为一级分类的集合
      */
     @Override
+    public List<PostClassWithChildren> getMenu(HttpServletRequest request) {
+        List<PostClassWithChildren> menu;
+        ServletContext application = request.getServletContext();
+        Object objMenu =request.getServletContext().getAttribute(SystemConstant.CATEGORY_MENU_KEY);
+        //判断上下文中是否存在
+        if (objMenu != null) {
+            menu = (List<PostClassWithChildren>)objMenu;
+        } else {
+            menu = this.getMenu();
+            //存入上下文
+            application.setAttribute(SystemConstant.CATEGORY_MENU_KEY,menu);
+        }
+        return menu;
+    }
+
+    /**
+     * ~~~~~~ 该方法暴露是为了方便测试，仅内部调用 ~~~~~~
+     * 从数据库获取菜单分类列表
+     * @return 菜单数据 当前为一级分类的集合
+     */
+    @Deprecated
     public List<PostClassWithChildren> getMenu() {
         PostClassWithChildren postClassWithChildren = new PostClassWithChildren();
         fillMenu(0,postClassWithChildren);

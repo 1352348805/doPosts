@@ -3,6 +3,7 @@ package com.doposts.service.interfaces;
 import com.doposts.to.CommonResult;
 import com.doposts.vo.PostClassWithChildren;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ public interface PostClassService {
      * 获取分类菜单
      * @return 菜单数据,一级分类的集合
      */
-    List<PostClassWithChildren> getMenu();
+    List<PostClassWithChildren> getMenu(HttpServletRequest request);
 
     /**
      * 以id删除分类
