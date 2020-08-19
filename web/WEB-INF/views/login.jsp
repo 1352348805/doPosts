@@ -103,9 +103,9 @@
     var bodyBgs = [];
     bodyBgs[0] = "<%=path%>/static/images/backgroundList/bg1.jpg";
     bodyBgs[1] = "<%=path%>/static/images/backgroundList/bg2.jpg";
-    bodyBgs[1] = "<%=path%>/static/images/backgroundList/bg3.jpg";
-    bodyBgs[1] = "<%=path%>/static/images/backgroundList/bg4.jpg";
-    var randomBgIndex = Math.round( Math.random() * 1 );
+    bodyBgs[2] = "<%=path%>/static/images/backgroundList/bg3.jpg";
+    bodyBgs[3] = "<%=path%>/static/images/backgroundList/bg4.jpg";
+    var randomBgIndex = Math.round( Math.random() * 3 );
     document.write('<div class="col-left" style="background: url(' + bodyBgs[randomBgIndex] + ') no-repeat"></div>');
 </script>
 <script>
@@ -137,16 +137,29 @@
     });
 $("#login-submit").click(
     function () {
+        let username = $("#LAY-user-login-username").val();
+        let password = $("#LAY-user-login-password").val();
         $.ajax({
-            url:"/user",
+            url:"<%=path%>/user",
             method:"post",
             data:{
-                action:"login"
+                action:"login",
+                "username":username,
+                "password":password
             },
             success:function (jsonStr) {
-                alert(jsonStr)
-            }
+                if(jsonStr.code === 200){
+                    location.href="<%=path%>/index.jsp";
+                }else if(jsonStr.code === 500){
+                    layer.msg("用户名或密码不正确！", {
+                        icon: 6, btn:['好的'],
+                    });
+                }
+                console.log(jsonStr);
+            },
+            dataType:"json"
         })
+        return false;
     }
 )
 
