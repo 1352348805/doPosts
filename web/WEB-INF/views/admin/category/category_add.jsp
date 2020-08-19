@@ -17,19 +17,15 @@
 </head>
 <body>
 <!--头部-->
-    <%@include file="../common/admin/head.jsp"%>
+    <%@include file="../../common/admin/head.jsp"%>
 <!--时间-->
-<%@include file="../common/admin/time.jsp"%>
+<%@include file="../../common/admin/time.jsp"%>
  <!--主体内容-->
  <section class="publicMian ">
-     <%@include file="../common/admin/leftnav.jsp"%>
+     <%@include file="../../common/admin/leftnav.jsp"%>
      <input type="hidden" id="path" name="path" value="${pageContext.request.contextPath }"/>
 	<div class="right">
-        <img class="wColck" src="<%=path%>/static/images/admin/clock.jpg" alt=""/>
-        <div class="wFont">
-<%--            <h2>${sessionScope.user.userName }</h2>--%>
-            <p>欢迎来到来贴管理系统!</p>
-        </div>
+        分类添加...
     </div>
 </section>
 <footer class="footer">
