@@ -25,4 +25,12 @@ public class AdminServlet extends AbstractServlet{
         return "admin/index";
     }
 
+    /**
+     * 跳转帖子分类列表
+     * @return
+     */
+    public String categoryList(HttpServletRequest request, HttpServletResponse response) {
+        return "admin/category/category_list";
+    }
+
 }

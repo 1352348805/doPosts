@@ -7,12 +7,5 @@ import com.doposts.dao.entity.SuperPost;
  * @author dx_hualuo
  */
 public interface PostDao {
-    /**
-     *  获得一个递归实体类
-     * @param id id
-     * @return SuperPost
-     */
-    SuperPost getPostById(Integer id);
-
 
 }

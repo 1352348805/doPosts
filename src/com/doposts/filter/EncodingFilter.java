@@ -27,7 +27,7 @@ public class EncodingFilter implements Filter{
             response.setCharacterEncoding(encoding);
             response.setContentType("text/html;charset="+encoding);
         }
-        chain.doFilter(request, response);
+        chain.doFilter(req, resp);
     }
 
     @Override
