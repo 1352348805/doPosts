@@ -47,6 +47,35 @@ public class PostClassServlet extends AbstractServlet{
         return "admin/category/category_add";
     }
 
+    /**
+     * 删除分类
+     */
+    public CommonResult delete(HttpServletRequest request, HttpServletResponse response) {
+        Integer classId = null;
+        Integer level = null;
+        try {
+            classId = Integer.parseInt(request.getParameter("classId"));
+            level = Integer.parseInt(request.getParameter("level"));
+            if (level < 1 || level > 3) {
+                throw new RuntimeException();
+            }
+        } catch (Exception e) {
+            return new CommonResult().validateFailed("非法参数!!!");
+        }
+
+        if (level != 3) {
+            Integer count = postClassService.getPostClasschildrenCountById(classId);
+            if (count > 0) {
+                return new CommonResult().validateFailed("该分类下还有" + count + "条数据,不能删除!");
+            }
+        }
+        boolean b = postClassService.deletePostClassById(classId);
+        if (b) {
+            return new CommonResult().success(null);
+        }
+        return new CommonResult().validateFailed("删除失败!");
+    }
+
 
 
 }

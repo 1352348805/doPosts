@@ -77,6 +77,7 @@
 <script type="text/javascript" src="<%=path%>/static/layuiadmin/layui/layui.js"></script>
 <script type="text/javascript" src="<%=path%>/static/calendar/WdatePicker.js"></script>
 <script type="text/javascript">
+    var path = $("#path").val();
     initMenuList();
 
     function initMenuList(){
@@ -91,9 +92,10 @@
                 var id = "<td>" + d['classLevel'] +"</td>";
                 tr += id;
                 var id = d['classId'];
+                let level = d['classLevel'];
                 let href = "updateMenu.html?id=" + id;
                 let edit = buttonEdit(href);
-                let del = buttonDel(id);
+                let del = buttonDel(id,level);
                 tr += "<td>"+edit + del+"</td>";
                 tr += "</tr>"
                 $("#dt-table").append(tr);
@@ -103,7 +105,7 @@
 
         $.ajax({
             type : 'get',
-            url : $("#path").val() + '/postCategory',
+            url : path + '/postCategory',
             data : {action : 'getClassList'},
             dataType : 'json',
             async:false,
@@ -120,15 +122,29 @@
         var layer = layui.layer;
     });
 
-    function del(id){
+    function del(id,level){
         layer.confirm('确定要删除吗？', {
             btn : [ '确定', '取消' ]
         }, function() {
+            let data = {
+                action : 'delete',
+                classId : id,
+                level : level
+            }
             $.ajax({
                 type : 'post',
-                url : '/postCategory?action=delete&classId=' + id,
+                url : path + '/postCategory',
+                data : data,
+                dataType: 'json',
                 success : function(data) {
-                    location.reload();
+                    if (data.code == 200) {
+                        layer.msg('删除成功!',{
+                            time : 1000
+                        });
+                        location.reload();
+                    } else {
+                        layer.msg(data.message);
+                    }
                 }
             });
         });

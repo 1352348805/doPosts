@@ -22,8 +22,8 @@ $.ajaxSetup({
 	}
 });
 
-function buttonDel(data){
-	var btn = $("<button class='layui-btn layui-btn-xs' title='删除' onclick='del(\"" + data +"\")'><i class='layui-icon'>&#xe640;</i></button>");
+function buttonDel(data,level){
+	var btn = $("<button class='layui-btn layui-btn-xs' title='删除' onclick='del(\"" + data +"\",\""+level+"\")'><i class='layui-icon'>&#xe640;</i></button>");
 	return btn.prop("outerHTML");
 }
 
