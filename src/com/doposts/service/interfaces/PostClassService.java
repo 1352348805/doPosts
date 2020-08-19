@@ -1,4 +1,4 @@
-package com.doposts.service;
+package com.doposts.service.interfaces;
 
 import com.doposts.dao.entity.SuperPostClass;
 
@@ -9,11 +9,5 @@ import com.doposts.dao.entity.SuperPostClass;
  * @email 1352348805@qq.com
  */
 public interface PostClassService {
-
-    /**
-     *  获得所有分类
-     * @return SuperPostClass
-     */
-    SuperPostClass getAllPostClass();
 
 }
