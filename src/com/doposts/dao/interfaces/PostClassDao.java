@@ -1,8 +1,6 @@
 package com.doposts.dao.interfaces;
 
-import com.doposts.dao.entity.SuperPostClass;
 import com.doposts.entity.PostClass;
-
 import java.util.List;
 
 /**

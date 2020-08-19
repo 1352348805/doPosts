@@ -1,7 +1,5 @@
 package com.doposts.service;
 
-import com.doposts.dao.entity.SuperPostClass;
-
 /**
  * @author asuk
  * @date 2020/8/19 15:55
@@ -14,6 +12,6 @@ public interface PostClassService {
      *  获得所有分类
      * @return SuperPostClass
      */
-    SuperPostClass getAllPostClass();
+    //SuperPostClass getAllPostClass();
 
 }

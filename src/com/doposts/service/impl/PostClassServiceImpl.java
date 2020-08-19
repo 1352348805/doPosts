@@ -1,7 +1,6 @@
 package com.doposts.service.impl;
 
 import com.doposts.dao.PostItDatabase;
-import com.doposts.dao.entity.SuperPostClass;
 import com.doposts.service.PostClassService;
 
 /**
@@ -12,14 +11,4 @@ import com.doposts.service.PostClassService;
  */
 public class PostClassServiceImpl implements PostClassService {
 
-
-    /**
-     * 获得所有分类
-     *
-     * @return SuperPostClass
-     */
-    @Override
-    public SuperPostClass getAllPostClass() {
-        return PostItDatabase.POST_CLASS_DAO.getAllPostClass();
-    }
 }
