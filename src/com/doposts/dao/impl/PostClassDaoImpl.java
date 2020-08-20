@@ -97,14 +97,12 @@ public class PostClassDaoImpl extends MySQL_C3P0<PostClass> implements PostClass
     @Override
     public Integer getPostClasschildrenCountById(int id) {
         try {
-            ResultSet rs = executeQuery("SELECT COUNT(1) as 'count' FROM `post_classification` where `classFatherId`=?", id);
-            if(rs.next()){
-                return rs.getInt("count");
-            }
+            PostClass postClass = new PostClass();
+            postClass.setClassFatherId(id);
+            return selectCount(PostClass.class, postClass);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return 0;
     }
 
     /**
@@ -129,13 +127,11 @@ public class PostClassDaoImpl extends MySQL_C3P0<PostClass> implements PostClass
     @Override
     public Integer findPostClassByClassName(String className) {
         try {
-            ResultSet rs = executeQuery("SELECT COUNT(1) as 'count' FROM `post_classification` where `className`=?", className);
-            if(rs.next()){
-                return rs.getInt("count");
-            }
+            PostClass postClass = new PostClass();
+            postClass.setClassName(className);
+            return selectCount(PostClass.class, postClass);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return 0;
     }
 }
