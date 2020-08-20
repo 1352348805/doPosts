@@ -161,6 +161,20 @@ $("#login-submit").click(
     }
 )
 
+    $("#login-submit").click(
+        function () {
+            $.ajax({
+                url:  "/user",
+                method: "post",
+                data: {
+                    action: "login",
+                },
+                success: function (jsonStr) {
+                 alert(jsonStr);
+                }
+            } )
+        }
+    )
 
 </script>
 </body>

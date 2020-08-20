@@ -38,6 +38,9 @@ public class Floor {
      */
     private String postContent;
 
+    private Integer createUserId;
+
+
     /**
      * 发送时间
      */
@@ -94,6 +97,14 @@ public class Floor {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Integer getCreateUserId() {
+        return createUserId;
+    }
+
+    public void setCreateUserId(Integer createUserId) {
+        this.createUserId = createUserId;
     }
 
     @Override

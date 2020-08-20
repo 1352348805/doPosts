@@ -49,4 +49,15 @@ public class PostDaoImpl extends MySQL_C3P0<Post> implements PostDao {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * 用id取帖子
+     *
+     * @param id 帖子id
+     * @return Post
+     */
+    @Override
+    public Post getPostById(Integer id) {
+        return null;
+    }
 }

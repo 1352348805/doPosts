@@ -1,5 +1,6 @@
 package com.doposts.dao.interfaces;
 
+import com.doposts.entity.Floor;
 import com.doposts.entity.Post;
 import java.util.List;
 
@@ -23,4 +24,14 @@ public interface PostDao {
      * @return 所有帖子List<Post>
      */
     List<Post> getPostByClassId(int classId);
+
+    /**
+     * 用id取帖子
+     * @param id 帖子id
+     * @return Post
+     */
+    Post getPostById(Integer id);
+
+
+
 }
