@@ -41,4 +41,18 @@ public interface PostClassDao {
      * @return  记录数
      */
     Integer getPostClasschildrenCountById(int id);
+
+    /**
+     * 插入分类记录
+     * @param postClass 插入的实体
+     * @return  受影响的行数
+     */
+    Integer insertPostClass(PostClass postClass);
+
+    /**
+     * 查询分类名相同的记录数
+     * @param className 要查询的分类名
+     * @return 记录数
+     */
+    Integer findPostClassByClassName(String className);
 }

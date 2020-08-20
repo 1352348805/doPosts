@@ -106,4 +106,26 @@ public class PostClassDaoImpl extends MySQL_C3P0<PostClass> implements PostClass
         }
         return null;
     }
+
+    /**
+     * 插入分类记录
+     *
+     * @param postClass 插入的实体
+     * @return 受影响的行数
+     */
+    @Override
+    public Integer insertPostClass(PostClass postClass) {
+        return null;
+    }
+
+    /**
+     * 查询分类名相同的记录数
+     *
+     * @param className 要查询的分类名
+     * @return 记录数
+     */
+    @Override
+    public Integer findPostClassByClassName(String className) {
+        return null;
+    }
 }

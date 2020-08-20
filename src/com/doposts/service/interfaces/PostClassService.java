@@ -1,5 +1,6 @@
 package com.doposts.service.interfaces;
 
+import com.doposts.entity.PostClass;
 import com.doposts.to.CommonResult;
 import com.doposts.vo.PostClassWithChildren;
 
@@ -34,4 +35,11 @@ public interface PostClassService {
      * @return 子分类数量
      */
     Integer getPostClasschildrenCountById(int id);
+
+    /**
+     * 查询id下一级分类列表
+     * @param parentId 父亲id
+     * @return  下一级分类列表
+     */
+    List<PostClass> getCategoryListByParentId(Integer parentId);
 }

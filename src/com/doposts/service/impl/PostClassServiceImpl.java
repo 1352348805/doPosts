@@ -75,6 +75,19 @@ public class PostClassServiceImpl implements PostClassService {
     }
 
     /**
+     * 查询id下一级分类列表
+     *
+     * @param parentId 父亲id
+     * @return 下一级分类列表
+     */
+    @Override
+    public List<PostClass> getCategoryListByParentId(Integer parentId) {
+        PostClass postClass = new PostClass();
+        postClass.setClassId(parentId);
+        return  PostItDatabase.POST_CLASS_DAO.getSubPostClass(postClass);
+    }
+
+    /**
      * 递归获取菜单分类
      * @param parentId 父级分类id
      * @param postClassWithChildren 该分类的子分类集合
