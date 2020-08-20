@@ -87,7 +87,7 @@
 			$("#form").ajaxForm(function(data){  
 				if(data==true||data=='true'){
 					alert("登录成功");
-					window.location.href="${pageContext.request.contextPath}/index.jsp";
+					window.location.href="../../../index.jsp";
 				}else{
 					alert("登录失败");
 					$(".Name").val('');
