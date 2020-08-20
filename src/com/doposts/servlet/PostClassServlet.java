@@ -1,6 +1,7 @@
 package com.doposts.servlet;
 
 import com.doposts.constant.SystemConstant;
+import com.doposts.entity.PostClass;
 import com.doposts.service.impl.PostClassServiceImpl;
 import com.doposts.service.interfaces.PostClassService;
 import com.doposts.to.CommonResult;
@@ -34,7 +35,7 @@ public class PostClassServlet extends AbstractServlet{
     }
 
     /**
-     * 获取分类数据
+     * 获取菜单分类数据
      */
     public CommonResult getClassList(HttpServletRequest request, HttpServletResponse response) {
         List<PostClassWithChildren> menu = postClassService.getMenu(request);
@@ -71,6 +72,39 @@ public class PostClassServlet extends AbstractServlet{
             }
         }
         boolean b = postClassService.deletePostClassById(classId);
+        if (b) {
+            //菜单缓存失效
+            request.getServletContext().setAttribute(SystemConstant.CATEGORY_MENU_KEY,null);
+            return new CommonResult().success(null);
+        }
+        return new CommonResult().failed("删除失败!");
+    }
+
+    /**
+     * 获取子分类列表
+     * @param request
+     * @param response
+     * @return
+     */
+    public CommonResult queryCategoryList(HttpServletRequest request, HttpServletResponse response) {
+        Integer parentId = Integer.parseInt(request.getParameter("parentId"));
+        List<PostClass> postClassList = postClassService.getCategoryListByParentId(parentId);
+        return new CommonResult().success(postClassList);
+    }
+
+    /**
+     * 添加分类
+     */
+    public CommonResult addCategory(HttpServletRequest request, HttpServletResponse response) {
+        String className = request.getParameter("className");
+        Integer type = Integer.parseInt(request.getParameter("type"));
+        Integer parentId = Integer.parseInt(request.getParameter("parentId"));
+        boolean isExists = postClassService.checkClassNameExists(className);
+        if (isExists) {
+            return new CommonResult().failed("该分类名已存在!");
+        }
+        PostClass postClass = new PostClass(null,className,type,parentId);
+        boolean b = postClassService.addPostClass(postClass);
         if (b) {
             //菜单缓存失效
             request.getServletContext().setAttribute(SystemConstant.CATEGORY_MENU_KEY,null);

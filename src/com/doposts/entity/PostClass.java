@@ -77,4 +77,15 @@ public class PostClass {
                 ", classFatherId=" + classFatherId +
                 '}';
     }
+
+    public PostClass() {
+
+    }
+
+    public PostClass(Integer classId, String className, Integer classLevel, Integer classFatherId) {
+        this.classId = classId;
+        this.className = className;
+        this.classLevel = classLevel;
+        this.classFatherId = classFatherId;
+    }
 }

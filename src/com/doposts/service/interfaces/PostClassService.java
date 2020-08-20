@@ -34,7 +34,7 @@ public interface PostClassService {
      * @param id 分类id
      * @return 子分类数量
      */
-    Integer getPostClasschildrenCountById(int id);
+    Integer getPostClassChildrenCountById(int id);
 
     /**
      * 查询id下一级分类列表
@@ -42,4 +42,18 @@ public interface PostClassService {
      * @return  下一级分类列表
      */
     List<PostClass> getCategoryListByParentId(Integer parentId);
+
+    /**
+     * 添加分类
+     * @param postClass 分类实体
+     * @return 是否添加成功
+     */
+    boolean addPostClass(PostClass postClass);
+
+    /**
+     * 检查分类名是否存在
+     * @param className 分类名
+     * @return 是否存在
+     */
+    boolean checkClassNameExists(String className);
 }

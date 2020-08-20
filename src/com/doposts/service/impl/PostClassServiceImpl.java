@@ -70,7 +70,7 @@ public class PostClassServiceImpl implements PostClassService {
      * @return 子分类数量
      */
     @Override
-    public Integer getPostClasschildrenCountById(int id) {
+    public Integer getPostClassChildrenCountById(int id) {
         return PostItDatabase.POST_CLASS_DAO.getPostClasschildrenCountById(id);
     }
 
@@ -85,6 +85,29 @@ public class PostClassServiceImpl implements PostClassService {
         PostClass postClass = new PostClass();
         postClass.setClassId(parentId);
         return  PostItDatabase.POST_CLASS_DAO.getSubPostClass(postClass);
+    }
+
+    /**
+     * 添加分类
+     *
+     * @param postClass 分类实体
+     * @return 是否添加成功
+     */
+    @Override
+    public boolean addPostClass(PostClass postClass) {
+
+        return PostItDatabase.POST_CLASS_DAO.insertPostClass(postClass) > 0 ? true : false;
+    }
+
+    /**
+     * 检查分类名是否存在
+     *
+     * @param className 分类名
+     * @return 是否存在
+     */
+    @Override
+    public boolean checkClassNameExists(String className) {
+        return PostItDatabase.POST_CLASS_DAO.findPostClassByClassName(className) > 0 ? true : false;
     }
 
     /**
