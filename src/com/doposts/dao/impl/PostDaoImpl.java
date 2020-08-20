@@ -58,6 +58,16 @@ public class PostDaoImpl extends MySQL_C3P0<Post> implements PostDao {
      */
     @Override
     public Post getPostById(Integer id) {
+        Post post = new Post();
+        post.setPostId(id);
+        try {
+            List<Post> postList = select(Post.class, post);
+            if(postList.size() == 1){
+                return postList.get(0);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return null;
     }
 }

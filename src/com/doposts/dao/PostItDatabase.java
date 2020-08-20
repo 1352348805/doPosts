@@ -2,8 +2,6 @@ package com.doposts.dao;
 
 import com.doposts.dao.impl.*;
 import com.doposts.dao.interfaces.*;
-import com.doposts.entity.CreateClassRequest;
-import com.dxhualuo.database.connectionpool.config.C3P0_Config;
 
 /**
  *  数据库实体类

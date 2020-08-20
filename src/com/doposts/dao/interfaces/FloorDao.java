@@ -14,5 +14,5 @@ public interface FloorDao {
      * @param postId 帖子id
      * @return 所有楼层信息
      */
-    List<Floor> getFloorById(Integer postId);
+    List<Floor> getFloorByPostId(Integer postId);
 }

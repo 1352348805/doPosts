@@ -3,9 +3,9 @@ package com.doposts.dao.impl;
 import com.doposts.dao.DatabaseConfig;
 import com.doposts.dao.interfaces.FloorDao;
 import com.doposts.entity.Floor;
-import com.doposts.vo.FloorWithReply;
 import com.dxhualuo.database.impl.MySQL_C3P0;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -24,7 +24,13 @@ public class FloorDaoImpl extends MySQL_C3P0<Floor> implements FloorDao {
      * @return 所有楼层信息
      */
     @Override
-    public List<Floor> getFloorById(Integer postId) {
-        return null;
+    public List<Floor> getFloorByPostId(Integer postId) {
+        Floor floor = new Floor();
+        floor.setPostId(postId);
+        try {
+            return select(Floor.class, floor);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
