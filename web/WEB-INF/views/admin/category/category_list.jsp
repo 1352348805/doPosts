@@ -40,7 +40,7 @@
                     <td>
                     </td>
                     <td align="right">
-                        <button class="layui-btn layui-btn-sm" onclick="location.href='<%=path%>/postCategory?action=toAdd'">
+                        <button class="layui-btn layui-btn-sm" onclick="location.href='<%=path%>/admin?action=toAdd'">
                             <i class="layui-icon">&#xe608;</i> 添加
                         </button>
                     </td>
@@ -93,7 +93,7 @@
                 tr += id;
                 var id = d['classId'];
                 let level = d['classLevel'];
-                let href = "updateMenu.html?id=" + id;
+                let href = path + "/admin?action=toModify&classId=" + id;
                 let edit = buttonEdit(href);
                 let del = buttonDel(id,level);
                 tr += "<td>"+edit + del+"</td>";
@@ -133,7 +133,7 @@
             }
             $.ajax({
                 type : 'post',
-                url : path + '/postCategory',
+                url : path + '/admin',
                 data : data,
                 dataType: 'json',
                 success : function(data) {

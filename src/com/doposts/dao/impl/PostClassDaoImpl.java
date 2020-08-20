@@ -134,4 +134,15 @@ public class PostClassDaoImpl extends MySQL_C3P0<PostClass> implements PostClass
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * 以id更新分类
+     *
+     * @param postClass 分类实体，其中属性值为空的字段无需参与更新
+     * @return 受影响的行数
+     */
+    @Override
+    public Integer updatePostClassById(PostClass postClass) {
+        return null;
+    }
 }

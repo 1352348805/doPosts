@@ -55,4 +55,11 @@ public interface PostClassDao {
      * @return 记录数
      */
     Integer findPostClassByClassName(String className);
+
+    /**
+     * 以id更新分类
+     * @param postClass 分类实体，其中属性值为空的字段无需参与更新
+     * @return 受影响的行数
+     */
+    Integer updatePostClassById(PostClass postClass);
 }

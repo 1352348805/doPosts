@@ -1,5 +1,6 @@
 package com.doposts;
 
+import com.doposts.entity.PostClass;
 import com.doposts.service.impl.PostClassServiceImpl;
 import com.doposts.service.interfaces.PostClassService;
 import com.doposts.vo.PostClassWithChildren;
@@ -39,7 +40,12 @@ public class PostClassTest {
                 });
             });
         });
+    }
 
+    @Test
+    public void getPostClassByIdWithParents() {
+        List<PostClass> list = postClassService.getPostClassByIdWithParents(35);
+        list.forEach(item -> System.out.println(item));
 
     }
 }

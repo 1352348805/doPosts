@@ -56,4 +56,18 @@ public interface PostClassService {
      * @return 是否存在
      */
     boolean checkClassNameExists(String className);
+
+    /**
+     * 获取分类和它的父亲分类
+     * @param classId 分类id
+     * @return 分类列表
+     */
+    List<PostClass> getPostClassByIdWithParents(Integer classId);
+
+    /**
+     * 以id修改分类
+     * @param postClass 分类实体
+     * @return 是否修改成功
+     */
+    boolean modifyPostClass(PostClass postClass);
 }

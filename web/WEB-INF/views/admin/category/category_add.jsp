@@ -30,6 +30,11 @@
             <table class="layui-table" style="margin: 20% auto;">
                 <tbody>
                 <tr>
+                    <td colspan="2" style="text-align: center;font-size: 20px;font-family: 宋体">
+                        添加分类
+                    </td>
+                </tr>
+                <tr>
                     <td width="135" align="right">分类级别</td>
                     <td colspan="3" style="font-family:'宋体';">
                         <select class="jj" name="type" style="background-color:#f6f6f6;" id="type"
@@ -166,7 +171,7 @@
             }
             parentId = level2;
         }
-        if (className == '' || className.length == 0) {
+        if (className.trim() == '') {
             layer.msg('请填写分类名称');
             return;
         }
@@ -176,7 +181,7 @@
             type : type,
             parentId : parentId
         }
-        $.post(path + '/postCategory',data,function (result) {
+        $.post(path + '/admin',data,function (result) {
             if (result.code == 200) {
                 layer.msg('添加成功!',{
                     time : 1000

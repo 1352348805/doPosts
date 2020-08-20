@@ -10,6 +10,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -109,6 +110,45 @@ public class PostClassServiceImpl implements PostClassService {
     public boolean checkClassNameExists(String className) {
         return PostItDatabase.POST_CLASS_DAO.findPostClassByClassName(className) > 0 ? true : false;
     }
+
+    /**
+     * 获取分类和它的父亲分类
+     *
+     * @param classId 分类id
+     * @return 分类列表
+     */
+    @Override
+    public List<PostClass> getPostClassByIdWithParents(Integer classId) {
+        List<PostClass> postClassList = new ArrayList<>();
+        getPostClassByIdWithParents(classId,postClassList);
+        return postClassList;
+    }
+
+    /**
+     * 以id修改分类
+     *
+     * @param postClass 分类实体
+     * @return 是否修改成功
+     */
+    @Override
+    public boolean modifyPostClass(PostClass postClass) {
+        return PostItDatabase.POST_CLASS_DAO.updatePostClassById(postClass) > 1 ? true : false;
+    }
+
+    /**
+     * 获取分类和它的父亲分类
+     * @param classId 当前分类id
+     * @param postClassList 需要填充的集合
+     */
+    private void getPostClassByIdWithParents(Integer classId, List<PostClass> postClassList) {
+        PostClass postClass = PostItDatabase.POST_CLASS_DAO.getPostClassById(classId);
+        if (postClass == null) {
+            return;
+        }
+        getPostClassByIdWithParents(postClass.getClassFatherId(),postClassList);
+        postClassList.add(postClass);
+    }
+
 
     /**
      * 递归获取菜单分类
