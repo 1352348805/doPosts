@@ -66,9 +66,9 @@ public class PostClassServlet extends AbstractServlet{
         }
 
         if (level != 3) {
-            Integer count = postClassService.getPostClasschildrenCountById(classId);
+            Integer count = postClassService.getPostClassChildrenCountById(classId);
             if (count > 0) {
-                return new CommonResult().failed("该分类下还有" + count + "条数据,不能删除!");
+                return new CommonResult().failed("该c分类下还有" + count + "条数据,不能删除!");
             }
         }
         boolean b = postClassService.deletePostClassById(classId);
