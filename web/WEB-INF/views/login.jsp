@@ -33,7 +33,7 @@
             <h2 style= "color:green" >.来贴吧.</h2>
             <p style="color:green">一个有趣的论坛</p>
         </div>
-        <form action="<%=path%>/user" method="post" class="layadmin-user-login-box layadmin-user-login-body layui-form">
+        <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
             <input type="hidden" name="action" value="login" />
             <div class="layui-form-item">
                 <label class="layadmin-user-login-icon layui-icon layui-icon-username" for="LAY-user-login-username"></label>
@@ -76,7 +76,7 @@
             <!--          -->
             <!--          <a href="reg.html" class="layadmin-user-jump-change layadmin-link">注册帐号</a>-->
             <!--        </div>-->
-        </form>
+        </div>
     </div>
 </div>
 
@@ -114,7 +114,7 @@
         let layer = layui.layer;
       });
 
-      function CheckInput() {
+      function login() {
         let username = $("#LAY-user-login-username").val();
         let password = $("#LAY-user-login-password").val();
         if (username == "" || username.length == 0) {
@@ -128,53 +128,32 @@
             });
             return false;
         }
+          $.ajax({
+              url:"<%=path%>/user",
+              method:"post",
+              data:{
+                  action:"login",
+                  "username":username,
+                  "password":password
+              },
+              success:function (jsonStr) {
+                  if(jsonStr.code === 200){
+                      location.href="<%=path%>/index.jsp";
+                  }else if(jsonStr.code === 500){
+                      layer.msg("用户名或密码不正确！", {
+                          icon: 6, btn:['好的'],
+                      });
+                  }
+                  console.log(jsonStr);
+              },
+              dataType:"json"
+          })
         return true;
       }
 
-      $("#login-submit").click(CheckInput);
+      $("#login-submit").click(login);
     });
-$("#login-submit").click(
-    function () {
-        let username = $("#LAY-user-login-username").val();
-        let password = $("#LAY-user-login-password").val();
-        $.ajax({
-            url:"<%=path%>/user",
-            method:"post",
-            data:{
-                action:"login",
-                "username":username,
-                "password":password
-            },
-            success:function (jsonStr) {
-                if(jsonStr.code === 200){
-                    location.href="<%=path%>/index.jsp";
-                }else if(jsonStr.code === 500){
-                    layer.msg("用户名或密码不正确！", {
-                        icon: 6, btn:['好的'],
-                    });
-                }
-                console.log(jsonStr);
-            },
-            dataType:"json"
-        })
-        return false;
-    }
-)
 
-    $("#login-submit").click(
-        function () {
-            $.ajax({
-                url:  "/user",
-                method: "post",
-                data: {
-                    action: "login",
-                },
-                success: function (jsonStr) {
-                 alert(jsonStr);
-                }
-            } )
-        }
-    )
 
 </script>
 </body>
