@@ -13,6 +13,6 @@ import java.util.List;
 @SuppressWarnings("RedundantThrows")
 public class Run {
     public static void main(String[] args) throws Exception{
-        System.out.println(PostItDatabase.POST_CLASS_DAO.findPostClassByClassName("4399小游戏"));
+        System.out.println(PostItDatabase.REPLY_DAO.getReplyListById(1));
     }
 }

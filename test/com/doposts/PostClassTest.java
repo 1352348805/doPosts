@@ -19,6 +19,7 @@ public class PostClassTest {
 
     private PostClassService postClassService;
 
+
     @Before
     public void init() {
         postClassService = new PostClassServiceImpl();
