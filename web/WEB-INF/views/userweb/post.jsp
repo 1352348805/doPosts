@@ -8,27 +8,27 @@
     <title>Home</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/css/fontawesome-all.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/css/style.login.css" type="text/css" media="all" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/css/default.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/css/search-form.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/fontawesome-all.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/style.login.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/default.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/search-form.css">
     <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/css/vendor/bootstrap.min.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/css/style.nav.css">
+	href="${pageContext.request.contextPath }/static/css/vendor/bootstrap.min.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/style.nav.css">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet"> 
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/css/styles-merged.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/css/style.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/css/custom.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/styles-merged.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/style.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/custom.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/font-awesome/css/font-awesome.css">
     <!--[if lt IE 9]>
       <script src="js/vendor/html5shiv.min.js"></script>
       <script src="js/vendor/respond.min.js"></script>
     <![endif]-->
-    <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.11.0.min.js"></script>
-    <script src="${pageContext.request.contextPath }/js/bootstrap.min.js"
+    <script type="text/javascript" src="${pageContext.request.contextPath }/static/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath }/static/js/jquery-1.11.0.min.js"></script>
+    <script src="${pageContext.request.contextPath }/static/js/bootstrap.min.js"
 	type="text/javascript" charset="utf-8"></script>
-	<script src="${pageContext.request.contextPath }/js/bootbox.min.js"></script>
+	<script src="${pageContext.request.contextPath }/static/js/bootbox.min.js"></script>
   </head>
   <body>
   <script type="text/javascript">
@@ -415,12 +415,12 @@
   </footer>
   <!-- END: footer -->
   
-  <script src="${pageContext.request.contextPath }/js/scripts.min.js"></script>
-  <script src="${pageContext.request.contextPath }/js/main.min.js"></script>
-  <script src="${pageContext.request.contextPath }/js/custom.js"></script>
-  <script src="${pageContext.request.contextPath }/js/js.nav.js"></script>
-<script src="${pageContext.request.contextPath }/js/canva_moving_effect.js"></script>
-<script src="${pageContext.request.contextPath }/js/jquery-form.js"></script>
+  <script src="${pageContext.request.contextPath }/static/js/scripts.js"></script>
+  <script src="${pageContext.request.contextPath }/static/js/main.js"></script>
+  <script src="${pageContext.request.contextPath }/static/js/custom.js"></script>
+  <script src="${pageContext.request.contextPath }/static/js/js.nav.js"></script>
+<script src="${pageContext.request.contextPath }/static/js/canva_moving_effect.js"></script>
+<script src="${pageContext.request.contextPath }/static/js/jquery-form.js"></script>
 <!-- //Jquery -->
 <script type="text/javascript">
 	$(function(){

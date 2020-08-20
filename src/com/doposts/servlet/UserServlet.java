@@ -46,7 +46,7 @@ public class UserServlet extends AbstractServlet{
     }
 
     /**
-     * 登录验证 + 跳转
+     * 登录验证
      * @param request
      * @param response
      * @return
@@ -61,5 +61,14 @@ public class UserServlet extends AbstractServlet{
         request.getSession().setAttribute("user", user);
         return new CommonResult().success("");
     }
+
+    /**
+     * 用户主页
+     */
+    public String index(HttpServletRequest request, HttpServletResponse response) {
+        return "userweb/index";
+    }
+
+
 
 }
