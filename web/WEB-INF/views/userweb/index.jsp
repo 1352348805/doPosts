@@ -8,20 +8,20 @@
     <title>Home</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/css/default.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/css/search-form.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/default.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/search-form.css">
     
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet"> 
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/css/styles-merged.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/css/style.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/css/custom.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/styles-merged.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/custom.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/font-awesome/css/font-awesome.css">
     <!--[if lt IE 9]>
-      <script src="js/vendor/html5shiv.min.js"></script>
-      <script src="js/vendor/respond.min.js"></script>
+      <script src="${pageContext.request.contextPath }/static/js/vendor/html5shiv.min.js"></script>
+      <script src="${pageContext.request.contextPath }/static/js/vendor/respond.min.js"></script>
     <![endif]-->
-    <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath }/static/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath }/static/js/jquery-1.11.0.min.js"></script>
   </head>
   <body>
   <script type="text/javascript">
@@ -106,8 +106,8 @@
 
         <nav role="navigation" class="probootstrap-nav hidden-xs">
           <ul class="probootstrap-main-nav">
-            <li><a href="${pageContext.request.contextPath }/jsp/login.jsp">登录</a></li>
-            <li><a href="${pageContext.request.contextPath }/jsp/register.jsp">注册</a></li>
+            <li><a href="${pageContext.request.contextPath }/user?action=toLogin">登录</a></li>
+            <li><a href="${pageContext.request.contextPath }/user?action=toRegister">注册</a></li>
           </ul>
           <div class="extra-text visible-xs">
             <ul class="social-buttons">
@@ -122,7 +122,7 @@
   <!-- END: header -->
   
   <!-- START: section -->
-  <section class="probootstrap-intro" style="background-image: url(img/hero_bg_2.jpg);" data-stellar-background-ratio="0.5">
+  <section class="probootstrap-intro" style="background-image: url(${pageContext.request.contextPath}/static/images/hero_bg_2.jpg);" data-stellar-background-ratio="0.5">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-7 probootstrap-intro-text">
@@ -195,9 +195,9 @@
   </footer>
   <!-- END: footer -->
 
-  <script src="${pageContext.request.contextPath }/js/scripts.min.js"></script>
-  <script src="${pageContext.request.contextPath }/js/main.min.js"></script>
-  <script src="${pageContext.request.contextPath }/js/custom.js"></script>
+  <script src="${pageContext.request.contextPath }/static/js/scripts.js"></script>
+  <script src="${pageContext.request.contextPath }/static/js/main.js"></script>
+  <script src="${pageContext.request.contextPath }/static/js/custom.js"></script>
 
   </body>
 </html>
