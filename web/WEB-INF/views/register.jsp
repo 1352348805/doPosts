@@ -17,11 +17,18 @@
     <link rel="stylesheet" href="<%=path%>/static/layuiadmin/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="<%=path%>/static/layuiadmin/style/admin.css" media="all">
     <link rel="stylesheet" href="<%=path%>/static/layuiadmin/style/login.css" media="all">
+    <style>
+    </style>
 </head>
-/
-<body>
+
+<body style="overflow:-Scroll;overflow-x:hidden;">
+
+
 <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
-    <div class="layadmin-user-login-main">
+    <video src="<%=path%>/static/video/adnibdvdsb.mp4" style="z-index: -1; width:1600px;height: 110%; position: absolute; top: -10%; left: -10%" loop="loop" autoplay="autoplay"
+           muted="muted" type="video/mp4"></video>
+
+    <div class="layadmin-user-login-main" >
         <div class="layadmin-user-login-box layadmin-user-login-header">
             <h2>来贴用户注册</h2>
             <p>灵感 , 来源于有趣的人</p>
@@ -29,25 +36,34 @@
         <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
             <div class="layui-form-item">
                 <label class="layadmin-user-login-icon layui-icon layui-icon-username"></label>
-                <input type="text" name="userLoginName" id="LAY-user-login-userName" placeholder="用户名" class="layui-input">
+                <input type="text" name="userLoginName" id="LAY-user-login-userName" placeholder="用户名"
+                       class="layui-input">
             </div>
             <div class="layui-form-item">
-                <label class="layadmin-user-login-icon layui-icon layui-icon-password" for="LAY-user-login-password"></label>
-                <input type="password" name="userPassword" id="LAY-user-login-password" lay-verify="pass" placeholder="密码" class="layui-input">
+                <label class="layadmin-user-login-icon layui-icon layui-icon-password"
+                       for="LAY-user-login-password"></label>
+                <input type="password" name="userPassword" id="LAY-user-login-password" lay-verify="pass"
+                       placeholder="密码" class="layui-input">
             </div>
             <div class="layui-form-item">
-                <label class="layadmin-user-login-icon layui-icon layui-icon-password" for="LAY-user-login-repass"></label>
-                <input type="password" name="repass" id="LAY-user-login-repass" lay-verify="required" placeholder="确认密码" class="layui-input">
+                <label class="layadmin-user-login-icon layui-icon layui-icon-password"
+                       for="LAY-user-login-repass"></label>
+                <input type="password" name="repass" id="LAY-user-login-repass" lay-verify="required" placeholder="确认密码"
+                       class="layui-input">
             </div>
             <div class="layui-form-item">
-                <label class="layadmin-user-login-icon layui-icon layui-icon-username" for="LAY-user-login-nickname"></label>
-                <input type="text" name="userName" id="LAY-user-login-nickname" lay-verify="nickname" placeholder="昵称" class="layui-input">
+                <label class="layadmin-user-login-icon layui-icon layui-icon-username"
+                       for="LAY-user-login-nickname"></label>
+                <input type="text" name="userName" id="LAY-user-login-nickname" lay-verify="nickname" placeholder="昵称"
+                       class="layui-input">
             </div>
             <div class="layui-form-item">
                 <input type="checkbox" name="agreement" lay-skin="primary" title="同意用户协议" checked>
             </div>
             <div class="layui-form-item">
-                <button id="but-register" class="layui-btn layui-btn-fluid" lay-submit lay-filter="LAY-user-reg-submit">注 册</button>
+                <button id="but-register" class="layui-btn layui-btn-fluid" lay-submit lay-filter="LAY-user-reg-submit">
+                    注 册
+                </button>
             </div>
             <div class="layui-trans layui-form-item layadmin-user-login-other">
                 <label>社交账号注册</label>
@@ -57,76 +73,79 @@
             </div>
         </div>
     </div>
-    <jsp:include page="common/admin/footer.jsp" />
+
+    <jsp:include page="common/admin/footer.jsp"/>
 </div>
 <script src="<%=path%>/static/layuiadmin/layui/layui.js"></script>
 <script>
     $(function () {
-        layui.use('layer', function(){
+        layui.use('layer', function () {
             let layer = layui.layer;
         })
     });
-    function CheckInput(){
-        let userLoginName=$("#LAY-user-login-userName").val();
-        let userPassword=$("#LAY-user-login-password").val();
-        let repass=$("#LAY-user-login-repass").val();
-        let nike=$("#LAY-user-login-nickname").val();
-        if (userLoginName==null || userLoginName.length==0){
-            layer.msg('请输入用户名',{
-                time:2000
+
+    function CheckInput() {
+        let userLoginName = $("#LAY-user-login-userName").val();
+        let userPassword = $("#LAY-user-login-password").val();
+        let repass = $("#LAY-user-login-repass").val();
+        let nike = $("#LAY-user-login-nickname").val();
+        if (userLoginName == null || userLoginName.length == 0) {
+            layer.msg('请输入用户名', {
+                time: 2000
             });
             return false;
         }
-        if (userPassword==null || userPassword.length==0){
-            layer.msg('请输入密码',{
-                time:2000
+        if (userPassword == null || userPassword.length == 0) {
+            layer.msg('请输入密码', {
+                time: 2000
             });
             return false;
         }
-        if (nike==null || nike.length==0){
-            layer.msg('请输入昵称--《例如:李阳是猪、李阳小贱人、、等等》',{
-                time:2000
+        if (nike == null || nike.length == 0) {
+            layer.msg('请输入昵称--《例如:李阳是猪、李阳小贱人、、等等》', {
+                time: 2000
             })
             return false;
         }
-        if (userPassword != repass){
-            layer.msg('两次密码不一致',{
-                time:2000
+        if (userPassword != repass) {
+            layer.msg('两次密码不一致', {
+                time: 2000
             })
             return false;
         }
         return true;
     }
-        $("#but-register").click(function () {
-            if(!CheckInput()){
-                return false;
-            }
-           $.ajax({
-               url:"<%=path%>/user",
-               type:"post",
-               data:{
-                   action:"registerUser",
-                   'loginName':$("#LAY-user-login-userName").val(),
-                   'password':$("#LAY-user-login-password").val(),
-                   'repass':$("#LAY-user-login-repass").val(),
-                   'name':$("#LAY-user-login-nickname").val()
-               },
-               success: function (jsonStr) {
-                   if (jsonStr.code===200){
-                       layer.msg("注册成功！,请返回登录页面", {
-                           icon: 6, btn:['好的'],
-                       });
-                   }else if (jsonStr.code===500){
-                       layer.msg("注册失败，可能该用户已存在！", {
-                           icon: 6, btn:['好的'],
-                       });
-                   }
-                   console.log(jsonStr);
-               },
-               dataType:"json"
-           })
+
+    $("#but-register").click(function () {
+        if (!CheckInput()) {
             return false;
+        }
+        $.ajax({
+            url: "<%=path%>/user",
+            type: "post",
+            data: {
+                action: "registerUser",
+                'loginName': $("#LAY-user-login-userName").val(),
+                'password': $("#LAY-user-login-password").val(),
+                'repass': $("#LAY-user-login-repass").val(),
+                'name': $("#LAY-user-login-nickname").val()
+            },
+            success: function (jsonStr) {
+                if (jsonStr.code === 200) {
+                    layer.msg("注册成功！,请返回登录页面", {
+                        icon: 6, btn: ['好的'],
+                    });
+                } else if (jsonStr.code === 500) {
+                    layer.msg("注册失败，可能该用户已存在！", {
+                        icon: 6, btn: ['好的'],
+                    });
+                }
+                console.log(jsonStr);
+            },
+            dataType: "json"
         })
+        return false;
+    })
 </script>
 
 <%--<script>--%>
