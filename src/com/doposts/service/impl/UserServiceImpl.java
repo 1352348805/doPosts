@@ -43,6 +43,9 @@ public class UserServiceImpl implements UserService {
         user.setUserPassword(password);
         user.setUserName(userName);
         user.setGroup("user");
+        if(PostItDatabase.USER_DAO.selectUserByLoginName(loginName) != null){
+            return false;
+        }
         int len = PostItDatabase.USER_DAO.insertUserByUser(user);
         return len > 0;
     }

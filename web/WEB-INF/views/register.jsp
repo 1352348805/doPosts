@@ -12,12 +12,14 @@
 <head>
     <meta charset="utf-8">
     <title>注册 </title>
+    <script src="<%=path%>/static/js/jquery.js"></script>
+    <script src="<%=path%>/static/layuiadmin/layui/layui.js"></script>
     <link rel="stylesheet" href="<%=path%>/static/layuiadmin/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="<%=path%>/static/layuiadmin/style/admin.css" media="all">
     <link rel="stylesheet" href="<%=path%>/static/layuiadmin/style/login.css" media="all">
 </head>
-<script src="<%=path%>/static/js/jquery.js"></script>
-
+/
+<body>
 <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
     <div class="layadmin-user-login-main">
         <div class="layadmin-user-login-box layadmin-user-login-header">
@@ -59,6 +61,11 @@
 </div>
 <script src="<%=path%>/static/layuiadmin/layui/layui.js"></script>
 <script>
+    $(function () {
+        layui.use('layer', function(){
+            let layer = layui.layer;
+        })
+    });
     function CheckInput(){
         let userLoginName=$("#LAY-user-login-userName").val();
         let userPassword=$("#LAY-user-login-password").val();
@@ -91,23 +98,28 @@
         return true;
     }
         $("#but-register").click(function () {
+            if(!CheckInput()){
+                return false;
+            }
            $.ajax({
                url:"<%=path%>/user",
                type:"post",
                data:{
                    action:"registerUser",
-                   loginName:$("#LAY-user-login-userName").val(),
-                   password:$("#LAY-user-login-password").val(),
-                   repass:$("#LAY-user-login-repass").val(),
-                   name:$("#LAY-user-login-nickname").val()
+                   'loginName':$("#LAY-user-login-userName").val(),
+                   'password':$("#LAY-user-login-password").val(),
+                   'repass':$("#LAY-user-login-repass").val(),
+                   'name':$("#LAY-user-login-nickname").val()
                },
                success: function (jsonStr) {
                    if (jsonStr.code===200){
-                       location.href="<%=path%>/views/register.jsp ";
+                       layer.msg("注册成功！,请返回登录页面", {
+                           icon: 6, btn:['好的'],
+                       });
                    }else if (jsonStr.code===500){
-                       layer.msg('注册失败！',{
-                           icon: 6,btn:['OK'],
-                       })
+                       layer.msg("注册失败，可能该用户已存在！", {
+                           icon: 6, btn:['好的'],
+                       });
                    }
                    console.log(jsonStr);
                },
@@ -164,5 +176,6 @@
 <%--        });--%>
 <%--    });--%>
 <%--</script>--%>
+
 </body>
 </html>
