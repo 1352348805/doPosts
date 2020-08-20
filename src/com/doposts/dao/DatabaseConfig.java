@@ -11,6 +11,7 @@ import java.io.IOException;
  */
 public class DatabaseConfig {
     static{
+        //数据库配置文件载入过程
         try {
             PropertiesManager properties = new PropertiesManager(Path.resourcePath("database.properties"));
             url = properties.getValue("url").trim();

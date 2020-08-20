@@ -13,6 +13,10 @@ import java.util.List;
 @SuppressWarnings("RedundantThrows")
 public class Run {
     public static void main(String[] args) throws Exception{
-        System.out.println(PostItDatabase.POST_CLASS_DAO.getPostClasschildrenCountById(1));
+        PostClass postClass = new PostClass();
+        postClass.setClassFatherId(12);
+        postClass.setClassLevel(3);
+        postClass.setClassName("4399小游戏");
+        System.out.println(PostItDatabase.POST_CLASS_DAO.insertPostClass(postClass));
     }
 }

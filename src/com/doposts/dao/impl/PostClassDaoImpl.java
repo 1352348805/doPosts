@@ -104,28 +104,38 @@ public class PostClassDaoImpl extends MySQL_C3P0<PostClass> implements PostClass
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return null;
+        return 0;
     }
 
     /**
      * 插入分类记录
-     *
      * @param postClass 插入的实体
      * @return 受影响的行数
      */
     @Override
     public Integer insertPostClass(PostClass postClass) {
-        return null;
+        try {
+            return insert(postClass);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
      * 查询分类名相同的记录数
-     *
      * @param className 要查询的分类名
      * @return 记录数
      */
     @Override
     public Integer findPostClassByClassName(String className) {
-        return null;
+        try {
+            ResultSet rs = executeQuery("SELECT COUNT(1) as 'count' FROM `post_classification` where `className`=?", className);
+            if(rs.next()){
+                return rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
     }
 }
