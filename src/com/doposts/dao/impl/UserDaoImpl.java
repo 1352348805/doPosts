@@ -45,7 +45,7 @@ public class UserDaoImpl extends MySQL_C3P0<User> implements UserDao {
      * @return 用户数据
      */
     @Override
-    public List<User> selcetFromUser() {
+    public List<User> selectFromUser() {
         return select(User.class);
     }
 
@@ -63,6 +63,16 @@ public class UserDaoImpl extends MySQL_C3P0<User> implements UserDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * 查询用户数量
+     *
+     * @return
+     */
+    @Override
+    public int selectUserCount() {
+        return 0;
     }
 
     /**

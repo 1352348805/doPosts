@@ -35,7 +35,7 @@ public interface UserDao {
      * 查看所有用户
      * @return 用户数据
      */
-    List<User> selcetFromUser();
+    List<User> selectFromUser();
 
     /**
      *  从startIndex开始位置查询length条用户数据
@@ -44,5 +44,11 @@ public interface UserDao {
      * @return List数据
      */
     List<User> selectUserByStartIndexAndLength(int startIndex, int length);
+
+    /**
+     * 查询用户数量
+     * @return
+     */
+    int selectUserCount();
 
 }
