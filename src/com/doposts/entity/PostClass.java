@@ -36,6 +36,16 @@ public class PostClass {
      */
     private Integer classFatherId;
 
+    private String classDescribe;
+
+    public String getClassDescribe() {
+        return classDescribe;
+    }
+
+    public void setClassDescribe(String classDescribe) {
+        this.classDescribe = classDescribe;
+    }
+
     public Integer getClassId() {
         return classId;
     }
