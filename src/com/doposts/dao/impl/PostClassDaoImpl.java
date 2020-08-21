@@ -143,6 +143,10 @@ public class PostClassDaoImpl extends MySQL_C3P0<PostClass> implements PostClass
      */
     @Override
     public Integer updatePostClassById(PostClass postClass) {
-        return null;
+        try {
+            return update(postClass);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

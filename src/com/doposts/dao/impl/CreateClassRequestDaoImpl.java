@@ -5,6 +5,7 @@ import com.doposts.dao.interfaces.CreateClassRequestDao;
 import com.doposts.entity.CreateClassRequest;
 import com.dxhualuo.database.impl.MySQL_C3P0;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -23,7 +24,13 @@ public class CreateClassRequestDaoImpl extends MySQL_C3P0<CreateClassRequest> im
      */
     @Override
     public Integer getUnauthorizedClassCount() {
-        return null;
+        CreateClassRequest createClassRequest = new CreateClassRequest();
+        createClassRequest.setIsProcess(false);
+        try {
+            return selectCount(CreateClassRequest.class, createClassRequest);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -35,6 +42,10 @@ public class CreateClassRequestDaoImpl extends MySQL_C3P0<CreateClassRequest> im
      */
     @Override
     public List<CreateClassRequest> selectAllCreateClassRequestByCondition(int offset, int pageSize) {
-        return null;
+        try {
+            return executeQueryToBeanList("SELECT * FROM `create_class_request` ORDER BY create_class_request.isProcess ASC LIMIT ?, ?", CreateClassRequest.class, offset, pageSize);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

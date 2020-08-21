@@ -126,9 +126,9 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-7 probootstrap-intro-text">
-          <h1 class="probootstrap-animate">小贴吧</h1>
+          <h1 class="probootstrap-animate">来贴吧</h1>
           <div class="probootstrap-subtitle probootstrap-animate">
-            <h2>希望您可以在小贴吧里面找到自己的快乐 <a href="#" target="_blank"></a></h2>
+            <h2>希望您来贴吧里面找到自己的快乐 <a href="#" target="_blank"></a></h2>
           </div>
         </div>
       </div>
@@ -186,7 +186,7 @@
       <div class="row mt40">
         <div class="col-md-12 text-center">
           <p>
-            <small>小贴吧，一个畅谈的梦想的贴吧</small><br>
+            <small>来贴吧，一个畅谈的梦想的贴吧</small><br>
             <a href="#" class="js-backtotop">回到顶部</a>
           </p>
         </div>

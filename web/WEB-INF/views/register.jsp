@@ -10,7 +10,8 @@
 %>
 <html>
 <head>
-    <title>注册 </title>
+    <link rel="shortcut icon" href="<%=path%>/static/images/head/500415.ico" />
+    <title>注册</title>
     <link rel="stylesheet" href="<%=path%>/static/layuiadmin/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="<%=path%>/static/layuiadmin/style/admin.css" media="all">
     <link rel="stylesheet" href="<%=path%>/static/layuiadmin/style/login.css" media="all">
@@ -19,7 +20,7 @@
 <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
     <div class="layadmin-user-login-main">
         <div class="layadmin-user-login-box layadmin-user-login-header">
-            <h2>来贴用户注册</h2>
+            <h2>欢迎注册来贴吧</h2>
             <p>灵感 , 来源于有趣的人</p>
         </div>
         <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
