@@ -69,5 +69,5 @@ public interface PostClassDao {
      * @param classLevel 查询的分类等级
      * @return 分类集合
      */
-    List<PostClass> getPostClassListByCondition(String className,int classLevel);
+    List<PostClass> getPostClassListByCondition(String className, int classLevel);
 }
