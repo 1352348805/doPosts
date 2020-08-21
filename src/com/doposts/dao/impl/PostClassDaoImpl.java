@@ -158,7 +158,7 @@ public class PostClassDaoImpl extends MySQL_C3P0<PostClass> implements PostClass
      * @return 分类集合
      */
     @Override
-    public List<PostClass> getPostClassListByCondition(String className, Integer classLevel) {
+    public List<PostClass> getPostClassListByCondition(String className, int classLevel) {
         return null;
     }
 }
