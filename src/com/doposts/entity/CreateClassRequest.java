@@ -1,5 +1,6 @@
 package com.doposts.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.dxhualuo.data.annotation.JavaBean;
 import com.dxhualuo.database.annotation.AutoIncrement;
 import com.dxhualuo.database.annotation.PrimaryKey;
@@ -40,6 +41,7 @@ public class CreateClassRequest {
     /**
      *  请求时间
      */
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date requestDate;
 
     /**
@@ -60,6 +62,7 @@ public class CreateClassRequest {
     /**
      *  审核日期
      */
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date reviewDate;
 
     public Boolean getIsPass() {

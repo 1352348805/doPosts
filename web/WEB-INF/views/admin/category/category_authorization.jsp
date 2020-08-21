@@ -34,7 +34,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div>
                 <div class="widget-body no-padding">
-                    <table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%;font-size: 14px;">
+                    <table id="dt-table" class="table table-striped table-bordered table-hover layui-form" style="width:100%;font-size: 14px;">
                         <tr>
                             <th width="10%">申请分类名</th>
                             <th width="10%">申请父分类名</th>
@@ -63,6 +63,27 @@
 <script type="text/javascript" src="<%=path%>/static/calendar/WdatePicker.js"></script>
 <script>
     var path = $("#path").val();
+
+    function PassStatusChange(obj,id) {
+        CommonChangeStatus(obj);
+    }
+
+    function AuthorizationStatusChange(obj,id) {
+        CommonChangeStatus(obj);
+    }
+
+    function CommonChangeStatus(obj) {
+        $obj = $(obj);
+        let v = $obj.prev().val();
+        if (v == 1) {
+            $obj.prev().val(0);
+            $obj.removeClass('layui-form-onswitch');
+        } else {
+            $obj.prev().val(1);
+            $obj.addClass('layui-form-onswitch');
+        }
+    }
+
     $(function () {
         $.post(path + '/admin',{action:'getCreateClassRequestList'},function (result) {
             if (result.code ==200) {
@@ -80,13 +101,50 @@
                 for (let i = 0;i < data.length; i++) {
                     html += "<tr>\n" +
                                 "<th width=\"10%\">"+data[i].className+"</th>\n" +
-                                "<th width=\"10%\">"+data[i].fatherClassId+"</th>\n" +
-                                "<th width=\"10%\">申请人</th>\n" +
+                                "<th width=\"10%\">"+data[i].fatherClassName+"</th>\n" +
+                                "<th width=\"10%\">"+data[i].requestName+"</th>\n" +
                                 "<th width=\"10%\">"+data[i].requestDate+"</th>\n" +
-                                "<th width=\"10%\">"+data[i].isProcess+"</th>\n" +
-                                "<th width=\"10%\">"+data[i].isPass+"</th>\n" +
-                                "<th width=\"15%\">审核人</th>\n" +
-                                "<th width=\"15%\">"+data[i].reviewDate+"</th>\n" +
+                                "<th width=\"10%\">" +
+                                "<div class=\"layui-card-body layui-row layui-col-space10\">\n" +
+                                "        <div class=\"layui-col-md12\">\n" +
+                                "            <input type=\"checkbox\" name=\"xxx\" value=\"";
+                    if (data[i].isProcess) {
+                        html += "1\" lay-skin=\"switch\">\n" +
+                                "            <div class=\"layui-unselect layui-form-switch layui-form-onswitch\" lay-skin=\"_switch\" onclick=\"PassStatusChange(this,"+data[i].requestId+")\"><em></em><i></i></div>\n";
+                    } else {
+                        html += "0\" lay-skin=\"switch\">\n" +
+                                "            <div class=\"layui-unselect layui-form-switch\" lay-skin=\"_switch\" onclick=\"PassStatusChange(this,"+data[i].requestId+")\"><em></em><i></i></div>\n";
+
+                    }
+                    html += "        </div>\n" +
+                            "    </div>";
+                    html +=
+                        "<th width=\"10%\">" +
+                        "<div class=\"layui-card-body layui-row layui-col-space10\">\n" +
+                        "        <div class=\"layui-col-md12\">\n" +
+                        "            <input type=\"checkbox\" name=\"xxx\" value=\"";;
+                    if (data[i].isPass) {
+                        html += "1\" lay-skin=\"switch\">\n" +
+                            "            <div class=\"layui-unselect layui-form-switch layui-form-onswitch\" lay-skin=\"_switch\" onclick=\"AuthorizationStatusChange(this,"+data[i].requestId+")\"><em></em><i></i></div>\n";
+                    } else {
+                        html += "0\" lay-skin=\"switch\">\n" +
+                            "            <div class=\"layui-unselect layui-form-switch\" lay-skin=\"_switch\" onclick=\"AuthorizationStatusChange(this,"+data[i].requestId+")\"><em></em><i></i></div>\n";
+
+                    }
+                    html += "        </div>\n" +
+                        "    </div>" +
+                            "</th>\n" +
+                                "<th width=\"15%\">";
+
+                    if (data[i].reviewerName != null) {
+                        html += data[i].reviewerName;
+                    }
+                    html += "</th>\n" +
+                                "<th width=\"15%\">";
+                    if (data[i].reviewDate != null) {
+                        html += data[i].reviewDate;
+                    }
+                    html+="</th>\n" +
                             "</tr>";
                 }
                 $("#dt-table").html(html);
