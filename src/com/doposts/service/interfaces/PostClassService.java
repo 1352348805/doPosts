@@ -70,4 +70,6 @@ public interface PostClassService {
      * @return 是否修改成功
      */
     boolean modifyPostClass(PostClass postClass);
+
+
 }

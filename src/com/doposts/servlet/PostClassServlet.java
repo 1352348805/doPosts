@@ -55,6 +55,13 @@ public class PostClassServlet extends AbstractServlet{
         return new CommonResult().success(postClassList);
     }
 
+    /**
+     * 获取分类导航
+     */
+    public CommonResult getAllBar(HttpServletRequest request, HttpServletResponse response) {
+        List<PostClass> oneClassList = postClassService.getCategoryListByParentId(0);
+        return new CommonResult().success(oneClassList);
+    }
 
 
 }

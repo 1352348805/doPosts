@@ -62,4 +62,12 @@ public interface PostClassDao {
      * @return 受影响的行数
      */
     Integer updatePostClassById(PostClass postClass);
+
+    /**
+     * 根据分类名和分类等级模糊查询分类列表
+     * @param className 查询的分类名
+     * @param classLevel 查询的分类等级
+     * @return 分类集合
+     */
+    List<PostClass> getPostClassListByCondition(String className,int classLevel);
 }
