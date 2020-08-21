@@ -58,7 +58,7 @@ public class PostClassRequestInfo extends CreateClassRequest {
                 ", className='" + getClassName() + '\'' +
                 ", fatherClassId=" + getFatherClassId() +
                 ", requestDate=" + getRequestDate() +
-                "requestName='" + requestName + '\'' +
+                ", requestName='" + requestName + '\'' +
                 ", fatherClassName='" + fatherClassName + '\'' +
                 ", reviewerName='" + reviewerName + '\'' +
                 '}';
