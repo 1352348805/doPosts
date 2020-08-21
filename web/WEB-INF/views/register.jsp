@@ -101,16 +101,22 @@
             });
             return false;
         }
+        if(repass==null || repass.length==0){
+            layer.msg('请再次输入您的密码',{
+                time: 2000
+            });
+            return false;
+        }
         if (nike == null || nike.length == 0) {
             layer.msg('请输入昵称--《例如:李阳是猪、李阳小贱人、、等等》', {
                 time: 2000
-            })
+            });
             return false;
         }
         if (userPassword != repass) {
             layer.msg('两次密码不一致', {
                 time: 2000
-            })
+            });
             return false;
         }
         return true;
