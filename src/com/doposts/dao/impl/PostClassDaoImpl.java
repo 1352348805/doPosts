@@ -152,15 +152,18 @@ public class PostClassDaoImpl extends MySQL_C3P0<PostClass> implements PostClass
 
     /**
      * 根据分类名和分类等级模糊查询分类列表
-     *
      * @param className  查询的分类名
      * @param classLevel 查询的分类等级
      * @return 分类集合
      */
     @Override
     public List<PostClass> getPostClassListByCondition(String className, int classLevel) {
+        PostClass like = new PostClass();
+        PostClass same = new PostClass();
+        like.setClassName(className);
+        same.setClassLevel(classLevel);
         try {
-            return executeQueryToBeanList("select * from `post_classification` where (`className` like concat('%',?,'%')) and classLevel=?", PostClass.class, className, classLevel);
+            return selectLikeAndSame(PostClass.class, like, same);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
