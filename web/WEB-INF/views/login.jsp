@@ -12,7 +12,7 @@
 <head>
     <link rel="shortcut icon" href="<%=path%>/static/images/head/500415.ico" />
     <meta charset="utf-8">
-    <title>登入 - @asuk</title>
+    <title>登入</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -28,7 +28,7 @@
 </head>
 <body>
 <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
-    <div class="layadmin-user-login-main" style="background-color: white;opacity: 0.5; margin-top: 100px;margin-right: 440px;" position:absolute>
+     <div class="layadmin-user-login-main" style="background-color: white;opacity: 0.5; margin-top: 100px;margin-right: 440px;" position:absolute>
         <div class="layadmin-user-login-box layadmin-user-login-header">
             <h2 style= "color:green" >.来贴吧.</h2>
             <p style="color:green">一个有趣的论坛</p>
