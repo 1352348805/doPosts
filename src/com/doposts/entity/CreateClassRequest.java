@@ -3,6 +3,7 @@ package com.doposts.entity;
 import com.dxhualuo.database.annotation.AutoIncrement;
 import com.dxhualuo.database.annotation.PrimaryKey;
 import com.dxhualuo.database.annotation.TableMapping;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.Date;
 
@@ -35,15 +36,54 @@ public class CreateClassRequest {
      */
     private Date requestDate;
     /**
-     *  是否被处理
+     *  是否被处理 0 未处理 1 已处理
      */
-    private boolean isProcess;
+    private Boolean isProcess;
 
-    public boolean getIsProcess() {
+    /**
+     *  是否通过 0 未通过 1 已通过
+     */
+    private Boolean isPass;
+
+    /**
+     *  审核人ID
+     */
+    private Integer reviewerId;
+
+    /**
+     *  审核日期
+     */
+    private Date reviewDate;
+
+    public Boolean getIsPass() {
+        return isPass;
+    }
+
+    public void setIsPass(Boolean pass) {
+        isPass = pass;
+    }
+
+    public Integer getReviewerId() {
+        return reviewerId;
+    }
+
+    public void setReviewerId(Integer reviewerId) {
+        this.reviewerId = reviewerId;
+    }
+
+    public Date getReviewDate() {
+        return reviewDate;
+    }
+
+    public void setReviewDate(Date reviewDate) {
+        this.reviewDate = reviewDate;
+    }
+
+    public Boolean getIsProcess() {
         return isProcess;
     }
 
-    public void setIsProcess(boolean process) {
+    public void setIsProcess(Boolean process) {
         isProcess = process;
     }
 

@@ -116,12 +116,13 @@ public class AdminServlet extends AbstractServlet{
     public CommonResult addCategory(HttpServletRequest request, HttpServletResponse response) {
         String className = request.getParameter("className");
         Integer type = Integer.parseInt(request.getParameter("type"));
+        String classDescribe = request.getParameter("classDescribe");
         Integer parentId = Integer.parseInt(request.getParameter("parentId"));
         boolean isExists = postClassService.checkClassNameExists(className);
         if (isExists) {
             return new CommonResult().failed("该分类名已存在!");
         }
-        PostClass postClass = new PostClass(null,className,type,parentId);
+        PostClass postClass = new PostClass(null,className,type,parentId,classDescribe);
         boolean b = postClassService.addPostClass(postClass);
         if (b) {
             invalidMenuCache(request);
@@ -136,7 +137,8 @@ public class AdminServlet extends AbstractServlet{
     public CommonResult modifyCategory(HttpServletRequest request, HttpServletResponse response) {
         Integer classId = Integer.parseInt(request.getParameter("classId"));
         String className = request.getParameter("className");
-        PostClass postClass = new PostClass(classId,className,null,null);
+        String classDescribe = request.getParameter("classDescribe");
+        PostClass postClass = new PostClass(classId,className,null,null,classDescribe);
         boolean b = postClassService.modifyPostClass(postClass);
         if (b) {
             invalidMenuCache(request);
