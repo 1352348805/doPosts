@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 import java.lang.reflect.Method;
 
 public abstract class AbstractServlet extends HttpServlet {
-	public abstract Class getServletClass();
+	public abstract Class<?> getServletClass();
 
 	
 	@Override

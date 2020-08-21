@@ -159,6 +159,10 @@ public class PostClassDaoImpl extends MySQL_C3P0<PostClass> implements PostClass
      */
     @Override
     public List<PostClass> getPostClassListByCondition(String className, int classLevel) {
-        return null;
+        try {
+            return executeQueryToBeanList("select * from `post_classification` where (`className` like concat('%',?,'%')) and classLevel=?", PostClass.class, className, classLevel);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
