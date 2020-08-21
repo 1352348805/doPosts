@@ -22,7 +22,7 @@ public class UserServlet extends AbstractServlet{
     UserServiceImpl userService;
 
     @Override
-    public Class getServletClass() {
+    public Class<?> getServletClass() {
         return UserServlet.class;
     }
 

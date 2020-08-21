@@ -26,7 +26,7 @@ public class PostClassServlet extends AbstractServlet{
     private PostClassService postClassService;
 
     @Override
-    public Class getServletClass() {
+    public Class<?> getServletClass() {
         return PostClassServlet.class;
     }
 
