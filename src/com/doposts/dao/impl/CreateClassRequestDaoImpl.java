@@ -48,4 +48,14 @@ public class CreateClassRequestDaoImpl extends MySQL_C3P0<CreateClassRequest> im
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * 查询总记录数
+     *
+     * @return 记录数
+     */
+    @Override
+    public Integer selectAllCreateClassRequestCount() {
+        return null;
+    }
 }
