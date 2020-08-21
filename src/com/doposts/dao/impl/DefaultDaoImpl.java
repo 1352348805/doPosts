@@ -8,7 +8,7 @@ import com.dxhualuo.database.impl.MySQL_C3P0;
  *  基本的Dao
  * @author dx_hualuo
  */
-public class DefaultDaoImpl extends MySQL_C3P0<Object> implements DefaultDao {
+public class DefaultDaoImpl extends MySQL_C3P0 implements DefaultDao {
     public DefaultDaoImpl() {
         super(DatabaseConfig.getUrl(), DatabaseConfig.getPort(), DatabaseConfig.getDatabase(), DatabaseConfig.getUserName(), DatabaseConfig.getPassword(), "post");
     }

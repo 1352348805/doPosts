@@ -49,4 +49,18 @@ public class PostClassRequestInfo extends CreateClassRequest {
     public void setReviewerName(String reviewerName) {
         this.reviewerName = reviewerName;
     }
+
+    @Override
+    public String toString() {
+        return "PostClassRequestInfo{"  +
+                "requestId=" + getRequestId() +
+                ", requestUserId=" + getRequestUserId() +
+                ", className='" + getClassName() + '\'' +
+                ", fatherClassId=" + getFatherClassId() +
+                ", requestDate=" + getRequestDate() +
+                "requestName='" + requestName + '\'' +
+                ", fatherClassName='" + fatherClassName + '\'' +
+                ", reviewerName='" + reviewerName + '\'' +
+                '}';
+    }
 }
