@@ -47,7 +47,7 @@ public class CreateClassRequestDaoImpl extends MySQL_C3P0<CreateClassRequest> im
     @Override
     public List<PostClassRequestInfo> selectAllCreateClassRequestByCondition(int offset, int pageSize) {
         try {
-             ResultSet rs = executeQuery("SELECT\n" +
+             return executeQueryToBeanList("SELECT\n" +
                     "\trequest.requestId, \n" +
                     "\trequest.requestUserId, \n" +
                     "\trequest.className, \n" +
@@ -64,25 +64,7 @@ public class CreateClassRequestDaoImpl extends MySQL_C3P0<CreateClassRequest> im
                     "\tcreate_class_request AS request\n" +
                     "LEFT JOIN `user` AS requestUser ON request.requestUserId = requestUser.userId\n" +
                     "LEFT JOIN post_classification AS postClass ON request.fatherClassId = postClass.classId\n" +
-                    "LEFT JOIN `user` AS reviewerUser ON request.reviewerId = reviewerUser.userId limit ?,?", offset, pageSize);
-             List<PostClassRequestInfo> infos = new ArrayList<>();
-             while(rs.next()){
-                 PostClassRequestInfo info = new PostClassRequestInfo();
-                 info.setRequestId(rs.getInt("requestId"));
-                 info.setRequestUserId(rs.getInt("requestUserId"));
-                 info.setClassName(rs.getString("className"));
-                 info.setFatherClassId(rs.getInt("fatherClassId"));
-                 info.setRequestDate(rs.getDate("requestDate"));
-                 info.setIsProcess(rs.getBoolean("isProcess"));
-                 info.setIsPass(rs.getBoolean("isPass"));
-                 info.setReviewerId(rs.getInt("reviewerId"));
-                 info.setReviewDate(rs.getDate("reviewDate"));
-                 info.setFatherClassName(rs.getString("fatherClassName"));
-                 info.setRequestName(rs.getString("requestName"));
-                 info.setReviewerName(rs.getString("reviewerName"));
-                 infos.add(info);
-             }
-             return infos;
+                    "LEFT JOIN `user` AS reviewerUser ON request.reviewerId = reviewerUser.userId limit ?,?", PostClassRequestInfo.class, offset, pageSize);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

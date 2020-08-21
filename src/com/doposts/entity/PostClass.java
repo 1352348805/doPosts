@@ -1,5 +1,6 @@
 package com.doposts.entity;
 
+import com.dxhualuo.data.annotation.JavaBean;
 import com.dxhualuo.database.annotation.AutoIncrement;
 import com.dxhualuo.database.annotation.PrimaryKey;
 import com.dxhualuo.database.annotation.TableMapping;
@@ -11,6 +12,7 @@ import com.dxhualuo.database.annotation.TableMapping;
  * @phone 18579133013
  * @email 1352348805@qq.com
  */
+@JavaBean
 @TableMapping("post_classification")
 public class PostClass {
 

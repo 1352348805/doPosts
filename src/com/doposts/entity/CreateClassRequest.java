@@ -1,5 +1,6 @@
 package com.doposts.entity;
 
+import com.dxhualuo.data.annotation.JavaBean;
 import com.dxhualuo.database.annotation.AutoIncrement;
 import com.dxhualuo.database.annotation.PrimaryKey;
 import com.dxhualuo.database.annotation.TableMapping;
@@ -11,6 +12,7 @@ import java.util.Date;
  *  创建分类请求
  * @author dx_hualuo
  */
+@JavaBean
 @TableMapping("create_class_request")
 public class CreateClassRequest {
     /**
@@ -19,22 +21,27 @@ public class CreateClassRequest {
     @PrimaryKey
     @AutoIncrement
     private Integer requestId;
+
     /**
      *  请求新建分类的用户id
      */
     private Integer requestUserId;
+
     /**
      *  分类名
      */
     private String className;
+
     /**
      *  父级分类Id
      */
     private Integer fatherClassId;
+
     /**
      *  请求时间
      */
     private Date requestDate;
+
     /**
      *  是否被处理 0 未处理 1 已处理
      */
