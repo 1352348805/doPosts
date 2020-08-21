@@ -8,6 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * 用户控制器
@@ -62,6 +64,12 @@ public class UserServlet extends AbstractServlet{
         return new CommonResult().success("");
     }
 
+    /**
+     * 注册用户
+     * @param request
+     * @param response
+     * @return
+     */
     public Object registerUser(HttpServletRequest request,HttpServletResponse response){
         String loginName=request.getParameter("loginName");
         String password=request.getParameter("password");
@@ -71,6 +79,23 @@ public class UserServlet extends AbstractServlet{
             return new CommonResult().failed();
         }
         return new CommonResult().success("");
+    }
+
+    /**
+     * 查看用户
+     * @param request
+     * @param response
+     * @return
+     */
+    public Object userManagement(HttpServletRequest request,HttpServletResponse response) throws Exception {
+       User user;
+        user= (User) userService.getAllUser();
+        if (user==null){
+            return new CommonResult().failed();
+        }
+        request.getSession().setAttribute("user",user);
+        request.getRequestDispatcher("/admin/userlist.jsp").forward(request,response);
+       return new CommonResult().success("") ;
     }
     /**
      * 用户主页

@@ -4,6 +4,8 @@ import com.doposts.dao.PostItDatabase;
 import com.doposts.entity.User;
 import com.doposts.service.interfaces.UserService;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -49,4 +51,38 @@ public class UserServiceImpl implements UserService {
         int len = PostItDatabase.USER_DAO.insertUserByUser(user);
         return len > 0;
     }
+
+    /**
+     * 查看所有用户
+     *
+     * @return 是否成功
+     */
+    @Override
+    public List<User> getAllUser() {
+       List<User> list=new ArrayList<>();
+       try {
+           list=PostItDatabase.USER_DAO.selectFromUser();
+       }catch (Exception e){
+           e.printStackTrace();
+       }
+       return list;
+    }
+
+    /**
+     * 根据a的位置b的长度查询（分页查询）
+     *
+     * @param index 起始位置
+     * @param length 长度
+     * @return
+     */
+    @Override
+    public List<User> getUserByStartIndex(int index, int length) {
+       List<User> userList=new ArrayList<>();
+       try {
+           userList=PostItDatabase.USER_DAO.selectUserByStartIndexAndLength(index, length);
+       }catch (Exception e){
+           e.printStackTrace();
+       }
+       return userList;
+       }
 }

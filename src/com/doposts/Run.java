@@ -14,6 +14,6 @@ import static com.doposts.dao.PostItDatabase.DEFAULT_DAO;
 @SuppressWarnings("RedundantThrows")
 public class Run {
     public static void main(String[] args) throws Exception{
-        System.out.println(PostItDatabase.POST_CLASS_DAO.getPostClassListByCondition("电影", 2));
+        System.out.println(PostItDatabase.USER_DAO.selectFromUser());
     }
 }
