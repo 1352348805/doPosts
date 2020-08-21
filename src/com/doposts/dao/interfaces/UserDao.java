@@ -2,6 +2,8 @@ package com.doposts.dao.interfaces;
 
 import com.doposts.entity.User;
 
+import java.util.List;
+
 /**
  *  用户的接口，在此添加方法以实现接口
  * @author dx_hualuo
@@ -28,4 +30,19 @@ public interface UserDao {
      * @return 受影响行数
      */
     int insertUserByUser(User entity);
+
+    /**
+     * 查看所有用户
+     * @return 用户数据
+     */
+    List<User> selcetFromUser();
+
+    /**
+     *  从startIndex开始位置查询length条用户数据
+     * @param startIndex 开始位置
+     * @param length 长度
+     * @return List数据
+     */
+    List<User> selectUserByStartIndexAndLength(int startIndex, int length);
+
 }
