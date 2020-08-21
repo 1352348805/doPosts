@@ -20,10 +20,9 @@
 </head>
 <body style="overflow:-Scroll;overflow-x:hidden;">
 <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
-    <video src="/doPosts/static/video/adnibdvdsb.mp4" style="z-index: -1; width:1600px;height: 110%; position: absolute; top: -10%; left: -10%" loop="loop" autoplay="autoplay"
-           muted="muted" type="video/mp4"></video>
-
     <div class="layadmin-user-login-main">
+        <video src="/doPosts/static/video/adnibdvdsb.mp4" style="z-index: -1; width:1600px;height: 110%; position: absolute; top: -10%; left: -10%" loop="loop" autoplay="autoplay"
+               muted="muted" type="video/mp4"></video>
         <div class="layadmin-user-login-box layadmin-user-login-header">
             <h2>欢迎注册来贴吧</h2>
             <p>灵感 , 来源于有趣的人</p>
