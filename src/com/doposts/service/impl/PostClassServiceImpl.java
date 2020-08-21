@@ -132,7 +132,7 @@ public class PostClassServiceImpl implements PostClassService {
      */
     @Override
     public boolean modifyPostClass(PostClass postClass) {
-        return PostItDatabase.POST_CLASS_DAO.updatePostClassById(postClass) > 1 ? true : false;
+        return PostItDatabase.POST_CLASS_DAO.updatePostClassById(postClass) > 0 ? true : false;
     }
 
     /**

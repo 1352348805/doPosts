@@ -40,10 +40,14 @@
                     <td>
                     </td>
                     <td align="right">
-                        <button class="layui-btn layui-btn-sm" onclick="location.href='<%=path%>/admin?action=toAdd'">
+                        <button class="layui-btn layui-btn-sm" onclick="location.href='<%=path%>/admin?action=toCategoryAdd'">
                             <i class="layui-icon">&#xe608;</i> 添加
                         </button>
+                        <button class="layui-btn layui-btn-sm" onclick="location.href='<%=path%>/admin?action=toCategoryAdd'">
+                            <i class="layui-icon">&#xe608;</i> 审核
+                        </button>
                     </td>
+
                 </tr>
             </table>
         </div>
@@ -93,7 +97,7 @@
                 tr += id;
                 var id = d['classId'];
                 let level = d['classLevel'];
-                let href = path + "/admin?action=toModify&classId=" + id;
+                let href = path + "/admin?action=toCategoryModify&classId=" + id;
                 let edit = buttonEdit(href);
                 let del = buttonDel(id,level);
                 tr += "<td>"+edit + del+"</td>";
@@ -127,7 +131,7 @@
             btn : [ '确定', '取消' ]
         }, function() {
             let data = {
-                action : 'delete',
+                action : 'deleteCategory',
                 classId : id,
                 level : level
             }

@@ -36,6 +36,13 @@ public class AdminServlet extends AbstractServlet{
     }
 
     /**
+     * 使菜单缓存失效
+     */
+    private void invalidMenuCache(HttpServletRequest request) {
+        request.getServletContext().setAttribute(SystemConstant.CATEGORY_MENU_KEY,null);
+    }
+
+    /**
      * 跳转后台主页
      */
     public String index(HttpServletRequest request, HttpServletResponse response) {
@@ -53,14 +60,14 @@ public class AdminServlet extends AbstractServlet{
     /**
      * 跳转分类添加页面
      */
-    public String toAdd(HttpServletRequest request, HttpServletResponse response) {
+    public String toCategoryAdd(HttpServletRequest request, HttpServletResponse response) {
         return "admin/category/category_add";
     }
 
     /**
      * 跳转分类修改页面
      */
-    public String toModify(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String toCategoryModify(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Integer classId = null;
         try {
             classId = Integer.parseInt(request.getParameter("classId"));
@@ -76,7 +83,7 @@ public class AdminServlet extends AbstractServlet{
     /**
      * 删除分类
      */
-    public CommonResult delete(HttpServletRequest request, HttpServletResponse response) {
+    public CommonResult deleteCategory(HttpServletRequest request, HttpServletResponse response) {
         Integer classId = null;
         Integer level = null;
         try {
@@ -139,9 +146,11 @@ public class AdminServlet extends AbstractServlet{
     }
 
     /**
-     * 使菜单缓存失效
+     * 获取未审核用户创建分类的数量
      */
-    private void invalidMenuCache(HttpServletRequest request) {
-        request.getServletContext().setAttribute(SystemConstant.CATEGORY_MENU_KEY,null);
+    public CommonResult getUnauthorizedClassCount(HttpServletRequest request, HttpServletResponse response) {
+
+
+        return new CommonResult().success(null);
     }
 }
