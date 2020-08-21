@@ -30,8 +30,26 @@
     <div class="right">
 
         <!-- 支撑高度 -->
-        <div style="height: 10px">
+        <div style="height: 30px">
 
+        </div>
+
+        <div align="left">
+            <table style="width: 100%">
+                <tr>
+                    <td>
+                    </td>
+                    <td align="right">
+                        <button class="layui-btn layui-btn-sm" onclick="location.href='<%=path%>/admin?action=toCategoryAdd'">
+                            <i class="layui-icon">&#xe608;</i> 添加
+                        </button>
+                        <button class="layui-btn layui-btn-sm" onclick="location.href='<%=path%>/admin?action=toCategoryAdd'">
+                            <i class="layui-icon">&#xe608;</i> 审核
+                        </button>
+                    </td>
+
+                </tr>
+            </table>
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -40,11 +58,9 @@
                 <div class="widget-body no-padding">
                     <table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%">
                         <tr>
-                            <th width="20%">名称</th>
+                            <th width="30%">名称</th>
                             <th width="15%">分类级别</th>
-                            <th width="5%">sort</th>
-                            <th width="20%">创建时间</th>
-                            <th>操作</th>
+                            <th width="15%">操作</th>
                         </tr>
                     </table>
                 </div>
@@ -58,60 +74,50 @@
     版权归来贴项目组
 </footer>
 <input id="path" type="hidden" value="<%=path%>" />
-<script type="text/javascript" src="<%=path%>/static/js/time.js"></script>
 <script type="text/javascript" src="<%=path%>/static/js/jquery.js"></script>
+<script type="text/javascript" src="<%=path%>/static/js/admin/time.js"></script>
+<script type="text/javascript" src="<%=path%>/static/js/admin/jq.js"></script>
 <script src="<%=path%>/static/js/libs/jquery.treetable.js"></script>
 <script type="text/javascript" src="<%=path%>/static/layuiadmin/layui/layui.js"></script>
 <script type="text/javascript" src="<%=path%>/static/calendar/WdatePicker.js"></script>
 <script type="text/javascript">
+    var path = $("#path").val();
     initMenuList();
 
     function initMenuList(){
+        //递归拼接分类项
+        function appendHtml(children) {
+            let length = children.length;
+            for(let i=0; i<length; i++){
+                let d = children[i];
+                let tr = "<tr data-tt-id='" + d['classId'] + "' data-tt-parent-id='" + d['classFatherId'] + "'>";
+                let td1 = "<td>" + d['className'] +"</td>";
+                tr += td1;
+                var id = "<td>" + d['classLevel'] +"</td>";
+                tr += id;
+                var id = d['classId'];
+                let level = d['classLevel'];
+                let href = path + "/admin?action=toCategoryModify&classId=" + id;
+                let edit = buttonEdit(href);
+                let del = buttonDel(id,level);
+                tr += "<td>"+edit + del+"</td>";
+                tr += "</tr>"
+                $("#dt-table").append(tr);
+                appendHtml(children[i].children);
+            }
+        }
+
         $.ajax({
             type : 'get',
-            url : $("#path") + '/category',
-            contentType: "application/json; charset=utf-8",
+            url : path + '/postCategory',
+            data : {action : 'getClassList'},
+            dataType : 'json',
             async:false,
             success : function(data) {
-                var length = data.length;
-                for(var i=0; i<length; i++){
-                    var d = data[i];
-                    var tr = "<tr data-tt-id='" + d['id'] + "' data-tt-parent-id='" + d['parentId'] + "'>";
-                    var td1 = "<td>" + d['name'] +"</td>";
-                    tr += td1;
-                    var id = "<td>" + d['id'] +"</td>";
-                    tr += id;
-                    var href = "";
-                    if(d['href'] != null){
-                        href = d['href'];
-                    }
-                    var td2 = "<td>" + href +"</td>";
-                    tr += td2;
-
-                    var permission = d['permission'];
-                    if(permission == null){
-                        permission = "";
-                    }
-
-                    var td3 = "<td>" + permission +"</td>";
-                    tr += td3;
-
-                    var sort = d['sort'];
-                    if(sort == 0){
-                        sort = "";
-                    }
-
-                    var td4 = "<td>" + sort +"</td>";
-                    tr += td4;
-
-                    var id = d['id'];
-                    var href = "updateMenu.html?id=" + id;
-                    var edit = buttonEdit(href, "sys:menu:add", pers);
-                    var del = buttonDel(id, "sys:menu:del", pers);
-                    tr += "<td>"+edit + del+"</td>";
-                    tr += "</tr>"
-                    $("#dt-table").append(tr);
+                if (data.code == 200) {
+                    appendHtml(data.data);
                 }
+
             }
         });
     }
@@ -120,15 +126,29 @@
         var layer = layui.layer;
     });
 
-    function del(id){
+    function del(id,level){
         layer.confirm('确定要删除吗？', {
             btn : [ '确定', '取消' ]
         }, function() {
+            let data = {
+                action : 'deleteCategory',
+                classId : id,
+                level : level
+            }
             $.ajax({
-                type : 'delete',
-                url : '/permissions/' + id,
+                type : 'post',
+                url : path + '/admin',
+                data : data,
+                dataType: 'json',
                 success : function(data) {
-                    location.reload();
+                    if (data.code == 200) {
+                        layer.msg('删除成功!',{
+                            time : 1000
+                        });
+                        location.reload();
+                    } else {
+                        layer.msg(data.message);
+                    }
                 }
             });
         });
@@ -139,13 +159,13 @@
         clickableNodeNames : true,
         onNodeExpand : function() {
             var d = this;
-            console.log(d['id']);
-            console.log(d['parentId']);
+            console.log(d['classId']);
+            console.log(d['classFatherId']);
         },
         onNodeCollapse : function() {
             var d = this;
-            console.log(d['id'] + "Collapse");
-            console.log(d['parentId'] + "Collapse");
+            console.log(d['classId'] + "Collapse");
+            console.log(d['classFatherId'] + "Collapse");
         }
 
     };

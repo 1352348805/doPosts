@@ -34,6 +34,18 @@ public class CreateClassRequest {
      *  请求时间
      */
     private Date requestDate;
+    /**
+     *  是否被处理
+     */
+    private boolean isProcess;
+
+    public boolean getIsProcess() {
+        return isProcess;
+    }
+
+    public void setIsProcess(boolean process) {
+        isProcess = process;
+    }
 
     public Integer getRequestId() {
         return requestId;

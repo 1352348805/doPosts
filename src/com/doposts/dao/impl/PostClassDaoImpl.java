@@ -4,6 +4,8 @@ import com.doposts.dao.DatabaseConfig;
 import com.doposts.dao.interfaces.PostClassDao;
 import com.doposts.entity.PostClass;
 import com.dxhualuo.database.impl.MySQL_C3P0;
+
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -66,6 +68,83 @@ public class PostClassDaoImpl extends MySQL_C3P0<PostClass> implements PostClass
                 return postClasses.get(0);
             }
             return null;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 删除指定id的分类
+     * @param id id
+     * @return 受影响的行数
+     */
+    @Override
+    public Integer deletePostClassById(int id) {
+        PostClass postClass = new PostClass();
+        postClass.setClassId(id);
+        try {
+            return delete(postClass);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 以分类id获取其子分类的记录数
+     * @param id id
+     * @return 记录数
+     */
+    @Override
+    public Integer getPostClasschildrenCountById(int id) {
+        try {
+            PostClass postClass = new PostClass();
+            postClass.setClassFatherId(id);
+            return selectCount(PostClass.class, postClass);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 插入分类记录
+     * @param postClass 插入的实体
+     * @return 受影响的行数
+     */
+    @Override
+    public Integer insertPostClass(PostClass postClass) {
+        try {
+            return insert(postClass);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 查询分类名相同的记录数
+     * @param className 要查询的分类名
+     * @return 记录数
+     */
+    @Override
+    public Integer findPostClassByClassName(String className) {
+        try {
+            PostClass postClass = new PostClass();
+            postClass.setClassName(className);
+            return selectCount(PostClass.class, postClass);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 以id更新分类
+     *
+     * @param postClass 分类实体，其中属性值为空的字段无需参与更新
+     * @return 受影响的行数
+     */
+    @Override
+    public Integer updatePostClassById(PostClass postClass) {
+        try {
+            return update(postClass);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

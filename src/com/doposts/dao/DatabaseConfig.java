@@ -11,61 +11,42 @@ import java.io.IOException;
  */
 public class DatabaseConfig {
     static{
+        //数据库配置文件载入过程
         try {
             PropertiesManager properties = new PropertiesManager(Path.resourcePath("database.properties"));
-            url = properties.getValue("url").trim();
-            port = Integer.parseInt(properties.getValue("port").trim());
-            database = properties.getValue("database").trim();
-            userName = properties.getValue("username").trim();
-            password = properties.getValue("password").trim();
+            URL = properties.getValue("url").trim();
+            PORT = Integer.parseInt(properties.getValue("port").trim());
+            DATABASE = properties.getValue("database").trim();
+            USER_NAME = properties.getValue("username").trim();
+            PASSWORD = properties.getValue("password").trim();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private static String url;
-    private static Integer port;
-    private static String database;
-    private static String userName;
-    private static String password;
+    private final static String URL;
+    private final static Integer PORT;
+    private final static String DATABASE;
+    private final static String USER_NAME;
+    private final static String PASSWORD;
 
     public static String getUrl() {
-        return url;
-    }
-
-    public static void setUrl(String url) {
-        DatabaseConfig.url = url;
+        return URL;
     }
 
     public static Integer getPort() {
-        return port;
-    }
-
-    public static void setPort(Integer port) {
-        DatabaseConfig.port = port;
+        return PORT;
     }
 
     public static String getDatabase() {
-        return database;
-    }
-
-    public static void setDatabase(String database) {
-        DatabaseConfig.database = database;
+        return DATABASE;
     }
 
     public static String getUserName() {
-        return userName;
-    }
-
-    public static void setUserName(String userName) {
-        DatabaseConfig.userName = userName;
+        return USER_NAME;
     }
 
     public static String getPassword() {
-        return password;
-    }
-
-    public static void setPassword(String password) {
-        DatabaseConfig.password = password;
+        return PASSWORD;
     }
 }

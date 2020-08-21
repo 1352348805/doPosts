@@ -12,7 +12,7 @@
 <head>
     <link rel="shortcut icon" href="<%=path%>/static/images/head/500415.ico" />
     <meta charset="utf-8">
-    <title>登入 - @asuk</title>
+    <title>登入</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -28,12 +28,12 @@
 </head>
 <body>
 <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
-    <div class="layadmin-user-login-main" style="background-color: white;opacity: 0.5; margin-top: 100px;margin-right: 440px;" position:absolute>
+     <div class="layadmin-user-login-main" style="background-color: white;opacity: 0.5; margin-top: 100px;margin-right: 440px;" position:absolute>
         <div class="layadmin-user-login-box layadmin-user-login-header">
             <h2 style= "color:green" >.来贴吧.</h2>
             <p style="color:green">一个有趣的论坛</p>
         </div>
-        <form action="<%=path%>/user" method="post" class="layadmin-user-login-box layadmin-user-login-body layui-form">
+        <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
             <input type="hidden" name="action" value="login" />
             <div class="layui-form-item">
                 <label class="layadmin-user-login-icon layui-icon layui-icon-username" for="LAY-user-login-username"></label>
@@ -76,7 +76,7 @@
             <!--          -->
             <!--          <a href="reg.html" class="layadmin-user-jump-change layadmin-link">注册帐号</a>-->
             <!--        </div>-->
-        </form>
+        </div>
     </div>
 </div>
 
@@ -114,7 +114,7 @@
         let layer = layui.layer;
       });
 
-      function CheckInput() {
+      function login() {
         let username = $("#LAY-user-login-username").val();
         let password = $("#LAY-user-login-password").val();
         if (username == "" || username.length == 0) {
@@ -128,38 +128,31 @@
             });
             return false;
         }
+          $.ajax({
+              url:"<%=path%>/user",
+              method:"post",
+              data:{
+                  action:"login",
+                  "username":username,
+                  "password":password
+              },
+              success:function (jsonStr) {
+                  if(jsonStr.code === 200){
+                      location.href="<%=path%>/index.jsp";
+                  }else if(jsonStr.code === 500){
+                      layer.msg("用户名或密码不正确！", {
+                          icon: 6, btn:['好的'],
+                      });
+                  }
+                  console.log(jsonStr);
+              },
+              dataType:"json"
+          })
         return true;
       }
 
-      $("#login-submit").click(CheckInput);
+      $("#login-submit").click(login);
     });
-$("#login-submit").click(
-    function () {
-        let username = $("#LAY-user-login-username").val();
-        let password = $("#LAY-user-login-password").val();
-        $.ajax({
-            url:"<%=path%>/user",
-            method:"post",
-            data:{
-                action:"login",
-                "username":username,
-                "password":password
-            },
-            success:function (jsonStr) {
-                if(jsonStr.code === 200){
-                    location.href="<%=path%>/index.jsp";
-                }else if(jsonStr.code === 500){
-                    layer.msg("用户名或密码不正确！", {
-                        icon: 6, btn:['好的'],
-                    });
-                }
-                console.log(jsonStr);
-            },
-            dataType:"json"
-        })
-        return false;
-    }
-)
 
 
 </script>

@@ -35,7 +35,7 @@
 <footer class="footer">
     版权归来贴项目组
 </footer>
-<script type="text/javascript" src="<%=path%>/static/js/time.js"></script>
+<script type="text/javascript" src="<%=path%>/static/js/admin/time.js"></script>
 <script type="text/javascript" src="<%=path%>/static/js/jquery.js"></script>
 <script type="text/javascript" src="<%=path%>/static/calendar/WdatePicker.js"></script>
 </body>

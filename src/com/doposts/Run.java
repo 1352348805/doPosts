@@ -2,9 +2,10 @@ package com.doposts;
 
 import com.doposts.dao.PostItDatabase;
 import com.doposts.entity.PostClass;
-import com.doposts.entity.User;
 
-import java.util.List;
+import java.sql.ResultSet;
+
+import static com.doposts.dao.PostItDatabase.DEFAULT_DAO;
 
 /**
  *  测试用的主方法
@@ -13,6 +14,6 @@ import java.util.List;
 @SuppressWarnings("RedundantThrows")
 public class Run {
     public static void main(String[] args) throws Exception{
-        System.out.println(PostItDatabase.POST_DAO.getPostPageByClassId(12, 0, 2));
+        System.out.println(PostItDatabase.CREATE_CLASS_REQUEST_DAO.selectAllCreateClassRequestByCondition(1, 2));
     }
 }

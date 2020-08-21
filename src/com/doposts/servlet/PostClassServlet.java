@@ -1,10 +1,18 @@
 package com.doposts.servlet;
 
+import com.doposts.constant.SystemConstant;
+import com.doposts.entity.PostClass;
+import com.doposts.service.impl.PostClassServiceImpl;
+import com.doposts.service.interfaces.PostClassService;
 import com.doposts.to.CommonResult;
+import com.doposts.vo.PostClassWithChildren;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * @author asuk
@@ -15,17 +23,36 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/postCategory")
 public class PostClassServlet extends AbstractServlet{
 
+    private PostClassService postClassService;
+
     @Override
     public Class getServletClass() {
         return PostClassServlet.class;
     }
 
+    @Override
+    public void init() throws ServletException {
+        postClassService = new PostClassServiceImpl();
+    }
+
     /**
-     * 获取分类列表
+     * 获取菜单分类数据
      */
     public CommonResult getClassList(HttpServletRequest request, HttpServletResponse response) {
+        List<PostClassWithChildren> menu = postClassService.getMenu(request);
+        return new CommonResult().success(menu);
+    }
 
-        return new CommonResult().success(null);
+    /**
+     * 获取子分类列表
+     * @param request
+     * @param response
+     * @return
+     */
+    public CommonResult queryCategoryList(HttpServletRequest request, HttpServletResponse response) {
+        Integer parentId = Integer.parseInt(request.getParameter("parentId"));
+        List<PostClass> postClassList = postClassService.getCategoryListByParentId(parentId);
+        return new CommonResult().success(postClassList);
     }
 
 
