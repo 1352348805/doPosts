@@ -76,6 +76,14 @@
                     </td>
                 </tr>
                 <tr>
+                    <td align="right">
+                        分类描述
+                    </td>
+                    <td>
+                        <input type="text" class="add_ipt" id="classDescribe">
+                    </td>
+                </tr>
+                <tr>
                     <td colspan="2" align="right">
                         <button class="layui-btn layui-btn-sm" onclick="addClass();">
                             <i class="layui-icon">&#xe608;</i> 确定
@@ -148,6 +156,7 @@
     function addClass() {
         let className = $("#name").val();
         let type = $("#type").val();
+        let classDescribe = $("#classDescribe").val();
         let parentId = 0;
         if (type == '') {
             layer.msg('请选择分类级别');
@@ -179,6 +188,7 @@
             action : 'addCategory',
             className : className,
             type : type,
+            classDescribe : classDescribe,
             parentId : parentId
         }
         $.post(path + '/admin',data,function (result) {

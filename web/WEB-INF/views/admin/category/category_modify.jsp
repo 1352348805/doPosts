@@ -82,6 +82,14 @@
                     </td>
                 </tr>
                 <tr>
+                    <td align="right">
+                        分类描述
+                    </td>
+                    <td>
+                        <input type="text" value="${postClassList[size-1].classDescribe}" class="add_ipt" id="classDescribe">
+                    </td>
+                </tr>
+                <tr>
                     <td colspan="2" align="right">
                         <button class="layui-btn layui-btn-sm" onclick="modifyClass(${postClassList[size-1].classId});">
                             <i class="layui-icon">&#xe608;</i> 修改
@@ -109,6 +117,7 @@
 
     function modifyClass(classId) {
         let className = $("#name").val();
+        let classDescribe = $("#classDescribe").val();
         if (className.trim() == '') {
             $("#name").val('');
             layer.msg('请填写分类名称');
@@ -117,7 +126,8 @@
         let data = {
             action : 'modifyCategory',
             classId : classId,
-            className : className
+            className : className,
+            classDescribe : classDescribe,
         }
         $.post(path + '/admin',data,function (result) {
             if (result.code == 200) {

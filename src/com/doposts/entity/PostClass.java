@@ -36,6 +36,9 @@ public class PostClass {
      */
     private Integer classFatherId;
 
+    /**
+     * 分类描述
+     */
     private String classDescribe;
 
     public String getClassDescribe() {
@@ -97,5 +100,13 @@ public class PostClass {
         this.className = className;
         this.classLevel = classLevel;
         this.classFatherId = classFatherId;
+    }
+
+    public PostClass(Integer classId, String className, Integer classLevel, Integer classFatherId, String classDescribe) {
+        this.classId = classId;
+        this.className = className;
+        this.classLevel = classLevel;
+        this.classFatherId = classFatherId;
+        this.classDescribe = classDescribe;
     }
 }
