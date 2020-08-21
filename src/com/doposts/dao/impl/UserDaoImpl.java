@@ -41,6 +41,31 @@ public class UserDaoImpl extends MySQL_C3P0<User> implements UserDao {
     }
 
     /**
+     * 查看所有用户
+     * @return 用户数据
+     */
+    @Override
+    public List<User> selcetFromUser() {
+        return select(User.class);
+    }
+
+    /**
+     * 从startIndex开始位置查询length条用户数据
+     *
+     * @param startIndex 开始位置
+     * @param length     长度
+     * @return List数据
+     */
+    @Override
+    public List<User> selectUserByStartIndexAndLength(int startIndex, int length) {
+        try {
+            return select(User.class, startIndex, length);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
      *  实现查询
      * @param user user实体
      * @return user实体

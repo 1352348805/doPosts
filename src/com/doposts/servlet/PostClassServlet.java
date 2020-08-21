@@ -63,5 +63,14 @@ public class PostClassServlet extends AbstractServlet{
         return new CommonResult().success(oneClassList);
     }
 
+    /**
+     * 模糊查询分类列表
+     */
+    public CommonResult getBarByName(HttpServletRequest request, HttpServletResponse response) {
+        String className = request.getParameter("className");
+        List<PostClass> list = postClassService.getThreePostClassListByName(className);
+        return new CommonResult().success(list);
+    }
+
 
 }
