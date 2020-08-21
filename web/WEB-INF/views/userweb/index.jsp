@@ -47,7 +47,7 @@
       }else{
         $(".result-container").css({"display":"none"});
       }
-      $.post("${pageContext.request.contextPath}/postCategory?action=getBarByName",{name:seach},function(result){
+      $.post("${pageContext.request.contextPath}/postCategory?action=getBarByName",{className:seach},function(result){
         let date = result.data;
         var table="";
         for(var i=0;i<date.length;i++){
