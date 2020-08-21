@@ -23,4 +23,10 @@ public interface CreateClassRequestDao {
      * @return 集合
      */
     List<CreateClassRequest> selectAllCreateClassRequestByCondition(int offset, int pageSize);
+
+    /**
+     * 查询总记录数
+     * @return 记录数
+     */
+    Integer selectAllCreateClassRequestCount();
 }
