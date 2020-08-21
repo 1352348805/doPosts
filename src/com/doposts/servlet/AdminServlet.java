@@ -53,14 +53,14 @@ public class AdminServlet extends AbstractServlet{
     /**
      * 跳转分类添加页面
      */
-    public String toAdd(HttpServletRequest request, HttpServletResponse response) {
+    public String toCategoryAdd(HttpServletRequest request, HttpServletResponse response) {
         return "admin/category/category_add";
     }
 
     /**
      * 跳转分类修改页面
      */
-    public String toModify(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String toCategoryModify(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Integer classId = null;
         try {
             classId = Integer.parseInt(request.getParameter("classId"));
@@ -76,7 +76,7 @@ public class AdminServlet extends AbstractServlet{
     /**
      * 删除分类
      */
-    public CommonResult delete(HttpServletRequest request, HttpServletResponse response) {
+    public CommonResult deleteCategory(HttpServletRequest request, HttpServletResponse response) {
         Integer classId = null;
         Integer level = null;
         try {
