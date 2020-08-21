@@ -2,6 +2,7 @@ package com.doposts.service.interfaces;
 
 import com.doposts.entity.CreateClassRequest;
 import com.doposts.utils.Page;
+import com.doposts.vo.PostClassRequestInfo;
 
 import java.util.List;
 
@@ -25,6 +26,6 @@ public interface CreateClassRequestService {
      * @param pageSize 显示数量
      * @return PageBean
      */
-    Page<CreateClassRequest> getPageByCreateClassRequest(int pageIndex, int pageSize);
+    Page<PostClassRequestInfo> getPageByCreateClassRequest(int pageIndex, int pageSize);
 
 }

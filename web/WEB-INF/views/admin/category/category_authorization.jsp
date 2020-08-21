@@ -61,5 +61,39 @@
 <script type="text/javascript" src="<%=path%>/static/js/admin/jq.js"></script>
 <script type="text/javascript" src="<%=path%>/static/layuiadmin/layui/layui.js"></script>
 <script type="text/javascript" src="<%=path%>/static/calendar/WdatePicker.js"></script>
+<script>
+    var path = $("#path").val();
+    $(function () {
+        $.post(path + '/admin',{action:'getCreateClassRequestList'},function (result) {
+            if (result.code ==200) {
+                let data = result.data.data;
+                let html = "<tr>\n" +
+                                "<th width=\"10%\">申请分类名</th>\n" +
+                                "<th width=\"10%\">申请父分类名</th>\n" +
+                                "<th width=\"10%\">申请人</th>\n" +
+                                "<th width=\"10%\">申请日期</th>\n" +
+                                "<th width=\"10%\">是否通过</th>\n" +
+                                "<th width=\"10%\">是否审核</th>\n" +
+                                "<th width=\"15%\">审核人</th>\n" +
+                                "<th width=\"15%\">审核日期</th>\n" +
+                            "</tr>";
+                for (let i = 0;i < data.length; i++) {
+                    html += "<tr>\n" +
+                                "<th width=\"10%\">"+data[i].className+"</th>\n" +
+                                "<th width=\"10%\">"+data[i].fatherClassId+"</th>\n" +
+                                "<th width=\"10%\">申请人</th>\n" +
+                                "<th width=\"10%\">"+data[i].requestDate+"</th>\n" +
+                                "<th width=\"10%\">"+data[i].isProcess+"</th>\n" +
+                                "<th width=\"10%\">"+data[i].isPass+"</th>\n" +
+                                "<th width=\"15%\">审核人</th>\n" +
+                                "<th width=\"15%\">"+data[i].reviewDate+"</th>\n" +
+                            "</tr>";
+                }
+                $("#dt-table").html(html);
+            }
+        },'json');
+
+    });
+</script>
 </body>
 </html>

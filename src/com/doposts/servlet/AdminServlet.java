@@ -1,10 +1,15 @@
 package com.doposts.servlet;
 
 import com.doposts.constant.SystemConstant;
+import com.doposts.entity.CreateClassRequest;
 import com.doposts.entity.PostClass;
+import com.doposts.service.impl.CreateClassRequestServiceImpl;
 import com.doposts.service.impl.PostClassServiceImpl;
+import com.doposts.service.interfaces.CreateClassRequestService;
 import com.doposts.service.interfaces.PostClassService;
 import com.doposts.to.CommonResult;
+import com.doposts.utils.Page;
+import com.doposts.vo.PostClassRequestInfo;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,6 +29,7 @@ import java.util.Stack;
 public class AdminServlet extends AbstractServlet{
 
     private PostClassService postClassService;
+    private CreateClassRequestService createClassRequestService;
 
     @Override
     public Class<?> getServletClass() {
@@ -33,6 +39,7 @@ public class AdminServlet extends AbstractServlet{
     @Override
     public void init() throws ServletException {
         postClassService = new PostClassServiceImpl();
+        createClassRequestService = new CreateClassRequestServiceImpl();
     }
 
     /**
@@ -147,12 +154,30 @@ public class AdminServlet extends AbstractServlet{
         return new CommonResult().failed("删除失败!");
     }
 
+    public String toAuthorize(HttpServletRequest request, HttpServletResponse response) {
+        return "admin/category/category_authorization";
+    }
+
     /**
      * 获取未审核用户创建分类的数量
      */
     public CommonResult getUnauthorizedClassCount(HttpServletRequest request, HttpServletResponse response) {
+        Integer count = createClassRequestService.getUnauthorizedClassCount();
+        return new CommonResult().success(count);
+    }
 
 
-        return new CommonResult().success(null);
+    /**
+     * 获取请求分类列表
+     */
+    public CommonResult getCreateClassRequestList(HttpServletRequest request, HttpServletResponse response) {
+        Integer pageIndex = null;
+        try {
+            pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
+        } catch (Exception e) {
+            pageIndex = 1;
+        }
+        Page<PostClassRequestInfo> page = createClassRequestService.getPageByCreateClassRequest(pageIndex, 10);
+        return new CommonResult().success(page);
     }
 }

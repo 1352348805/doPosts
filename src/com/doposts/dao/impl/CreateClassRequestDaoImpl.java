@@ -3,6 +3,7 @@ package com.doposts.dao.impl;
 import com.doposts.dao.DatabaseConfig;
 import com.doposts.dao.interfaces.CreateClassRequestDao;
 import com.doposts.entity.CreateClassRequest;
+import com.doposts.vo.PostClassRequestInfo;
 import com.dxhualuo.database.impl.MySQL_C3P0;
 
 import java.sql.SQLException;
@@ -41,12 +42,13 @@ public class CreateClassRequestDaoImpl extends MySQL_C3P0<CreateClassRequest> im
      * @return 集合
      */
     @Override
-    public List<CreateClassRequest> selectAllCreateClassRequestByCondition(int offset, int pageSize) {
-        try {
-            return executeQueryToBeanList("SELECT * FROM `create_class_request` ORDER BY create_class_request.isProcess ASC LIMIT ?, ?", CreateClassRequest.class, offset, pageSize);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public List<PostClassRequestInfo> selectAllCreateClassRequestByCondition(int offset, int pageSize) {
+//        try {
+//            return executeQueryToBeanList("SELECT * FROM `create_class_request` ORDER BY create_class_request.isProcess ASC LIMIT ?, ?", CreateClassRequest.class, offset, pageSize);
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+        return null;
     }
 
     /**

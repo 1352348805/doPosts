@@ -1,6 +1,7 @@
 package com.doposts.dao.interfaces;
 
 import com.doposts.entity.CreateClassRequest;
+import com.doposts.vo.PostClassRequestInfo;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public interface CreateClassRequestDao {
      * @param pageSize 取多少条
      * @return 集合
      */
-    List<CreateClassRequest> selectAllCreateClassRequestByCondition(int offset, int pageSize);
+    List<PostClassRequestInfo> selectAllCreateClassRequestByCondition(int offset, int pageSize);
 
     /**
      * 查询总记录数

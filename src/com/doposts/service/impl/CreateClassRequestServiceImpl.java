@@ -4,6 +4,10 @@ import com.doposts.dao.PostItDatabase;
 import com.doposts.entity.CreateClassRequest;
 import com.doposts.service.interfaces.CreateClassRequestService;
 import com.doposts.utils.Page;
+import com.doposts.vo.PostClassRequestInfo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author asuk
@@ -31,11 +35,15 @@ public class CreateClassRequestServiceImpl implements CreateClassRequestService 
      * @return PageBean
      */
     @Override
-    public Page<CreateClassRequest> getPageByCreateClassRequest(int pageIndex, int pageSize) {
-        Page<CreateClassRequest> page = new Page<>();
-        //TODO
+    public Page<PostClassRequestInfo> getPageByCreateClassRequest(int pageIndex, int pageSize) {
+        Page<PostClassRequestInfo> page = new Page<>();
+        Integer total = PostItDatabase.CREATE_CLASS_REQUEST_DAO.selectAllCreateClassRequestCount();
+        page.setTotalCount(total);
+        page.setCurrPageNo(pageIndex);
+        page.setPageSize(pageSize);
         Integer offSet = page.getOffSet();
-        PostItDatabase.CREATE_CLASS_REQUEST_DAO.selectAllCreateClassRequestByCondition(offSet,pageSize);
-        return null;
+        List<PostClassRequestInfo> requestInfos = PostItDatabase.CREATE_CLASS_REQUEST_DAO.selectAllCreateClassRequestByCondition(offSet, pageSize);
+        page.setData(requestInfos);
+        return page;
     }
 }
