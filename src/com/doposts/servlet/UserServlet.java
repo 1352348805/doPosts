@@ -62,6 +62,16 @@ public class UserServlet extends AbstractServlet{
         return new CommonResult().success("");
     }
 
+    public Object registerUser(HttpServletRequest request,HttpServletResponse response){
+        String loginName=request.getParameter("loginName");
+        String password=request.getParameter("password");
+        String name=request.getParameter("name");
+        boolean flag = userService.register(loginName,password,name);
+        if(!flag){
+            return new CommonResult().failed();
+        }
+        return new CommonResult().success("");
+    }
     /**
      * 用户主页
      */
