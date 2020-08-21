@@ -67,12 +67,11 @@ public class UserDaoImpl extends MySQL_C3P0<User> implements UserDao {
 
     /**
      * 查询用户数量
-     *
-     * @return
+     * @return 用户的数量
      */
     @Override
     public int selectUserCount() {
-        return 0;
+        return selectCount(User.class);
     }
 
     /**
