@@ -85,4 +85,19 @@ public class UserServiceImpl implements UserService {
        }
        return userList;
        }
+
+    /**
+     * 查询用户数量
+     * @return 数量int
+     */
+    @Override
+    public int getselectUserConut() {
+        int count=0;
+        try {
+            count=PostItDatabase.USER_DAO.selectUserCount();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return count;
+    }
 }

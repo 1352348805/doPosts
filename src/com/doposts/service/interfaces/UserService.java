@@ -39,4 +39,10 @@ public interface UserService {
      * @return
      */
     List<User> getUserByStartIndex(int index, int length);
+
+    /**
+     * 查询用户数量
+     * @return 数量int
+     */
+    int getselectUserConut();
 }

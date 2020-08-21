@@ -8,8 +8,6 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.List;
 
 /**
  * 用户控制器
@@ -80,7 +78,6 @@ public class UserServlet extends AbstractServlet{
         }
         return new CommonResult().success("");
     }
-
     /**
      * 查看用户
      * @param request

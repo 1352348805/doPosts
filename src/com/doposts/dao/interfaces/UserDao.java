@@ -50,5 +50,4 @@ public interface UserDao {
      * @return 用户的数量
      */
     int selectUserCount();
-
 }
