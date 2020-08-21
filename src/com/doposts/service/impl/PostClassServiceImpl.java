@@ -136,6 +136,17 @@ public class PostClassServiceImpl implements PostClassService {
     }
 
     /**
+     * 根据分类名查询三级分类列表
+     *
+     * @param name 分类名
+     * @return 分类列表
+     */
+    @Override
+    public List<PostClass> getThreePostClassListByName(String name) {
+        return PostItDatabase.POST_CLASS_DAO.getPostClassListByCondition(name,3);
+    }
+
+    /**
      * 获取分类和它的父亲分类
      * @param classId 当前分类id
      * @param postClassList 需要填充的集合

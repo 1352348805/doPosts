@@ -71,5 +71,11 @@ public interface PostClassService {
      */
     boolean modifyPostClass(PostClass postClass);
 
+    /**
+     * 根据分类名查询三级分类列表
+     * @param name 分类名
+     * @return 分类列表
+     */
+    List<PostClass> getThreePostClassListByName(String name);
 
 }
