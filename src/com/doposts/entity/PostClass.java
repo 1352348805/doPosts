@@ -2,6 +2,7 @@ package com.doposts.entity;
 
 import com.dxhualuo.data.annotation.JavaBean;
 import com.dxhualuo.database.annotation.AutoIncrement;
+import com.dxhualuo.database.annotation.FieldMapping;
 import com.dxhualuo.database.annotation.PrimaryKey;
 import com.dxhualuo.database.annotation.TableMapping;
 
