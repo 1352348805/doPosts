@@ -87,6 +87,10 @@ public class CreateClassRequestDaoImpl extends MySQL_C3P0<CreateClassRequest> im
      */
     @Override
     public Integer updateCreateClassRequestById(CreateClassRequest classRequest) {
-        return null;
+        try {
+            return update(classRequest);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
