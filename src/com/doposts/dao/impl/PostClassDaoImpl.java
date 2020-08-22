@@ -1,5 +1,6 @@
 package com.doposts.dao.impl;
 
+import com.doposts.Run;
 import com.doposts.dao.DatabaseConfig;
 import com.doposts.dao.interfaces.PostClassDao;
 import com.doposts.entity.PostClass;
@@ -126,14 +127,17 @@ public class PostClassDaoImpl extends MySQL_C3P0<PostClass> implements PostClass
      */
     @Override
     public PostClass findPostClassByClassName(String className) {
-//        try {
-//            PostClass postClass = new PostClass();
-//            postClass.setClassName(className);
-//            return selectCount(PostClass.class, postClass);
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-        return null;
+        PostClass postClass = new PostClass();
+        postClass.setClassName(className);
+        try {
+            List<PostClass> postClassList = select(PostClass.class, postClass);
+            if(postClassList != null && postClassList.size() == 1){
+                return postClassList.get(0);
+            }
+            return null;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
