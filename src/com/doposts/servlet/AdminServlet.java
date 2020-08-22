@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-import java.util.Stack;
 
 /**
  * @author asuk
@@ -56,6 +55,22 @@ public class AdminServlet extends AbstractServlet{
      */
     public String index(HttpServletRequest request, HttpServletResponse response) {
         return "admin/index";
+    }
+
+    /**
+     * 后台退出
+     */
+    public String exit(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.getSession().invalidate();
+        response.sendRedirect(request.getContextPath() + "/user?action=toLogin");
+        return null;
+    }
+
+    /**
+     * 跳转修改密码页面
+     */
+    public String toModifyPwd(HttpServletRequest request, HttpServletResponse response) {
+        return "admin/user/pwd_modify";
     }
 
     /**
@@ -108,7 +123,7 @@ public class AdminServlet extends AbstractServlet{
         if (level != 3) {
             Integer count = postClassService.getPostClassChildrenCountById(classId);
             if (count > 0) {
-                return new CommonResult().failed("该c分类下还有" + count + "条数据,不能删除!");
+                return new CommonResult().failed("该分类下还有" + count + "条数据,不能删除!");
             }
         }
         boolean b = postClassService.deletePostClassById(classId);
@@ -168,6 +183,13 @@ public class AdminServlet extends AbstractServlet{
         return new CommonResult().success(count);
     }
 
+    /**
+     * 获取分类申请总记录数
+     */
+    public CommonResult getCreateClassRequestCount(HttpServletRequest request, HttpServletResponse response) {
+        Integer count = createClassRequestService.getCreateClassRequestCount();
+        return new CommonResult().success(count);
+    }
 
     /**
      * 获取请求分类列表

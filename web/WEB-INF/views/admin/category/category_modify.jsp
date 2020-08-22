@@ -32,7 +32,7 @@
                 <tbody>
                 <c:set var="size" value="${postClassList.size()}" />
                 <tr>
-                    <td colspan="2" style="text-align: center;font-size: 20px;font-family: 宋体">
+                    <td colspan="2" style="text-align: center;font-size: 20px;">
                         修改分类
                     </td>
                 </tr>

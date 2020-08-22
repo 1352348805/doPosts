@@ -6,8 +6,8 @@
             <li ><a href="<%=path%>/admin/billlist">帖子管理</a></li>
             <li><a href="<%=path%>/admin?action=categoryList">分类管理</a></li>
             <li><a href="<%=path%>/admin/userlist">用户管理</a></li>
-            <li><a href="<%=path%>/admin/pwdmodify">密码修改</a></li>
-            <li><a href="<%=path%>/admin/exit">退出系统</a></li>
+            <li><a href="<%=path%>/admin?action=toModifyPwd">密码修改</a></li>
+            <li><a href="<%=path%>/admin?action=exit">退出系统</a></li>
         </ul>
     </nav>
 </div>

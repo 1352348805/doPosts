@@ -59,14 +59,14 @@ public class CreateClassRequestServiceImpl implements CreateClassRequestService 
         //如果通过，去分类表添加分类或者修改分类禁用状态
         if (classRequest.getIsPass()) {
             //查询分类表是否存在此分类
-            PostClass postClass = PostItDatabase.POST_CLASS_DAO.findPostClassByClassName(classRequest.getClassName());
+            CreateClassRequest request = PostItDatabase.CREATE_CLASS_REQUEST_DAO.selectCreateClassRequestById(classRequest.getRequestId());
+            PostClass postClass = PostItDatabase.POST_CLASS_DAO.findPostClassByClassName(request.getClassName());
             if (postClass == null) {
                 //不存在: 添加这个分类
-                CreateClassRequest request = PostItDatabase.CREATE_CLASS_REQUEST_DAO.selectCreateClassRequestById(classRequest.getRequestId());
                 postClass = new PostClass();
                 postClass.setClassFatherId(request.getFatherClassId());
                 postClass.setClassLevel(3);
-                postClass.setClassName(classRequest.getClassName());
+                postClass.setClassName(request.getClassName());
                 PostItDatabase.POST_CLASS_DAO.insertPostClass(postClass);
             } else {
                 //存在: 修改分类的状态
@@ -75,5 +75,13 @@ public class CreateClassRequestServiceImpl implements CreateClassRequestService 
         }
         //最终修改分类申请返回结果
         return PostItDatabase.CREATE_CLASS_REQUEST_DAO.updateCreateClassRequestById(classRequest) > 0 ? true : false;
+    }
+
+    /**
+     * 获取分类申请总记录数
+     */
+    @Override
+    public Integer getCreateClassRequestCount() {
+        return PostItDatabase.CREATE_CLASS_REQUEST_DAO.selectAllCreateClassRequestCount();
     }
 }

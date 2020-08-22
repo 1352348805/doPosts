@@ -35,5 +35,9 @@ public interface CreateClassRequestService {
      */
     boolean modifyRequestStatus(CreateClassRequest classRequest);
 
+    /**
+     * 获取分类申请总记录数
+     */
+    Integer getCreateClassRequestCount();
 
 }

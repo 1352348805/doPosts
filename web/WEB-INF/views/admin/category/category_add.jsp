@@ -30,7 +30,7 @@
             <table class="layui-table" style="margin: 20% auto;">
                 <tbody>
                 <tr>
-                    <td colspan="2" style="text-align: center;font-size: 20px;font-family: 宋体">
+                    <td colspan="2" style="text-align: center;font-size: 20px;">
                         添加分类
                     </td>
                 </tr>
