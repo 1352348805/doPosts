@@ -36,5 +36,5 @@ public interface CreateClassRequestDao {
      * @param classRequest 修改实体类,属性值为空则不参与更新
      * @return 受影响的行数
      */
-    Integer updateCreateClassRequest(CreateClassRequest classRequest);
+    Integer updateCreateClassRequestById(CreateClassRequest classRequest);
 }

@@ -86,7 +86,7 @@ public class CreateClassRequestDaoImpl extends MySQL_C3P0<CreateClassRequest> im
      * @return 受影响的行数
      */
     @Override
-    public Integer updateCreateClassRequest(CreateClassRequest classRequest) {
+    public Integer updateCreateClassRequestById(CreateClassRequest classRequest) {
         return null;
     }
 }
