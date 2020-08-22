@@ -17,12 +17,25 @@
     <link rel="stylesheet" href="<%=path%>/static/layuiadmin/style/login.css" media="all">
     <script src="<%=path%>/static/layuiadmin/layui/layui.js"></script>
     <script src="<%=path%>/static/js/jquery.js"></script>
+    <style>
+        body{
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .layadmin-user-login-main{
+          border: 1px;
+        }
+        .layadmin-user-login layadmin-user-display-show{
+            border: 1px;
+        }
+    </style>
 </head>
 <body style="overflow:-Scroll;overflow-x:hidden;">
-<div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
-    <div class="layadmin-user-login-main">
-        <video src="/doPosts/static/video/adnibdvdsb.mp4" style="z-index: -1; width:1600px;height: 110%; position: absolute; top: -10%; left: -10%" loop="loop" autoplay="autoplay"
-               muted="muted" type="video/mp4"></video>
+<video src="/doPosts/static/video/edit.mp4" style="z-index: -1; width:100%;height: 100%;object-fit: cover;" position: absolute; loop="loop" autoplay="autoplay"
+       muted="muted" type="video/mp4"></video>
+<div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="position: absolute;left: 33%;top: -100px">
+    <div class="layadmin-user-login-main" >
         <div class="layadmin-user-login-box layadmin-user-login-header">
             <h2>欢迎注册来贴吧</h2>
             <p>灵感 , 来源于有趣的人</p>
