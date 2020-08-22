@@ -78,4 +78,15 @@ public class CreateClassRequestDaoImpl extends MySQL_C3P0<CreateClassRequest> im
     public Integer selectAllCreateClassRequestCount() {
         return selectCount(CreateClassRequest.class);
     }
+
+    /**
+     * 根据id修改创建信息
+     *
+     * @param classRequest 修改实体类,属性值为空则不参与更新
+     * @return 受影响的行数
+     */
+    @Override
+    public Integer updateCreateClassRequest(CreateClassRequest classRequest) {
+        return null;
+    }
 }

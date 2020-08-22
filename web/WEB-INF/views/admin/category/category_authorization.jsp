@@ -65,7 +65,14 @@
     var path = $("#path").val();
 
     function PassStatusChange(obj,id) {
-        CommonChangeStatus(obj);
+        let v = CommonChangeStatus(obj);
+        let data = {
+            action : 'passStatusChange',
+            requestId : id
+        }
+        $.post(path + '/admin',data,function (result) {
+
+        })
     }
 
     function AuthorizationStatusChange(obj,id) {
@@ -76,12 +83,13 @@
         $obj = $(obj);
         let v = $obj.prev().val();
         if (v == 1) {
-            $obj.prev().val(0);
+            $obj.prev().val(v=0);
             $obj.removeClass('layui-form-onswitch');
         } else {
-            $obj.prev().val(1);
+            $obj.prev().val(v=1);
             $obj.addClass('layui-form-onswitch');
         }
+        return v;
     }
 
     $(function () {

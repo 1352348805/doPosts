@@ -30,4 +30,11 @@ public interface CreateClassRequestDao {
      * @return 记录数
      */
     Integer selectAllCreateClassRequestCount();
+
+    /**
+     * 根据id修改创建信息
+     * @param classRequest 修改实体类,属性值为空则不参与更新
+     * @return 受影响的行数
+     */
+    Integer updateCreateClassRequest(CreateClassRequest classRequest);
 }

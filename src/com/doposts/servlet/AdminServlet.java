@@ -180,4 +180,12 @@ public class AdminServlet extends AbstractServlet{
         Page<PostClassRequestInfo> page = createClassRequestService.getPageByCreateClassRequest(pageIndex, 10);
         return new CommonResult().success(page);
     }
+
+    /**
+     * 通过状态切换
+     */
+    public CommonResult passStatusChange(HttpServletRequest request, HttpServletResponse response) {
+
+        return new CommonResult().success(null);
+    }
 }

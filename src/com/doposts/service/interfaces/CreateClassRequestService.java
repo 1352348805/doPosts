@@ -28,4 +28,11 @@ public interface CreateClassRequestService {
      */
     Page<PostClassRequestInfo> getPageByCreateClassRequest(int pageIndex, int pageSize);
 
+    /**
+     * 修改请求状态信息
+     * @param classRequest 修改的实体
+     * @return 是否修改成功
+     */
+    boolean modifyRequestStatus(CreateClassRequest classRequest);
+
 }

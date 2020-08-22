@@ -46,4 +46,15 @@ public class CreateClassRequestServiceImpl implements CreateClassRequestService 
         page.setData(requestInfos);
         return page;
     }
+
+    /**
+     * 修改请求状态信息
+     *
+     * @param classRequest 修改的实体
+     * @return 是否修改成功
+     */
+    @Override
+    public boolean modifyRequestStatus(CreateClassRequest classRequest) {
+        return false;
+    }
 }
