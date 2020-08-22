@@ -1,13 +1,22 @@
 package com.doposts.servlet;
 
+import com.doposts.entity.Post;
 import com.doposts.entity.User;
+import com.doposts.service.impl.FloorServiceImpl;
+import com.doposts.service.impl.PostServiceImpl;
 import com.doposts.service.impl.UserServiceImpl;
+import com.doposts.service.interfaces.FloorService;
+import com.doposts.service.interfaces.PostService;
+import com.doposts.service.interfaces.UserService;
 import com.doposts.to.CommonResult;
+import com.doposts.vo.FloorWithReply;
+import com.doposts.vo.SelectAllPostAndFloor;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * 用户控制器
@@ -19,7 +28,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/user")
 public class UserServlet extends AbstractServlet{
 
-    UserServiceImpl userService;
+    UserService userService;
+    FloorService floorService;
+    PostService postService;
 
     @Override
     public Class<?> getServletClass() {
@@ -28,7 +39,12 @@ public class UserServlet extends AbstractServlet{
 
     @Override
     public void init() throws ServletException {
+
         userService = new UserServiceImpl();
+
+        floorService = new FloorServiceImpl();
+
+        postService = new PostServiceImpl();
     }
 
     /**
@@ -78,6 +94,24 @@ public class UserServlet extends AbstractServlet{
         }
         return new CommonResult().success("");
     }
+
+    /**
+     *  发送数据给页面
+     * @param request
+     * @param response
+     * @return  楼层消息
+     */
+    public String postAndfloor(HttpServletRequest request, HttpServletResponse response){
+
+        SelectAllPostAndFloor id = floorService.getFloorById(1);
+       Post post= postService.getPostById(1);
+        List<FloorWithReply> floorWithReplies= id.getFloor();
+        request.setAttribute("post",post);
+        request.setAttribute("floor",floorWithReplies);
+
+        return "userweb/reply";
+    }
+
     /**
      * 查看用户
      * @param request

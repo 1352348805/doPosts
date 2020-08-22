@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -5,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Home</title>
+    <title>${post.postName}</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/fontawesome-all.css">
@@ -229,8 +230,8 @@
 
         <nav role="navigation" class="probootstrap-nav hidden-xs">
           <ul class="probootstrap-main-nav">
-            <li><a href="${pageContext.request.contextPath }/jsp/login.jsp">登录</a></li>
-            <li><a href="${pageContext.request.contextPath }/jsp/register.jsp">注册</a></li>
+            <li><a href="${pageContext.request.contextPath }/static/jsp/login.jsp">登录</a></li>
+            <li><a href="${pageContext.request.contextPath }/static/jsp/register.jsp">注册</a></li>
           </ul>
           <div class="extra-text visible-xs">
             <ul class="social-buttons">
@@ -259,7 +260,7 @@
   }
   </style>
   <!-- START: section -->
-  <section class="probootstrap-intro" style="background-image: url(img/hero_bg_2.jpg);height: 400px;" data-stellar-background-ratio="0.5">
+  <section class="probootstrap-intro" style="background-image: url(${pageContext.request.contextPath }/static/images/1234.jpg);height: 400px; background-size: 100% 700px;" data-stellar-background-ratio="0.5">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-7 probootstrap-intro-text">
@@ -271,6 +272,9 @@
       </div>
     </div>
     <a class="probootstrap-scroll-down js-next" href="#next-section">Scroll down <i class="icon-chevron-down"></i></a>
+      <div>
+          <div> <h1>${requestScope.post.postName}</h1></div>
+      </div>
   </section>
   <!-- END: section -->
 	
@@ -288,16 +292,41 @@
 	</div>		
   <section id="next-section" class="probootstrap-section">
     <div class="container">
+        <c:forEach items="${floor}" var="floor">
       <div class="row bar">
        	<div class='col-md-12 col-sm-6 probootstrap-animate fadeInUp probootstrap-animated'>
        		<div class='probootstrap-block-image'>
   				<div class='text'>
   				<span class='clearfix like'>
-  				<a class='hint info-right'href='#' title='发帖时间'><i class='fa fa-clock-o'>发帖时间</i></a>
+  				<a class='hint info-right'href='#' title='发帖时间'><i class='fa fa-clock-o'>发帖时间:${floor.sendDate}</i></a>
   				<a class='hint info-left' href='#' title='发帖人'><i class='fa fa-user'>作者名字</i></a>
   				</span>
-  						<p class='dark' style='80px'>这是很长的的描述这是很长的的描述这是很长的的描述这是很长的的描述这是很长的的描述</p>
-  						<p><img src="${pageContext.request.contextPath }/img/img_1.jpg" style="width:50px ;height:50px"></p>
+
+  						<p class='dark' style='height: 80px'>
+                                ${floor.postContent}
+                        </p>
+
+  						<p ><img src="${pageContext.request.contextPath }/static/images/hero_bg_2.jpg" style="width:50px ;height:50px">
+                        </p>
+
+                    <div style="float: right">
+                        &nbsp;<span><a href="#">回复</a></span>
+                    </div>
+                    <div style=" float: right; " >
+                             <span><a href="#">
+                                 <img src="${pageContext.request.contextPath }/static/images/jb.png " width="35px" height="15px" >
+                             </a></span>
+                        <span class="tail-info">来自
+                                 <a  href="#">Android客户端</a>
+                             </span>
+                        <span class="tail-info">${floor.postFloor}楼</span>
+                    </div>
+                    <div style="display: inline-block">
+                        <a href=" "></a>
+                        <a href="">奥特曼： </a>
+                        <span>哇你这也说的出来啊</span>
+                    </div>
+                    <br/>
   						<hr>
   						<p class='clearfix like'>
   							<a class='pull-right hint' href='#'><i class='fa fa-thumbs-down'></i></a>	
@@ -308,6 +337,7 @@
 				</div>
 			</div>
       </div>
+        </c:forEach>
       <div class="row mb60" id="send">
         <div class="col-md-12  probootstrap-animate">
         <h4>回复帖子</h4>
@@ -418,12 +448,12 @@
   </footer>
   <!-- END: footer -->
   
-  <script src="${pageContext.request.contextPath }/js/scripts.min.js"></script>
-  <script src="${pageContext.request.contextPath }/js/main.min.js"></script>
-  <script src="${pageContext.request.contextPath }/js/custom.js"></script>
-  <script src="${pageContext.request.contextPath }/js/js.nav.js"></script>
-<script src="${pageContext.request.contextPath }/js/canva_moving_effect.js"></script>
-<script src="${pageContext.request.contextPath }/js/jquery-form.js"></script>
+  <script src="${pageContext.request.contextPath }/static/js/scripts.min.js"></script>
+  <script src="${pageContext.request.contextPath }/static/js/main.min.js"></script>
+  <script src="${pageContext.request.contextPath }/static/js/custom.js"></script>
+  <script src="${pageContext.request.contextPath }/staticjs/js.nav.js"></script>
+<script src="${pageContext.request.contextPath }/static/js/canva_moving_effect.js"></script>
+<script src="${pageContext.request.contextPath }/static/js/jquery-form.js"></script>
 <!-- //Jquery -->
 <script type="text/javascript">
 	$(function(){

@@ -1,5 +1,6 @@
 package com.doposts;
 
+import com.doposts.entity.Floor;
 import com.doposts.entity.Post;
 import com.doposts.service.impl.FloorServiceImpl;
 import com.doposts.service.impl.PostServiceImpl;
@@ -24,6 +25,8 @@ public class PostTest {
          SelectAllPostAndFloor floorById = floorService.getFloorById(1);
 
          List<FloorWithReply> floor = floorById.getFloor();
+
+
          floor.forEach(f -> {
              System.out.println("sssssss:"+f.getPostContent());
              f.getReplyList().forEach( r -> {
