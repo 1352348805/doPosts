@@ -120,19 +120,20 @@ public class PostClassDaoImpl extends MySQL_C3P0<PostClass> implements PostClass
     }
 
     /**
-     * 查询分类名相同的记录数
+     * 查询分类名相同的记录
      * @param className 要查询的分类名
-     * @return 记录数
+     * @return 实体类
      */
     @Override
-    public Integer findPostClassByClassName(String className) {
-        try {
-            PostClass postClass = new PostClass();
-            postClass.setClassName(className);
-            return selectCount(PostClass.class, postClass);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public PostClass findPostClassByClassName(String className) {
+//        try {
+//            PostClass postClass = new PostClass();
+//            postClass.setClassName(className);
+//            return selectCount(PostClass.class, postClass);
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+        return null;
     }
 
     /**

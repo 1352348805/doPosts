@@ -50,11 +50,11 @@ public interface PostClassDao {
     Integer insertPostClass(PostClass postClass);
 
     /**
-     * 查询分类名相同的记录数
+     * 查询分类名相同的记录
      * @param className 要查询的分类名
-     * @return 记录数
+     * @return 实体类
      */
-    Integer findPostClassByClassName(String className);
+    PostClass findPostClassByClassName(String className);
 
     /**
      * 以id更新分类
