@@ -45,7 +45,7 @@
                         </button>
                         <button class="layui-btn layui-btn-sm" onclick="location.href='<%=path%>/admin?action=toAuthorize'">
                             <i class="layui-icon">&#xe608;</i> 审核
-                            <span class="layui-badge" id="no-process-count"></span>
+                            <span class="layui-badge" style="display: none;" id="no-process-count"></span>
                         </button>
                     </td>
 
@@ -174,7 +174,10 @@
     $("#dt-table").treetable(option);
 
     $.post(path + '/admin',{action:'getUnauthorizedClassCount'},function (result) {
-        $("#no-process-count").html(result.data);
+        if (result.data > 0) {
+            $("#no-process-count").css('display','initial');
+            $("#no-process-count").html(result.data);
+        }
     },'json');
 </script>
 </body>

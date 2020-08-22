@@ -2,6 +2,7 @@ package com.doposts.service.impl;
 
 import com.doposts.dao.PostItDatabase;
 import com.doposts.entity.CreateClassRequest;
+import com.doposts.entity.PostClass;
 import com.doposts.service.interfaces.CreateClassRequestService;
 import com.doposts.utils.Page;
 import com.doposts.vo.PostClassRequestInfo;
@@ -55,6 +56,24 @@ public class CreateClassRequestServiceImpl implements CreateClassRequestService 
      */
     @Override
     public boolean modifyRequestStatus(CreateClassRequest classRequest) {
-        return false;
+        //如果通过，去分类表添加分类或者修改分类禁用状态
+        if (classRequest.getIsPass()) {
+            //查询分类表是否存在此分类
+            PostClass postClass = PostItDatabase.POST_CLASS_DAO.findPostClassByClassName(classRequest.getClassName());
+            if (postClass == null) {
+                //不存在: 添加这个分类
+                CreateClassRequest request = PostItDatabase.CREATE_CLASS_REQUEST_DAO.selectCreateClassRequestById(classRequest.getRequestId());
+                postClass = new PostClass();
+                postClass.setClassFatherId(request.getFatherClassId());
+                postClass.setClassLevel(3);
+                postClass.setClassName(classRequest.getClassName());
+                PostItDatabase.POST_CLASS_DAO.insertPostClass(postClass);
+            } else {
+                //存在: 修改分类的状态
+                //PostItDatabase.POST_CLASS_DAO.updatePostClassById();
+            }
+        }
+        //最终修改分类申请返回结果
+        return PostItDatabase.CREATE_CLASS_REQUEST_DAO.updateCreateClassRequestById(classRequest) > 0 ? true : false;
     }
 }

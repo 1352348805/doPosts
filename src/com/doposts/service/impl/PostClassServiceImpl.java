@@ -108,7 +108,7 @@ public class PostClassServiceImpl implements PostClassService {
      */
     @Override
     public boolean checkClassNameExists(String className) {
-        return PostItDatabase.POST_CLASS_DAO.findPostClassByClassName(className) > 0 ? true : false;
+        return PostItDatabase.POST_CLASS_DAO.findPostClassByClassName(className) != null ? true : false;
     }
 
     /**

@@ -35,4 +35,5 @@ public interface CreateClassRequestService {
      */
     boolean modifyRequestStatus(CreateClassRequest classRequest);
 
+
 }

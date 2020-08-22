@@ -1,5 +1,6 @@
 package com.doposts.servlet;
 
+
 import com.doposts.constant.SystemConstant;
 import com.doposts.entity.CreateClassRequest;
 import com.doposts.entity.PostClass;
@@ -16,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Stack;
 
@@ -172,12 +174,15 @@ public class AdminServlet extends AbstractServlet{
      */
     public CommonResult getCreateClassRequestList(HttpServletRequest request, HttpServletResponse response) {
         Integer pageIndex = null;
+        Integer pageSize = null;
         try {
             pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
+            pageSize = Integer.parseInt(request.getParameter("pageSize"));
         } catch (Exception e) {
             pageIndex = 1;
+            pageSize = 8;
         }
-        Page<PostClassRequestInfo> page = createClassRequestService.getPageByCreateClassRequest(pageIndex, 10);
+        Page<PostClassRequestInfo> page = createClassRequestService.getPageByCreateClassRequest(pageIndex, pageSize);
         return new CommonResult().success(page);
     }
 
@@ -185,7 +190,18 @@ public class AdminServlet extends AbstractServlet{
      * 通过状态切换
      */
     public CommonResult passStatusChange(HttpServletRequest request, HttpServletResponse response) {
-
-        return new CommonResult().success(null);
+        Integer requestId = Integer.parseInt(request.getParameter("requestId"));
+        Integer isPass = Integer.parseInt(request.getParameter("isPass"));
+        CreateClassRequest classRequest = new CreateClassRequest();
+        classRequest.setRequestId(requestId);
+        classRequest.setIsPass(isPass > 0 ? true : false);
+        classRequest.setIsProcess(true);
+        classRequest.setReviewerId(1);
+        classRequest.setReviewDate(new Date());
+        boolean b = createClassRequestService.modifyRequestStatus(classRequest);
+        if (b) {
+            return new CommonResult().success(null);
+        }
+        return new CommonResult().failed("操作失败");
     }
 }
