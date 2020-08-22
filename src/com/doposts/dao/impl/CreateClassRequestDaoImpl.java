@@ -93,4 +93,15 @@ public class CreateClassRequestDaoImpl extends MySQL_C3P0<CreateClassRequest> im
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * 根据id获取请求分类
+     *
+     * @param requestId 主键
+     * @return 实体
+     */
+    @Override
+    public CreateClassRequest selectCreateClassRequestById(int requestId) {
+        return null;
+    }
 }

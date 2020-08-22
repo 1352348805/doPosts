@@ -37,4 +37,11 @@ public interface CreateClassRequestDao {
      * @return 受影响的行数
      */
     Integer updateCreateClassRequestById(CreateClassRequest classRequest);
+
+    /**
+     * 根据id获取请求分类
+     * @param requestId 主键
+     * @return 实体
+     */
+    CreateClassRequest selectCreateClassRequestById(int requestId);
 }
