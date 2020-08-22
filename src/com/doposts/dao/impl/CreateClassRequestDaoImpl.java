@@ -102,6 +102,16 @@ public class CreateClassRequestDaoImpl extends MySQL_C3P0<CreateClassRequest> im
      */
     @Override
     public CreateClassRequest selectCreateClassRequestById(int requestId) {
-        return null;
+        CreateClassRequest createClassRequest = new CreateClassRequest();
+        createClassRequest.setRequestId(requestId);
+        try {
+            List<CreateClassRequest> requests = select(CreateClassRequest.class, createClassRequest);
+            if(requests != null && requests.size() == 1){
+                return requests.get(0);
+            }
+            return null;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
