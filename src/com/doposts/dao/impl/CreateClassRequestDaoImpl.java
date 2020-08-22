@@ -64,7 +64,7 @@ public class CreateClassRequestDaoImpl extends MySQL_C3P0<CreateClassRequest> im
                     "\tcreate_class_request AS request\n" +
                     "LEFT JOIN `user` AS requestUser ON request.requestUserId = requestUser.userId\n" +
                     "LEFT JOIN post_classification AS postClass ON request.fatherClassId = postClass.classId\n" +
-                    "LEFT JOIN `user` AS reviewerUser ON request.reviewerId = reviewerUser.userId limit ?,?", PostClassRequestInfo.class, offset, pageSize);
+                    "LEFT JOIN `user` AS reviewerUser ON request.reviewerId = reviewerUser.userId ORDER BY request.isProcess limit ?,?", PostClassRequestInfo.class, offset, pageSize);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
