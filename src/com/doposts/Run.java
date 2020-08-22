@@ -14,19 +14,20 @@ import static com.doposts.dao.PostItDatabase.DEFAULT_DAO;
 @SuppressWarnings("RedundantThrows")
 public class Run {
     public static void main(String[] args) throws Exception{
-        for (int i = 0; i < 500; i++) {
+        long time = System.currentTimeMillis();
+        for (int i = 0; i < 50; i++) {
             System.out.println(i+1);
-            System.out.println(PostItDatabase.USER_DAO.selectUserCount());
-            System.out.println(PostItDatabase.USER_DAO.selectUserByStartIndexAndLength(0, 5));
-            System.out.println(PostItDatabase.USER_DAO.selectUserCount());
-            System.out.println(PostItDatabase.USER_DAO.selectUserByStartIndexAndLength(5, 5));
-            System.out.println(PostItDatabase.USER_DAO.selectUserCount());
-            System.out.println(PostItDatabase.USER_DAO.selectUserByStartIndexAndLength(10, 5));
-            System.out.println(PostItDatabase.USER_DAO.selectUserCount());
-            System.out.println(PostItDatabase.USER_DAO.selectUserByStartIndexAndLength(15, 5));
-            System.out.println(PostItDatabase.USER_DAO.selectUserCount());
-            System.out.println(PostItDatabase.USER_DAO.selectUserByStartIndexAndLength(20, 5));
+            PostItDatabase.USER_DAO.selectUserCount();
+            PostItDatabase.USER_DAO.selectUserByStartIndexAndLength(0, 5);
+            PostItDatabase.USER_DAO.selectUserCount();
+            PostItDatabase.USER_DAO.selectUserByStartIndexAndLength(5, 5);
+            PostItDatabase.USER_DAO.selectUserCount();
+            PostItDatabase.USER_DAO.selectUserByStartIndexAndLength(10, 5);
+            PostItDatabase.USER_DAO.selectUserCount();
+            PostItDatabase.USER_DAO.selectUserByStartIndexAndLength(15, 5);
+            PostItDatabase.USER_DAO.selectUserCount();
+            PostItDatabase.USER_DAO.selectUserByStartIndexAndLength(20, 5);
         }
-
+        System.out.println(System.currentTimeMillis() - time);
     }
 }
