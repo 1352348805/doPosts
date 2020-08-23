@@ -7,7 +7,18 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
-    
+
+    <!-- Dx_Database数据库监控 -->
+    <servlet>
+        <servlet-name>databaseMonitorServlet</servlet-name>
+        <servlet-class>com.doposts.dao.monitor.DatabaseMonitorServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>databaseMonitorServlet</servlet-name>
+        <url-pattern>/DX_DatabaseMonitor</url-pattern>
+    </servlet-mapping>
+
     <!-- 编码过滤 -->
     <filter>
         <filter-name>encodingFilter</filter-name>

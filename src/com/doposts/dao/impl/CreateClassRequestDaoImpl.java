@@ -1,24 +1,22 @@
 package com.doposts.dao.impl;
 
-import com.doposts.dao.DatabaseConfig;
-import com.doposts.dao.PostItDatabase;
+import com.doposts.dao.CrudHandler;
 import com.doposts.dao.interfaces.CreateClassRequestDao;
 import com.doposts.entity.CreateClassRequest;
 import com.doposts.vo.PostClassRequestInfo;
-import com.dxhualuo.database.impl.MySQL_C3P0;
-
-import java.sql.ResultSet;
+import com.dxhualuo.database.handler.interfaces.SuperCrud;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * 创建分类的申请DAO的实现，在此添加方法以实现接口
  * @author dx_hualuo
  */
-public class CreateClassRequestDaoImpl extends MySQL_C3P0<CreateClassRequest> implements CreateClassRequestDao {
-    public CreateClassRequestDaoImpl(){
-        super(DatabaseConfig.getUrl(), DatabaseConfig.getPort(), DatabaseConfig.getDatabase(), DatabaseConfig.getUserName(), DatabaseConfig.getPassword(), "post");
+public class CreateClassRequestDaoImpl implements CreateClassRequestDao {
+    SuperCrud<CreateClassRequest> crud;
+
+    public CreateClassRequestDaoImpl() {
+        this.crud = CrudHandler.createClassRequestCrud;
     }
 
     /**
@@ -31,7 +29,7 @@ public class CreateClassRequestDaoImpl extends MySQL_C3P0<CreateClassRequest> im
         CreateClassRequest createClassRequest = new CreateClassRequest();
         createClassRequest.setIsProcess(false);
         try {
-            return selectCount(CreateClassRequest.class, createClassRequest);
+            return crud.selectCount(CreateClassRequest.class, createClassRequest);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -47,7 +45,7 @@ public class CreateClassRequestDaoImpl extends MySQL_C3P0<CreateClassRequest> im
     @Override
     public List<PostClassRequestInfo> selectAllCreateClassRequestByCondition(int offset, int pageSize) {
         try {
-             return executeQueryToBeanList("SELECT\n" +
+             return crud.executeQueryToBeanList("SELECT\n" +
                     "\trequest.requestId, \n" +
                     "\trequest.requestUserId, \n" +
                     "\trequest.className, \n" +
@@ -76,7 +74,7 @@ public class CreateClassRequestDaoImpl extends MySQL_C3P0<CreateClassRequest> im
      */
     @Override
     public Integer selectAllCreateClassRequestCount() {
-        return selectCount(CreateClassRequest.class);
+        return crud.selectCount(CreateClassRequest.class);
     }
 
     /**
@@ -88,7 +86,7 @@ public class CreateClassRequestDaoImpl extends MySQL_C3P0<CreateClassRequest> im
     @Override
     public Integer updateCreateClassRequestById(CreateClassRequest classRequest) {
         try {
-            return update(classRequest);
+            return crud.update(classRequest);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -105,7 +103,7 @@ public class CreateClassRequestDaoImpl extends MySQL_C3P0<CreateClassRequest> im
         CreateClassRequest createClassRequest = new CreateClassRequest();
         createClassRequest.setRequestId(requestId);
         try {
-            List<CreateClassRequest> requests = select(CreateClassRequest.class, createClassRequest);
+            List<CreateClassRequest> requests = crud.select(CreateClassRequest.class, createClassRequest);
             if(requests != null && requests.size() == 1){
                 return requests.get(0);
             }

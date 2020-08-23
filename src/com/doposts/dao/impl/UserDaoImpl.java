@@ -1,9 +1,9 @@
 package com.doposts.dao.impl;
 
-import com.doposts.dao.DatabaseConfig;
+import com.doposts.dao.CrudHandler;
 import com.doposts.dao.interfaces.UserDao;
 import com.doposts.entity.User;
-import com.dxhualuo.database.impl.MySQL_C3P0;
+import com.dxhualuo.database.handler.interfaces.SuperCrud;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -11,9 +11,11 @@ import java.util.List;
  *  用户DAO的实现
  * @author dx_hualuo
  */
-public class UserDaoImpl extends MySQL_C3P0<User> implements UserDao {
-    public UserDaoImpl(){
-        super(DatabaseConfig.getUrl(), DatabaseConfig.getPort(), DatabaseConfig.getDatabase(), DatabaseConfig.getUserName(), DatabaseConfig.getPassword(), "post");
+public class UserDaoImpl implements UserDao {
+    SuperCrud<User> crud;
+
+    public UserDaoImpl() {
+        this.crud = CrudHandler.userCrud;
     }
 
     @Override
@@ -34,7 +36,7 @@ public class UserDaoImpl extends MySQL_C3P0<User> implements UserDao {
     @Override
     public int insertUserByUser(User entity) {
         try {
-            return insert(entity);
+            return crud.insert(entity);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -46,7 +48,7 @@ public class UserDaoImpl extends MySQL_C3P0<User> implements UserDao {
      */
     @Override
     public List<User> selectFromUser() {
-        return select(User.class);
+        return crud.select(User.class);
     }
 
     /**
@@ -59,7 +61,7 @@ public class UserDaoImpl extends MySQL_C3P0<User> implements UserDao {
     @Override
     public List<User> selectUserByStartIndexAndLength(int startIndex, int length) {
         try {
-            return select(User.class, startIndex, length);
+            return crud.select(User.class, startIndex, length);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -71,7 +73,7 @@ public class UserDaoImpl extends MySQL_C3P0<User> implements UserDao {
      */
     @Override
     public int selectUserCount() {
-        return selectCount(User.class);
+        return crud.selectCount(User.class);
     }
 
     /**
@@ -82,7 +84,7 @@ public class UserDaoImpl extends MySQL_C3P0<User> implements UserDao {
     private User getUser(User user) {
         List<User> users;
         try {
-            users = select(User.class, user);
+            users = crud.select(User.class, user);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

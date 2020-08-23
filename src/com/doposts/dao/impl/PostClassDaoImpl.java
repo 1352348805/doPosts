@@ -1,12 +1,9 @@
 package com.doposts.dao.impl;
 
-import com.doposts.Run;
-import com.doposts.dao.DatabaseConfig;
+import com.doposts.dao.CrudHandler;
 import com.doposts.dao.interfaces.PostClassDao;
 import com.doposts.entity.PostClass;
-import com.dxhualuo.database.impl.MySQL_C3P0;
-
-import java.sql.ResultSet;
+import com.dxhualuo.database.handler.interfaces.SuperCrud;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -14,9 +11,11 @@ import java.util.List;
  *  帖子类型的实现
  * @author dx_hualuo
  */
-public class PostClassDaoImpl extends MySQL_C3P0<PostClass> implements PostClassDao {
-    public PostClassDaoImpl(){
-        super(DatabaseConfig.getUrl(), DatabaseConfig.getPort(), DatabaseConfig.getDatabase(), DatabaseConfig.getUserName(), DatabaseConfig.getPassword(), "post");
+public class PostClassDaoImpl implements PostClassDao {
+    SuperCrud<PostClass> crud;
+
+    public PostClassDaoImpl() {
+        this.crud = CrudHandler.postClassCrud;
     }
 
     /**
@@ -28,7 +27,7 @@ public class PostClassDaoImpl extends MySQL_C3P0<PostClass> implements PostClass
         PostClass ps = new PostClass();
         ps.setClassLevel(1);
         try {
-            return select(PostClass.class, ps);
+            return crud.select(PostClass.class, ps);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -45,7 +44,7 @@ public class PostClassDaoImpl extends MySQL_C3P0<PostClass> implements PostClass
             PostClass ps = new PostClass();
             ps.setClassFatherId(postClass.getClassId());
             try {
-                return select(PostClass.class, ps);
+                return crud.select(PostClass.class, ps);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -64,7 +63,7 @@ public class PostClassDaoImpl extends MySQL_C3P0<PostClass> implements PostClass
         PostClass ps = new PostClass();
         ps.setClassId(id);
         try {
-            List<PostClass> postClasses = select(PostClass.class, ps);
+            List<PostClass> postClasses = crud.select(PostClass.class, ps);
             if(postClasses.size() == 1){
                 return postClasses.get(0);
             }
@@ -84,7 +83,7 @@ public class PostClassDaoImpl extends MySQL_C3P0<PostClass> implements PostClass
         PostClass postClass = new PostClass();
         postClass.setClassId(id);
         try {
-            return delete(postClass);
+            return crud.delete(postClass);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -100,7 +99,7 @@ public class PostClassDaoImpl extends MySQL_C3P0<PostClass> implements PostClass
         try {
             PostClass postClass = new PostClass();
             postClass.setClassFatherId(id);
-            return selectCount(PostClass.class, postClass);
+            return crud.selectCount(PostClass.class, postClass);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -114,7 +113,7 @@ public class PostClassDaoImpl extends MySQL_C3P0<PostClass> implements PostClass
     @Override
     public Integer insertPostClass(PostClass postClass) {
         try {
-            return insert(postClass);
+            return crud.insert(postClass);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -130,7 +129,7 @@ public class PostClassDaoImpl extends MySQL_C3P0<PostClass> implements PostClass
         PostClass postClass = new PostClass();
         postClass.setClassName(className);
         try {
-            List<PostClass> postClassList = select(PostClass.class, postClass);
+            List<PostClass> postClassList = crud.select(PostClass.class, postClass);
             if(postClassList != null && postClassList.size() == 1){
                 return postClassList.get(0);
             }
@@ -149,7 +148,7 @@ public class PostClassDaoImpl extends MySQL_C3P0<PostClass> implements PostClass
     @Override
     public Integer updatePostClassById(PostClass postClass) {
         try {
-            return update(postClass);
+            return crud.update(postClass);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -168,7 +167,7 @@ public class PostClassDaoImpl extends MySQL_C3P0<PostClass> implements PostClass
         like.setClassName(className);
         same.setClassLevel(classLevel);
         try {
-            return selectLikeAndSame(PostClass.class, like, same);
+            return crud.selectLikeAndSame(PostClass.class, like, same);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

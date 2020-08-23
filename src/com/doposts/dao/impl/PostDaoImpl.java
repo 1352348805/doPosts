@@ -1,11 +1,9 @@
 package com.doposts.dao.impl;
 
-import com.doposts.dao.DatabaseConfig;
+import com.doposts.dao.CrudHandler;
 import com.doposts.dao.interfaces.PostDao;
 import com.doposts.entity.Post;
-import com.doposts.entity.PostClass;
-import com.dxhualuo.database.impl.MySQL_C3P0;
-
+import com.dxhualuo.database.handler.interfaces.SuperCrud;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -13,9 +11,14 @@ import java.util.List;
  *  帖子DAO的实现
  * @author dx_hualuo
  */
-public class PostDaoImpl extends MySQL_C3P0<Post> implements PostDao {
-    public PostDaoImpl(){
-        super(DatabaseConfig.getUrl(), DatabaseConfig.getPort(), DatabaseConfig.getDatabase(), DatabaseConfig.getUserName(), DatabaseConfig.getPassword(), "post");
+public class PostDaoImpl implements PostDao {
+    SuperCrud<Post> crud;
+    /**
+     * 通过一个连接管理器创建一个CRUD处理器
+     *
+     */
+    public PostDaoImpl() {
+        this.crud = CrudHandler.postCrud;
     }
 
     /**
@@ -28,7 +31,7 @@ public class PostDaoImpl extends MySQL_C3P0<Post> implements PostDao {
     @Override
     public List<Post> getPostPageByClassId(int classId, int index, int length) {
         try {
-            return executeQueryToBeanList("SELECT * FROM `post` WHERE `postClassId`=? ORDER BY post.postId ASC LIMIT "+index+","+length, Post.class, classId);
+            return crud.executeQueryToBeanList("SELECT * FROM `post` WHERE `postClassId`=? ORDER BY post.postId ASC LIMIT "+index+","+length, Post.class, classId);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -44,7 +47,7 @@ public class PostDaoImpl extends MySQL_C3P0<Post> implements PostDao {
         Post post = new Post();
         post.setPostClassId(classId);
         try {
-            return select(Post.class, post);
+            return crud.select(Post.class, post);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -61,7 +64,7 @@ public class PostDaoImpl extends MySQL_C3P0<Post> implements PostDao {
         Post post = new Post();
         post.setPostId(id);
         try {
-            List<Post> postList = select(Post.class, post);
+            List<Post> postList = crud.select(Post.class, post);
             if(postList.size() == 1){
                 return postList.get(0);
             }
