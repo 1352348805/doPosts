@@ -31,9 +31,19 @@ public class Post {
     private String postName;
 
     /**
-     * 帖子分类id
+     * 帖子一级分类id
      */
-    private Integer postClassId;
+    private Integer postClassLevel1Id;
+
+    /**
+     * 帖子二级分类id
+     */
+    private Integer postClassLevel2Id;
+
+    /**
+     * 帖子三级分类id
+     */
+    private Integer postClassLevel3Id;
 
     /**
      * 创建者
@@ -61,12 +71,28 @@ public class Post {
         this.postName = postName;
     }
 
-    public Integer getPostClassId() {
-        return postClassId;
+    public Integer getPostClassLevel1Id() {
+        return postClassLevel1Id;
     }
 
-    public void setPostClassId(Integer postClassId) {
-        this.postClassId = postClassId;
+    public void setPostClassLevel1Id(Integer postClassLevel1Id) {
+        this.postClassLevel1Id = postClassLevel1Id;
+    }
+
+    public Integer getPostClassLevel2Id() {
+        return postClassLevel2Id;
+    }
+
+    public void setPostClassLevel2Id(Integer postClassLevel2Id) {
+        this.postClassLevel2Id = postClassLevel2Id;
+    }
+
+    public Integer getPostClassLevel3Id() {
+        return postClassLevel3Id;
+    }
+
+    public void setPostClassLevel3Id(Integer postClassLevel3Id) {
+        this.postClassLevel3Id = postClassLevel3Id;
     }
 
     public Integer getCreateUserId() {
@@ -90,7 +116,9 @@ public class Post {
         return "Post{" +
                 "postId=" + postId +
                 ", postName='" + postName + '\'' +
-                ", postClassId=" + postClassId +
+                ", postClassLevel1Id=" + postClassLevel1Id +
+                ", postClassLevel2Id=" + postClassLevel2Id +
+                ", postClassLevel3Id=" + postClassLevel3Id +
                 ", createUserId=" + createUserId +
                 ", createDate=" + createDate +
                 '}';

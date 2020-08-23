@@ -45,7 +45,7 @@ public class PostDaoImpl implements PostDao {
     @Override
     public List<Post> getPostByClassId(int classId) {
         Post post = new Post();
-        post.setPostClassId(classId);
+        post.setPostClassLevel3Id(classId);
         try {
             return crud.select(Post.class, post);
         } catch (SQLException e) {
