@@ -31,7 +31,7 @@ public class PostDaoImpl implements PostDao {
     @Override
     public List<Post> getPostPageByClassId(int classId, int index, int length) {
         try {
-            return crud.executeQueryToBeanList("SELECT * FROM `post` WHERE `postClassId`=? ORDER BY post.postId ASC LIMIT "+index+","+length, Post.class, classId);
+            return crud.executeQueryToBeanList("SELECT * FROM `post` WHERE `postClassLevel3Id`=? ORDER BY post.postId ASC LIMIT "+index+","+length, Post.class, classId);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
