@@ -36,8 +36,8 @@ public class DatabaseMonitor {
     }
 
     private static void printLog(String interfaceName, InterfaceLogItem log) {
-        StringBuilder builder = new StringBuilder("==============================================================================================").append("\n");
-        builder.append("                           ============ DX_Database ============ \n\t数据库调用：").append(interfaceName).append("\n");
+        StringBuilder builder = new StringBuilder();
+        builder.append("\n                           ============ DX_Database ============ \n\t数据库调用：").append(interfaceName).append("\n");
         builder.append("\t方法名：").append(log.getMethodName()).append("\n");
         builder.append("\t参数：\n").append(log.getParams());
         builder.append("\t调用位置：").append(log.getLocation()).append("\n");
