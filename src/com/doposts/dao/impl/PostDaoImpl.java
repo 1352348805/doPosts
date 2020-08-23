@@ -3,6 +3,8 @@ package com.doposts.dao.impl;
 import com.doposts.dao.CrudHandler;
 import com.doposts.dao.interfaces.PostDao;
 import com.doposts.entity.Post;
+import com.doposts.vo.PostInfo;
+import com.doposts.vo.PostQueryParam;
 import com.dxhualuo.database.handler.interfaces.SuperCrud;
 import java.sql.SQLException;
 import java.util.List;
@@ -71,6 +73,19 @@ public class PostDaoImpl implements PostDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return null;
+    }
+
+    /**
+     * 按条件分页查询帖子
+     *
+     * @param postQueryParam 查询条件,属性值为空的字段不参与查询
+     * @param offset         偏移量
+     * @param size           查询数量
+     * @return PostInfo集合
+     */
+    @Override
+    public List<PostInfo> getPostListByCondition(PostQueryParam postQueryParam, int offset, int size) {
         return null;
     }
 }

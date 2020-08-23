@@ -2,6 +2,9 @@ package com.doposts.dao.interfaces;
 
 import com.doposts.entity.Floor;
 import com.doposts.entity.Post;
+import com.doposts.vo.PostInfo;
+import com.doposts.vo.PostQueryParam;
+
 import java.util.List;
 
 /**
@@ -32,6 +35,15 @@ public interface PostDao {
      */
     Post getPostById(Integer id);
 
-
+    /**
+     * 按条件分页查询帖子
+     * @param postQueryParam 查询条件,属性值为空的字段不参与查询
+     * @param offset 偏移量
+     * @param size  查询数量
+     * @return PostInfo集合
+     */
+    List<PostInfo> getPostListByCondition(PostQueryParam postQueryParam,
+                                          int offset,
+                                          int size);
 
 }
