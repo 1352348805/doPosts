@@ -1,5 +1,6 @@
 package com.doposts.dao.impl;
 
+import com.doposts.dao.Count;
 import com.doposts.dao.CrudHandler;
 import com.doposts.dao.interfaces.PostDao;
 import com.doposts.entity.Post;
@@ -86,7 +87,60 @@ public class PostDaoImpl implements PostDao {
      */
     @Override
     public List<PostInfo> getPostListByCondition(PostQueryParam postQueryParam, int offset, int size) {
-        return null;
+        StringBuilder builder = new StringBuilder("SELECT\n" +
+                "\tpost.*, \n" +
+                "\tcreateUser.userName AS createUserName, \n" +
+                "\tlv1.className AS postClassLevel1Name, \n" +
+                "\tlv2.className AS postClassLevel2Name, \n" +
+                "\tlv3.className AS postClassLevel3Name\n" +
+                "FROM\n" +
+                "\tpost\n" +
+                "\tINNER JOIN\n" +
+                "\t`user` AS createUser\n" +
+                "\tON \n" +
+                "\t\tpost.createUserId = createUser.userId\n" +
+                "\tLEFT JOIN\n" +
+                "\tpost_classification AS lv1\n" +
+                "\tON \n" +
+                "\t\tlv1.classId = post.postClassLevel1Id\n" +
+                "\tLEFT JOIN\n" +
+                "\tpost_classification AS lv2\n" +
+                "\tON \n" +
+                "\t\tlv2.classId = post.postClassLevel2Id\n" +
+                "\tLEFT JOIN\n" +
+                "\tpost_classification AS lv3\n" +
+                "\tON \n" +
+                "\t\tlv3.classId = post.postClassLevel3Id\n" +
+                "WHERE\n" +
+                "\tpost.postName LIKE CONCAT('%',?,'%') AND\n" +
+                "\tcreateUser.userName = ? AND\n");
+        Object para = null;
+        if(postQueryParam.getPostClassLevel1Id() != null){
+            builder.append("post.postClassLevel1Id = ?\n");
+            para = postQueryParam.getPostClassLevel1Id();
+        }else if(postQueryParam.getPostClassLevel2Id() != null){
+            builder.append("post.postClassLevel2Id = ?\n");
+            para = postQueryParam.getPostClassLevel2Id();
+        }else if(postQueryParam.getPostClassLevel3Id() != null){
+            builder.append("post.postClassLevel3Id = ?\n");
+            para = postQueryParam.getPostClassLevel3Id();
+        }else{
+            builder.delete(builder.length()-4,builder.length());
+        }
+        builder.append("LIMIT ?, ?");
+        if(para != null){
+            try {
+                return crud.executeQueryToBeanList(builder.toString(), PostInfo.class, postQueryParam.getPostName(), postQueryParam.getCreateUserName(), para, offset, size);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }else{
+            try {
+                return crud.executeQueryToBeanList(builder.toString(), PostInfo.class, postQueryParam.getPostName(), postQueryParam.getCreateUserName(), offset, size);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     /**
@@ -97,7 +151,13 @@ public class PostDaoImpl implements PostDao {
      */
     @Override
     public Integer deletePostById(int id) {
-        return null;
+        Post post = new Post();
+        post.setPostId(id);
+        try {
+            return crud.delete(post);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -108,7 +168,11 @@ public class PostDaoImpl implements PostDao {
      */
     @Override
     public Integer insertPost(Post post) {
-        return null;
+        try {
+            return crud.insert(post);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -119,7 +183,11 @@ public class PostDaoImpl implements PostDao {
      */
     @Override
     public Integer updatePostById(Post post) {
-        return null;
+        try {
+            return crud.update(post);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -130,6 +198,62 @@ public class PostDaoImpl implements PostDao {
      */
     @Override
     public Integer getPostCountByCondition(PostQueryParam postQueryParam) {
-        return null;
+        StringBuilder builder = new StringBuilder("SELECT\n" +
+                "\tCOUNT(*) as count\n"+
+                "FROM\n" +
+                "\tpost\n" +
+                "\tINNER JOIN\n" +
+                "\t`user` AS createUser\n" +
+                "\tON \n" +
+                "\t\tpost.createUserId = createUser.userId\n" +
+                "\tLEFT JOIN\n" +
+                "\tpost_classification AS lv1\n" +
+                "\tON \n" +
+                "\t\tlv1.classId = post.postClassLevel1Id\n" +
+                "\tLEFT JOIN\n" +
+                "\tpost_classification AS lv2\n" +
+                "\tON \n" +
+                "\t\tlv2.classId = post.postClassLevel2Id\n" +
+                "\tLEFT JOIN\n" +
+                "\tpost_classification AS lv3\n" +
+                "\tON \n" +
+                "\t\tlv3.classId = post.postClassLevel3Id\n" +
+                "WHERE\n" +
+                "\tpost.postName LIKE CONCAT('%',?,'%') AND\n" +
+                "\tcreateUser.userName = ? AND\n");
+        Object para = null;
+        if(postQueryParam.getPostClassLevel1Id() != null){
+            builder.append("post.postClassLevel1Id = ?\n");
+            para = postQueryParam.getPostClassLevel1Id();
+        }else if(postQueryParam.getPostClassLevel2Id() != null){
+            builder.append("post.postClassLevel2Id = ?\n");
+            para = postQueryParam.getPostClassLevel2Id();
+        }else if(postQueryParam.getPostClassLevel3Id() != null){
+            builder.append("post.postClassLevel3Id = ?\n");
+            para = postQueryParam.getPostClassLevel3Id();
+        }else{
+            builder.delete(builder.length()-4,builder.length());
+        }
+        if(para != null){
+            try {
+                Count count = crud.executeQueryToBean(builder.toString(), Count.class, postQueryParam.getPostName(), postQueryParam.getCreateUserName(), para);
+                if(count != null){
+                    return Integer.parseInt(count.getCount().toString());
+                }
+                throw new RuntimeException();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }else{
+            try {
+                Count count = crud.executeQueryToBean(builder.toString(), Count.class, postQueryParam.getPostName(), postQueryParam.getCreateUserName());
+                if(count != null){
+                    return Integer.parseInt(count.getCount().toString());
+                }
+                throw new RuntimeException();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }

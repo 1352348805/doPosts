@@ -21,7 +21,6 @@ public class PostQueryParam {
      */
     private String createUserName;
 
-
     /**
      * 帖子一级分类id
      * 查询为：精准查询

@@ -14,44 +14,44 @@ public class PostInfo extends Post {
     /**
      * 帖子一级分类名
      */
-    private Integer postClassLevel1Name;
+    private String postClassLevel1Name;
 
     /**
      * 帖子二级分类名
      */
-    private Integer postClassLevel2Name;
+    private String postClassLevel2Name;
 
     /**
      * 帖子三级分类名
      */
-    private Integer postClassLevel3Name;
+    private String postClassLevel3Name;
 
     /**
      * 发帖用户名
      */
     private String createUserName;
 
-    public Integer getPostClassLevel1Name() {
+    public String getPostClassLevel1Name() {
         return postClassLevel1Name;
     }
 
-    public void setPostClassLevel1Name(Integer postClassLevel1Name) {
+    public void setPostClassLevel1Name(String postClassLevel1Name) {
         this.postClassLevel1Name = postClassLevel1Name;
     }
 
-    public Integer getPostClassLevel2Name() {
+    public String getPostClassLevel2Name() {
         return postClassLevel2Name;
     }
 
-    public void setPostClassLevel2Name(Integer postClassLevel2Name) {
+    public void setPostClassLevel2Name(String postClassLevel2Name) {
         this.postClassLevel2Name = postClassLevel2Name;
     }
 
-    public Integer getPostClassLevel3Name() {
+    public String getPostClassLevel3Name() {
         return postClassLevel3Name;
     }
 
-    public void setPostClassLevel3Name(Integer postClassLevel3Name) {
+    public void setPostClassLevel3Name(String postClassLevel3Name) {
         this.postClassLevel3Name = postClassLevel3Name;
     }
 
@@ -76,7 +76,7 @@ public class PostInfo extends Post {
 
     public PostInfo() {}
 
-    public PostInfo(Integer postClassLevel1Name, Integer postClassLevel2Name, Integer postClassLevel3Name, String createUserName) {
+    public PostInfo(String postClassLevel1Name, String postClassLevel2Name, String postClassLevel3Name, String createUserName) {
         this.postClassLevel1Name = postClassLevel1Name;
         this.postClassLevel2Name = postClassLevel2Name;
         this.postClassLevel3Name = postClassLevel3Name;

@@ -1,7 +1,8 @@
 package com.doposts;
 
 import com.doposts.dao.PostItDatabase;
-import com.doposts.vo.PostClassRequestInfo;
+import com.doposts.vo.PostQueryParam;
+
 import java.util.List;
 
 /**
@@ -11,7 +12,12 @@ import java.util.List;
 @SuppressWarnings("RedundantThrows")
 public class Run {
     public static void main(String[] args) throws Exception{
-        List<PostClassRequestInfo> infos = PostItDatabase.CREATE_CLASS_REQUEST_DAO.selectAllCreateClassRequestByCondition(0,2);
-        System.out.println(infos);
+        PostQueryParam queryParam = new PostQueryParam();
+        queryParam.setPostName("大战");
+        queryParam.setCreateUserName("系统管理员");
+        queryParam.setPostClassLevel1Id(1);
+        Integer info = PostItDatabase.POST_DAO.getPostCountByCondition(queryParam);
+        System.out.println("返回数据：");
+        System.out.println(info);
     }
 }
