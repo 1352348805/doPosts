@@ -1,8 +1,10 @@
 package com.doposts.dao.impl;
 
 import com.doposts.dao.CrudHandler;
+import com.doposts.dao.PostItDatabase;
 import com.doposts.dao.interfaces.PostClassDao;
 import com.doposts.entity.PostClass;
+import com.dxhualuo.database.handler.interfaces.DatabaseCrud;
 import com.dxhualuo.database.handler.interfaces.SuperCrud;
 import java.sql.SQLException;
 import java.util.List;
@@ -13,9 +15,12 @@ import java.util.List;
  */
 public class PostClassDaoImpl implements PostClassDao {
     SuperCrud<PostClass> crud;
+    DatabaseCrud basicCrud;
+
 
     public PostClassDaoImpl() {
         this.crud = CrudHandler.postClassCrud;
+        this.basicCrud = PostItDatabase.CRUD;
     }
 
     /**

@@ -33,6 +33,7 @@ public class PostItDatabase {
     public static final ReplyDao REPLY_DAO;
     public static final UserDao USER_DAO;
     public static final CreateClassRequestDao CREATE_CLASS_REQUEST_DAO;
+    public static final DatabaseCrud CRUD;
 
     static {
         //创建C3P0连接池参数
@@ -48,14 +49,14 @@ public class PostItDatabase {
         //创建连接池
         CONNECTION_MANAGER = new C3P0ConnectionManager( "post_it", config);
         //创建基本增删改查处理器
-        DatabaseCrud crud = new DatabaseCrudHandler(CONNECTION_MANAGER);
+        CRUD = new DatabaseCrudHandler(CONNECTION_MANAGER);
         //增强的通过实体类进行增删改查的处理器，且包含MySQL的特性（Limit）
-        CrudHandler.floorCrud = new MySQLSuperCrudHandler<>(crud);
-        CrudHandler.postClassCrud = new MySQLSuperCrudHandler<>(crud);
-        CrudHandler.postCrud = new MySQLSuperCrudHandler<>(crud);
-        CrudHandler.replyCrud = new MySQLSuperCrudHandler<>(crud);
-        CrudHandler.userCrud = new MySQLSuperCrudHandler<>(crud);
-        CrudHandler.createClassRequestCrud = new MySQLSuperCrudHandler<>(crud);
+        CrudHandler.floorCrud = new MySQLSuperCrudHandler<>(CRUD);
+        CrudHandler.postClassCrud = new MySQLSuperCrudHandler<>(CRUD);
+        CrudHandler.postCrud = new MySQLSuperCrudHandler<>(CRUD);
+        CrudHandler.replyCrud = new MySQLSuperCrudHandler<>(CRUD);
+        CrudHandler.userCrud = new MySQLSuperCrudHandler<>(CRUD);
+        CrudHandler.createClassRequestCrud = new MySQLSuperCrudHandler<>(CRUD);
         //创建数据库接口实现
         FLOOR_DAO = (FloorDao)Proxy.newProxyInstance(FloorDaoImpl.class.getClassLoader(), new Class[]{FloorDao.class}, new InterfaceInvokeHandler(new FloorDaoImpl()));
         POST_CLASS_DAO = (PostClassDao)Proxy.newProxyInstance(PostClassDaoImpl.class.getClassLoader(), new Class[]{Database.class, PostClassDao.class}, new InterfaceInvokeHandler(new PostClassDaoImpl()));

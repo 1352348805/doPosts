@@ -2,10 +2,12 @@ package com.doposts.dao.impl;
 
 import com.doposts.dao.Count;
 import com.doposts.dao.CrudHandler;
+import com.doposts.dao.PostItDatabase;
 import com.doposts.dao.interfaces.PostDao;
 import com.doposts.entity.Post;
 import com.doposts.vo.PostInfo;
 import com.doposts.vo.PostQueryParam;
+import com.dxhualuo.database.handler.interfaces.DatabaseCrud;
 import com.dxhualuo.database.handler.interfaces.SuperCrud;
 import java.sql.SQLException;
 import java.util.List;
@@ -16,12 +18,15 @@ import java.util.List;
  */
 public class PostDaoImpl implements PostDao {
     SuperCrud<Post> crud;
+    DatabaseCrud basicCrud;
+
     /**
      * 通过一个连接管理器创建一个CRUD处理器
      *
      */
     public PostDaoImpl() {
         this.crud = CrudHandler.postCrud;
+        this.basicCrud = PostItDatabase.CRUD;
     }
 
     /**

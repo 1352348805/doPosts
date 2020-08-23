@@ -2,9 +2,11 @@ package com.doposts.dao.impl;
 
 import com.doposts.dao.CrudHandler;
 import com.doposts.dao.DatabaseConfig;
+import com.doposts.dao.PostItDatabase;
 import com.doposts.dao.interfaces.ReplyDao;
 import com.doposts.entity.Post;
 import com.doposts.entity.Reply;
+import com.dxhualuo.database.handler.interfaces.DatabaseCrud;
 import com.dxhualuo.database.handler.interfaces.SuperCrud;
 
 import java.sql.SQLException;
@@ -16,9 +18,11 @@ import java.util.List;
  */
 public class ReplyDaoImpl implements ReplyDao {
     SuperCrud<Reply> crud;
+    DatabaseCrud basicCrud;
 
     public ReplyDaoImpl(){
         this.crud = CrudHandler.replyCrud;
+        this.basicCrud = PostItDatabase.CRUD;
     }
 
     /**
