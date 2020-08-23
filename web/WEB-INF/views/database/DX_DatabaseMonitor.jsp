@@ -22,6 +22,8 @@
 <body>
 <div class="layui-card-body" style="padding: 0 0 0 0">
     <ul class="layui-nav" lay-filter="component-nav">
+        <li style="display: inline-block;vertical-align: middle;"><img src="<%=path%>/static/images/database/database.png" alt="???" height="30" width="30"></li>
+        <li style="display: inline-block;position: relative;vertical-align: middle;margin-right: 25px;margin-left: 7px;text-align: -webkit-match-parent;"><div style="color: white;font-size: 14px;line-height: 58px;text-align: -webkit-match-parent;">DX_Database数据库</div></li>
         <li class="layui-nav-item"><a href="javascript:">概览</a></li>
         <li class="layui-nav-item"><a href="javascript:">SQL监控</a></li>
         <li class="layui-nav-item">
