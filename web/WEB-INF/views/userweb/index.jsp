@@ -55,9 +55,9 @@
             table+="<div class='clearfix visible-sm-block'></div>";
           }
           table+="<div class='col-md-4 col-sm-6 probootstrap-animate fadeInUp probootstrap-animated'><div class='probootstrap-block-image'>"+
-                  "<div class='text'><h3 class='mb30'><a href='${pageContext.request.contextPath}/jsp/post.jsp?barId="+date[i].classId+"'>"+date[i].className+"</a></h3>"+
+                  "<div class='text'><h3 class='mb30'><a href='${pageContext.request.contextPath}/postCategory?action=forumpark&barId="+date[i].classId+"'>"+date[i].className+"</a></h3>"+
                   "<p class='dark' style='80px''>"+date[i].classDescribe+"</p><hr>"+
-                  "<p class='clearfix like'><a class='pull-left' href='#'><i class='fa fa-heart'></i></a><a class='pull-right' href='${pageContext.request.contextPath}/jsp/post.jsp?barId="+date[i].classId+"'><i class='fa fa-bars'></i></a></p>"+
+                  "<p class='clearfix like'><a class='pull-left' href='#'><i class='fa fa-heart'></i></a><a class='pull-right' href='${pageContext.request.contextPath}/postCategory?action=forumpark&barId="+date[i].classId+"'><i class='fa fa-bars'></i></a></p>"+
                   "</div></div></div>";
         }
         $(".bar").html(table);
@@ -79,9 +79,9 @@
             table+="<div class='clearfix visible-sm-block'></div>";
           }
           table+="<div class='col-md-4 col-sm-6 probootstrap-animate fadeInUp probootstrap-animated'><div class='probootstrap-block-image'>"+
-                  "<div class='text'><h3 class='mb30'><a href='${pageContext.request.contextPath}/jsp/post.jsp?barId="+date[i].barId+"'>"+date[i].className+"</a></h3>"+
+                  "<div class='text'><h3 class='mb30'><a href='${pageContext.request.contextPath}/postCategory?action=forumpark&barId="+date[i].barId+"'>"+date[i].className+"</a></h3>"+
                   "<p class='dark' style='80px''>"+date[i].classDescribe+"</p><hr>"+
-                  "<p class='clearfix like'><a class='pull-left' href='#'><i class='fa fa-heart'></i></a><a class='pull-right' href='${pageContext.request.contextPath}/jsp/post.jsp?barId="+date[i].classId+"'><i class='fa fa-bars'></i></a></p>"+
+                  "<p class='clearfix like'><a class='pull-left' href='#'><i class='fa fa-heart'></i></a><a class='pull-right' href='${pageContext.request.contextPath}/postCategory?action=forumpark&barId="+date[i].classId+"'><i class='fa fa-bars'></i></a></p>"+
                   "</div></div></div>";
         }
         $(".bar").html(table);
