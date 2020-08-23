@@ -50,7 +50,9 @@ public class DatabaseMonitorServlet extends HttpServlet {
         System.out.println("DX_Database =====》 初始化完成！ 耗时："+ (System.currentTimeMillis() - time)+ "ms");
         System.out.println("DX_Database ======》 监控启动在URL：web/DX_DatabaseMonitor");
         boolean dataOut = Boolean.parseBoolean(DatabaseConfig.getDataOutPut());
-        DatabaseMonitor.init(dataOut);
+        boolean output = Boolean.parseBoolean(DatabaseConfig.getConsoleOutput());
+        DatabaseMonitor.init(dataOut, output);
+        System.out.println("DX_Database =======》 控制台日志输出："+ output);
         System.out.println("DX_Database =======》 查询结果输出："+ dataOut);
         System.out.println("DX_Database =======》 监控已启动！");
     }
