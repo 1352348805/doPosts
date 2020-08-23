@@ -88,4 +88,37 @@ public class PostDaoImpl implements PostDao {
     public List<PostInfo> getPostListByCondition(PostQueryParam postQueryParam, int offset, int size) {
         return null;
     }
+
+    /**
+     * 根据id删除帖子
+     *
+     * @param id 主键
+     * @return 受影响的行数
+     */
+    @Override
+    public Integer deletePostById(int id) {
+        return null;
+    }
+
+    /**
+     * 添加帖子
+     *
+     * @param post 实体
+     * @return 受影响的行数
+     */
+    @Override
+    public Integer insertPost(Post post) {
+        return null;
+    }
+
+    /**
+     * 修改帖子
+     *
+     * @param post 实体
+     * @return 受影响的行数
+     */
+    @Override
+    public Integer updatePostById(Post post) {
+        return null;
+    }
 }

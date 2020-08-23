@@ -46,4 +46,25 @@ public interface PostDao {
                                           int offset,
                                           int size);
 
+    /**
+     * 根据id删除帖子
+     * @param id 主键
+     * @return 受影响的行数
+     */
+    Integer deletePostById(int id);
+
+    /**
+     * 添加帖子
+     * @param post 实体
+     * @return 受影响的行数
+     */
+    Integer insertPost(Post post);
+
+    /**
+     * 修改帖子
+     * @param post 实体
+     * @return 受影响的行数
+     */
+    Integer updatePostById(Post post);
+
 }
