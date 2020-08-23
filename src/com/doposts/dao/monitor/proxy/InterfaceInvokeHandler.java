@@ -52,7 +52,9 @@ public class InterfaceInvokeHandler implements InvocationHandler {
                 }
                 log.setData(builder.toString());
             }else if(returnValue.getClass().getAnnotation(JavaBean.class) != null){
-                log.setData(returnValue.toString());
+                log.setData("\t\t"+returnValue.toString()+"\n");
+            }else{
+                log.setData("\t\t"+returnValue.toString()+"\n");
             }
         }
         DatabaseMonitor.logInterface(interfaceName, log);

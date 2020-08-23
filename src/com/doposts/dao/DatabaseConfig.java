@@ -20,6 +20,7 @@ public class DatabaseConfig {
             USER_NAME = properties.getValue("username").trim();
             PASSWORD = properties.getValue("password").trim();
             DATA_OUT_PUT = properties.getValue("dx_database.consoleResultOutput").trim();
+            CONSOLE_OUTPUT = properties.getValue("dx_database.consoleOutput").trim();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -30,7 +31,12 @@ public class DatabaseConfig {
     private final static String DATABASE;
     private final static String USER_NAME;
     private final static String PASSWORD;
+    private final static String CONSOLE_OUTPUT;
     private final static String DATA_OUT_PUT;
+
+    public static String getConsoleOutput() {
+        return CONSOLE_OUTPUT;
+    }
 
     public static String getDataOutPut() {
         return DATA_OUT_PUT;
