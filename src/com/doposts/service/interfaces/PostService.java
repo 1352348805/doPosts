@@ -1,6 +1,8 @@
 package com.doposts.service.interfaces;
 
 import com.doposts.entity.Post;
+import com.doposts.utils.Page;
+import com.doposts.vo.PostQueryParam;
 import com.doposts.vo.SelectAllPostAndFloor;
 
 import java.util.List;
@@ -17,4 +19,12 @@ public interface PostService {
      */
     Post getPostById(Integer id);
 
+    /**
+     * 根据条件获取帖子分页数据
+     * @param queryParam 查询参数
+     * @param pageIndex 当前页码
+     * @param pageSize 显示数量
+     * @return PageBean
+     */
+    Page<Post> getPostPageByCondition(PostQueryParam queryParam, Integer pageIndex, Integer pageSize);
 }
