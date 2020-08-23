@@ -121,4 +121,15 @@ public class PostDaoImpl implements PostDao {
     public Integer updatePostById(Post post) {
         return null;
     }
+
+    /**
+     * 根据条件获取记录数
+     *
+     * @param postQueryParam 查询条件,属性值为空的字段不参与查询
+     * @return 记录数
+     */
+    @Override
+    public Integer getPostCountByCondition(PostQueryParam postQueryParam) {
+        return null;
+    }
 }

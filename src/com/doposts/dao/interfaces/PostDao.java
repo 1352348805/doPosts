@@ -67,4 +67,11 @@ public interface PostDao {
      */
     Integer updatePostById(Post post);
 
+    /**
+     * 根据条件获取记录数
+     * @param postQueryParam 查询条件,属性值为空的字段不参与查询
+     * @return 记录数
+     */
+    Integer getPostCountByCondition(PostQueryParam postQueryParam);
+
 }
