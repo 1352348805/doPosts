@@ -122,7 +122,7 @@
 <!-- END: header -->
 
 <!-- START: section -->
-<section class="probootstrap-intro" style="background-image: url(${pageContext.request.contextPath}/static/images/hero_bg_2.jpg);" data-stellar-background-ratio="0.5">
+<section class="probootstrap-intro" style="height: 100px ;background-image: url(${pageContext.request.contextPath}/static/images/hero_bg_2.jpg);" data-stellar-background-ratio="0.5">
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-7 probootstrap-intro-text">
@@ -161,7 +161,7 @@
 
 <!-- START: section -->
 <section class="probootstrap-section probootstrap-section-colored">
-  <div class="container">
+  <div class="container" style="height: 100px">
     <div class="row text-center">
       <div class="col-lg-8 col-md-offset-2 mb30 section-heading probootstrap-animate">
         <h2>执谁之笔 共赴锦上添花 为谁迷离 空守盛夏光年...</h2>
