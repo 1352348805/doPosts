@@ -108,7 +108,6 @@ public class UserServlet extends AbstractServlet{
         List<FloorWithReply> floorWithReplies= id.getFloor();
         request.setAttribute("post",post);
         request.setAttribute("floor",floorWithReplies);
-
         return "userweb/reply";
     }
 
