@@ -81,6 +81,28 @@ public class UserDaoImpl implements UserDao {
     }
 
     /**
+     * 删除用户
+     *
+     * @param id 用户id
+     * @return 影响行数
+     */
+    @Override
+    public int deleteUser(int id) {
+        return 0;
+    }
+
+    /**
+     * 修改用户昵称、密码等。。。
+     *
+     * @param user 实体类
+     * @return 是否成功
+     */
+    @Override
+    public int selectUserContnt(User user) {
+        return 0;
+    }
+
+    /**
      *  实现查询
      * @param user user实体
      * @return user实体

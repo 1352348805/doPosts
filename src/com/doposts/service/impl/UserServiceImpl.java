@@ -79,7 +79,8 @@ public class UserServiceImpl implements UserService {
     public List<User> getUserByStartIndex(int index, int length) {
        List<User> userList=new ArrayList<>();
        try {
-           userList=PostItDatabase.USER_DAO.selectUserByStartIndexAndLength(index, length);
+           int offset = (index - 1) * length;
+           userList=PostItDatabase.USER_DAO.selectUserByStartIndexAndLength(offset, length);
        }catch (Exception e){
            e.printStackTrace();
        }

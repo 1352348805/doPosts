@@ -78,9 +78,43 @@ public class AdminServlet extends AbstractServlet{
      * @return 用户
      */
     public String tUser(HttpServletRequest request, HttpServletResponse response){
-        List<User> list=userService.getAllUser();
-        request.getSession().setAttribute("list",list);
         return "admin/user/user_list";
+    }
+
+    /**
+     * 获取总记录数
+     * @param request
+     * @param response
+     * @return 总记录数
+     */
+    public CommonResult userCount(HttpServletRequest request, HttpServletResponse response){
+        int count=userService.getselectUserConut();
+        return new CommonResult().success(count);
+    }
+
+    /**
+     * 分页查询
+     * @param request
+     * @param response
+     * @return
+     */
+    public CommonResult userIndexANDSize(HttpServletRequest request, HttpServletResponse response){
+        Integer pageindex=null;
+        Integer pageSize=null;
+        try {
+            pageindex=Integer.valueOf(request.getParameter("pageIndex"));
+            pageSize=Integer.valueOf(request.getParameter("pageSize"));
+        } catch (Exception e) {
+            pageindex = 1;
+            pageSize = 10;
+        }
+        List<User> list=null;
+        try {
+            list = userService.getUserByStartIndex(pageindex,pageSize);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new CommonResult().success(list);
     }
 
     /**
