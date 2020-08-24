@@ -92,7 +92,8 @@ public class PostDaoImpl implements PostDao {
      */
     @Override
     public List<PostInfo> getPostListByCondition(PostQueryParam postQueryParam, int offset, int size) {
-        StringBuilder builder = new StringBuilder("SELECT\n" +
+        StringBuilder builder = new StringBuilder(
+                "SELECT\n" +
                 "\tpost.*, \n" +
                 "\tcreateUser.userName AS createUserName, \n" +
                 "\tlv1.className AS postClassLevel1Name, \n" +
@@ -100,7 +101,7 @@ public class PostDaoImpl implements PostDao {
                 "\tlv3.className AS postClassLevel3Name\n" +
                 "FROM\n" +
                 "\tpost\n" +
-                "\tINNER JOIN\n" +
+                "\tLEFT JOIN\n" +
                 "\t`user` AS createUser\n" +
                 "\tON \n" +
                 "\t\tpost.createUserId = createUser.userId\n" +
@@ -207,7 +208,7 @@ public class PostDaoImpl implements PostDao {
                 "\tCOUNT(*) as count\n"+
                 "FROM\n" +
                 "\tpost\n" +
-                "\tINNER JOIN\n" +
+                "\tLEFT JOIN\n" +
                 "\t`user` AS createUser\n" +
                 "\tON \n" +
                 "\t\tpost.createUserId = createUser.userId\n" +
