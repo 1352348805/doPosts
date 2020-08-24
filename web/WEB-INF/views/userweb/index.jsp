@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%
+  String path = request.getContextPath();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
+  <link rel="shortcut icon" href="<%=path%>/static/images/head/500415.ico" />
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Home</title>
@@ -55,9 +59,9 @@
             table+="<div class='clearfix visible-sm-block'></div>";
           }
           table+="<div class='col-md-4 col-sm-6 probootstrap-animate fadeInUp probootstrap-animated'><div class='probootstrap-block-image'>"+
-                  "<div class='text'><h3 class='mb30'><a href='${pageContext.request.contextPath}/postCategory?action=forumpark&barId="+date[i].classId+"'>"+date[i].className+"</a></h3>"+
+                  "<div class='text'><h3 class='mb30'><a href='${pageContext.request.contextPath}/user?action=forumpark&barId="+date[i].classId+"'>"+date[i].className+"</a></h3>"+
                   "<p class='dark' style='80px''>"+date[i].classDescribe+"</p><hr>"+
-                  "<p class='clearfix like'><a class='pull-left' href='#'><i class='fa fa-heart'></i></a><a class='pull-right' href='${pageContext.request.contextPath}/postCategory?action=forumpark&barId="+date[i].classId+"'><i class='fa fa-bars'></i></a></p>"+
+                  "<p class='clearfix like'><a class='pull-left' href='#'><i class='fa fa-heart'></i></a><a class='pull-right' href='${pageContext.request.contextPath}/user?action=forumpark&barId="+date[i].classId+"'><i class='fa fa-bars'></i></a></p>"+
                   "</div></div></div>";
         }
         $(".bar").html(table);
@@ -79,9 +83,9 @@
             table+="<div class='clearfix visible-sm-block'></div>";
           }
           table+="<div class='col-md-4 col-sm-6 probootstrap-animate fadeInUp probootstrap-animated'><div class='probootstrap-block-image'>"+
-                  "<div class='text'><h3 class='mb30'><a href='${pageContext.request.contextPath}/postCategory?action=forumpark&barId="+date[i].barId+"'>"+date[i].className+"</a></h3>"+
+                  "<div class='text'><h3 class='mb30'><a href='${pageContext.request.contextPath}/user?action=forumpark&barId="+date[i].barId+"'>"+date[i].className+"</a></h3>"+
                   "<p class='dark' style='80px''>"+date[i].classDescribe+"</p><hr>"+
-                  "<p class='clearfix like'><a class='pull-left' href='#'><i class='fa fa-heart'></i></a><a class='pull-right' href='${pageContext.request.contextPath}/postCategory?action=forumpark&barId="+date[i].classId+"'><i class='fa fa-bars'></i></a></p>"+
+                  "<p class='clearfix like'><a class='pull-left' href='#'><i class='fa fa-heart'></i></a><a class='pull-right' href='${pageContext.request.contextPath}/user?action=forumpark&barId="+date[i].classId+"'><i class='fa fa-bars'></i></a></p>"+
                   "</div></div></div>";
         }
         $(".bar").html(table);
@@ -122,19 +126,11 @@
 <!-- END: header -->
 
 <!-- START: section -->
-<section class="probootstrap-intro" style="height: 100px ;background-image: url(${pageContext.request.contextPath}/static/images/hero_bg_2.jpg);" data-stellar-background-ratio="0.5">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-7 probootstrap-intro-text">
-        <h1 class="probootstrap-animate">来贴吧</h1>
-        <div class="probootstrap-subtitle probootstrap-animate">
-          <h2>希望您来贴吧里面找到自己的快乐 <a href="#" target="_blank"></a></h2>
-        </div>
-      </div>
-    </div>
-  </div>
-  <a class="probootstrap-scroll-down js-next" href="#next-section">Scroll down <i class="icon-chevron-down"></i></a>
-</section>
+<%--<section class="probootstrap-intro" style="height: 100px ;" data-stellar-background-ratio="0.5">--%>
+<%--background-image: url(${pageContext.request.contextPath}/static/images/hero_bg_2.jpg);--%>
+<a href=""><img src="<%=path%>/static/images/head/egm.png"height="300px" style="margin-left: 850px"><a/>
+<%--  <a class="probootstrap-scroll-down js-next" href="#next-section">Scroll down <i class="icon-chevron-down"></i></a>--%>
+<%--</section>--%>
 <!-- END: section -->
 
 <div style="position: relative;width: 100%;height: 80px;">
@@ -164,7 +160,7 @@
   <div class="container" style="height: 100px">
     <div class="row text-center">
       <div class="col-lg-8 col-md-offset-2 mb30 section-heading probootstrap-animate">
-        <h2>执谁之笔 共赴锦上添花 为谁迷离 空守盛夏光年...</h2>
+        <h2 id="blink">执谁之笔 共赴锦上添花 为谁迷离 空守盛夏光年...</h2>
         <p class="lead">不要因为也许会改变，就不肯说出那句美丽的誓言，不要因为也许会分离，就不敢求一次倾心的相遇。——席慕容《印记》</p>
       </div>
     </div>
@@ -194,6 +190,16 @@
   </div>
 </footer>
 <!-- END: footer -->
+
+<%-- h2 闪烁字体--%>
+<script language="javascript">
+  function changeColor(){
+    var color="#f00|bai#0f0|#00f|#880|#808|#088|yellow|green|blue|gray";
+    color=color.split("|");
+    document.getElementById("blink").style.color=color[parseInt(Math.random() * color.length)];
+  }
+  setInterval("changeColor()",200);
+</script>
 
 <script src="${pageContext.request.contextPath }/static/js/scripts.js"></script>
 <script src="${pageContext.request.contextPath }/static/js/main.js"></script>
