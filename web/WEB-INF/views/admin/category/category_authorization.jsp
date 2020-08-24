@@ -76,10 +76,12 @@
     layui.use('laypage', function(){
         var laypage = layui.laypage;
         let count;
+
+        $.ajaxSettings.async = false;
         $.post(path + '/admin',{action :'getCreateClassRequestCount'},function (result) {
             count = result.data;
         },'json');
-
+        $.ajaxSettings.async = true;
         //执行一个laypage实例
         laypage.render({
             elem: 'page' //注意，这里的 test1 是 ID，不用加 # 号
