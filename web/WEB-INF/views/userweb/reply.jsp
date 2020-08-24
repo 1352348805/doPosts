@@ -293,7 +293,7 @@
     <div class="container" >
         <c:forEach items="${floor}" var="floor">
       <div class="row bar" style="border:rgb(225 226 230) solid 1px ; border-bottom: none ">
-       	<div class='col-md-12 col-sm-6 probootstrap-animate fadeInUp probootstrap-animated' style="padding: 0px 0px 0px 0px; height: 100%" >
+       	<div class='col-md-12 col-sm-6 probootstrap-animate fadeInUp probootstrap-animated' style="padding: 0px 0px 0px 0px; height: 100%;display: inline-block" >
             <div style=" float: left; display: inline-block; background: rgb(251,251,253);width: 130px; height:100%; padding: 20px" >
                 <ul style="width: 130px; height: 170px">
                     <li>
@@ -307,12 +307,12 @@
                     </li>
                 </ul>
             </div>
-       		<div style="display: inline-block;width: 837px;height:100%;" class='probootstrap-block-image'>
+       		<div style="display: inline-block;width: 1035px;height:100%;" class='probootstrap-block-image'>
   				<div class='text' style="padding: 0px 0px 8px 20px;">
                     <div style="padding: 20px 20px 0px 0px ">
                         <span class='clearfix like'>
   				<a class='hint info-right'href='#' title='发帖时间' style="margin: 0px 0px 0px 0px">
-                    <i class='fa fa-clock-o'>发帖时间:${floor.sendDate}</i>
+                    <i class='fa fa-clock-o'>发帖时间&nbsp;:&nbsp;${floor.sendDate}</i>
                 </a>
   				</span>
                         <div style="margin: 20px">
@@ -322,21 +322,23 @@
                         </div>
 
                     </div>
-                    <div style=" float: right;  width: 230px; height: 20px">
-                    <div style="float: right">
-                        &nbsp;<span><a href="javascript:;" id="hf" >回复</a></span>
+                    <div style=" float: right;  width: 230px; height: 20px;margin: 10px">
+                        <div style="float: right">
+                            <span><a href="javascript:;" onclick="ShowOrHideReply(this)" >回复</a>&nbsp;</span>
+                        </div>
+
+                        <div style=" float: right; " >
+                                 <span><a href="#">
+                                     <img src="${pageContext.request.contextPath }/static/images/jb.png " width="35px" height="15px" >
+                                 </a></span>
+                            <span class="tail-info">来自
+                                     <a  href="#">Android客户端</a>
+                                 </span>
+                            <span class="tail-info">${floor.postFloor}楼</span>&nbsp;
+                        </div>
                     </div>
-                    <div style=" float: right; " >
-                             <span><a href="#">
-                                 <img src="${pageContext.request.contextPath }/static/images/jb.png " width="35px" height="15px" >
-                             </a></span>
-                        <span class="tail-info">来自
-                                 <a  href="#">Android客户端</a>
-                             </span>
-                        <span class="tail-info">${floor.postFloor}楼</span>
-                    </div>
-                    </div>
-                    <div   id="xs" style=" display: none;  border: rgb(240 241 242) solid 1px;height: auto; width: 600px; background : rgb(247 248 250); padding: 4px 15px 14px 15px">
+                    <c:forEach items="${floor.replyList}" var="replylist">
+                    <div   style=" display: none;  border: rgb(240 241 242) solid 1px;height: auto; width: 600px; background : rgb(247 248 250); padding: 4px 15px 14px 15px">
                        <ul style="">
                            <li style="">
                                <a href="" style=" width: 32px; height: 32px;display: inline-block; float: left;margin: 10px 10px 0px 0px">
@@ -344,9 +346,9 @@
                                </a>
                                <div style="display: inline-block; margin-top: 10px;width: 520px" >
                                    <a href="">名字：</a>
-                                   <span>回复信息</span>
+                                   <span>${replylist.replyContent}</span>
                                    <div style=" float: right;padding: 10px 0px 0px 0px ">
-                                       <span>用户回复时间</span>
+                                       <span>${replylist.replyDate}</span>
                                        <a href="" onclick="">回复</a>
                                    </div>
                                </div>
@@ -356,13 +358,7 @@
                           <p></p>
                        </div>
                     </div>
-                    <div  style="display: inline-block;float: right; ">
-                        <p class='clearfix like'>
-                            <a class='pull-right hint' href='#'><i class='fa fa-thumbs-down'></i></a>
-                            <a class='pull-right hint' href='#'><i class='fa fa-thumbs-up'></i></a>
-                            <a class='pull-right hint' href='#'><i class='fa fa-heart'></i></a>
-                        </p>
-                    </div>
+                    </c:forEach>
 					</div>
 				</div>
 			</div>
@@ -509,18 +505,31 @@
 		}); 
 		
 	});
-    $(function(){
-        $('#hf').click(function(){
-            if($('#xs').is(':hidden')){
-                $('#xs').show();
-                $('#hf').val('点击隐藏');
-            }
-            else{
-                $('#xs').hide();
-                $('#hf').val('点击显示');
-            }
-        })
-    })
+
+
+	function ShowOrHideReply(obj) {
+	    $obj = $(obj);
+        $reply = $obj.parent().parent().parent().next();
+        if ($reply.css('display') == 'none') {
+            $reply.css('display','block');
+        } else {
+            $reply.css('display','none');
+        }
+    }
+    // $(function(){
+    //     $('.hf').click(function(){
+    //         if($('.xs').is(':hidden')){
+    //             $('.xs').show();
+    //             $('.hf').val('点击隐藏');
+    //         }
+    //         else{
+    //             $('.xs').hide();
+    //             $('.hf').val('点击显示');
+    //         }
+    //     })
+    // })
+
+
 
 </script>
   </body>
