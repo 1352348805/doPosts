@@ -6,6 +6,7 @@
 	<%
 		String path = request.getContextPath();
 	%>
+	<link rel="shortcut icon" href="<%=path%>/static/images/head/500415.ico" />
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<title>Home</title>
 	<link href="<%=path%>/static/css/forumpark/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
@@ -51,8 +52,8 @@
 
 					<select tabindex="4" class="dropdown ">
 						<option value="" class="label" value="">Currency :USD</option>
-						<option value="1">Dollar</option>
-						<option value="2">Euro</option>
+						<option value="1"> Dollar</option>
+						<option value="2"> Euro</option>
 					</select>
 				</div>
 
@@ -99,7 +100,19 @@
 				<div class="wmuSliderWrapper">
 					<article style="position: absolute; width: 100%; opacity: 0;">
 						<div class="banner-matter">
-							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/bag.jpg" alt=" " />
+							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/youxi2.png" alt=" " />
+							<div class="banner-off">
+								<h2>FLAT 50% 0FF</h2>
+								<span>FOR ALL PURCHASE <b>VALUE</b></span>
+								<p>Lorem ipsum dolor sit amet,  consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>
+								<a class="now-get" href="#">GET  NOW</a>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+					</article>
+					<article style="position: absolute; width: 100%; opacity: 1;">
+						<div class="banner-matter">
+							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/dongman.png" alt=" " />
 							<div class="banner-off">
 								<h2>FLAT 50% 0FF</h2>
 								<span>FOR ALL PURCHASE <b>VALUE</b></span>
@@ -109,9 +122,21 @@
 							<div class="clearfix"> </div>
 						</div>
 					</article>
-					<article style="position: absolute; width: 100%; opacity: 0;">
+					<article style="position: absolute; width: 100%; opacity: 2;">
 						<div class="banner-matter">
-							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/bag1.jpg" alt=" " />
+							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/timg.png" alt=" " />
+							<div class="banner-off">
+								<h2>FLAT 50% 0FF</h2>
+								<span>FOR ALL PURCHASE <b>VALUE</b></span>
+								<p>Lorem ipsum dolor sit amet, consectetur  adipisicing  elit, sed do eiusmod tempor incididunt ut labore et </p>
+								<a class="now-get" href="#">GET NOW</a>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+					</article>
+					<article style="position: absolute; width: 100%; opacity: 3;">
+						<div class="banner-matter">
+							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/tiyu.png" alt=" " />
 							<div class="banner-off">
 								<h2>FLAT 50% 0FF</h2>
 								<span>FOR ALL PURCHASE <b>VALUE</b></span>
@@ -121,9 +146,21 @@
 							<div class="clearfix"> </div>
 						</div>
 					</article>
-					<article style="position: absolute; width: 100%; opacity: 0;">
+					<article style="position: absolute; width: 100%; opacity: 4;">
 						<div class="banner-matter">
-							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/bag.jpg" alt=" " />
+							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/dianying.png" alt=" " />
+							<div class="banner-off">
+								<h2>FLAT 50% 0FF</h2>
+								<span>FOR ALL PURCHASE <b>VALUE</b></span>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>
+								<a class="now-get" href="#">GET NOW</a>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+					</article>
+					<article style="position: absolute; width: 100%; opacity: 5;">
+						<div class="banner-matter">
+							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/xiaoshuo.png" alt=" " />
 							<div class="banner-off">
 								<h2>FLAT 50% 0FF</h2>
 								<span>FOR ALL PURCHASE <b>VALUE</b></span>
