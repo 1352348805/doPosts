@@ -88,7 +88,13 @@ public class UserDaoImpl implements UserDao {
      */
     @Override
     public int deleteUser(int id) {
-        return 0;
+        User user = new User();
+        user.setUserId(id);
+        try {
+            return crud.delete(user);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -99,7 +105,11 @@ public class UserDaoImpl implements UserDao {
      */
     @Override
     public int selectUserContnt(User user) {
-        return 0;
+        try {
+            return crud.selectCount(User.class, user);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
