@@ -125,6 +125,12 @@ public class AdminServlet extends AbstractServlet{
     }
 
     /**
+     * 帖子列表
+     */
+    public String postList(HttpServletRequest request, HttpServletResponse response) {
+        return "admin/post/post_list";
+    }
+    /**
      * 跳转帖子分类列表
      * @return
      */

@@ -4,6 +4,8 @@ import com.doposts.entity.PostClass;
 import com.doposts.service.impl.PostClassServiceImpl;
 import com.doposts.service.interfaces.PostClassService;
 import com.doposts.vo.PostClassWithChildren;
+import com.doposts.vo.PostInfo;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,11 +20,12 @@ import java.util.List;
 public class PostClassTest {
 
     private PostClassService postClassService;
-
+    long start;
 
     @Before
     public void init() {
         postClassService = new PostClassServiceImpl();
+        start = System.currentTimeMillis();
     }
 
     @Test
@@ -48,5 +51,24 @@ public class PostClassTest {
         List<PostClass> list = postClassService.getPostClassByIdWithParents(35);
         list.forEach(item -> System.out.println(item));
 
+    }
+
+    @Test
+    public void t1() {
+        PostInfo postInfo = new PostInfo();
+        System.out.println(postInfo);
+    }
+
+    @Test
+    public void t2() {
+        List<PostClass> categoryListByParentId = postClassService.getThreePostClassListByParent(1);
+        System.out.println(categoryListByParentId.size());
+    }
+
+
+    @After
+    public void after() {
+        long end = System.currentTimeMillis();
+        System.out.println("耗时:" + (end - start));
     }
 }

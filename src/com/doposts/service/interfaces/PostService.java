@@ -2,6 +2,7 @@ package com.doposts.service.interfaces;
 
 import com.doposts.entity.Post;
 import com.doposts.utils.Page;
+import com.doposts.vo.PostInfo;
 import com.doposts.vo.PostQueryParam;
 import com.doposts.vo.SelectAllPostAndFloor;
 
@@ -26,5 +27,33 @@ public interface PostService {
      * @param pageSize 显示数量
      * @return PageBean
      */
-    Page<Post> getPostPageByCondition(PostQueryParam queryParam, Integer pageIndex, Integer pageSize);
+    Page<PostInfo> getPostPageByCondition(PostQueryParam queryParam, Integer pageIndex, Integer pageSize);
+
+    /**
+     * 添加帖子
+     * @param post 实体
+     * @return 是否添加成功
+     */
+    boolean addPost(Post post);
+
+    /**
+     * 根据id修改帖子
+     * @param post 实体
+     * @return 是否修改成功
+     */
+    boolean modifyPostById(Post post);
+
+    /**
+     * 根据id删除帖子
+     * @param id id 主键
+     * @return 是否删除成功
+     */
+    boolean deletePostById(int id);
+
+    /**
+     * 根据查询参数获取总记录数
+     * @param queryParam 查询条件
+     * @return 记录数
+     */
+    Integer getPostCountByCondition(PostQueryParam queryParam);
 }

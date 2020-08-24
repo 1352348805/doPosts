@@ -1,16 +1,94 @@
 package com.doposts.servlet;
 
+import com.doposts.entity.Post;
+import com.doposts.service.impl.PostServiceImpl;
+import com.doposts.service.interfaces.PostService;
+import com.doposts.to.CommonResult;
+import com.doposts.utils.Page;
+import com.doposts.vo.PostInfo;
+import com.doposts.vo.PostQueryParam;
+
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author xiao yao
  * @date 2020/8/21 16:28
  */
-@WebServlet("/Post")
+@WebServlet("/post")
 public class PostServlet extends AbstractServlet {
+
+    private PostService postService;
 
     @Override
     public Class<?> getServletClass() {
-        return null;
+        return PostServlet.class;
+    }
+
+    @Override
+    public void init() throws ServletException {
+        postService = new PostServiceImpl();
+    }
+
+    /**
+     * 获取帖子列表
+     */
+    public CommonResult getPostList(HttpServletRequest request, HttpServletResponse response) {
+        Integer pageIndex;
+        Integer pageSize;
+        Integer postClassLevel1Id;
+        Integer postClassLevel2Id;
+        Integer postClassLevel3Id;
+        try {
+            pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
+            pageSize = Integer.parseInt(request.getParameter("pageSize"));
+      } catch (Exception e) {
+            pageIndex = 1;
+            pageSize = 10;
+        }
+        if (request.getParameter("postClassLevel1Id") != null && !request.getParameter("postClassLevel1Id").equals("0")) {
+            postClassLevel1Id = Integer.parseInt(request.getParameter("postClassLevel1Id"));
+        } else {
+            postClassLevel1Id = null;
+        }
+        if (request.getParameter("postClassLevel2Id") != null && !request.getParameter("postClassLevel2Id").equals("0")) {
+            postClassLevel1Id = null;
+            postClassLevel2Id = Integer.parseInt(request.getParameter("postClassLevel2Id"));
+        } else {
+            postClassLevel2Id = null;
+        }
+        if (request.getParameter("postClassLevel3Id") != null && !request.getParameter("postClassLevel3Id").equals("0")) {
+            postClassLevel2Id = null;
+            postClassLevel3Id = Integer.parseInt(request.getParameter("postClassLevel3Id"));
+        } else {
+            postClassLevel3Id = null;
+        }
+
+        String postName = request.getParameter("postName");
+        if (postName == null || postName.length() == 0) {
+            postName = null;
+        }
+        String createUserName = request.getParameter("createUserName");
+        if (createUserName == null || createUserName.length() == 0) {
+            createUserName = null;
+        }
+        PostQueryParam queryParam = new PostQueryParam(postName,createUserName,postClassLevel1Id,postClassLevel2Id,postClassLevel3Id);
+
+        Page<PostInfo> page = postService.getPostPageByCondition(queryParam,pageIndex,pageSize);
+        return new CommonResult().success(page);
+    }
+
+    /**
+     *
+     * @param request
+     * @param response
+     * @return
+     */
+    public CommonResult getPostCountByCondition(HttpServletRequest request, HttpServletResponse response) {
+        PostQueryParam queryParam = new PostQueryParam();
+        Integer count = postService.getPostCountByCondition(queryParam);
+        return new CommonResult().success(count);
     }
 }
