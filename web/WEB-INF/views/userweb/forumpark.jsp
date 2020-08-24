@@ -52,8 +52,8 @@
 
 					<select tabindex="4" class="dropdown ">
 						<option value="" class="label" value="">Currency :USD</option>
-						<option value="1">Dollar</option>
-						<option value="2">Euro</option>
+						<option value="1"> Dollar</option>
+						<option value="2"> Euro</option>
 					</select>
 				</div>
 
@@ -104,8 +104,8 @@
 							<div class="banner-off">
 								<h2>FLAT 50% 0FF</h2>
 								<span>FOR ALL PURCHASE <b>VALUE</b></span>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>
-								<a class="now-get" href="#">GET NOW</a>
+								<p>Lorem ipsum dolor sit amet,  consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>
+								<a class="now-get" href="#">GET  NOW</a>
 							</div>
 							<div class="clearfix"> </div>
 						</div>
@@ -128,7 +128,7 @@
 							<div class="banner-off">
 								<h2>FLAT 50% 0FF</h2>
 								<span>FOR ALL PURCHASE <b>VALUE</b></span>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>
+								<p>Lorem ipsum dolor sit amet, consectetur  adipisicing  elit, sed do eiusmod tempor incididunt ut labore et </p>
 								<a class="now-get" href="#">GET NOW</a>
 							</div>
 							<div class="clearfix"> </div>
