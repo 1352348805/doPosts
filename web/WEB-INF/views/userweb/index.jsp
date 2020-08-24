@@ -128,7 +128,7 @@
 <!-- START: section -->
 <%--<section class="probootstrap-intro" style="height: 100px ;" data-stellar-background-ratio="0.5">--%>
 <%--background-image: url(${pageContext.request.contextPath}/static/images/hero_bg_2.jpg);--%>
-<a href=""><img src="<%=path%>/static/images/head/egm.jpg.png"height="300px" style="margin-left: 850px"><a/>
+<a href=""><img src="<%=path%>/static/images/head/egm.png"height="300px" style="margin-left: 850px"><a/>
 <%--  <a class="probootstrap-scroll-down js-next" href="#next-section">Scroll down <i class="icon-chevron-down"></i></a>--%>
 <%--</section>--%>
 <!-- END: section -->
