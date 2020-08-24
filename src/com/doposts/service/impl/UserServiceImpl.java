@@ -101,4 +101,32 @@ public class UserServiceImpl implements UserService {
         }
         return count;
     }
+
+    /**
+     * 删除用户
+     *
+     * @param id id
+     * @return 影响行数
+     */
+    @Override
+    public int getDeleteUser(int id) {
+        int qwq=0;
+        try {
+            qwq=PostItDatabase.USER_DAO.deleteUser(id);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return qwq;
+    }
+
+    /**
+     * 修改用户
+     *
+     * @param user 实体类
+     * @return 是否成功
+     */
+    @Override
+    public boolean updateUser(User user) {
+        return PostItDatabase.USER_DAO.updateUserInfo(user) == 1;
+    }
 }

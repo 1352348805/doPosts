@@ -61,7 +61,7 @@ public interface UserDao {
     /**
      * 修改用户昵称、密码等。。。
      * @param user 实体类
-     * @return 是否成功
+     * @return 受影响行数
      */
-    int selectUserContnt(User user);
+    int updateUserInfo(User user);
 }
