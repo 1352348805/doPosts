@@ -96,7 +96,7 @@
 				   <div class="wmuSliderWrapper">
 					   <article style="position: absolute; width: 100%; opacity: 0;">
 					   	<div class="banner-matter">
-							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/bag.jpg" alt=" " />
+							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/youxi2.png" alt=" " />
 							<div class="banner-off">
 								<h2>FLAT 50% 0FF</h2>
 								<span>FOR ALL PURCHASE <b>VALUE</b></span>
@@ -106,9 +106,9 @@
 							<div class="clearfix"> </div>
 						</div>
 					 	</article>
-					 	<article style="position: absolute; width: 100%; opacity: 0;">
+					 	<article style="position: absolute; width: 100%; opacity: 1;">
 						<div class="banner-matter">
-							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/bag1.jpg" alt=" " />
+							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/youxi1.png" alt=" " />
 							<div class="banner-off">
 								<h2>FLAT 50% 0FF</h2>
 								<span>FOR ALL PURCHASE <b>VALUE</b></span>
@@ -118,9 +118,9 @@
 							<div class="clearfix"> </div>
 						</div>
 					 	</article>
-					 	<article style="position: absolute; width: 100%; opacity: 0;">
+					 	<article style="position: absolute; width: 100%; opacity: 2;">
 						<div class="banner-matter">
-							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/bag.jpg" alt=" " />
+							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/timg.png" alt=" " />
 							<div class="banner-off">
 								<h2>FLAT 50% 0FF</h2>
 								<span>FOR ALL PURCHASE <b>VALUE</b></span>
@@ -130,11 +130,50 @@
 							<div class="clearfix"> </div>
 						</div>
 					 	</article>
+					   <article style="position: absolute; width: 100%; opacity: 3;">
+						   <div class="banner-matter">
+							   <img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/tiyu.png" alt=" " />
+							   <div class="banner-off">
+								   <h2>FLAT 50% 0FF</h2>
+								   <span>FOR ALL PURCHASE <b>VALUE</b></span>
+								   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>
+								   <a class="now-get" href="#">GET NOW</a>
+							   </div>
+							   <div class="clearfix"> </div>
+						   </div>
+					   </article>
+					   <article style="position: absolute; width: 100%; opacity: 4;">
+						   <div class="banner-matter">
+							   <img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/dianying.png" alt=" " />
+							   <div class="banner-off">
+								   <h2>FLAT 50% 0FF</h2>
+								   <span>FOR ALL PURCHASE <b>VALUE</b></span>
+								   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>
+								   <a class="now-get" href="#">GET NOW</a>
+							   </div>
+							   <div class="clearfix"> </div>
+						   </div>
+					   </article>
+					   <article style="position: absolute; width: 100%; opacity: 5;">
+						   <div class="banner-matter">
+							   <img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/xiaoshuo.png" alt=" " />
+							   <div class="banner-off">
+								   <h2>FLAT 50% 0FF</h2>
+								   <span>FOR ALL PURCHASE <b>VALUE</b></span>
+								   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>
+								   <a class="now-get" href="#">GET NOW</a>
+							   </div>
+							   <div class="clearfix"> </div>
+						   </div>
+					   </article>
 					 </div>
 	                <ul class="wmuSliderPagination">
 	                	<li><a href="#" class="">0</a></li>
 	                	<li><a href="#" class="">1</a></li>
 	                	<li><a href="#" class="">2</a></li>
+						<li><a href="#" class="">3</a></li>
+						<li><a href="#" class="">4</a></li>
+						<li><a href="#" class="">5</a></li>
 	                </ul>
 	            </div>
 	           
