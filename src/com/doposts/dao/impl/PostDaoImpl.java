@@ -1,5 +1,6 @@
 package com.doposts.dao.impl;
 
+import com.alibaba.fastjson.support.odps.udf.CodecCheck;
 import com.doposts.dao.Count;
 import com.doposts.dao.CrudHandler;
 import com.doposts.dao.PostItDatabase;
@@ -10,6 +11,7 @@ import com.doposts.vo.PostQueryParam;
 import com.dxhualuo.database.handler.interfaces.DatabaseCrud;
 import com.dxhualuo.database.handler.interfaces.SuperCrud;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -117,35 +119,38 @@ public class PostDaoImpl implements PostDao {
                 "\tpost_classification AS lv3\n" +
                 "\tON \n" +
                 "\t\tlv3.classId = post.postClassLevel3Id\n" +
-                "WHERE\n" +
-                "\tpost.postName LIKE CONCAT('%',?,'%') AND\n" +
-                "\tcreateUser.userName = ? AND\n");
-        Object para = null;
+                "WHERE\n");
+        ArrayList<Object> para = new ArrayList<>();
+        if(postQueryParam.getPostName() != null){
+            builder.append("\tpost.postName LIKE CONCAT('%',?,'%') AND\n");
+            para.add(postQueryParam.getPostName());
+        }
+        if(postQueryParam.getCreateUserName() != null){
+            builder.append("\tcreateUser.userName = ? AND\n");
+            para.add(postQueryParam.getCreateUserName());
+        }
         if(postQueryParam.getPostClassLevel1Id() != null){
             builder.append("post.postClassLevel1Id = ?\n");
-            para = postQueryParam.getPostClassLevel1Id();
+            para.add(postQueryParam.getPostClassLevel1Id());
         }else if(postQueryParam.getPostClassLevel2Id() != null){
             builder.append("post.postClassLevel2Id = ?\n");
-            para = postQueryParam.getPostClassLevel2Id();
+            para.add(postQueryParam.getPostClassLevel2Id());
         }else if(postQueryParam.getPostClassLevel3Id() != null){
             builder.append("post.postClassLevel3Id = ?\n");
-            para = postQueryParam.getPostClassLevel3Id();
-        }else{
-            builder.delete(builder.length()-4,builder.length());
+            para.add(postQueryParam.getPostClassLevel3Id());
+        }else if(para.size() > 0){
+            builder.delete(builder.length()-5,builder.length());
         }
-        builder.append("LIMIT ?, ?");
-        if(para != null){
-            try {
-                return crud.executeQueryToBeanList(builder.toString(), PostInfo.class, postQueryParam.getPostName(), postQueryParam.getCreateUserName(), para, offset, size);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        }else{
-            try {
-                return crud.executeQueryToBeanList(builder.toString(), PostInfo.class, postQueryParam.getPostName(), postQueryParam.getCreateUserName(), offset, size);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+        if(para.size() == 0){
+            builder.delete(builder.length()-7,builder.length());
+        }
+        builder.append(" LIMIT ?, ?");
+        para.add(offset);
+        para.add(size);
+        try {
+            return crud.executeQueryToBeanList(builder.toString(), PostInfo.class, para.toArray());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -224,42 +229,39 @@ public class PostDaoImpl implements PostDao {
                 "\tpost_classification AS lv3\n" +
                 "\tON \n" +
                 "\t\tlv3.classId = post.postClassLevel3Id\n" +
-                "WHERE\n" +
-                "\tpost.postName LIKE CONCAT('%',?,'%') AND\n" +
-                "\tcreateUser.userName = ? AND\n");
-        Object para = null;
+                "WHERE\n");
+        ArrayList<Object> para = new ArrayList<>();
+        if(postQueryParam.getPostName() != null){
+            builder.append("\tpost.postName LIKE CONCAT('%',?,'%') AND\n");
+            para.add(postQueryParam.getPostName());
+        }
+        if(postQueryParam.getCreateUserName() != null){
+            builder.append("\tcreateUser.userName = ? AND\n");
+            para.add(postQueryParam.getCreateUserName());
+        }
         if(postQueryParam.getPostClassLevel1Id() != null){
             builder.append("post.postClassLevel1Id = ?\n");
-            para = postQueryParam.getPostClassLevel1Id();
+            para.add(postQueryParam.getPostClassLevel1Id());
         }else if(postQueryParam.getPostClassLevel2Id() != null){
             builder.append("post.postClassLevel2Id = ?\n");
-            para = postQueryParam.getPostClassLevel2Id();
+            para.add(postQueryParam.getPostClassLevel2Id());
         }else if(postQueryParam.getPostClassLevel3Id() != null){
             builder.append("post.postClassLevel3Id = ?\n");
-            para = postQueryParam.getPostClassLevel3Id();
-        }else{
-            builder.delete(builder.length()-4,builder.length());
+            para.add(postQueryParam.getPostClassLevel3Id());
+        }else if(para.size() > 0){
+            builder.delete(builder.length()-5,builder.length());
         }
-        if(para != null){
-            try {
-                Count count = crud.executeQueryToBean(builder.toString(), Count.class, postQueryParam.getPostName(), postQueryParam.getCreateUserName(), para);
-                if(count != null){
-                    return Integer.parseInt(count.getCount().toString());
-                }
-                throw new RuntimeException();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+        if(para.size() == 0){
+            builder.delete(builder.length()-7,builder.length());
+        }
+        try {
+            Count count = crud.executeQueryToBeanByArrayParameter(builder.toString(), Count.class, para.toArray());
+            if(count != null){
+                return Integer.parseInt(count.getCount().toString());
             }
-        }else{
-            try {
-                Count count = crud.executeQueryToBean(builder.toString(), Count.class, postQueryParam.getPostName(), postQueryParam.getCreateUserName());
-                if(count != null){
-                    return Integer.parseInt(count.getCount().toString());
-                }
-                throw new RuntimeException();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+            throw new RuntimeException();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }
