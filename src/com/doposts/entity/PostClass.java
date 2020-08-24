@@ -44,6 +44,19 @@ public class PostClass {
      */
     private String classDescribe;
 
+    /**
+     * 是否启用 0:未启用 1:启用
+     */
+    private Boolean isEnable;
+
+    public Boolean getEnable() {
+        return isEnable;
+    }
+
+    public void setEnable(Boolean enable) {
+        isEnable = enable;
+    }
+
     public String getClassDescribe() {
         return classDescribe;
     }
@@ -91,6 +104,8 @@ public class PostClass {
                 ", className='" + className + '\'' +
                 ", classLevel=" + classLevel +
                 ", classFatherId=" + classFatherId +
+                ", classDescribe='" + classDescribe + '\'' +
+                ", isEnable=" + isEnable +
                 '}';
     }
 

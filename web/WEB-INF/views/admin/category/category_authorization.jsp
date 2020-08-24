@@ -136,6 +136,18 @@
             $obj.prev().val(v=1);
             $obj.addClass('layui-form-onswitch layui-checkbox-disbaled layui-disabled');
         }
+        let data = {
+            action : 'processStatusChange',
+            requestId : id,
+            isProcess : v
+        }
+        $.post(path + '/admin',data,function (result) {
+            if (result.code == 200) {
+                layer.msg(result.message);
+            } else {
+                layer.msg(result.message);
+            }
+        },'json');
     }
 
 

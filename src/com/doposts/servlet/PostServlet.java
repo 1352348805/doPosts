@@ -81,14 +81,24 @@ public class PostServlet extends AbstractServlet {
     }
 
     /**
-     *
-     * @param request
-     * @param response
-     * @return
+     * 按条件获取总记录数
      */
     public CommonResult getPostCountByCondition(HttpServletRequest request, HttpServletResponse response) {
         PostQueryParam queryParam = new PostQueryParam();
         Integer count = postService.getPostCountByCondition(queryParam);
         return new CommonResult().success(count);
     }
+
+    /**
+     * 删除帖子
+     */
+    public CommonResult deletePost(HttpServletRequest request, HttpServletResponse response) {
+        Integer id = Integer.parseInt(request.getParameter("postId"));
+        boolean b = postService.deletePostById(id);
+        if (b) {
+            return new CommonResult().success(null);
+        }
+       return new CommonResult().failed("删除失败");
+    }
+
 }

@@ -170,8 +170,10 @@
                     if (data.code == 200) {
                         layer.msg('删除成功!',{
                             time : 1000
+                        },function () {
+                            location.reload();
                         });
-                        location.reload();
+
                     } else {
                         layer.msg(data.message);
                     }
