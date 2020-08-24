@@ -291,23 +291,31 @@
 		</div>
 	</div>		
   <section id="next-section" class="probootstrap-section">
-    <div class="container">
+    <div class="container" >
         <c:forEach items="${floor}" var="floor">
-      <div class="row bar">
-       	<div class='col-md-12 col-sm-6 probootstrap-animate fadeInUp probootstrap-animated'>
-       		<div class='probootstrap-block-image'>
-  				<div class='text'>
-  				<span class='clearfix like'>
+      <div class="row bar" style="border: solid 1px slategray; border-bottom: none ">
+       	<div class='col-md-12 col-sm-6 probootstrap-animate fadeInUp probootstrap-animated' style="padding: 0px 0px 0px 0px">
+            <div style=" float: left; display: inline-block; background: rgb(251,251,253); width: 130px; height: 300px"   >
+                <ul style="width: 130px; height: 170px">
+                    <li>
+                        <div>
+                            <img src="${pageContext.request.contextPath }/static/images/hero_bg_2.jpg" style="width:80px ;height:80px">
+                        </div>
+                    </li>
+                    <li>名字</li>
+                </ul>
+            </div>
+       		<div style="display: inline-block;width: auto;height: auto" class='probootstrap-block-image'>
+  				<div class='text' style="padding: 0px 0px 8px 20px">
+                    <div style="padding: 20px 20px 0px 0px ">
+                        <span class='clearfix like'>
   				<a class='hint info-right'href='#' title='发帖时间'><i class='fa fa-clock-o'>发帖时间:${floor.sendDate}</i></a>
   				<a class='hint info-left' href='#' title='发帖人'><i class='fa fa-user'>作者名字</i></a>
   				</span>
-
-  						<p class='dark' style='height: 80px'>
+                        <p class='dark' style='height: 80px'>
                                 ${floor.postContent}
                         </p>
-
-  						<p ><img src="${pageContext.request.contextPath }/static/images/hero_bg_2.jpg" style="width:50px ;height:50px">
-                        </p>
+                    </div>
 
                     <div style="float: right">
                         &nbsp;<span><a href="#">回复</a></span>
@@ -322,9 +330,20 @@
                         <span class="tail-info">${floor.postFloor}楼</span>
                     </div>
                     <div style="display: inline-block">
-                        <a href=" "></a>
-                        <a href="">奥特曼： </a>
-                        <span>哇你这也说的出来啊</span>
+                       <ul style="">
+                           <li>
+                               <a href=""></a>
+                               <div>
+                                   <a href="">名字：</a>
+                                   <span>回复信息</span>
+                                   <div>
+                                       <span>用户回复时间</span>
+                                       <a href="">回复</a>
+                                   </div>
+                               </div>
+                           </li>
+                           <li>asdasda</li>
+                       </ul>
                     </div>
                     <br/>
   						<hr>

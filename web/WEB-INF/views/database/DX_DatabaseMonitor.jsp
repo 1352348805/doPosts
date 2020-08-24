@@ -18,19 +18,38 @@
     <link rel="stylesheet" href="<%=path%>/static/layuiadmin/style/login.css" media="all">
     <script src="<%=path%>/static/layuiadmin/layui/layui.js"></script>
     <script src="<%=path%>/static/js/jquery.js"></script>
+    <script>
+        function mouseOnTitle(titleDom) {
+            let title = $(titleDom);
+            let left = title.offsetLeft;
+            console.log(title.text());
+            console.log(left);
+        }
+    </script>
 </head>
 <body>
 <div class="layui-card-body" style="padding: 0 0 0 0">
     <ul class="layui-nav" lay-filter="component-nav">
-        <li style="display: inline-block;vertical-align: middle;"><img src="<%=path%>/static/images/database/database.png" alt="???" height="30" width="30"></li>
-        <li style="display: inline-block;position: relative;vertical-align: middle;margin-right: 25px;margin-left: 7px;text-align: -webkit-match-parent;"><div style="color: white;font-size: 14px;line-height: 58px;text-align: -webkit-match-parent;">DX_Database数据库</div></li>
-        <li class="layui-nav-item"><a href="javascript:">概览</a></li>
+        <li style="display: inline-block; width:164px;position: relative;vertical-align: middle;margin-right: 25px;margin-left: 6px;text-align: -webkit-match-parent;">
+            <div>
+                <img src="<%=path%>/static/images/database/database.png" alt="???" height="30" width="30">
+                <div style="color: white;font-size: 14px;line-height: 58px;text-align: -webkit-match-parent;display: inline-block">DX_Database数据库</div>
+            </div>
+        </li>
+        <li class="layui-nav-item layui-this" onmouseover="mouseOnTitle(this)"><a href="javascript:">概览</a></li>
         <li class="layui-nav-item"><a href="javascript:">SQL监控</a></li>
-        <li class="layui-nav-item">
+        <li class="layui-nav-item ">
             <a href="javascript:">数据库接口调用统计</a>
         </li>
         <li class="layui-nav-item"><a href="javascript:">数据库</a></li>
+        <span class="layui-nav-bar" style="left: 150px; top: 55px; width: 0; opacity: 0;"></span>
     </ul>
+</div>
+<div id="content" style="height: 100%; width: 100%;">
+    <div id="overview" style="height: 100%; width: 100%;" ></div>
+    <div id="sql_monitor" style="height: 100%; width: 100%;display: none;" ></div>
+    <div id="interface_monitor" style="height: 100%; width: 100%;display: none;" ></div>
+    <div id="database" style="height: 100%; width: 100%;display: none;" ></div>
 </div>
 </body>
 </html>

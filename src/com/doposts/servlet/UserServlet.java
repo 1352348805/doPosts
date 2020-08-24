@@ -112,22 +112,8 @@ public class UserServlet extends AbstractServlet{
         return "userweb/reply";
     }
 
-    /**
-     * 查看用户
-     * @param request
-     * @param response
-     * @return
-     */
-    public Object userManagement(HttpServletRequest request,HttpServletResponse response) throws Exception {
-       User user;
-        user= (User) userService.getAllUser();
-        if (user==null){
-            return new CommonResult().failed();
-        }
-        request.getSession().setAttribute("user",user);
-        request.getRequestDispatcher("/admin/userlist.jsp").forward(request,response);
-       return new CommonResult().success("") ;
-    }
+
+
     /**
      * 用户主页
      */
