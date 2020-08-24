@@ -48,18 +48,18 @@ public class PostServlet extends AbstractServlet {
             pageIndex = 1;
             pageSize = 10;
         }
-        if (request.getParameter("postClassLevel1Id") != null && !request.getParameter("postClassLevel1Id").equals("0")) {
+        if (request.getParameter("postClassLevel1Id") != null && !request.getParameter("postClassLevel1Id").equals("-1")) {
             postClassLevel1Id = Integer.parseInt(request.getParameter("postClassLevel1Id"));
         } else {
             postClassLevel1Id = null;
         }
-        if (request.getParameter("postClassLevel2Id") != null && !request.getParameter("postClassLevel2Id").equals("0")) {
+        if (request.getParameter("postClassLevel2Id") != null && !request.getParameter("postClassLevel2Id").equals("-1")) {
             postClassLevel1Id = null;
             postClassLevel2Id = Integer.parseInt(request.getParameter("postClassLevel2Id"));
         } else {
             postClassLevel2Id = null;
         }
-        if (request.getParameter("postClassLevel3Id") != null && !request.getParameter("postClassLevel3Id").equals("0")) {
+        if (request.getParameter("postClassLevel3Id") != null && !request.getParameter("postClassLevel3Id").equals("-1")) {
             postClassLevel2Id = null;
             postClassLevel3Id = Integer.parseInt(request.getParameter("postClassLevel3Id"));
         } else {
