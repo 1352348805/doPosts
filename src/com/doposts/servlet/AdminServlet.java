@@ -4,10 +4,13 @@ package com.doposts.servlet;
 import com.doposts.constant.SystemConstant;
 import com.doposts.entity.CreateClassRequest;
 import com.doposts.entity.PostClass;
+import com.doposts.entity.User;
 import com.doposts.service.impl.CreateClassRequestServiceImpl;
 import com.doposts.service.impl.PostClassServiceImpl;
+import com.doposts.service.impl.UserServiceImpl;
 import com.doposts.service.interfaces.CreateClassRequestService;
 import com.doposts.service.interfaces.PostClassService;
+import com.doposts.service.interfaces.UserService;
 import com.doposts.to.CommonResult;
 import com.doposts.utils.Page;
 import com.doposts.vo.PostClassRequestInfo;
@@ -31,6 +34,7 @@ public class AdminServlet extends AbstractServlet{
 
     private PostClassService postClassService;
     private CreateClassRequestService createClassRequestService;
+    private UserService userService;
 
     @Override
     public Class<?> getServletClass() {
@@ -41,6 +45,7 @@ public class AdminServlet extends AbstractServlet{
     public void init() throws ServletException {
         postClassService = new PostClassServiceImpl();
         createClassRequestService = new CreateClassRequestServiceImpl();
+        userService = new UserServiceImpl();
     }
 
     /**
@@ -64,6 +69,18 @@ public class AdminServlet extends AbstractServlet{
         request.getSession().invalidate();
         response.sendRedirect(request.getContextPath() + "/user?action=toLogin");
         return null;
+    }
+
+    /**
+     * 查看所有用户
+     * @param request
+     * @param response
+     * @return 用户
+     */
+    public String tUser(HttpServletRequest request, HttpServletResponse response){
+        List<User> list=userService.getAllUser();
+        request.getSession().setAttribute("list",list);
+        return "admin/user/user_list";
     }
 
     /**
