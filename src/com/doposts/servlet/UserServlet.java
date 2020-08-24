@@ -122,6 +122,18 @@ public class UserServlet extends AbstractServlet{
     }
 
 
+    /**
+     *@Description 二级分类及一级分类下所有贴吧的展示(二级分类以forumpark命名)
+     *@Param request/response
+     *@Author Wang.li.ming
+     *@Date 2020/8/23
+     *@Time 19:01
+     */
+    public String forumpark(HttpServletRequest request , HttpServletResponse response){
+
+        return "userweb/forumpark";
+    }
+
 
 
 }
