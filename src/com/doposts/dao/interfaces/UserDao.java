@@ -64,4 +64,5 @@ public interface UserDao {
      * @return 受影响行数
      */
     int updateUserInfo(User user);
+
 }

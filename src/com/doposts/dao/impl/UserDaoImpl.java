@@ -98,13 +98,13 @@ public class UserDaoImpl implements UserDao {
     }
 
     /**
-     * 修改用户昵称、密码等。。。
+     * 修改用户
      *
      * @param user 实体类
-     * @return 是否成功
+     * @return 受影响行数
      */
     @Override
-    public int selectUserContnt(User user) {
+    public int updateUserInfo(User user) {
         try {
             return crud.selectCount(User.class, user);
         } catch (SQLException e) {
