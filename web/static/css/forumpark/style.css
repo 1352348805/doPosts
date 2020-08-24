@@ -10,7 +10,7 @@ body a{
 	-moz-transition: 0.5s all;
 }
 .top-header{
-	background: #F97E76;
+	background: #f54ea2;
 	padding: 0.7em 0;
 }
 .top-header-left{
@@ -166,7 +166,7 @@ ul.support li a {
 	width:90px;
 }
 .dropdown:hover div{
-	background:#4CB1CA;
+	background: #4cb1ca;
 }
 /* Height is adjusted by JS on open */
 .dropdown.open div{
@@ -296,7 +296,7 @@ ul.men-grid li.login{
 	background:#fff;
 	border: 1px solid #ddd;
 	position: relative;
-	width: 47%;
+	width: 70%;
 	float: right;
 	margin: 1.7em 0 0;
 }
@@ -333,9 +333,9 @@ ul.men-grid li.login{
 /*----*/
 h3.cate {
 	color: #fff;
-	font-size: 1.7em;
-	padding: 0.6em ;
-	background: #000;
+	font-size: 1.3em;
+	padding: 0.6em;
+	background: #f54ea2;
 	margin: 0;
 }
 /*----*/
@@ -381,7 +381,7 @@ ul {
 	text-indent: 1.2em;
 }
 .menu ul li a:hover{
-	background: #1DBAA5;
+	background: #eca5d6;
 }
 .menu > li > a:hover, .menu > li > a.active {
 	background:#fff;
