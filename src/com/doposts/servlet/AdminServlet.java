@@ -275,7 +275,8 @@ public class AdminServlet extends AbstractServlet{
         classRequest.setRequestId(requestId);
         classRequest.setIsPass(isPass > 0);
         classRequest.setIsProcess(true);
-        classRequest.setReviewerId(1);
+        User user = (User)request.getSession().getAttribute("user");
+        classRequest.setReviewerId(user.getUserId());
         classRequest.setReviewDate(new Date());
         boolean b = createClassRequestService.modifyRequestStatus(classRequest);
         if (b) {
@@ -294,7 +295,8 @@ public class AdminServlet extends AbstractServlet{
         CreateClassRequest classRequest = new CreateClassRequest();
         classRequest.setRequestId(requestId);
         classRequest.setIsProcess(isProcess > 0);
-        classRequest.setReviewerId(1);
+        User user = (User)request.getSession().getAttribute("user");
+        classRequest.setReviewerId(user.getUserId());
         classRequest.setReviewDate(new Date());
         boolean b = createClassRequestService.modifyRequestStatus(classRequest);
         if (b) {
