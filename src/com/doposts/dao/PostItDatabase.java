@@ -25,15 +25,14 @@ import static com.dxhualuo.database.connection.ConnectionManager.URL_PARAMETER;
 public class PostItDatabase {
     //初始化顺序不要动，C3P0连接配置在第一个FloorDaoImpl类中
     //代理对象请放到这里
-
-    public static final ConnectionManager CONNECTION_MANAGER;
     public static final FloorDao FLOOR_DAO;
     public static final PostClassDao POST_CLASS_DAO;
     public static final PostDao POST_DAO;
     public static final ReplyDao REPLY_DAO;
     public static final UserDao USER_DAO;
     public static final CreateClassRequestDao CREATE_CLASS_REQUEST_DAO;
-    public static final DatabaseCrud CRUD;
+    private static final DatabaseCrud CRUD;
+    private static final ConnectionManager CONNECTION_MANAGER;
 
     static {
         //创建C3P0连接池参数
@@ -64,6 +63,14 @@ public class PostItDatabase {
         REPLY_DAO = (ReplyDao)Proxy.newProxyInstance(PostDaoImpl.class.getClassLoader(), new Class[]{Database.class, ReplyDao.class}, new InterfaceInvokeHandler(new ReplyDaoImpl()));
         USER_DAO = (UserDao)Proxy.newProxyInstance(UserDaoImpl.class.getClassLoader(), new Class[]{Database.class, UserDao.class}, new InterfaceInvokeHandler(new UserDaoImpl()));
         CREATE_CLASS_REQUEST_DAO = (CreateClassRequestDao)Proxy.newProxyInstance(CreateClassRequestDaoImpl.class.getClassLoader(), new Class[]{Database.class, CreateClassRequestDao.class}, new InterfaceInvokeHandler(new CreateClassRequestDaoImpl()));
+    }
+
+    public static DatabaseCrud getCRUD() {
+        return CRUD;
+    }
+
+    public static ConnectionManager getConnectionManager() {
+        return CONNECTION_MANAGER;
     }
 
     /**

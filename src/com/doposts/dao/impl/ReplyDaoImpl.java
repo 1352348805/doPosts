@@ -22,7 +22,7 @@ public class ReplyDaoImpl implements ReplyDao {
 
     public ReplyDaoImpl(){
         this.crud = CrudHandler.replyCrud;
-        this.basicCrud = PostItDatabase.CRUD;
+        this.basicCrud = PostItDatabase.getCRUD();
     }
 
     /**

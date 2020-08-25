@@ -20,7 +20,7 @@ public class PostClassDaoImpl implements PostClassDao {
 
     public PostClassDaoImpl() {
         this.crud = CrudHandler.postClassCrud;
-        this.basicCrud = PostItDatabase.CRUD;
+        this.basicCrud = PostItDatabase.getCRUD();
     }
 
     /**
