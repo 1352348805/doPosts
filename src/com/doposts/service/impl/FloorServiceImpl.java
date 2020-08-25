@@ -46,7 +46,7 @@ public class FloorServiceImpl  implements FloorService {
             floorWithReply.setSendDate(floor.getSendDate());
             floorWithReply.setImageUrl(floor.getImageUrl());
           //拿到每一楼的回复信息
-            replyList  =   dao.getReplyListById(floorWithReply.getFloorId());
+            replyList  =  PostItDatabase.REPLY_DAO.getReplyListById(floorWithReply.getFloorId());
             //把回复数据装进当前楼的List里
             floorWithReply.setReplyList(replyList);
             floorWithReplies.add(floorWithReply);
