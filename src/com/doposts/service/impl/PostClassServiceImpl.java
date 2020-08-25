@@ -85,6 +85,7 @@ public class PostClassServiceImpl implements PostClassService {
     public List<PostClass> getCategoryListByParentId(Integer parentId) {
         PostClass postClass = new PostClass();
         postClass.setClassId(parentId);
+        postClass.setEnable(true);
         return  PostItDatabase.POST_CLASS_DAO.getSubPostClass(postClass);
     }
 
@@ -97,7 +98,7 @@ public class PostClassServiceImpl implements PostClassService {
     @Override
     public boolean addPostClass(PostClass postClass) {
 
-        return PostItDatabase.POST_CLASS_DAO.insertPostClass(postClass) > 0 ? true : false;
+        return PostItDatabase.POST_CLASS_DAO.insertPostClass(postClass) > 0;
     }
 
     /**
@@ -108,7 +109,7 @@ public class PostClassServiceImpl implements PostClassService {
      */
     @Override
     public boolean checkClassNameExists(String className) {
-        return PostItDatabase.POST_CLASS_DAO.findPostClassByClassName(className) != null ? true : false;
+        return PostItDatabase.POST_CLASS_DAO.findPostClassByClassName(className) != null;
     }
 
     /**
@@ -132,7 +133,7 @@ public class PostClassServiceImpl implements PostClassService {
      */
     @Override
     public boolean modifyPostClass(PostClass postClass) {
-        return PostItDatabase.POST_CLASS_DAO.updatePostClassById(postClass) > 0 ? true : false;
+        return PostItDatabase.POST_CLASS_DAO.updatePostClassById(postClass) > 0;
     }
 
     /**
@@ -144,6 +145,35 @@ public class PostClassServiceImpl implements PostClassService {
     @Override
     public List<PostClass> getThreePostClassListByName(String name) {
         return PostItDatabase.POST_CLASS_DAO.getPostClassListByCondition(name,3);
+    }
+
+    /**
+     * 获取一个父分类下的所有三级分类
+     *
+     * @param parentId
+     * @return list
+     */
+    @Override
+    public List<PostClass> getThreePostClassListByParent(Integer parentId) {
+        List<PostClass> list = new ArrayList<>();
+        getThreePostClassListByParent(parentId,list);
+        return list;
+    }
+
+    /**
+     * 获取一个父分类下的所有三级分类
+     * @param parentId
+     * @param list
+     */
+    private void getThreePostClassListByParent(Integer parentId, List<PostClass> list) {
+        List<PostClass> postClassList = getCategoryListByParentId(parentId);
+        postClassList.forEach(item -> {
+            getThreePostClassListByParent(item.getClassId(),list);
+            if (item.getClassLevel() == 3) {
+                list.add(item);
+            }
+        });
+
     }
 
     /**
@@ -173,6 +203,7 @@ public class PostClassServiceImpl implements PostClassService {
         //使用父级id查询子分类
         PostClass postClass = new PostClass();
         postClass.setClassId(parentId);
+        postClass.setEnable(true);
         List<PostClass> postClassList = PostItDatabase.POST_CLASS_DAO.getSubPostClass(postClass);
 
         postClassList.forEach(item -> {

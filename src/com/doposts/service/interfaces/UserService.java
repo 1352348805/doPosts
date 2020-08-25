@@ -45,4 +45,18 @@ public interface UserService {
      * @return 数量int
      */
     int getselectUserConut();
+
+    /**
+     * 删除用户
+     * @param id id
+     * @return 影响行数
+     */
+    int getDeleteUser(int id);
+
+    /**
+     * 修改用户信息
+     * @param user 实体类
+     * @return 是否成功
+     */
+    boolean updateUser(User user);
 }

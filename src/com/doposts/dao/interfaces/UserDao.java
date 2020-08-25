@@ -50,4 +50,19 @@ public interface UserDao {
      * @return 用户的数量
      */
     int selectUserCount();
+
+    /**
+     * 删除用户
+     * @param id 用户id
+     * @return 影响行数
+     */
+    int deleteUser(int id);
+
+    /**
+     * 修改用户昵称、密码等。。。
+     * @param user 实体类
+     * @return 受影响行数
+     */
+    int updateUserInfo(User user);
+
 }

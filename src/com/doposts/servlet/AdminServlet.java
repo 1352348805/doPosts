@@ -78,9 +78,43 @@ public class AdminServlet extends AbstractServlet{
      * @return 用户
      */
     public String tUser(HttpServletRequest request, HttpServletResponse response){
-        List<User> list=userService.getAllUser();
-        request.getSession().setAttribute("list",list);
         return "admin/user/user_list";
+    }
+
+    /**
+     * 获取总记录数
+     * @param request
+     * @param response
+     * @return 总记录数
+     */
+    public CommonResult userCount(HttpServletRequest request, HttpServletResponse response){
+        int count=userService.getselectUserConut();
+        return new CommonResult().success(count);
+    }
+
+    /**
+     * 分页查询
+     * @param request
+     * @param response
+     * @return
+     */
+    public CommonResult userIndexANDSize(HttpServletRequest request, HttpServletResponse response){
+        Integer pageindex=null;
+        Integer pageSize=null;
+        try {
+            pageindex=Integer.valueOf(request.getParameter("pageIndex"));
+            pageSize=Integer.valueOf(request.getParameter("pageSize"));
+        } catch (Exception e) {
+            pageindex = 1;
+            pageSize = 10;
+        }
+        List<User> list=null;
+        try {
+            list = userService.getUserByStartIndex(pageindex,pageSize);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new CommonResult().success(list);
     }
 
     /**
@@ -90,6 +124,12 @@ public class AdminServlet extends AbstractServlet{
         return "admin/user/pwd_modify";
     }
 
+    /**
+     * 帖子列表
+     */
+    public String postList(HttpServletRequest request, HttpServletResponse response) {
+        return "admin/post/post_list";
+    }
     /**
      * 跳转帖子分类列表
      * @return
@@ -233,12 +273,32 @@ public class AdminServlet extends AbstractServlet{
         Integer isPass = Integer.parseInt(request.getParameter("isPass"));
         CreateClassRequest classRequest = new CreateClassRequest();
         classRequest.setRequestId(requestId);
-        classRequest.setIsPass(isPass > 0 ? true : false);
+        classRequest.setIsPass(isPass > 0);
         classRequest.setIsProcess(true);
         classRequest.setReviewerId(1);
         classRequest.setReviewDate(new Date());
         boolean b = createClassRequestService.modifyRequestStatus(classRequest);
         if (b) {
+            invalidMenuCache(request);
+            return new CommonResult().success(null);
+        }
+        return new CommonResult().failed("操作失败");
+    }
+
+    /**
+     * 切换审核状态
+     */
+    public CommonResult processStatusChange(HttpServletRequest request, HttpServletResponse response) {
+        Integer requestId = Integer.parseInt(request.getParameter("requestId"));
+        Integer isProcess = Integer.parseInt(request.getParameter("isProcess"));
+        CreateClassRequest classRequest = new CreateClassRequest();
+        classRequest.setRequestId(requestId);
+        classRequest.setIsProcess(isProcess > 0);
+        classRequest.setReviewerId(1);
+        classRequest.setReviewDate(new Date());
+        boolean b = createClassRequestService.modifyRequestStatus(classRequest);
+        if (b) {
+            invalidMenuCache(request);
             return new CommonResult().success(null);
         }
         return new CommonResult().failed("操作失败");

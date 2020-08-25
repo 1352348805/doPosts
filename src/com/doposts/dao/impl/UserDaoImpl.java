@@ -81,6 +81,38 @@ public class UserDaoImpl implements UserDao {
     }
 
     /**
+     * 删除用户
+     *
+     * @param id 用户id
+     * @return 影响行数
+     */
+    @Override
+    public int deleteUser(int id) {
+        User user = new User();
+        user.setUserId(id);
+        try {
+            return crud.delete(user);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 修改用户
+     *
+     * @param user 实体类
+     * @return 受影响行数
+     */
+    @Override
+    public int updateUserInfo(User user) {
+        try {
+            return crud.selectCount(User.class, user);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
      *  实现查询
      * @param user user实体
      * @return user实体

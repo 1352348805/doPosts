@@ -78,4 +78,11 @@ public interface PostClassService {
      */
     List<PostClass> getThreePostClassListByName(String name);
 
+    /**
+     * 获取一个父分类下的所有三级分类
+     * @param parentId
+     * @return list
+     */
+    List<PostClass> getThreePostClassListByParent(Integer parentId);
+
 }

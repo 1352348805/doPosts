@@ -15,6 +15,8 @@
     <meta charset="UTF-8">
     <title>来贴管理系统</title>
     <link type="text/css" rel="stylesheet" href="<%=path%>/static/css/admin.css" />
+    <link rel="stylesheet" href="<%=path%>/static/layuiadmin/layui/css/layui.css" media="all"/>
+    <script type="text/javascript" src="<%=path%>/static/layuiadmin/layui/layui.js"></script>
 </head>
 <body>
 <!--头部-->
@@ -26,46 +28,98 @@
      <%@include file="../../common/admin/leftnav.jsp"%>
      <input type="hidden" id="path" name="path" value="${pageContext.request.contextPath }"/>
 	<div class="right">
-        <table border="1" width="80%">
-            <tr>
-                <th>头像</th>
-                <th>账号</th>
-                <th>密码</th>
-                <th>昵称</th>
-                <th>权限</th>
-            </tr>
-            <c:forEach var="cnm" items="${list}">
-                <tr>
-                    <td>${cnm.favicon}</td>
-                    <td>${cnm.userLoginName}</td>
-                    <td>${cnm.userPassword}</td>
-                    <td>${cnm.userName}</td>
-                    <td>
-                    <c:choose>
-                        <c:when test="${cnm.group=='admin'}">
-                            管理员
-                        </c:when>
-                        <c:otherwise>
-                            Urbbr
-                        </c:otherwise>
-                    </c:choose>
-                   </td>
-                </tr>
-            </c:forEach>
+        <table border="1" width="80%" id="dt-table">
+
         </table>
-        <div>
-            <span><a>首页</a></span>
-            <span><a>上一页</a></span>
-            <span><a>下一页</a></span>
-            <span><a>尾页</a></span>
+        <div id="page">
         </div>
     </div>
 </section>
 <footer class="footer">
     版权归来贴项目组
 </footer>
+<input id="path" type="hidden" value="<%=path%>" />
 <script type="text/javascript" src="<%=path%>/static/js/admin/time.js"></script>
 <script type="text/javascript" src="<%=path%>/static/js/jquery.js"></script>
 <script type="text/javascript" src="<%=path%>/static/calendar/WdatePicker.js"></script>
 </body>
+<script>
+    var path = $("#path").val();
+
+    loadRequestList({action:'userIndexANDSize'});
+    layui.use('layer', function(){
+        var layer = layui.layer;
+    });
+    layui.use('laypage', function(){
+        var laypage = layui.laypage;
+        let count;
+
+        $.ajaxSettings.async = false;
+        $.post(path + '/admin',{action :'userCount'},function (result) {
+            count = result.data;
+        },'json');
+        $.ajaxSettings.async = true;
+        //执行一个laypage实例
+        laypage.render({
+            elem: 'page' //注意，这里的 test1 是 ID，不用加 # 号
+            ,limit: 10
+            ,count: count //数据总数，从服务端得到
+            ,
+            jump: function(e, first){ //触发分页后的回调
+                if(!first){ //一定要加此判断，否则初始时会无限刷新
+                    let pageIndex = e.curr; //当前页
+                    let pageSize = e.limit;
+                    let data = {
+                        action:'userIndexANDSize',
+                        pageIndex : pageIndex,
+                        pageSize : pageSize
+                    }
+                    loadRequestList(data);
+                }
+            }
+        });
+    });
+    function loadRequestList(data) {
+        $.post(path + '/admin',data,function (result) {
+            if (result.code ==200) {
+                let data = result.data;
+                let html = "<tr>\n" +
+                    "            <th>头像</th>\n" +
+                    "                <th>账号</th>\n" +
+                    "                <th>密码</th>\n" +
+                    "                <th>昵称</th>\n" +
+                    "                <th>权限</th>\n" +
+                    "                <th>操作</th>\n" +
+                    "</tr>";
+                for (let i = 0;i < data.length; i++) {
+                    html += "<tr>\n" +
+                        "<th width=\"10%\">"+data[i].favicon+"</th>\n" +
+                        "<th width=\"10%\">"+data[i].userLoginName+"</th>\n" +
+                        "<th width=\"10%\">"+data[i].userPassword+"</th>\n" +
+                        "<th width=\"10%\">"+data[i].userName+"</th>\n" +
+                        "<th width=\"10%\">";
+                           if (data[i].group == 'admin') {
+                               html += "管理员";
+                           } else if (data[i].group == 'user') {
+                               html += "用户";
+                           }
+                    html+="</th>"
+                    html+="<th style='width: 10%'>\n" +
+                        "    <button class=\"layui-btn layui-btn-xs\" title=\"编辑\" onclick=\"window.location=&quot;/doPosts/admin?action=toCategoryModify&amp;classId=1&quot;\">\n" +
+                        "        <i class=\"layui-icon\">\n" +
+                        "        </i>\n" +
+                        "    </button>\n" +
+                        "    <button class=\"layui-btn layui-btn-xs\" title=\"删除\" onclick=\"del(&quot;1&quot;,&quot;1&quot;)\">\n" +
+                        "        <i class=\"layui-icon\">\n" +
+                        "        </i>\n" +
+                        "    </button>\n" +
+                        "</th>"
+
+                    html+="</tr>"
+                }
+                $("#dt-table").html(html);
+            }
+        },'json');
+    };
+</script>
 </html>
