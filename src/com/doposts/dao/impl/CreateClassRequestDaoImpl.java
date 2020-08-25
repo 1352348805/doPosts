@@ -20,7 +20,7 @@ public class CreateClassRequestDaoImpl implements CreateClassRequestDao {
 
     public CreateClassRequestDaoImpl() {
         this.crud = CrudHandler.createClassRequestCrud;
-        this.basicCrud = PostItDatabase.CRUD;
+        this.basicCrud = PostItDatabase.getCRUD();
     }
 
     /**

@@ -83,7 +83,7 @@
             table+="<div class='clearfix visible-sm-block'></div>";
           }
           table+="<div class='col-md-4 col-sm-6 probootstrap-animate fadeInUp probootstrap-animated'><div class='probootstrap-block-image'>"+
-                  "<div class='text'><h3 class='mb30'><a href='${pageContext.request.contextPath}/user?action=forumpark&barId="+date[i].barId+"'>"+date[i].className+"</a></h3>"+
+                  "<div class='text'><h3 class='mb30'><a href='${pageContext.request.contextPath}/user?action=forumpark&barId="+date[i].classId+"'>"+date[i].className+"</a></h3>"+
                   "<p class='dark' style='80px''>"+date[i].classDescribe+"</p><hr>"+
                   "<p class='clearfix like'><a class='pull-left' href='#'><i class='fa fa-heart'></i></a><a class='pull-right' href='${pageContext.request.contextPath}/user?action=forumpark&barId="+date[i].classId+"'><i class='fa fa-bars'></i></a></p>"+
                   "</div></div></div>";
@@ -125,14 +125,10 @@
 </header>
 <!-- END: header -->
 
-<!-- START: section -->
-<%--<section class="probootstrap-intro" style="height: 100px ;" data-stellar-background-ratio="0.5">--%>
-<%--background-image: url(${pageContext.request.contextPath}/static/images/hero_bg_2.jpg);--%>
-<a href=""><img src="<%=path%>/static/images/head/egm.png"height="300px" style="margin-left: 850px"><a/>
-<%--  <a class="probootstrap-scroll-down js-next" href="#next-section">Scroll down <i class="icon-chevron-down"></i></a>--%>
-<%--</section>--%>
-<!-- END: section -->
-
+<START: section >
+<section class="probootstrap-intro" style="height: 300px ;" data-stellar-background-ratio="0.5">
+<a href=""><img src="<%=path%>/static/images/head/egm.png"height="360px" style="margin-left: 860px"><a/>
+</section>
 <div style="position: relative;width: 100%;height: 80px;">
   <div class="search-wrapper">
     <div class="input-holder">
@@ -152,9 +148,6 @@
     </div>
   </div>
 </section>
-
-
-
 <!-- START: section -->
 <section class="probootstrap-section probootstrap-section-colored">
   <div class="container" style="height: 100px">

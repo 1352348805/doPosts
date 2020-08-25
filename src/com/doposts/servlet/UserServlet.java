@@ -104,11 +104,10 @@ public class UserServlet extends AbstractServlet{
     public String postAndfloor(HttpServletRequest request, HttpServletResponse response){
 
         SelectAllPostAndFloor id = floorService.getFloorById(1);
-       Post post= postService.getPostById(1);
+        Post post= postService.getPostById(1);
         List<FloorWithReply> floorWithReplies= id.getFloor();
         request.setAttribute("post",post);
         request.setAttribute("floor",floorWithReplies);
-
         return "userweb/reply";
     }
 
@@ -133,6 +132,8 @@ public class UserServlet extends AbstractServlet{
 
         return "userweb/forumpark";
     }
+
+
 
 
 

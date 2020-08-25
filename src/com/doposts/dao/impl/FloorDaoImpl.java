@@ -21,7 +21,7 @@ public class FloorDaoImpl implements FloorDao{
 
     public FloorDaoImpl() {
         this.crud = CrudHandler.floorCrud;
-        this.basicCrud = PostItDatabase.CRUD;
+        this.basicCrud = PostItDatabase.getCRUD();
     }
 
 
