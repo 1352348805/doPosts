@@ -85,6 +85,7 @@ public class PostClassServiceImpl implements PostClassService {
     public List<PostClass> getCategoryListByParentId(Integer parentId) {
         PostClass postClass = new PostClass();
         postClass.setClassId(parentId);
+        postClass.setEnable(true);
         return  PostItDatabase.POST_CLASS_DAO.getSubPostClass(postClass);
     }
 
@@ -202,6 +203,7 @@ public class PostClassServiceImpl implements PostClassService {
         //使用父级id查询子分类
         PostClass postClass = new PostClass();
         postClass.setClassId(parentId);
+        postClass.setEnable(true);
         List<PostClass> postClassList = PostItDatabase.POST_CLASS_DAO.getSubPostClass(postClass);
 
         postClassList.forEach(item -> {

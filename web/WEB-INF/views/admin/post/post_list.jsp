@@ -170,8 +170,10 @@
                     if (data.code == 200) {
                         layer.msg('删除成功!',{
                             time : 1000
+                        },function () {
+                            location.reload();
                         });
-                        location.reload();
+
                     } else {
                         layer.msg(data.message);
                     }
@@ -190,7 +192,7 @@
             dataType : 'json',
             success: function (result) {
                 if (result.code == 200) {
-                    var options = "<option value='0'>" + "请选择..." + "</option>";
+                    var options = "<option value='-1'>" + "请选择..." + "</option>";
                     for (var i = 0; i < result.data.length; i++) {
                         var option = "<option value=" + result.data[i].classId + ">" + result.data[i].className + "</option>";
                         options = options + option;

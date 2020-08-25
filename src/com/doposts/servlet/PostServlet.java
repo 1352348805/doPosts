@@ -48,18 +48,18 @@ public class PostServlet extends AbstractServlet {
             pageIndex = 1;
             pageSize = 10;
         }
-        if (request.getParameter("postClassLevel1Id") != null && !request.getParameter("postClassLevel1Id").equals("0")) {
+        if (request.getParameter("postClassLevel1Id") != null && !request.getParameter("postClassLevel1Id").equals("-1")) {
             postClassLevel1Id = Integer.parseInt(request.getParameter("postClassLevel1Id"));
         } else {
             postClassLevel1Id = null;
         }
-        if (request.getParameter("postClassLevel2Id") != null && !request.getParameter("postClassLevel2Id").equals("0")) {
+        if (request.getParameter("postClassLevel2Id") != null && !request.getParameter("postClassLevel2Id").equals("-1")) {
             postClassLevel1Id = null;
             postClassLevel2Id = Integer.parseInt(request.getParameter("postClassLevel2Id"));
         } else {
             postClassLevel2Id = null;
         }
-        if (request.getParameter("postClassLevel3Id") != null && !request.getParameter("postClassLevel3Id").equals("0")) {
+        if (request.getParameter("postClassLevel3Id") != null && !request.getParameter("postClassLevel3Id").equals("-1")) {
             postClassLevel2Id = null;
             postClassLevel3Id = Integer.parseInt(request.getParameter("postClassLevel3Id"));
         } else {
@@ -81,14 +81,24 @@ public class PostServlet extends AbstractServlet {
     }
 
     /**
-     *
-     * @param request
-     * @param response
-     * @return
+     * 按条件获取总记录数
      */
     public CommonResult getPostCountByCondition(HttpServletRequest request, HttpServletResponse response) {
         PostQueryParam queryParam = new PostQueryParam();
         Integer count = postService.getPostCountByCondition(queryParam);
         return new CommonResult().success(count);
     }
+
+    /**
+     * 删除帖子
+     */
+    public CommonResult deletePost(HttpServletRequest request, HttpServletResponse response) {
+        Integer id = Integer.parseInt(request.getParameter("postId"));
+        boolean b = postService.deletePostById(id);
+        if (b) {
+            return new CommonResult().success(null);
+        }
+       return new CommonResult().failed("删除失败");
+    }
+
 }

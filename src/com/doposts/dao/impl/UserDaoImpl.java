@@ -19,7 +19,7 @@ public class UserDaoImpl implements UserDao {
 
     public UserDaoImpl() {
         this.crud = CrudHandler.userCrud;
-        this.basicCrud = PostItDatabase.CRUD;
+        this.basicCrud = PostItDatabase.getCRUD();
     }
 
     @Override

@@ -30,7 +30,7 @@ public class PostTest {
          floor.forEach(f -> {
              System.out.println("sssssss:"+f.getPostContent());
              f.getReplyList().forEach( r -> {
-                 System.out.println(r);
+                 System.out.println("reply："+r);
              });
          });
      }

@@ -20,7 +20,7 @@ public class PostClassDaoImpl implements PostClassDao {
 
     public PostClassDaoImpl() {
         this.crud = CrudHandler.postClassCrud;
-        this.basicCrud = PostItDatabase.CRUD;
+        this.basicCrud = PostItDatabase.getCRUD();
     }
 
     /**
@@ -48,6 +48,7 @@ public class PostClassDaoImpl implements PostClassDao {
         if(postClass != null){
             PostClass ps = new PostClass();
             ps.setClassFatherId(postClass.getClassId());
+            ps.setEnable(postClass.getEnable());
             try {
                 return crud.select(PostClass.class, ps);
             } catch (SQLException e) {
