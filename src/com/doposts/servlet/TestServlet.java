@@ -37,5 +37,6 @@ public class TestServlet extends HttpServlet {
         List<User> userList = PostItDatabase.USER_DAO.selectUserByStartIndexAndLength(startIndex, 5);
         req.setAttribute("userList", userList);
         req.getRequestDispatcher("/test.jsp").forward(req, resp);
+
     }
 }
