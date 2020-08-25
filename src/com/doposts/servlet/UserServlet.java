@@ -129,7 +129,8 @@ public class UserServlet extends AbstractServlet{
      *@Time 19:01
      */
     public String forumpark(HttpServletRequest request , HttpServletResponse response){
-
+        System.out.println(request.getParameter("barId"));
+        request.setAttribute("barid",request.getParameter("barId"));
         return "userweb/forumpark";
     }
 
