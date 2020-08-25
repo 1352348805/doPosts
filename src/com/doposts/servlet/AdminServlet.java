@@ -125,6 +125,12 @@ public class AdminServlet extends AbstractServlet{
     }
 
     /**
+     * 帖子列表
+     */
+    public String postList(HttpServletRequest request, HttpServletResponse response) {
+        return "admin/post/post_list";
+    }
+    /**
      * 跳转帖子分类列表
      * @return
      */
@@ -267,12 +273,32 @@ public class AdminServlet extends AbstractServlet{
         Integer isPass = Integer.parseInt(request.getParameter("isPass"));
         CreateClassRequest classRequest = new CreateClassRequest();
         classRequest.setRequestId(requestId);
-        classRequest.setIsPass(isPass > 0 ? true : false);
+        classRequest.setIsPass(isPass > 0);
         classRequest.setIsProcess(true);
         classRequest.setReviewerId(1);
         classRequest.setReviewDate(new Date());
         boolean b = createClassRequestService.modifyRequestStatus(classRequest);
         if (b) {
+            invalidMenuCache(request);
+            return new CommonResult().success(null);
+        }
+        return new CommonResult().failed("操作失败");
+    }
+
+    /**
+     * 切换审核状态
+     */
+    public CommonResult processStatusChange(HttpServletRequest request, HttpServletResponse response) {
+        Integer requestId = Integer.parseInt(request.getParameter("requestId"));
+        Integer isProcess = Integer.parseInt(request.getParameter("isProcess"));
+        CreateClassRequest classRequest = new CreateClassRequest();
+        classRequest.setRequestId(requestId);
+        classRequest.setIsProcess(isProcess > 0);
+        classRequest.setReviewerId(1);
+        classRequest.setReviewDate(new Date());
+        boolean b = createClassRequestService.modifyRequestStatus(classRequest);
+        if (b) {
+            invalidMenuCache(request);
             return new CommonResult().success(null);
         }
         return new CommonResult().failed("操作失败");

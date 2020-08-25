@@ -12,6 +12,14 @@ import java.util.List;
 public class FloorWithReply extends Floor {
 
 
+    /**
+     * 用户名字
+     */
+    private String userName;
+
+    /**
+     * 回复列表的所有数据
+     */
     List<Reply> replyList;
 
     public List<Reply> getReplyList() {
@@ -20,5 +28,13 @@ public class FloorWithReply extends Floor {
 
     public void setReplyList(List<Reply> replyList) {
         this.replyList = replyList;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }
