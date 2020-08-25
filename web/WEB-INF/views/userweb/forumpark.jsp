@@ -52,8 +52,8 @@
 
 					<select tabindex="4" class="dropdown ">
 						<option value="" class="label" value="">Currency :USD</option>
-						<option value="1"> Dollar</option>
-						<option value="2"> Euro</option>
+						<option value="1">Dollar</option>
+						<option value="2">Euro</option>
 					</select>
 				</div>
 
@@ -104,8 +104,8 @@
 							<div class="banner-off">
 								<h2>FLAT 50% 0FF</h2>
 								<span>FOR ALL PURCHASE <b>VALUE</b></span>
-								<p>Lorem ipsum dolor sit amet,  consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>
-								<a class="now-get" href="#">GET  NOW</a>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>
+								<a class="now-get" href="#">GET NOW</a>
 							</div>
 							<div class="clearfix"> </div>
 						</div>
@@ -128,7 +128,7 @@
 							<div class="banner-off">
 								<h2>FLAT 50% 0FF</h2>
 								<span>FOR ALL PURCHASE <b>VALUE</b></span>
-								<p>Lorem ipsum dolor sit amet, consectetur  adipisicing  elit, sed do eiusmod tempor incididunt ut labore et </p>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>
 								<a class="now-get" href="#">GET NOW</a>
 							</div>
 							<div class="clearfix"> </div>
@@ -388,13 +388,13 @@
 				<h3 class="cate">全部贴吧分类</h3>
 				<ul class="menu">
 					<ul class="kid-menu ">
-						<li><a href="product.html">Commodo sit</a></li>
-						<li ><a href="product.html">Urna ac tortor sc</a></li>
-						<li><a href="product.html">Ornared id aliquet</a></li>
-						<li><a href="product.html">Urna ac tortor sc</a></li>
-						<li ><a href="product.html">Eget nisi laoreet</a></li>
-						<li><a href="product.html">Faciisis ornare</a></li>
-						<li class="menu-kid-left"><a href="contact.html">Contact us</a></li>
+						<li class="kid-menu-li"><a href="product.html">Commodo sit</a></li>
+<%--						<li ><a href="product.html">Urna ac tortor sc</a></li>--%>
+<%--						<li><a href="product.html">Ornared id aliquet</a></li>--%>
+<%--						<li><a href="product.html">Urna ac tortor sc</a></li>--%>
+<%--						<li ><a href="product.html">Eget nisi laoreet</a></li>--%>
+<%--						<li><a href="product.html">Faciisis ornare</a></li>--%>
+<%--						<li class="menu-kid-left"><a href="contact.html">Contact us</a></li>--%>
 					</ul>
 				</ul>
 			</div>
@@ -521,6 +521,14 @@
 		</div>
 	</div>
 </div>
+  <script>
+	  $(function(){
+	  	kid_menu();
+	  	function kid_menu(){
 
+		}
+
+	  });
+  </script>
 </body>
 </html>
