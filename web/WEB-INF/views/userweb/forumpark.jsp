@@ -253,6 +253,7 @@
 		<div class="clearfix"> </div>
 	</div>
 </div>
+<div style="display: inline-block"></div>
 <!---->
   <script type="text/javascript">
 	  $(function(){

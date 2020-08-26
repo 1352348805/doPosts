@@ -53,7 +53,7 @@
             </table>
         </div>
 
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div style="overflow: auto;height: 80%;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
             <div>
                 <div class="widget-body no-padding">
