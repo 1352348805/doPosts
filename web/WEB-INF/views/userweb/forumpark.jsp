@@ -255,12 +255,53 @@
 		<div class="clearfix"> </div>
 	</div>
 </div>
+<input type="hidden" id="pid" value="<%=barid%>"/>
 <div style="display: inline-block"></div>
 <!---->
   <script type="text/javascript">
+
+	  // 展示一级贴吧分类的下所有三级贴吧
+	  function threelevelbar(id){
+		  $.post("${pageContext.request.contextPath}/postCategory?action=getThreeLevelAllBarByName&barId="+id,
+				  function (result) {
+					  let date = result.data;
+					  var bardiv = "" ;
+					  for(var i = 0 ; i < date.length ; i++){
+						  bardiv +="<div class=\" con-sed-grid\">\n" +
+								  "\t\t\t\t\t<div class=\"elit-grid\">\n" +
+								  "\t\t\t\t\t\t<h4>consectetur  elit</h4>\n" +
+								  "\t\t\t\t\t\t<span>"+date[i].className+"</span>\n" +
+								  "\t\t\t\t\t\t<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, </p>\n" +
+								  "\t\t\t\t\t\t<a class=\"now-get\" href=\"#\">GET NOW</a>\n" +
+								  "\t\t\t\t\t</div>\n" +
+								  "\t\t\t\t\t<a href=\"single.html\"><img class=\"img-responsive shoe-left\" src=\"images/sh.jpg\" alt=\" \"></a>\n" +
+								  "\t\t\t\t\t<div class=\"clearfix\"> </div>\n" +
+								  "\t\t\t\t</div>\n" ;
+						  if(++i<date.length){
+							  bardiv+="\t\t\t\t<div class=\"con-sed-grid sed-left-top\">\n" +
+									  "\t\t\t\t\t<div class=\"elit-grid\">\n" +
+									  "\t\t\t\t\t\t<h4>consectetur  elit</h4>\n" +
+									  "\t\t\t\t\t\t<span>"+date[i].className+"</span>\n" +
+									  "\t\t\t\t\t\t<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, </p>\n" +
+									  "\t\t\t\t\t\t<a class=\"now-get\" href=\"#\">GET NOW</a>\n" +
+									  "\t\t\t\t\t</div>\n" +
+									  "\t\t\t\t\t<a href=\"single.html\"><img class=\"img-responsive shoe-left\" src=\"images/wa.jpg\" alt=\" \"></a>\n" +
+									  "\t\t\t\t\t<div class=\"clearfix\"> </div>\n" +
+									  "\t\t\t\t</div>";
+						  }
+
+					  }
+					  $(".shoes-grid-left").html(bardiv);
+				  },'json');
+	  }
+
+	  function selectThreeClassById(id) {
+		  threelevelbar(id);
+	  }
+
 	  $(function(){
 	  	kid_menu();
-	  	threelevelbar();
+	  	threelevelbar($("#pid").val());
 	  	// 展示页面左边导航栏
 	  	function kid_menu(){
 	  		$.post("${pageContext.request.contextPath}/postCategory?action=getSecondLevelBarByName&barId=<%=barid%>",
@@ -268,7 +309,8 @@
                      let date = result.data;
                      var menu_div = "";
                      for(var i = 0 ; i < date.length ; i++){
-						 menu_div += " <li><a href=\"#\">"+date[i].className +"</a></li>";
+                     	//date[i].classId
+						 menu_div += " <li><a href=\"javascript:;\" onclick='selectThreeClassById("+date[i].classId+");'>"+ date[i].className +"</a></li>";
 					 }
                      $(".kid-menu").html(menu_div);
 
@@ -276,40 +318,7 @@
 			);
 		}
 
-		// 展示一级贴吧分类的下所有三级贴吧
-        function threelevelbar(){
-            $.post("${pageContext.request.contextPath}/postCategory?action=getThreeLevelAllBarByName&barId=<%=barid%>",
-                function (result) {
-            	let date = result.data;
-            	var bardiv = "" ;
-            	for(var i = 0 ; i < date.length ; i++){
-            		bardiv +="<div class=\" con-sed-grid\">\n" +
-							"\t\t\t\t\t<div class=\"elit-grid\">\n" +
-							"\t\t\t\t\t\t<h4>consectetur  elit</h4>\n" +
-							"\t\t\t\t\t\t<span>"+date[i].className+"</span>\n" +
-							"\t\t\t\t\t\t<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, </p>\n" +
-							"\t\t\t\t\t\t<a class=\"now-get\" href=\"#\">GET NOW</a>\n" +
-							"\t\t\t\t\t</div>\n" +
-							"\t\t\t\t\t<a href=\"single.html\"><img class=\"img-responsive shoe-left\" src=\"images/sh.jpg\" alt=\" \"></a>\n" +
-							"\t\t\t\t\t<div class=\"clearfix\"> </div>\n" +
-							"\t\t\t\t</div>\n" ;
-				   if(++i<date.length){
-					bardiv+="\t\t\t\t<div class=\"con-sed-grid sed-left-top\">\n" +
-							"\t\t\t\t\t<div class=\"elit-grid\">\n" +
-							"\t\t\t\t\t\t<h4>consectetur  elit</h4>\n" +
-							"\t\t\t\t\t\t<span>"+date[i].className+"</span>\n" +
-							"\t\t\t\t\t\t<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, </p>\n" +
-							"\t\t\t\t\t\t<a class=\"now-get\" href=\"#\">GET NOW</a>\n" +
-							"\t\t\t\t\t</div>\n" +
-							"\t\t\t\t\t<a href=\"single.html\"><img class=\"img-responsive shoe-left\" src=\"images/wa.jpg\" alt=\" \"></a>\n" +
-							"\t\t\t\t\t<div class=\"clearfix\"> </div>\n" +
-							"\t\t\t\t</div>";
-				   }
 
-				}
-            	$(".shoes-grid-left").html(bardiv);
-            },'json');
-        }
 
 	  });
   </script>

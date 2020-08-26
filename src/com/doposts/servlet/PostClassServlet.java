@@ -6,6 +6,7 @@ import com.doposts.service.impl.PostClassServiceImpl;
 import com.doposts.service.interfaces.PostClassService;
 import com.doposts.to.CommonResult;
 import com.doposts.vo.PostClassWithChildren;
+import com.sun.deploy.net.HttpRequest;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -98,4 +99,20 @@ public class PostClassServlet extends AbstractServlet{
          List<PostClass> list = postClassService.getThreePostClassListByParent(barid);
          return new CommonResult().success(list);
      }
+
+
+//     /**
+//      *@Description 查询二级分类下的贴吧
+//      *@Param
+//      *@Author Wang.li.ming
+//      *@Date 2020/8/26
+//      *@Time 16:52
+//      */
+//     public CommonResult getsecondLevelAllBarName(HttpServletRequest request , HttpServletResponse response){
+//         Integer secondbarid = Integer.parseInt(request.getParameter("secondBarid"));
+//         List<PostClass> list = postClassService.getCategoryListByParentId(secondbarid);
+//         return new CommonResult().success(list);
+//     }
+
+
 }
