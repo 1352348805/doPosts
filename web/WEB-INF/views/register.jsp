@@ -19,21 +19,14 @@
     <script src="<%=path%>/static/js/jquery.js"></script>
     <style>
         body{
+            background-image: image("/static/images/backgroundList/bg1.jpg");
             background-size: cover;
             background-repeat: no-repeat;
         }
-
-        .layadmin-user-login-main{
-          border: 1px;
-        }
-        .layadmin-user-login layadmin-user-display-show{
-            border: 1px;
-        }
     </style>
 </head>
-<body style="overflow:-Scroll;overflow-x:hidden;">
-<video src="/doPosts/static/video/edit.mp4" style="z-index: -1; width:100%;height: 100%;object-fit: cover;" position: absolute; loop="loop" autoplay="autoplay"
-       muted="muted" type="video/mp4"></video>
+<body>
+
 <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="position: absolute;left: 33%;top: -100px">
     <div class="layadmin-user-login-main" >
         <div class="layadmin-user-login-box layadmin-user-login-header">
