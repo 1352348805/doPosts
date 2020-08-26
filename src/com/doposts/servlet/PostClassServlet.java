@@ -86,4 +86,16 @@ public class PostClassServlet extends AbstractServlet{
      }
 
 
+     /**
+      *@Description 展示一级分类下所有三级贴吧
+      *@Param
+      *@Author Wang.li.ming
+      *@Date 2020/8/26
+      *@Time 12:33
+      */
+     public CommonResult getThreeLevelAllBarByName(HttpServletRequest request , HttpServletResponse response){
+         Integer barid = Integer.parseInt(request.getParameter("barId")) ;
+         List<PostClass> list = postClassService.getThreePostClassListByParent(barid);
+         return new CommonResult().success(list);
+     }
 }
