@@ -522,6 +522,7 @@ ul.wmuSliderPagination {
 	margin: 0em 31px 0 0;
 	float: left;
 	width: 48%;
+	margin-top:15px;
 }
 .elit-grid{
 	float:left;
@@ -608,6 +609,7 @@ h5.latest-product{
 }
 .sed-left-top,.grid-top-chain{
 	margin: 0;
+	margin-top: 15px;
 }
 .star-price {
 	padding: 1em 0.5em;
@@ -1489,6 +1491,7 @@ a.get-cart {
 }
 .sed-left-top, .grid-top-chain{
     margin: 0;
+	margin-top: 15px;
 }
 .elit-grid {
     width: 44%;
@@ -1542,6 +1545,7 @@ a.get-cart {
 }
 .sed-left-top{
 	margin:1em 0 0 0;
+	margin-top:15px;
 }
 .latter h6 {
 	width: 43%;
