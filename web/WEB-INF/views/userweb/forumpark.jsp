@@ -64,14 +64,12 @@
 		</div>
 	</div>
 	<div class="bottom-header">
+
 		<div class="container">
-			<div class="header-bottom-left">
-				<div class="logo">
-					<a href="index.html"><img src="<%=path%>/static/images/forumpark/logo.png" alt=" " /></a>
-				</div>
-				<div class="search">
-					<input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" >
-					<input type="submit"  value="SEARCH">
+				<div style="text-align:center;vertical-align:middle;">
+
+					<input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" style="margin-left: 300px; border-radius: 6px; height: 35px; width: 350px">
+					<input type="submit"  value="搜索" style="background-color:pink;height: 40px;width: 80px;border-radius: 6px; position: absolute;">
 
 				</div>
 				<div class="clearfix"> </div>
@@ -205,7 +203,7 @@
 				<h3 class="cate">全部贴吧分类</h3>
 				<ul class="menu">
 					<ul class="kid-menu ">
-						<li class="kid-menu-li"><a href="product.html">Commodo sit</a></li>
+						<li class="kid-menu-li"><a href="product.html">李洋解刨学</a></li>
 <%--						<li ><a href="product.html">Urna ac tortor sc</a></li>--%>
 <%--						<li><a href="product.html">Ornared id aliquet</a></li>--%>
 <%--						<li><a href="product.html">Urna ac tortor sc</a></li>--%>
