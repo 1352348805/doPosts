@@ -54,7 +54,7 @@ public class DatabaseMonitor {
             StringBuilder builder = new StringBuilder();
             builder.append("                           ============ DX_Database ============ \n\t数据库接口调用：").append(interfaceName).append("\n");
             builder.append("\t方法名：").append(log.getMethodName()).append("\n");
-            builder.append("\t参数：\n").append(log.getParams());
+            builder.append("\t参数：\n").append(log.getParams()==null? "\t\t"+null+"\n": log.getParams());
             builder.append("\t调用位置：").append(log.getLocation()).append("\n");
             if(dataOutput){
                 builder.append("\t数据：↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ \n").append(log.getData());

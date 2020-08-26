@@ -51,6 +51,9 @@
 				</div>
 				<div class="down-top top-down">
 
+
+
+
 					<select tabindex="4" class="dropdown ">
 						<option value="" class="label" value="">Currency :USD</option>
 						<option value="1">Dollar</option>
@@ -102,72 +105,72 @@
 					<article style="position: absolute; width: 100%; opacity: 0;">
 						<div class="banner-matter">
 							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/youxi2.png" alt=" " />
-							<div class="banner-off">
-								<h2>FLAT 50% 0FF</h2>
-								<span>FOR ALL PURCHASE <b>VALUE</b></span>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>
-								<a class="now-get" href="#">GET NOW</a>
-							</div>
+<%--							<div class="banner-off">--%>
+<%--								<h2>FLAT 50% 0FF</h2>--%>
+<%--								<span>FOR ALL PURCHASE <b>VALUE</b></span>--%>
+<%--								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>--%>
+<%--								<a class="now-get" href="#">GET NOW</a>--%>
+<%--							</div>--%>
 							<div class="clearfix"> </div>
 						</div>
 					</article>
 					<article style="position: absolute; width: 100%; opacity: 1;">
 						<div class="banner-matter">
 							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/dongman.png" alt=" " />
-							<div class="banner-off">
-								<h2>FLAT 50% 0FF</h2>
-								<span>FOR ALL PURCHASE <b>VALUE</b></span>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>
-								<a class="now-get" href="#">GET NOW</a>
-							</div>
+<%--							<div class="banner-off">--%>
+<%--								<h2>FLAT 50% 0FF</h2>--%>
+<%--								<span>FOR ALL PURCHASE <b>VALUE</b></span>--%>
+<%--								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>--%>
+<%--								<a class="now-get" href="#">GET NOW</a>--%>
+<%--							</div>--%>
 							<div class="clearfix"> </div>
 						</div>
 					</article>
 					<article style="position: absolute; width: 100%; opacity: 2;">
 						<div class="banner-matter">
 							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/timg.png" alt=" " />
-							<div class="banner-off">
-								<h2>FLAT 50% 0FF</h2>
-								<span>FOR ALL PURCHASE <b>VALUE</b></span>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>
-								<a class="now-get" href="#">GET NOW</a>
-							</div>
+<%--							<div class="banner-off">--%>
+<%--								<h2>FLAT 50% 0FF</h2>--%>
+<%--								<span>FOR ALL PURCHASE <b>VALUE</b></span>--%>
+<%--								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>--%>
+<%--								<a class="now-get" href="#">GET NOW</a>--%>
+<%--							</div>--%>
 							<div class="clearfix"> </div>
 						</div>
 					</article>
 					<article style="position: absolute; width: 100%; opacity: 3;">
 						<div class="banner-matter">
 							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/tiyu.png" alt=" " />
-							<div class="banner-off">
-								<h2>FLAT 50% 0FF</h2>
-								<span>FOR ALL PURCHASE <b>VALUE</b></span>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>
-								<a class="now-get" href="#">GET NOW</a>
-							</div>
+<%--							<div class="banner-off">--%>
+<%--								<h2>FLAT 50% 0FF</h2>--%>
+<%--								<span>FOR ALL PURCHASE <b>VALUE</b></span>--%>
+<%--								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>--%>
+<%--								<a class="now-get" href="#">GET NOW</a>--%>
+<%--							</div>--%>
 							<div class="clearfix"> </div>
 						</div>
 					</article>
 					<article style="position: absolute; width: 100%; opacity: 4;">
 						<div class="banner-matter">
 							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/dianying.png" alt=" " />
-							<div class="banner-off">
-								<h2>FLAT 50% 0FF</h2>
-								<span>FOR ALL PURCHASE <b>VALUE</b></span>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>
-								<a class="now-get" href="#">GET NOW</a>
-							</div>
+<%--							<div class="banner-off">--%>
+<%--								<h2>FLAT 50% 0FF</h2>--%>
+<%--								<span>FOR ALL PURCHASE <b>VALUE</b></span>--%>
+<%--								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>--%>
+<%--								<a class="now-get" href="#">GET NOW</a>--%>
+<%--							</div>--%>
 							<div class="clearfix"> </div>
 						</div>
 					</article>
 					<article style="position: absolute; width: 100%; opacity: 5;">
 						<div class="banner-matter">
 							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/xiaoshuo.png" alt=" " />
-							<div class="banner-off">
-								<h2>FLAT 50% 0FF</h2>
-								<span>FOR ALL PURCHASE <b>VALUE</b></span>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>
-								<a class="now-get" href="#">GET NOW</a>
-							</div>
+<%--							<div class="banner-off">--%>
+<%--								<h2>FLAT 50% 0FF</h2>--%>
+<%--								<span>FOR ALL PURCHASE <b>VALUE</b></span>--%>
+<%--								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>--%>
+<%--								<a class="now-get" href="#">GET NOW</a>--%>
+<%--							</div>--%>
 							<div class="clearfix"> </div>
 						</div>
 					</article>
@@ -184,10 +187,11 @@
 				$('.example1').wmuSlider();
 			</script>
 			<!---->
-			<div class="shoes-grid-left">
 
+            <%--贴吧展示--%>
+            <div class="shoes-grid-left">
 
-			</div>
+            </div>
 
 			<div class="product-left">
 
@@ -244,7 +248,7 @@
 					<h6>Lorem ipsum dolor</h6>
 				</div>
 			</div>
-			<a class="view-all all-product" href="product.html">VIEW ALL PRODUCTS<span> </span></a>
+<%--			<a class="view-all all-product" href="product.html">VIEW ALL PRODUCTS<span> </span></a>--%>
 		</div>
 		<div class="clearfix"> </div>
 	</div>
@@ -253,6 +257,8 @@
   <script type="text/javascript">
 	  $(function(){
 	  	kid_menu();
+	  	threelevelbar();
+	  	// 展示页面左边导航栏
 	  	function kid_menu(){
 	  		$.post("${pageContext.request.contextPath}/postCategory?action=getSecondLevelBarByName&barId=<%=barid%>",
 					function (result) {
@@ -266,6 +272,28 @@
 			        },'json'
 			);
 		}
+
+		// 展示一级贴吧分类的下所有三级贴吧
+        function threelevelbar(){
+            $.post("${pageContext.request.contextPath}/postCategory?action=getThreeLevelAllBarByName&barId=<%=barid%>",
+                function (result) {
+            	let date = result.data;
+            	var bardiv = "" ;
+            	for(var i = 0 ; i < date.length ; i++){
+            		bardiv +="<div class=\" con-sed-grid\">\n" +
+							"                    <div class=\"elit-grid\">\n" +
+							"                        <h4>consectetur  elit</h4>\n" +
+							"                        <span>"+date[i].className+"</span>\n" +
+							"                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, </p>\n" +
+							"                        <a class=\"now-get\" href=\"#\">GET NOW</a>\n" +
+							"                    </div>\n" +
+							"                    <a href=\"single.html\"><img class=\"img-responsive shoe-left\" src=\"<%=path%>/static/images/forumpark/sh.jpg\" alt=\" \"></a>\n" +
+							"                    <div class=\"clearfix\"> </div>\n" +
+							"                </div>\n";
+				}
+            	$(".shoes-grid-left").html(bardiv);
+            },'json');
+        }
 
 	  });
   </script>
