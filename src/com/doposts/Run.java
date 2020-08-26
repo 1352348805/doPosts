@@ -13,9 +13,6 @@ import java.util.List;
 @SuppressWarnings("RedundantThrows")
 public class Run {
     public static void main(String[] args) throws Exception{
-        PostQueryParam queryParam = new PostQueryParam();
-        List<PostInfo> info = PostItDatabase.POST_DAO.getPostListByCondition(queryParam, 0, 200);
-        System.out.println("返回数据：");
-        System.out.println(info);
+
     }
 }
