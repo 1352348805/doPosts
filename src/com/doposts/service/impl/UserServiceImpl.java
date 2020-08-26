@@ -129,4 +129,10 @@ public class UserServiceImpl implements UserService {
     public boolean updateUser(User user) {
         return PostItDatabase.USER_DAO.updateUserInfo(user) == 1;
     }
+
+    @Override
+    public User getUserById(int id) {
+        User user = PostItDatabase.USER_DAO.getUserById(id);
+        return user;
+    }
 }
