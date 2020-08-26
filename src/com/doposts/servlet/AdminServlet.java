@@ -82,6 +82,32 @@ public class AdminServlet extends AbstractServlet{
     }
 
     /**
+     * 删除用户
+     * @param request
+     * @param response
+     * @return
+     */
+    public String delete(HttpServletRequest request, HttpServletResponse response){
+
+        int c=Integer.valueOf(request.getParameter("userId") )   ;
+        userService.getDeleteUser(c);
+        return "admin/user/user_list";
+    }
+
+    /**
+     * 修改用户
+     * @param request
+     * @param response
+     * @return
+     */
+    public String update(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        int id = Integer.valueOf(request.getParameter("userId") );
+        User user = userService.getUserById(id);
+        request.setAttribute("sb",user);
+        return "admin/user/user_update";
+    }
+
+    /**
      * 获取总记录数
      * @param request
      * @param response

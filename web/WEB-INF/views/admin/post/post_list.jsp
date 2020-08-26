@@ -1,6 +1,8 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
+  后台主页
   Author: asuk
-  DateTime: 2020/8/21 16:48
+  DateTime: 2020/8/18 18:50
   Phone: 18579133013
   Email: 1352348805@qq.com
 --%>
@@ -19,92 +21,90 @@
 </head>
 <body>
 <!--头部-->
-<%@include file="../../common/admin/head.jsp" %>
+<%@include file="../../common/admin/head.jsp"%>
 <!--时间-->
-<%@include file="../../common/admin/time.jsp" %>
-<!--主体内容-->
-<section class="publicMian ">
-    <%@include file="../../common/admin/leftnav.jsp" %>
-    <input type="hidden" id="path" name="path" value="${pageContext.request.contextPath }"/>
-    <div class="right">
-        <!-- 支撑高度 -->
-        <div style="height: 30px">
+<%@include file="../../common/admin/time.jsp"%>
+ <!--主体内容-->
+ <section class="publicMian ">
+     <%@include file="../../common/admin/leftnav.jsp"%>
+     <input type="hidden" id="path" name="path" value="${pageContext.request.contextPath }"/>
+     <div class="right">
+         <!-- 支撑高度 -->
+         <div style="height: 30px">
 
-        </div>
+         </div>
 
-        <div class="layui-card-header layuiadmin-card-header-auto">
-            <div class="layui-form-item">
-                <label class="layui-form-label">分类</label>
-                <div class="layui-input-block">
-                    <div class="layui-inline">
-                        <select class="jj" name="categoryLevel1Id" style="background-color:#f6f6f6;" id="categoryLevel1Id"
-                                onchange="queryCategoryList(this,'categoryLevel2Id');">
-                            <option value="0" selected="selected">请选择...</option>
-                        </select>
-                    </div>
-                    <div class="layui-inline">
-                        <select class="jj" name="categoryLevel2Id" style="background-color:#f6f6f6;" id="categoryLevel2Id"
-                                onchange="queryCategoryList(this,'categoryLevel3Id');">
-                            <option value="0" selected="selected">请选择...</option>
-                        </select>
-                    </div>
-                    <div class="layui-inline">
-                        <select class="jj" name="categoryLevel3Id" style="background-color:#f6f6f6;" id="categoryLevel3Id">
-                            <option value="0" selected="selected">请选择</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <div class="layui-inline">
-                    <label class="layui-form-label">贴名</label>
-                    <div class="layui-input-inline">
-                        <input type="text" name="postName" id="postName" placeholder="请输入" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label class="layui-form-label">发帖人</label>
-                    <div class="layui-input-inline">
-                        <input type="text" name="createUserName" id="createUserName" placeholder="请输入" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <button class="layui-btn layuiadmin-btn-list" id="query-btn">
-                        <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
-                    </button>
-                </div>
-            </div>
-
-
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div>
-                    <div class="widget-body no-padding">
-                        <table id="dt-table" class="table table-striped table-bordered table-hover layui-form"
-                               style="width:100%;font-size: 14px;">
-                            <tr>
-                                <th width="10%">贴名</th>
-                                <th width="10%">一级分类</th>
-                                <th width="10%">二级分类</th>
-                                <th width="10%">三级分类</th>
-                                <th width="10%">发帖人</th>
-                                <th width="10%">发帖日期</th>
-                                <th width="10%">操作</th>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-    <!-- 存放分页的容器 -->
-    <div id="page" style="text-align: center;position:fixed; height:100px;width:100%;bottom:10%;"></div>
+         <div class="layui-card-header layuiadmin-card-header-auto">
+             <div class="layui-form-item">
+                 <label class="layui-form-label">分类</label>
+                 <div class="layui-input-block">
+                     <div class="layui-inline">
+                         <select class="jj" name="categoryLevel1Id" style="background-color:#f6f6f6;" id="categoryLevel1Id"
+                                 onchange="queryCategoryList(this,'categoryLevel2Id');">
+                             <option value="0" selected="selected">请选择...</option>
+                         </select>
+                     </div>
+                     <div class="layui-inline">
+                         <select class="jj" name="categoryLevel2Id" style="background-color:#f6f6f6;" id="categoryLevel2Id"
+                                 onchange="queryCategoryList(this,'categoryLevel3Id');">
+                             <option value="0" selected="selected">请选择...</option>
+                         </select>
+                     </div>
+                     <div class="layui-inline">
+                         <select class="jj" name="categoryLevel3Id" style="background-color:#f6f6f6;" id="categoryLevel3Id">
+                             <option value="0" selected="selected">请选择</option>
+                         </select>
+                     </div>
+                 </div>
+             </div>
+             <div class="layui-form-item">
+                 <div class="layui-inline">
+                     <label class="layui-form-label">贴名</label>
+                     <div class="layui-input-inline">
+                         <input type="text" name="postName" id="postName" placeholder="请输入" autocomplete="off" class="layui-input">
+                     </div>
+                 </div>
+                 <div class="layui-inline">
+                     <label class="layui-form-label">发帖人</label>
+                     <div class="layui-input-inline">
+                         <input type="text" name="createUserName" id="createUserName" placeholder="请输入" autocomplete="off" class="layui-input">
+                     </div>
+                 </div>
+                 <div class="layui-inline">
+                     <button style="background-color: #5994d6;" class="layui-btn layuiadmin-btn-list" id="query-btn">
+                         <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                     </button>
+                 </div>
+             </div>
 
 
+             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                 <div>
+                     <div class="widget-body no-padding">
+                         <table id="dt-table" class="table table-striped table-bordered table-hover layui-form"
+                                style="width:100%;font-size: 14px;">
+                             <tr>
+                                 <th width="10%">贴名</th>
+                                 <th width="10%">一级分类</th>
+                                 <th width="10%">二级分类</th>
+                                 <th width="10%">三级分类</th>
+                                 <th width="10%">发帖人</th>
+                                 <th width="10%">发帖日期</th>
+                                 <th width="10%">操作</th>
+                             </tr>
+                         </table>
+                     </div>
+                 </div>
+             </div>
+
+         </div>
+
+     </div>
+     <!-- 存放分页的容器 -->
+     <div id="page"></div>
 </section>
 <footer class="footer">
-    版权归来贴项目组
+    <%@include file="../../common/admin/footer.jsp"%>
 </footer>
 <input id="path" type="hidden" value="<%=path%>"/>
 <script type="text/javascript" src="<%=path%>/static/js/jquery.js"></script>
@@ -136,6 +136,7 @@
         laypage.render({
             elem: 'page' //注意，这里的 test1 是 ID，不用加 # 号
             ,limit: 10
+            ,theme: '#5994d6'
             ,count: count //数据总数，从服务端得到
             ,
             jump: function(e, first){ //触发分页后的回调

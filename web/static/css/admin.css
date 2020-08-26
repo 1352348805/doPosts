@@ -692,6 +692,10 @@ li{
     line-height: 40px;
     text-align: center;
     color: #fff;
+    position: fixed;
+    bottom: 0px;
+    height: 12%;
+    background-color: #5994d6;
 }
 
 #searchbutton{
@@ -710,7 +714,17 @@ li{
     background-color: #5d8410;
 }
 
+section {
+    height: 80%;
+}
 
+#page {
+    text-align: center;
+    position:fixed;
+    height:100px;
+    width:100%;
+    bottom:20%;
+}
 
 
 

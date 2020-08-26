@@ -23,12 +23,12 @@ $.ajaxSetup({
 });
 
 function buttonDel(data,level){
-	var btn = $("<button class='layui-btn layui-btn-xs' title='删除' onclick='del(\"" + data +"\",\""+level+"\")'><i class='layui-icon'>&#xe640;</i></button>");
+	var btn = $("<button style=\"background-color: #5994d6;\" class='layui-btn layui-btn-xs' title='删除' onclick='del(\"" + data +"\",\""+level+"\")'><i class='layui-icon'>&#xe640;</i></button>");
 	return btn.prop("outerHTML");
 }
 
 function buttonEdit(href){
-	var btn = $("<button class='layui-btn layui-btn-xs' title='编辑' onclick='window.location=\"" + href +"\"'><i class='layui-icon'>&#xe642;</i></button>");
+	var btn = $("<button style=\"background-color: #5994d6;\" class='layui-btn layui-btn-xs' title='编辑' onclick='window.location=\"" + href +"\"'><i class='layui-icon'>&#xe642;</i></button>");
 	return btn.prop("outerHTML");
 }
 
