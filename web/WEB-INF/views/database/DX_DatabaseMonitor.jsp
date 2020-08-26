@@ -23,6 +23,7 @@
         let dx_Data = {
             titleIndex: 1,
         };
+        //绑到window对象上（无用操作）
         window.dx_Data = dx_Data;
         //加载完网页执行
         $(function () {

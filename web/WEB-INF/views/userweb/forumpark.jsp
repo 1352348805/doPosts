@@ -4,7 +4,8 @@
 <html>
 <head>
 	<%
-		String path = request.getContextPath();
+		 String path = request.getContextPath();
+	     String barid= (String) request.getAttribute("barid");
 	%>
 	<link rel="shortcut icon" href="<%=path%>/static/images/head/500415.ico" />
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
@@ -64,12 +65,14 @@
 		</div>
 	</div>
 	<div class="bottom-header">
-
 		<div class="container">
-				<div style="text-align:center;vertical-align:middle;">
-
-					<input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" style="margin-left: 300px; border-radius: 6px; height: 35px; width: 350px">
-					<input type="submit"  value="搜索" style="background-color:pink;height: 40px;width: 80px;border-radius: 6px; position: absolute;">
+			<div class="header-bottom-left">
+				<div class="logo">
+					<a href="index.html"><img src="<%=path%>/static/images/forumpark/logo.png" alt=" " /></a>
+				</div>
+				<div class="search">
+					<input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" >
+					<input type="submit"  value="SEARCH">
 
 				</div>
 				<div class="clearfix"> </div>
@@ -203,11 +206,11 @@
 				<h3 class="cate">全部贴吧分类</h3>
 				<ul class="menu">
 					<ul class="kid-menu ">
-						<li class="kid-menu-li"><a href="product.html">李洋解刨学</a></li>
-<%--						<li ><a href="product.html">Urna ac tortor sc</a></li>--%>
+<%--						<li><a href="#">date[i].className</a></li>--%>
+<%--						<li><a href="product.html">Urna ac tortor sc</a></li>--%>
 <%--						<li><a href="product.html">Ornared id aliquet</a></li>--%>
 <%--						<li><a href="product.html">Urna ac tortor sc</a></li>--%>
-<%--						<li ><a href="product.html">Eget nisi laoreet</a></li>--%>
+<%--						<li><a href="product.html">Eget nisi laoreet</a></li>--%>
 <%--						<li><a href="product.html">Faciisis ornare</a></li>--%>
 <%--						<li class="menu-kid-left"><a href="contact.html">Contact us</a></li>--%>
 					</ul>
@@ -247,11 +250,21 @@
 	</div>
 </div>
 <!---->
-  <script>
+  <script type="text/javascript">
 	  $(function(){
 	  	kid_menu();
 	  	function kid_menu(){
+	  		$.post("${pageContext.request.contextPath}/postCategory?action=getSecondLevelBarByName&barId=<%=barid%>",
+					function (result) {
+                     let date = result.data;
+                     var menu_div = "";
+                     for(var i = 0 ; i < date.length ; i++){
+						 menu_div += " <li><a href=\"#\">"+date[i].className +"</a></li>";
+					 }
+                     $(".kid-menu").html(menu_div);
 
+			        },'json'
+			);
 		}
 
 	  });

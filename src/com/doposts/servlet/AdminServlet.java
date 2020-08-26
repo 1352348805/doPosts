@@ -275,7 +275,8 @@ public class AdminServlet extends AbstractServlet{
         classRequest.setRequestId(requestId);
         classRequest.setIsPass(isPass > 0);
         classRequest.setIsProcess(true);
-        classRequest.setReviewerId(1);
+        User user = (User)request.getSession().getAttribute("user");
+        classRequest.setReviewerId(user.getUserId());
         classRequest.setReviewDate(new Date());
         boolean b = createClassRequestService.modifyRequestStatus(classRequest);
         if (b) {
@@ -294,7 +295,8 @@ public class AdminServlet extends AbstractServlet{
         CreateClassRequest classRequest = new CreateClassRequest();
         classRequest.setRequestId(requestId);
         classRequest.setIsProcess(isProcess > 0);
-        classRequest.setReviewerId(1);
+        User user = (User)request.getSession().getAttribute("user");
+        classRequest.setReviewerId(user.getUserId());
         classRequest.setReviewDate(new Date());
         boolean b = createClassRequestService.modifyRequestStatus(classRequest);
         if (b) {
@@ -302,5 +304,31 @@ public class AdminServlet extends AbstractServlet{
             return new CommonResult().success(null);
         }
         return new CommonResult().failed("操作失败");
+    }
+
+    /**
+     * 检查密码
+     */
+    public CommonResult checkPwd(HttpServletRequest request, HttpServletResponse response) {
+        String oldPassword = request.getParameter("oldpassword");
+        User user = (User)request.getSession().getAttribute("user");
+        if (oldPassword.equals(user.getUserPassword())) {
+            return new CommonResult().success(null);
+        }
+        return new CommonResult().failed("密码错误");
+    }
+
+    /**
+     * 更换密码
+     */
+    public CommonResult changePwd(HttpServletRequest request, HttpServletResponse response) {
+        String password = request.getParameter("password");
+        User user = (User)request.getSession().getAttribute("user");
+        user.setUserPassword(password);
+        boolean b = userService.updateUser(user);
+        if (b) {
+            return new CommonResult().success(null);
+        }
+        return new CommonResult().failed("修改失败");
     }
 }
