@@ -85,7 +85,7 @@
             if (result.code ==200) {
                 let data = result.data;
                 let html = "<tr>\n" +
-                    "            <th>头像</th>\n" +
+                    "                <th>头像</th>\n" +
                     "                <th>账号</th>\n" +
                     "                <th>密码</th>\n" +
                     "                <th>昵称</th>\n" +
@@ -105,16 +105,17 @@
                                html += "用户";
                            }
                     html+="</th>"
-                    html+="<th style='width: 10%'>\n" +
-                        "    <button class=\"layui-btn layui-btn-xs\" title=\"编辑\" onclick=\"window.location=&quot;/doPosts/admin?action=toCategoryModify&amp;classId=1&quot;\">\n" +
+                    html+="<th width=10%>\n" +
+                        "    <button class=\"layui-btn layui-btn-xs\" title=\"修改\" onclick=\"window.location.href='<%=path%>/admin?action=update&userId="+data[i].userId+"'\">\n" +
                         "        <i class=\"layui-icon\">\n" +
                         "        </i>\n" +
                         "    </button>\n" +
-                        "    <button class=\"layui-btn layui-btn-xs\" title=\"删除\" onclick=\"del(&quot;1&quot;,&quot;1&quot;)\">\n" +
+                        "    <button class=\"layui-btn layui-btn-xs\" title=\"删除\" onclick=\"window.location.href='<%=path%>/admin?action=delete&userId="+data[i].userId+"'\">\n" +
                         "        <i class=\"layui-icon\">\n" +
                         "        </i>\n" +
                         "    </button>\n" +
                         "</th>"
+
 
                     html+="</tr>"
                 }
@@ -123,4 +124,5 @@
         },'json');
     };
 </script>
+
 </html>
