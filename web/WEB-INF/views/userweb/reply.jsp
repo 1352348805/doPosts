@@ -344,7 +344,7 @@
                                        <a href="" style=" width: 32px; height: 32px;display: inline-block; float: left;margin: 10px 10px 0px 0px">
                                            <img src="${pageContext.request.contextPath }/static/images/hero_bg_2.jpg" style="border: silver 1px solid; width: 32px; height: 32px;">
                                        </a>
-                                       <div style="display: inline-block; margin-top: 10px;width: 520px" >
+                                       <div style="display: inline-block; margin-top: 10px;width: 575px " >
                                            <a href="">盖亚:</a>
                                            <span>${replys.replyContent}</span>
                                            <div style=" float: right;padding: 10px 0px 0px 0px ">
