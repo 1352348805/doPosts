@@ -15,6 +15,7 @@ import com.doposts.to.CommonResult;
 import com.doposts.utils.Page;
 import com.doposts.vo.PostClassRequestInfo;
 
+import javax.jms.Message;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +31,7 @@ import java.util.List;
  * @email 1352348805@qq.com
  */
 @WebServlet("/admin")
-public class AdminServlet extends AbstractServlet{
+public class AdminServlet extends AbstractServlet {
 
     private PostClassService postClassService;
     private CreateClassRequestService createClassRequestService;
@@ -52,7 +53,7 @@ public class AdminServlet extends AbstractServlet{
      * 使菜单缓存失效
      */
     private void invalidMenuCache(HttpServletRequest request) {
-        request.getServletContext().setAttribute(SystemConstant.CATEGORY_MENU_KEY,null);
+        request.getServletContext().setAttribute(SystemConstant.CATEGORY_MENU_KEY, null);
     }
 
     /**
@@ -73,71 +74,102 @@ public class AdminServlet extends AbstractServlet{
 
     /**
      * 查看所有用户
+     *
      * @param request
      * @param response
      * @return 用户
      */
-    public String tUser(HttpServletRequest request, HttpServletResponse response){
+    public String tUser(HttpServletRequest request, HttpServletResponse response) {
         return "admin/user/user_list";
     }
 
     /**
      * 删除用户
+     *
      * @param request
      * @param response
      * @return
      */
-    public String delete(HttpServletRequest request, HttpServletResponse response){
+    public String delete(HttpServletRequest request, HttpServletResponse response) {
 
-        int c=Integer.valueOf(request.getParameter("userId") )   ;
+        int c = Integer.valueOf(request.getParameter("userId"));
         userService.getDeleteUser(c);
         return "admin/user/user_list";
     }
 
     /**
-     * 修改用户
+     * 修改(查询id值 带入修改页)
+     *
      * @param request
      * @param response
      * @return
      */
-    public String update(HttpServletRequest request, HttpServletResponse response) throws Exception{
-        int id = Integer.valueOf(request.getParameter("userId") );
+    public String update(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        int id = Integer.valueOf(request.getParameter("userId"));
         User user = userService.getUserById(id);
-        request.setAttribute("sb",user);
+        request.setAttribute("sb", user);
+        return "admin/user/user_update";
+    }
+
+    /**
+     * 修改(用户数据)
+     *
+     * @param request
+     * @param response
+     * @return
+     */
+    public String updateTwa(HttpServletRequest request, HttpServletResponse response) {
+        Integer userid = Integer.parseInt(request.getParameter("userId"));
+        String userLoginName = request.getParameter("userLoginName");
+        String userPassword = request.getParameter("userPassword");
+        String userName = request.getParameter("userName");
+        String group = request.getParameter("group");
+        User user = new User();
+        user.setUserId(userid);
+        user.setUserLoginName(userLoginName);
+        user.setUserPassword(userPassword);
+        user.setUserName(userName);
+        user.setGroup(group);
+        boolean b = userService.updateUser(user);
+        if (b) {
+            return "admin/user/user_list";
+        }
         return "admin/user/user_update";
     }
 
     /**
      * 获取总记录数
+     *
      * @param request
      * @param response
      * @return 总记录数
      */
-    public CommonResult userCount(HttpServletRequest request, HttpServletResponse response){
-        int count=userService.getselectUserConut();
+    public CommonResult userCount(HttpServletRequest request, HttpServletResponse response) {
+        int count = userService.getselectUserConut();
         return new CommonResult().success(count);
     }
 
     /**
      * 分页查询
+     *
      * @param request
      * @param response
      * @return
      */
-    public CommonResult userIndexANDSize(HttpServletRequest request, HttpServletResponse response){
-        Integer pageindex=null;
-        Integer pageSize=null;
+    public CommonResult userIndexANDSize(HttpServletRequest request, HttpServletResponse response) {
+        Integer pageindex = null;
+        Integer pageSize = null;
         try {
-            pageindex=Integer.valueOf(request.getParameter("pageIndex"));
-            pageSize=Integer.valueOf(request.getParameter("pageSize"));
+            pageindex = Integer.valueOf(request.getParameter("pageIndex"));
+            pageSize = Integer.valueOf(request.getParameter("pageSize"));
         } catch (Exception e) {
             pageindex = 1;
             pageSize = 10;
         }
-        List<User> list=null;
+        List<User> list = null;
         try {
-            list = userService.getUserByStartIndex(pageindex,pageSize);
-        }catch (Exception e){
+            list = userService.getUserByStartIndex(pageindex, pageSize);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return new CommonResult().success(list);
@@ -156,8 +188,10 @@ public class AdminServlet extends AbstractServlet{
     public String postList(HttpServletRequest request, HttpServletResponse response) {
         return "admin/post/post_list";
     }
+
     /**
      * 跳转帖子分类列表
+     *
      * @return
      */
     public String categoryList(HttpServletRequest request, HttpServletResponse response) {
@@ -179,7 +213,7 @@ public class AdminServlet extends AbstractServlet{
         try {
             classId = Integer.parseInt(request.getParameter("classId"));
             List<PostClass> postClassList = postClassService.getPostClassByIdWithParents(classId);
-            request.setAttribute("postClassList",postClassList);
+            request.setAttribute("postClassList", postClassList);
         } catch (Exception e) {
             response.sendRedirect(request.getContextPath() + "/admin?action=categoryList");
             return null;
@@ -229,7 +263,7 @@ public class AdminServlet extends AbstractServlet{
         if (isExists) {
             return new CommonResult().failed("该分类名已存在!");
         }
-        PostClass postClass = new PostClass(null,className,type,parentId,classDescribe);
+        PostClass postClass = new PostClass(null, className, type, parentId, classDescribe);
         boolean b = postClassService.addPostClass(postClass);
         if (b) {
             invalidMenuCache(request);
@@ -245,7 +279,7 @@ public class AdminServlet extends AbstractServlet{
         Integer classId = Integer.parseInt(request.getParameter("classId"));
         String className = request.getParameter("className");
         String classDescribe = request.getParameter("classDescribe");
-        PostClass postClass = new PostClass(classId,className,null,null,classDescribe);
+        PostClass postClass = new PostClass(classId, className, null, null, classDescribe);
         boolean b = postClassService.modifyPostClass(postClass);
         if (b) {
             invalidMenuCache(request);
@@ -301,7 +335,7 @@ public class AdminServlet extends AbstractServlet{
         classRequest.setRequestId(requestId);
         classRequest.setIsPass(isPass > 0);
         classRequest.setIsProcess(true);
-        User user = (User)request.getSession().getAttribute("user");
+        User user = (User) request.getSession().getAttribute("user");
         classRequest.setReviewerId(user.getUserId());
         classRequest.setReviewDate(new Date());
         boolean b = createClassRequestService.modifyRequestStatus(classRequest);
@@ -321,7 +355,7 @@ public class AdminServlet extends AbstractServlet{
         CreateClassRequest classRequest = new CreateClassRequest();
         classRequest.setRequestId(requestId);
         classRequest.setIsProcess(isProcess > 0);
-        User user = (User)request.getSession().getAttribute("user");
+        User user = (User) request.getSession().getAttribute("user");
         classRequest.setReviewerId(user.getUserId());
         classRequest.setReviewDate(new Date());
         boolean b = createClassRequestService.modifyRequestStatus(classRequest);
@@ -337,7 +371,7 @@ public class AdminServlet extends AbstractServlet{
      */
     public CommonResult checkPwd(HttpServletRequest request, HttpServletResponse response) {
         String oldPassword = request.getParameter("oldpassword");
-        User user = (User)request.getSession().getAttribute("user");
+        User user = (User) request.getSession().getAttribute("user");
         if (oldPassword.equals(user.getUserPassword())) {
             return new CommonResult().success(null);
         }
@@ -349,7 +383,7 @@ public class AdminServlet extends AbstractServlet{
      */
     public CommonResult changePwd(HttpServletRequest request, HttpServletResponse response) {
         String password = request.getParameter("password");
-        User user = (User)request.getSession().getAttribute("user");
+        User user = (User) request.getSession().getAttribute("user");
         user.setUserPassword(password);
         boolean b = userService.updateUser(user);
         if (b) {
