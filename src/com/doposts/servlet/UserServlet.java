@@ -135,7 +135,16 @@ public class UserServlet extends AbstractServlet{
     }
 
 
-
+   /**
+    *@Description 帖子列表
+    *@Param
+    *@Author Wang.li.ming
+    *@Date 2020/8/26
+    *@Time 22:20
+    */
+   public String postListpage(HttpServletRequest request , HttpServletResponse response){
+       return "userweb/post";
+   }
 
 
 }

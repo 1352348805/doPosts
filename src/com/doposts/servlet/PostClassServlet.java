@@ -101,18 +101,6 @@ public class PostClassServlet extends AbstractServlet{
      }
 
 
-//     /**
-//      *@Description 查询二级分类下的贴吧
-//      *@Param
-//      *@Author Wang.li.ming
-//      *@Date 2020/8/26
-//      *@Time 16:52
-//      */
-//     public CommonResult getsecondLevelAllBarName(HttpServletRequest request , HttpServletResponse response){
-//         Integer secondbarid = Integer.parseInt(request.getParameter("secondBarid"));
-//         List<PostClass> list = postClassService.getCategoryListByParentId(secondbarid);
-//         return new CommonResult().success(list);
-//     }
 
 
 }
