@@ -305,4 +305,30 @@ public class AdminServlet extends AbstractServlet{
         }
         return new CommonResult().failed("操作失败");
     }
+
+    /**
+     * 检查密码
+     */
+    public CommonResult checkPwd(HttpServletRequest request, HttpServletResponse response) {
+        String oldPassword = request.getParameter("oldpassword");
+        User user = (User)request.getSession().getAttribute("user");
+        if (oldPassword.equals(user.getUserPassword())) {
+            return new CommonResult().success(null);
+        }
+        return new CommonResult().failed("密码错误");
+    }
+
+    /**
+     * 更换密码
+     */
+    public CommonResult changePwd(HttpServletRequest request, HttpServletResponse response) {
+        String password = request.getParameter("password");
+        User user = (User)request.getSession().getAttribute("user");
+        user.setUserPassword(password);
+        boolean b = userService.updateUser(user);
+        if (b) {
+            return new CommonResult().success(null);
+        }
+        return new CommonResult().failed("修改失败");
+    }
 }

@@ -106,7 +106,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public int updateUserInfo(User user) {
         try {
-            return crud.selectCount(User.class, user);
+            return crud.update(user);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
