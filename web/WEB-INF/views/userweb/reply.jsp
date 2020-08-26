@@ -293,12 +293,12 @@
     <div class="container" >
         <c:forEach items="${floor}" var="floor">
       <div class="row bar" style="border:rgb(225 226 230) solid 1px ; border-bottom: none ">
-       	<div class='col-md-12 col-sm-6 probootstrap-animate fadeInUp probootstrap-animated' style="padding: 0px 0px 0px 0px; height: 100%;display: inline-block" >
+       	<div class='col-md-12 col-sm-6 probootstrap-animate fadeInUp probootstrap-animated' style="padding: 0px 0px 0px 0px; height: 100%;display: inline-block;" >
             <div style=" float: left; display: inline-block; background: rgb(251,251,253);width: 130px; height:100%; padding: 20px" >
                 <ul style="width: 130px; height: 170px">
                     <li>
                         <div>
-                            <img src="${pageContext.request.contextPath }/static/images/hero_bg_2.jpg" style="width:80px ;height:80px;border: silver solid 1px">
+                            <img src="${pageContext.request.contextPath }/static/images/hero_bg_2.jpg" style="width:80px ;height:80px;border: silver solid 1px; ">
                         </div>
                     </li>
                     </br>
@@ -337,28 +337,30 @@
                             <span class="tail-info">${floor.postFloor}楼</span>&nbsp;
                         </div>
                     </div>
-                    <c:forEach items="${floor.replyList}" var="replylist">
-                    <div   style=" display: none;  border: rgb(240 241 242) solid 1px;height: auto; width: 600px; background : rgb(247 248 250); padding: 4px 15px 14px 15px">
-                       <ul style="">
-                           <li style="">
-                               <a href="" style=" width: 32px; height: 32px;display: inline-block; float: left;margin: 10px 10px 0px 0px">
-                                   <img src="${pageContext.request.contextPath }/static/images/hero_bg_2.jpg" style="border: silver 1px solid; width: 32px; height: 32px;">
-                               </a>
-                               <div style="display: inline-block; margin-top: 10px;width: 520px" >
-                                   <a href="">名字：</a>
-                                   <span>${replylist.replyContent}</span>
-                                   <div style=" float: right;padding: 10px 0px 0px 0px ">
-                                       <span>${replylist.replyDate}</span>
-                                       <a href="" onclick="">回复</a>
+                        <div   style=" display: none;  border: rgb(240 241 242) solid 1px;height:100%; width: 650px; background : rgb(247 248 250); padding: 4px 15px 14px 15px">
+                           <ul style="margin: 0px 0px 0px 0px ">
+                               <c:forEach items="${floor.replyList}" var="replys">
+                                   <li style=" height: 45px;">
+                                       <a href="" style=" width: 32px; height: 32px;display: inline-block; float: left;margin: 10px 10px 0px 0px">
+                                           <img src="${pageContext.request.contextPath }/static/images/hero_bg_2.jpg" style="border: silver 1px solid; width: 32px; height: 32px;">
+                                       </a>
+                                       <div style="display: inline-block; margin-top: 10px;width: 520px" >
+                                           <a href="">盖亚:</a>
+                                           <span>${replys.replyContent}</span>
+                                           <div style=" float: right;padding: 10px 0px 0px 0px ">
+                                               <span>${replys.replyDate}</span>
+                                               <a href="" onclick="">回复</a>
+                                           </div>
+                                       </div>
+                                   </li>
+                               </c:forEach>
+                               <li style="height: 45px">
+                                   <div style="float: right; display: inline-block; padding: 20px">
+                                       <a>我也说一句</a>
                                    </div>
-                               </div>
-                           </li>
-                       </ul>
-                       <div style="height: auto; overflow: hidden auto;" >
-                          <p></p>
-                       </div>
-                    </div>
-                    </c:forEach>
+                               </li>
+                           </ul>
+                        </div>
 					</div>
 				</div>
 			</div>
@@ -477,7 +479,7 @@
   <script src="${pageContext.request.contextPath }/static/js/scripts.min.js"></script>
   <script src="${pageContext.request.contextPath }/static/js/main.min.js"></script>
   <script src="${pageContext.request.contextPath }/static/js/custom.js"></script>
-  <script src="${pageContext.request.contextPath }/staticjs/js.nav.js"></script>
+  <script src="${pageContext.request.contextPath }/static/js/js.nav.js"></script>
 <script src="${pageContext.request.contextPath }/static/js/canva_moving_effect.js"></script>
 <script src="${pageContext.request.contextPath }/static/js/jquery-form.js"></script>
 <!-- //Jquery -->
