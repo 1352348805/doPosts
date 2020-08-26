@@ -113,6 +113,27 @@ public class UserDaoImpl implements UserDao {
     }
 
     /**
+     * 以id获取用户信息
+     *
+     * @param id
+     * @return user
+     */
+    @Override
+    public User getUserById(int id) {
+        User user = new User();
+        user.setUserId(id);
+        try {
+            List<User> select = crud.select(User.class, user);
+            if(select.size() == 1){
+                return select.get(0);
+            }
+            throw new RuntimeException();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
      *  实现查询
      * @param user user实体
      * @return user实体

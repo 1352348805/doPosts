@@ -58,7 +58,7 @@
 
 </section>
 <footer class="footer">
-    版权归来贴项目组
+    <%@include file="../../common/admin/footer.jsp"%>
 </footer>
 <input id="path" type="hidden" value="<%=path%>" />
 <script type="text/javascript" src="<%=path%>/static/js/jquery.js"></script>
@@ -86,6 +86,7 @@
         laypage.render({
             elem: 'page' //注意，这里的 test1 是 ID，不用加 # 号
             ,limit: 10
+            ,theme: '#5994d6'
             ,count: count //数据总数，从服务端得到
             ,
             jump: function(e, first){ //触发分页后的回调

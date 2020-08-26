@@ -83,7 +83,7 @@
   		$(function(){
   			var postId=${param.postId};
   			showPost();
-  			
+
   			//点踩
   			$(document).on("click",".unlike",function(event){
   				event.preventDefault();
@@ -99,7 +99,7 @@
   						replyId:replyId,
   						accountId:accountId,
   						EvaluateState:2
-  						
+
   				}
   				$.post("${pageContext.request.contextPath}/replyEvaluate/doupate",param,function(date){
   					date=eval(date);
@@ -109,7 +109,7 @@
   						likesum.html(date.likeSum);
   						unlikesum.html(date.unlikeSum);
   					}
-  					
+
   				});
   			});
   			$(document).on("click",".nlike",function(event){
@@ -126,7 +126,7 @@
   						replyId:replyId,
   						accountId:accountId,
   						EvaluateState:1
-  						
+
   				}
   				$.post("${pageContext.request.contextPath}/replyEvaluate/doupate",param,function(date){
   					date=eval(date);
@@ -136,11 +136,11 @@
   						likesum.html(date.likeSum);
   						unlikesum.html(date.unlikeSum);
   					}
-  					
-  					
+
+
   				});
   			});
-  			
+
   			//发表
   			$("#spend").click(function(event){
   				event.preventDefault();
@@ -157,7 +157,7 @@
   					$(".postId").val(postId);
   					$(".accountId").val("${sessionScope.account.accountId}");
   					$(".probootstrap-form").submit();
-  				
+
   			});
   			
   			//查询帖子所有的回复
@@ -229,8 +229,8 @@
 
         <nav role="navigation" class="probootstrap-nav hidden-xs">
           <ul class="probootstrap-main-nav">
-            <li><a href="${pageContext.request.contextPath }/static/jsp/login.jsp">登录</a></li>
-            <li><a href="${pageContext.request.contextPath }/static/jsp/register.jsp">注册</a></li>
+            <li><a href="${pageContext.request.contextPath }/user?action=toLogin">登录</a></li>
+            <li><a href="${pageContext.request.contextPath }/user?action=toRegister">注册</a></li>
           </ul>
           <div class="extra-text visible-xs">
             <ul class="social-buttons">
@@ -344,7 +344,7 @@
                                        <a href="" style=" width: 32px; height: 32px;display: inline-block; float: left;margin: 10px 10px 0px 0px">
                                            <img src="${pageContext.request.contextPath }/static/images/hero_bg_2.jpg" style="border: silver 1px solid; width: 32px; height: 32px;">
                                        </a>
-                                       <div style="display: inline-block; margin-top: 10px;width: 520px" >
+                                       <div style="display: inline-block; margin-top: 10px;width: 575px " >
                                            <a href="">盖亚:</a>
                                            <span>${replys.replyContent}</span>
                                            <div style=" float: right;padding: 10px 0px 0px 0px ">
@@ -355,11 +355,20 @@
                                    </li>
                                </c:forEach>
                                <li style="height: 45px">
-                                   <div style="float: right; display: inline-block; padding: 20px">
-                                       <a>我也说一句</a>
+                                   <div style="float: right; padding: 4px 8px 4px 8px; border: 1px solid rgb(240, 241, 242); background:#FFFFFF">
+                                       <a href="javascript:;" style="color: #1a1919" onclick="conceal(this)">我也说一句</a>
                                    </div>
                                </li>
                            </ul>
+                            <div style="display: none; ">
+                                <div style="margin: 10px">
+                                    <textarea style="width: 100%; height: 100px"></textarea>
+                                </div>
+                                <biv style="margin: 0px 0px 0px 570px">
+                                <input  type="button"  name="submit" value="发表">
+                                </biv>
+                            </div>
+
                         </div>
 					</div>
 				</div>
@@ -441,25 +450,41 @@
   
 
   <!-- START: section -->
-  <section class="probootstrap-section probootstrap-section-colored">
-    <div class="container">
+  <section class="probootstrap-section probootstrap-section-colored"><a>
+  </a><div class="container" style="height: 100px"><a>
       <div class="row text-center">
-        <div class="col-lg-8 col-md-offset-2 mb30 section-heading probootstrap-animate">
-          <h2>执谁之笔 共赴锦上添花 为谁迷离 空守盛夏光年...</h2>
-          <p class="lead">不要因为也许会改变，就不肯说出那句美丽的誓言，不要因为也许会分离，就不敢求一次倾心的相遇。——席慕容《印记》</p>
-        </div>
+          <div class="col-lg-8 col-md-offset-2 mb30 section-heading probootstrap-animate fadeInUp probootstrap-animated">
+              <h2 id="blink" style="color: rgb(136, 136, 0);">
+                  <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">执谁之笔共赴锦上添花为谁迷离空守盛夏光年...</font></font></h2>
+              <p class="lead"><font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">不要因为也许会改变，就不肯说出那句美丽的誓言，不要因为也许会分离，就不敢求一次倾心的相遇。——席慕容《印记》</font>
+              </font>
+              </p>
+          </div>
       </div>
-      <div class="row">
-        <div class="col-md-4 col-md-offset-4 probootstrap-animate">
-          <p class="text-center">
-            <a href="#" class="btn btn-ghost btn-ghost-white btn-lg btn-block" role="button">联系我们</a>
-          </p>
-        </div>
-      </div>
-    </div>
+  </a><div class="row"><a>
+  </a><div class="col-md-4 col-md-offset-4 probootstrap-animate fadeInUp probootstrap-animated"><a>
+  </a><p class="text-center"><a>
+  </a><a href="#" class="btn btn-ghost btn-ghost-white btn-lg btn-block" role="button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">联系我们</font></font></a>
+  </p>
+  </div>
+  </div>
+  </div>
   </section>
   <!-- END: section -->
-  
+
+  <%-- h2 闪烁字体--%>
+  <script language="javascript">
+      function changeColor(){
+          var color="#f00|bai#0f0|#00f|#880|#808|#088|yellow|green|blue|gray";
+          color=color.split("|");
+          document.getElementById("blink").style.color=color[parseInt(Math.random() * color.length)];
+      }
+      setInterval("changeColor()",200);
+  </script>
+
+
   <!-- START: footer -->
   <footer role="contentinfo" class="probootstrap-footer">
     <div class="container">
@@ -518,6 +543,15 @@
             $reply.css('display','none');
         }
     }
+     function conceal(obj) {
+        $obj=  $(obj);
+        $conceal=$obj.parent().parent().parent().next();
+        if ($conceal.css('display')=='none'){
+            $conceal.css('display','block');
+        }else {
+            $conceal.css('display','none');
+        }
+     }
     // $(function(){
     //     $('.hf').click(function(){
     //         if($('.xs').is(':hidden')){
