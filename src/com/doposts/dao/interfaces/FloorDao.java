@@ -15,4 +15,10 @@ public interface FloorDao {
      * @return 所有楼层信息
      */
     List<Floor> getFloorByPostId(Integer postId);
+
+    /**
+     *  通过postId获得当前帖子的最大楼数
+     * @return 最大楼数
+     */
+    int getMaxFloorByPostId(Integer postId);
 }
