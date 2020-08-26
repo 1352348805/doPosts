@@ -15,6 +15,7 @@
     <meta charset="UTF-8">
     <title>来贴管理系统</title>
     <link type="text/css" rel="stylesheet" href="<%=path%>/static/css/admin.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="<%=path%>/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=path%>/static/layuiadmin/layui/css/layui.css" media="all"/>
     <script type="text/javascript" src="<%=path%>/static/layuiadmin/layui/layui.js"></script>
 </head>
@@ -36,7 +37,7 @@
     </div>
 </section>
 <footer class="footer">
-    版权归来贴项目组
+    <%@include file="../../common/admin/footer.jsp"%>
 </footer>
 <input id="path" type="hidden" value="<%=path%>" />
 <script type="text/javascript" src="<%=path%>/static/js/admin/time.js"></script>

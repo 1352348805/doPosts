@@ -40,10 +40,10 @@
                     <td>
                     </td>
                     <td align="right">
-                        <button class="layui-btn layui-btn-sm" onclick="location.href='<%=path%>/admin?action=toCategoryAdd'">
+                        <button style="background-color: #5994d6;" class="layui-btn layui-btn-sm" onclick="location.href='<%=path%>/admin?action=toCategoryAdd'">
                             <i class="layui-icon">&#xe608;</i> 添加
                         </button>
-                        <button class="layui-btn layui-btn-sm" onclick="location.href='<%=path%>/admin?action=toAuthorize'">
+                        <button style="background-color: #5994d6;" class="layui-btn layui-btn-sm" onclick="location.href='<%=path%>/admin?action=toAuthorize'">
                             <i class="layui-icon">&#xe608;</i> 审核
                             <span class="layui-badge" style="display: none;" id="no-process-count"></span>
                         </button>
@@ -68,11 +68,9 @@
             </div>
         </div>
     </div>
-
-
 </section>
 <footer class="footer">
-    版权归来贴项目组
+    <%@include file="../../common/admin/footer.jsp"%>
 </footer>
 <input id="path" type="hidden" value="<%=path%>" />
 <script type="text/javascript" src="<%=path%>/static/js/jquery.js"></script>

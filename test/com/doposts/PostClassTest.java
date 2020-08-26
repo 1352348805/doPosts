@@ -1,14 +1,18 @@
 package com.doposts;
 
+import com.doposts.entity.Post;
 import com.doposts.entity.PostClass;
 import com.doposts.service.impl.PostClassServiceImpl;
+import com.doposts.service.impl.PostServiceImpl;
 import com.doposts.service.interfaces.PostClassService;
+import com.doposts.service.interfaces.PostService;
 import com.doposts.vo.PostClassWithChildren;
 import com.doposts.vo.PostInfo;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -63,6 +67,22 @@ public class PostClassTest {
     public void t2() {
         List<PostClass> categoryListByParentId = postClassService.getThreePostClassListByParent(1);
         System.out.println(categoryListByParentId.size());
+    }
+
+    @Test
+    public void t3() {
+        PostService postService = new PostServiceImpl();
+        for (int i = 0;i < 1000;i++) {
+
+            Post post = new Post();
+            post.setPostClassLevel1Id(1);
+            post.setPostClassLevel2Id(7);
+            post.setPostClassLevel3Id(35);
+            post.setPostName("亚索好玩吗?"+(++i));
+            post.setCreateDate(new Date());
+            post.setCreateUserId(32);
+            postService.addPost(post);
+        }
     }
 
 
