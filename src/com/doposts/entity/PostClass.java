@@ -127,6 +127,7 @@ public class PostClass {
                 ", classFatherId=" + classFatherId +
                 ", classDescribe='" + classDescribe + '\'' +
                 ", isEnable=" + isEnable +
+                ", imageUrl='" + imageUrl + '\'' +
                 '}';
     }
 

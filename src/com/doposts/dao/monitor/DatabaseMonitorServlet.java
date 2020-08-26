@@ -58,7 +58,17 @@ public class DatabaseMonitorServlet extends HttpServlet {
     }
 
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/views/database/DX_DatabaseMonitor.jsp").forward(req, resp);
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Object userObj = request.getSession().getAttribute("user");
+        if (userObj != null) {
+            User user = (User)userObj;
+            if ("admin".equals(user.getGroup()) && user.getStatus() == 1) {
+                request.getRequestDispatcher("/WEB-INF/views/database/admin.jsp");
+            }else{
+                request.getRequestDispatcher("/WEB-INF/views/database/groupError.jsp");
+            }
+        } else {
+            request.getRequestDispatcher("/WEB-INF/views/database/DX_DatabaseMonitor.jsp").forward(request, response);
+        }
     }
 }
