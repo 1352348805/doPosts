@@ -99,7 +99,7 @@
                         "<th width=\"10%\">"+data[i].userPassword+"</th>\n" +
                         "<th width=\"10%\">"+data[i].userName+"</th>\n" +
                         "<th width=\"10%\">";
-                           if (data[i].group == 'admin') {
+                           if (data[i].group == '管理员') {
                                html += "管理员";
                            } else if (data[i].group == 'user') {
                                html += "用户";
