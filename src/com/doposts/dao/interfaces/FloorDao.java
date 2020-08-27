@@ -1,6 +1,7 @@
 package com.doposts.dao.interfaces;
 
 import com.doposts.entity.Floor;
+import com.doposts.vo.FloorWithReply;
 
 import java.util.List;
 
@@ -25,7 +26,14 @@ public interface FloorDao {
     /**
      *   插入楼正文
      * @param floor 楼所有数据
-     * @return 受影响的行数
+     * @return 返回插入后的主键
      */
     Integer insertFloor(Floor floor);
+
+    /**
+     * 以id查询楼层信息
+     * @param id 主键
+     * @return  实体类
+     */
+    FloorWithReply getFloorById(Integer id);
 }

@@ -3,6 +3,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
   <head>
+      <%
+          String path=request.getContextPath();
+      %>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>${post.postName}</title>
@@ -15,9 +18,9 @@
     <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/static/css/vendor/bootstrap.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/style.nav.css">
-    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/styles-merged.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/style.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/static/style.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/custom.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/font-awesome/css/font-awesome.css">
     <!--[if lt IE 9]>
@@ -44,7 +47,7 @@
 			  container.find('.search-input').val('');
 			  // clear and hide result container when we press close
 			  container.find('.result-container').fadeOut(100, function(){$(this).empty();});
-			  
+
 		}else{
 			//执行查询
 			var seach=$(".search-input").val().trim();
@@ -73,9 +76,9 @@
 			  				"<a class='pull-right hint' href='#'><i class='fa fa-heart'></i></a>"+
 						"</p></div></div></div>"
 						}
-						$(".bar").html(table); 
+						$(".bar").html(table);
 			});
-			
+
 		}
 	}
   </script>
@@ -159,7 +162,7 @@
   					$(".probootstrap-form").submit();
 
   			});
-  			
+
   			//查询帖子所有的回复
   			function showPost(){
   				$.post("${pageContext.request.contextPath}/reply/getAllReply",{postId:postId},function(date){
@@ -181,7 +184,7 @@
   			  				"<a class='pull-right hint' href='#'><i class='fa fa-heart'></i></a>"+
 							"</p></div></div></div>"
   						}
-  						$(".bar").html(table); 
+  						$(".bar").html(table);
   				});
   			}
   			function showBar(){
@@ -191,12 +194,12 @@
   					$(".barName").html(date.barName);
   				});
   			}
-  			
-  			
+
+
   			$(".file").click(function(){
-  				document.getElementById("photo").click(); 
+  				document.getElementById("photo").click();
   			});
-  			
+
   		});
   </script>
 <style>
@@ -214,7 +217,7 @@
 				<li title="回复">
 					<i class="fa fa-pencil-square-o"></i>
 					<a href="#send"class="rota">回复</a>
-				</li> 
+				</li>
 				<li title="回到顶部" class="for-top">
 					<i class="fa fa-arrow-up"></i>
 					<a href="javascript:;" class="rota">去顶部</a>
@@ -224,7 +227,7 @@
   <!-- START: header -->
 	<header role="banner" class="probootstrap-header">
     <div class="container-fluid">
-      
+
         <div class="mobile-menu-overlay"></div>
 
         <nav role="navigation" class="probootstrap-nav hidden-xs">
@@ -276,7 +279,7 @@
       </div>
   </section>
   <!-- END: section -->
-	
+
 	<div style="position: relative;width: 100%;height: 80px;">
 		 <div class="search-wrapper">
 			<div class="input-holder">
@@ -288,7 +291,7 @@
 				搜索内容不能为空
 			</div>
 		</div>
-	</div>		
+	</div>
   <section id="next-section" class="probootstrap-section">
     <div class="container" >
         <c:forEach items="${floor}" var="floor">
@@ -322,7 +325,7 @@
                         </div>
 
                     </div>
-                    <div style=" float: right;  width: 230px; height: 20px;margin: 10px">
+                    <div style=" float: right;  width: 240px; height: 20px;margin: 10px">
                         <div class="hf" style="float: right">
                             <span><a href="javascript:;" onclick="ShowOrHideReply(this)" >回复</a>&nbsp;</span>
                         </div>
@@ -378,7 +381,7 @@
       <div class="row mb60" id="send">
         <div class="col-md-12  probootstrap-animate">
         <h4>回复帖子</h4>
-          <form action="${pageContext.request.contextPath }/reply/doInsReply" method="post" class="probootstrap-form" enctype="multipart/form-data">
+          <form action="${pageContext.request.contextPath }/floor?action=insertFloor" method="post" class="probootstrap-form" enctype="multipart/form-data">
           	<input type='text' style='display:none' class='postId' name='postId' value=''>
           	<input type='text' style='display:none' class='accountId' name='accountId' value=''>
             <div class="form-group">
@@ -387,7 +390,7 @@
             <div class="form-group">
             		<span style="foalt:left;" class='file'>
             			<i class="fa fa-file-image-o hint" aria-hidden="true">
-            			<input type='file' id="photo" style="display:none;" name='file'></i> 
+            			<input type='file' id="photo" style="display:none;" name='file'></i>
 	            		<i class="fa fa-file hint" aria-hidden="true"></i>
             		</span>
             </div>
@@ -396,13 +399,13 @@
             </div>
           </form>
         </div>
-       
+
       </div>
 
 
     </div>
   </section>
-	
+
 	<!-- 登录框  -->
   	<div class="export" >
 				<div class="modal fade" id="accountLogin" style="opacity: 1.0 !important;">
@@ -447,7 +450,7 @@
 					</div>
 				</div>
 			</div>
-  
+
 
   <!-- START: section -->
   <section class="probootstrap-section probootstrap-section-colored"><a>
@@ -488,7 +491,7 @@
   <!-- START: footer -->
   <footer role="contentinfo" class="probootstrap-footer">
     <div class="container">
-     
+
       <div class="row mt40">
         <div class="col-md-12 text-center">
           <p>
@@ -500,7 +503,7 @@
     </div>
   </footer>
   <!-- END: footer -->
-  
+
   <script src="${pageContext.request.contextPath }/static/js/scripts.min.js"></script>
   <script src="${pageContext.request.contextPath }/static/js/main.min.js"></script>
   <script src="${pageContext.request.contextPath }/static/js/custom.js"></script>
@@ -510,17 +513,17 @@
 <!-- //Jquery -->
 <script type="text/javascript">
 	$(function(){
-		$("#form").ajaxForm(function(data){  
+		$("#form").ajaxForm(function(data){
 			if(data==true||data=='true'){
 				 window.location.reload();
 			}else{
 				alert("账号或密码错误，请重新登录");
 				$(".Name").val('');
 				$(".Password").val('');
-				
+
 			}
-		}); 
-		$(".probootstrap-form").ajaxForm(function(data){  
+		});
+		$(".probootstrap-form").ajaxForm(function(data){
 			if(data==true||data=='true'){
 				alert("发表成功");
 				 window.location.reload();
@@ -529,8 +532,8 @@
 				$("#postSubject").val('');
 				$("#postContent").val('');
 			}
-		}); 
-		
+		});
+
 	});
 
 
@@ -564,8 +567,26 @@
     //         }
     //     })
     // })
+   
 
-
+   $("#spend").click(function () {
+       alert($("#replyContent").val())
+       $.ajax({
+           url:  "<%=path%>/floor",
+           method: "post",
+           dataType: 'json',
+           data :{
+               action: "insertFloor",
+               postid:1,
+               replyContent: $("#replyContent").val()
+           },
+           success: function (jsonStr) {
+           if (jsonStr.code===200){
+               location.href="<%=path%>/user?action=postAndfloor";
+           }
+           }
+       } )
+   })
 
 </script>
   </body>
@@ -583,7 +604,7 @@
 
 
 $(".wysyg").click(function(){
-    em.css("height",""+ (hg+150)+"px");
+    em.css("height",""+ (hg+170)+"px");
 });
   </script>
 </html>

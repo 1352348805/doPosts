@@ -5,6 +5,7 @@ import com.doposts.dao.CrudHandler;
 import com.doposts.dao.PostItDatabase;
 import com.doposts.dao.interfaces.FloorDao;
 import com.doposts.entity.Floor;
+import com.doposts.vo.FloorWithReply;
 import com.dxhualuo.database.handler.interfaces.DatabaseCrud;
 import com.dxhualuo.database.handler.interfaces.SuperCrud;
 import java.sql.SQLException;
@@ -74,5 +75,16 @@ public class FloorDaoImpl implements FloorDao{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * 以id查询楼层信息
+     *
+     * @param id 主键
+     * @return 实体类
+     */
+    @Override
+    public FloorWithReply getFloorById(Integer id) {
+        return null;
     }
 }
