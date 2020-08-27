@@ -4,13 +4,13 @@ import com.dxhualuo.data.annotation.JavaBean;
 
 @JavaBean
 public class Count {
-    private Long count;
+    private Integer count;
 
-    public Long getCount() {
+    public Integer getCount() {
         return count;
     }
 
-    public Count setCount(Long count) {
+    public Count setCount(Integer count) {
         this.count = count;
         return this;
     }

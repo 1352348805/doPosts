@@ -136,7 +136,7 @@ public class UserServlet extends AbstractServlet{
 
 
    /**
-    *@Description 帖子列表
+    *@Description 转发到帖子列表
     *@Param
     *@Author Wang.li.ming
     *@Date 2020/8/26
@@ -146,5 +146,13 @@ public class UserServlet extends AbstractServlet{
        return "userweb/post";
    }
 
+
+   /**
+    *@Description
+    *@Param
+    *@Author Wang.li.ming
+    *@Date 2020/8/27
+    *@Time 16:12
+    */
 
 }

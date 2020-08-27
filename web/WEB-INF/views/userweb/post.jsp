@@ -1,450 +1,250 @@
+<!doctype html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
-  <head>
+         pageEncoding="UTF-8"%>
+<%
+   String path = request.getContextPath();
+%>
+<html lang="zh-CN">
+<head>
     <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Home</title>
-    <meta name="description" content="">
+    <title>list</title>
     <meta name="keywords" content="">
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/fontawesome-all.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/style.login.css" type="text/css" media="all" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/default.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/search-form.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/vendor/bootstrap.min.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/style.nav.css">
-    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet"> 
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/styles-merged.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/style.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/custom.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/font-awesome/css/font-awesome.css">
-    <!--[if lt IE 9]>
-      <script src="${pageContext.request.contextPath }/static/js/vendor/html5shiv.min.js"></script>
-      <script src="${pageContext.request.contextPath }/static/js/vendor/respond.min.js"></script>
+    <meta name="description" content="">
+    <link rel="stylesheet" type="text/css" href="<%=path%>/static/postStyle/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="<%=path%>/static/postStyle/css/nprogress.css">
+    <link rel="stylesheet" type="text/css" href="<%=path%>/static/postStyle/css/style.css">
+    <link rel="stylesheet" type="text/css" href="<%=path%>/static/postStyle/css/font-awesome.min.css">
+    <link rel="apple-touch-icon-precomposed" href="<%=path%>/static/postStyle/images/icon.png">
+    <link rel="shortcut icon" href="<%=path%>/static/postStyle/images/favicon.ico">
+    <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="<%=path%>/static/postStyle/js/nprogress.js"></script>
+    <script src="<%=path%>/static/postStyle/js/jquery.lazyload.min.js"></script>
+    <!--[if gte IE 9]>
+    <script src="<%=path%>/static/postStyle/js/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <script src="<%=path%>/static/postStyle/js/html5shiv.min.js" type="text/javascript"></script>
+    <script src="<%=path%>/static/postStyle/js/respond.min.js" type="text/javascript"></script>
+    <script src="<%=path%>/static/postStyle/js/selectivizr-min.js" type="text/javascript"></script>
     <![endif]-->
-    <script type="text/javascript" src="${pageContext.request.contextPath }/static/js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath }/static/js/jquery-1.11.0.min.js"></script>
-    <script src="${pageContext.request.contextPath }/static/js/bootstrap.min.js"
-	type="text/javascript" charset="utf-8"></script>
-	<script src="${pageContext.request.contextPath }/static/js/bootbox.min.js"></script>
-  </head>
-  <body>
-  <script type="text/javascript">
-  var barId=${param.barId};
-  function searchToggle(obj, evt){
-		var container = $(obj).closest('.search-wrapper');
-		if(!container.hasClass('active')){
-			  container.addClass('active');
-			  evt.preventDefault();
-		}else if(container.hasClass('active') && $(obj).closest('.input-holder').length == 0){
-			  container.removeClass('active');
-			  // clear input
-			  container.find('.search-input').val('');
-			  // clear and hide result container when we press close
-			  container.find('.result-container').fadeOut(100, function(){$(this).empty();});
-			  
-		}else{
-			//执行查询
-			var seach=$(".search-input").val().trim();
-			if(seach==null||seach==''){
-				$(".result-container").css({"display":"block"});
-				return false;
-			}else{
-				$(".result-container").css({"display":"none"});
-			}
-			$.post("${pageContext.request.contextPath}/post/getPostByPostName",{name:seach ,barId:barId},function(date){
-				date=eval(date);
-					console.log(date);
-					var table="";
-						for(var i=0;i<date.length;i++){
-							table+="<div class='col-md-12 col-sm-6 probootstrap-animate fadeInUp probootstrap-animated'>"+
-				       		"<div class='probootstrap-block-image'><div class='text'><h3><a href='${pageContext.request.contextPath}/jsp/reply.jsp?postId="+date[i].postId+"'>"+date[i].postSubject+"</a>"+
-			  				"<span class='clearfix like'>"+
-			  					"<a class='hint info'href='#' title='"+date[i].postDate+"'><i class='fa fa-clock-o'>"+date[i].postDate+"</i></a>"+
-			  					"<a class='hint info' href='#' title='主题作者："+date[i].accountName+"'><i class='fa fa-user'>"+date[i].accountName+"</i></a>"+
-			  				"</span></h3>"+
-			  				"<p class='dark' style='80px'>"+date[i].postContent+"</p>"+
-			  				"<p><img src='${pageContext.request.contextPath }/img/img_1.jpg' style='width:50px ;height:50px'></p>"+
-			  				"<hr><p class='clearfix like'>"+
-			  				"<a class='pull-right hint unlike' href='"+date[i].postId+"'><i class='fa fa-thumbs-down'></i></a>"+
-			  				"<a class='pull-right hint nlike' href='"+date[i].postId+"'><i class='fa fa-thumbs-up'></i></a>"+
-			  				"<a class='pull-right hint' href='#'><i class='fa fa-heart'></i></a>"+
-						"</p></div></div></div>"
-						}
-						$(".bar").html(table);
-			});
-			
-		}
-	}
-  </script>
-  <script type="text/javascript">
-  		$(function(){
-  			var barId=${param.barId};
-  			showPost();
-  			showBar();
-  			
-  			$(document).on("click",".unlike",function(event){
-  				event.preventDefault();
-  				var postId=$(this).attr("href");
-  				var unlikesum=$(this).children().eq(0);
-  				var likesum=$(this).next().children().eq(0);
-  				var accountId="${sessionScope.account.accountId}";
-  				if(accountId==null||accountId==''){
-  				$("#accountLogin").modal('show');
-  				return false;
-  				}
-  				var param={
-  						postId:postId,
-  						accountId:accountId,
-  						EvaluateState:2
-  						
-  				}
-  				$.post("${pageContext.request.contextPath}/replyEvaluate/doupatePostLike",param,function(date){
-  					date=eval(date);
-  					if(date.unlikeSum==unlikesum.html()){
-  						alert("你已经点踩过了");
-  					}else{
-  						likesum.html(date.likeSum);
-  						unlikesum.html(date.unlikeSum);
-  					}
-  					
-  				});
-  			});
-  			$(document).on("click",".nlike",function(event){
-  				event.preventDefault();
-  				var postId=$(this).attr("href");
-  				var likesum=$(this).children().eq(0);
-  				var unlikesum=$(this).prev().children().eq(0);
-  				var accountId="${sessionScope.account.accountId}";
-  				if(accountId==null||accountId==''){
-  				$("#accountLogin").modal('show');
-  				return false;
-  				}
-  				var param={
-  						postId:postId,
-  						accountId:accountId,
-  						EvaluateState:1
-  						
-  				}
-  				$.post("${pageContext.request.contextPath}/replyEvaluate/doupatePostLike",param,function(date){
-  					date=eval(date);
-  					if(date.likeSum==likesum.html()){
-  						alert("你已经点赞过了");
-  					}else{
-  						likesum.html(date.likeSum);
-  						unlikesum.html(date.unlikeSum);
-  					}
-  					
-  					
-  				});
-  			});
-  			
-  			//发表
-  			$("#spend").click(function(event){
-  				event.preventDefault();
-  				var account="${sessionScope.account.accountId}";
-  				if(account==null||account==''){
-  				$("#accountLogin").modal('show');
-  				}else{
-  					$(".barId").val(barId);
-  					$(".accountId").val("${sessionScope.account.accountId}");
-  					$(".probootstrap-form").submit();
-  				}
-  			});
-  			
-  			//查询贴吧下所有的帖子
-  			function showPost(){
-  				$.post("${pageContext.request.contextPath}/post/getPostByBarId",{barId:barId},function(date){
-  					date=eval(date);
-  					console.log(date);
-  					var table="";
-  						for(var i=0;i<date.length;i++){
-  							table+="<div class='col-md-12 col-sm-6 probootstrap-animate fadeInUp probootstrap-animated'>"+
-  				       		"<div class='probootstrap-block-image'><div class='text'><h3><a href='${pageContext.request.contextPath}/jsp/reply.jsp?postId="+date[i].postId+"'>"+date[i].postSubject+"</a>"+
-  			  				"<span class='clearfix like'>"+
-  			  					"<a class='hint info'href='#' title='"+date[i].postDate+"'><i class='fa fa-clock-o'>"+date[i].postDate+"</i></a>"+
-  			  					"<a class='hint info' href='#' title='主题作者："+date[i].accountName+"'><i class='fa fa-user'>"+date[i].accountName+"</i></a>"+
-  			  				"</span></h3>"+
-  			  				"<p class='dark' style='80px'>"+date[i].postContent+"</p>"+
-  			  				"<p><img src='${pageContext.request.contextPath }/img/img_1.jpg' style='width:50px ;height:50px'></p>"+
-  			  				"<hr><p class='clearfix like'>"+
-  			  				"<a class='pull-right hint unlike' href='"+date[i].postId+"'><i class='fa fa-thumbs-down'></i></a>"+
-  			  				"<a class='pull-right hint nlike' href='"+date[i].postId+"'><i class='fa fa-thumbs-up'></i></a>"+
-  			  				"<a class='pull-right hint' href='#'><i class='fa fa-heart'></i></a>"+
-							"</p></div></div></div>"
-  						}
-  						$(".bar").html(table);
-  				});
-  			}
-  			function showBar(){
-  				$.post("${pageContext.request.contextPath}/bar/skipPost",{barId:barId},function(date){
-  					date=eval(date);
-  					$(".barDescribe").html(date.barDescribe);
-  					$(".barName").html(date.barName);
-  				});
-  			}
-  			
-  			
-  			$(".file").click(function(){
-  				document.getElementById("photo").click(); 
-  			});
-  			
-  		});
-  </script>
-<style>
-/* .probootstrap-block-image {
-    margin-bottom: 30px;
-  	background: linear-gradient(to right,#9b76ff 0,#f54ea2 100%);
-} */
-</style>
-		<div class="leftNav-item">
-			<ul>
-				<li>
-					<i class="fa fa-user-circle"></i>
-					<a href="javascript:void(0)" class="rota">个人中心</a>
-				</li>
-				<li title="发帖子">
-					<i class="fa fa-pencil-square-o"></i>
-					<a href="#send"class="rota">发帖子</a>
-				</li> 
-				<li title="回到顶部" class="for-top">
-					<i class="fa fa-arrow-up"></i>
-					<a href="javascript:;" class="rota">去顶部</a>
-				</li>
-			</ul>
-		</div>
-  <!-- START: header -->
-	<header role="banner" class="probootstrap-header">
-    <div class="container-fluid">
-      
-        <div class="mobile-menu-overlay"></div>
+    <!--[if lt IE 9]>
+    <script>window.location.href='upgrade-browser.html';</script>
+    <![endif]-->
+</head>
+<body class="user-select">
+<header class="header">
+    <nav class="navbar navbar-default" id="navbar">
+        <div class="container">
+            <div class="header-topbar hidden-xs link-border">
+                <ul class="site-nav topmenu">
+                    <li><a href="#" >标签云</a></li>
+                    <li><a href="#" rel="nofollow" >读者墙</a></li>
+                    <li><a href="#" title="RSS订阅" >
+                        <i class="fa fa-rss">
+                        </i> RSS订阅
+                    </a></li>
+                </ul>
+                勤记录 懂分享</div>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-navbar" aria-expanded="false"> <span class="sr-only"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                <h1 class="logo hvr-bounce-in"><a href="#" title="木庄网络博客"><img src="<%=path%>/static/postStyle/images/201610171329086541.png" alt="木庄网络博客"></a></h1>
+            </div>
+            <div class="collapse navbar-collapse" id="header-navbar">
+                <form class="navbar-form visible-xs" action="/Search" method="post">
+                    <div class="input-group">
+                        <input type="text" name="keyword" class="form-control" placeholder="请输入关键字" maxlength="20" autocomplete="off">
+                        <span class="input-group-btn">
+		<button class="btn btn-default btn-search" name="search" type="submit">搜索</button>
+		</span> </div>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a data-cont="木庄网络博客" title="木庄网络博客" href="index.html">首页</a></li>
+                    <li><a data-cont="列表页" title="列表页" href="list.html">列表页</a></li>
+                    <li><a data-cont="详细页" title="详细页" href="show.html">详细页</a></li>
+                    <li><a data-cont="404" title="404" href="404.html">404</a></li>
+                    <li><a data-cont="MZ-NetBolg主题" title="MZ-NetBolg主题" href="#" >MZ-NetBolg主题</a></li>
+                    <li><a data-cont="IT技术笔记" title="IT技术笔记" href="#" >IT技术笔记</a></li>
+                    <li><a data-cont="源码分享" title="源码分享" href="#" >源码分享</a></li>
+                    <li><a data-cont="靠谱网赚" title="靠谱网赚" href="#" >靠谱网赚</a></li>
+                    <li><a data-cont="资讯分享" title="资讯分享" href="#" >资讯分享</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<section class="container">
+    <div class="content-wrap">
+        <div class="content">
+            <div class="title">
+                <h3 style="line-height: 1.3">MZ-NetBlog主题</h3>
+            </div>
 
-        <nav role="navigation" class="probootstrap-nav hidden-xs">
-          <ul class="probootstrap-main-nav">
-            <li><a href="${pageContext.request.contextPath }/jsp/login.jsp">登录</a></li>
-            <li><a href="${pageContext.request.contextPath }/jsp/register.jsp">注册</a></li>
-          </ul>
-          <div class="extra-text visible-xs">
-            <ul class="social-buttons">
-              <li><a href="#"><i class="icon-twitter"></i></a></li>
-              <li><a href="#"><i class="icon-facebook"></i></a></li>
-              <li><a href="#"><i class="icon-instagram2"></i></a></li>
+            <article class="excerpt excerpt-1">
+                <a class="focus" href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank">
+                    <img class="thumb" data-original="<%=path%>/static/postStyle/images/201610181739277776.jpg" src="<%=path%>/static/postStyle/images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）" style="display: inline;" />
+                </a>
+                <header>
+                    <a class="cat" href="#" title="MZ-NetBlog主题">MZ-NetBlog主题<i></i></a>
+                    <h2><a href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank">用DTcms做一个独立博客网站（响应式模板）</a></h2>
+                </header>
+                <p class="meta">
+                    <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-10-14</time>
+                    <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 217</span> <a class="comment" href="##comment" title="评论" target="_blank"><i class="glyphicon glyphicon-comment"></i> 4</a>
+                </p>
+                <p class="note">用DTcms做一个独立博客网站（响应式模板），采用DTcms V4.0正式版（MSSQL）。开发环境：SQL2008R2+VS2010。DTcms V4.0正式版功能修复和优化：1、favicon.ico图标后台上传。（解决要换图标时要连FTP或者开服务器的麻烦）</p>
+            </article>
+
+        </div>
+    </div>
+    <aside class="sidebar">
+        <div class="fixed">
+            <div class="widget widget_search">
+                <form class="navbar-form" action="/Search" method="post">
+                    <div class="input-group">
+                        <input type="text" name="keyword" class="form-control" size="35" placeholder="请输入关键字" maxlength="15" autocomplete="off">
+                        <span class="input-group-btn">
+		<button class="btn btn-default btn-search" name="search" type="submit">搜索</button>
+		</span> </div>
+                </form>
+            </div>
+            <div class="widget widget_sentence">
+                <h3>标签云</h3>
+                <div class="widget-sentence-content">
+                    <ul class="plinks ptags">
+                        <li><a href="#list/67/" title="移动统计" draggable="false">移动统计 <span class="badge">1</span></a></li>
+                        <li><a href="#list/256/" title="404" draggable="false">404 <span class="badge">1</span></a></li>
+                        <li><a href="#list/252/" title="VS2010" draggable="false">VS2010 <span class="badge">1</span></a></li>
+                        <li><a href="#list/162/" title="杀毒软件" draggable="false">杀毒软件 <span class="badge">1</span></a></li>
+                        <li><a href="#list/133/" title="html标签" draggable="false">html标签 <span class="badge">1</span></a></li>
+                        <li><a href="#list/49/" title="循环" draggable="false">循环 <span class="badge">2</span></a></li>
+                        <li><a href="#list/22/" title="百度统计" draggable="false">百度统计 <span class="badge">2</span></a></li>
+                        <li><a href="#list/132/" title="sql" draggable="false">sql <span class="badge">6</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="widget widget_hot">
+            <h3>最新评论文章</h3>
+            <ul>
+                <li>
+                    <a title="用DTcms做一个独立博客网站（响应式模板）" href="#">
+                <span class="thumbnail">
+                    <img class="thumb" data-original="<%=path%>/static/postStyle/images/201610181739277776.jpg" src="<%=path%>/static/postStyle/images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）" style="display: block;" />
+                </span>
+                        <span class="text">用DTcms做一个独立博客网站（响应式模板）</span>
+                        <span class="muted">
+                    <i class="glyphicon glyphicon-time"></i>
+                    2016-11-01
+                </span>
+                        <span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span>
+                    </a>
+                </li>
+                <li>
+                    <a title="用DTcms做一个独立博客网站（响应式模板）" href="#">
+                <span class="thumbnail">
+                    <img class="thumb" data-original="<%=path%>/static/postStyle/images/201610181739277776.jpg" src="<%=path%>/static/postStyle/images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）" style="display: block;" />
+                </span>
+                        <span class="text">用DTcms做一个独立博客网站（响应式模板）</span>
+                        <span class="muted">
+                    <i class="glyphicon glyphicon-time"></i>
+                    2016-11-01
+                </span>
+                        <span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span>
+                    </a>
+                </li>
+                <li>
+                    <a title="用DTcms做一个独立博客网站（响应式模板）" href="#">
+                <span class="thumbnail">
+                    <img class="thumb" data-original="<%=path%>/static/postStyle/images/201610181739277776.jpg" src="<%=path%>/static/postStyle/images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）" style="display: block;" />
+                </span>
+                        <span class="text">用DTcms做一个独立博客网站（响应式模板）</span>
+                        <span class="muted">
+                    <i class="glyphicon glyphicon-time"></i>
+                    2016-11-01
+                </span>
+                        <span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span>
+                    </a>
+                </li>
+                <li>
+                    <a title="用DTcms做一个独立博客网站（响应式模板）" href="#">
+                <span class="thumbnail">
+                    <img class="thumb" data-original="<%=path%>/static/postStyle/images/201610181739277776.jpg" src="<%=path%>/static/postStyle/images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）" style="display: block;" />
+                </span>
+                        <span class="text">用DTcms做一个独立博客网站（响应式模板）</span>
+                        <span class="muted">
+                    <i class="glyphicon glyphicon-time"></i>
+                    2016-11-01
+                </span>
+                        <span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span>
+                    </a>
+                </li>
+                <li>
+                    <a title="用DTcms做一个独立博客网站（响应式模板）" href="#">
+                <span class="thumbnail">
+                    <img class="thumb" data-original="<%=path%>/static/postStyle/images/201610181739277776.jpg" src="<%=path%>/static/postStyle/images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）" style="display: block;" />
+                </span>
+                        <span class="text">用DTcms做一个独立博客网站（响应式模板）</span>
+                        <span class="muted">
+                    <i class="glyphicon glyphicon-time"></i>
+                    2016-11-01
+                </span>
+                        <span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span>
+                    </a>
+                </li>
+                <li>
+                    <a title="用DTcms做一个独立博客网站（响应式模板）" href="#">
+                <span class="thumbnail">
+                    <img class="thumb" data-original="<%=path%>/static/postStyle/images/201610181739277776.jpg" src="<%=path%>/static/postStyle/images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）" style="display: block;" />
+                </span>
+                        <span class="text">用DTcms做一个独立博客网站（响应式模板）</span>
+                        <span class="muted">
+                    <i class="glyphicon glyphicon-time"></i>
+                    2016-11-01
+                </span>
+                        <span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span>
+                    </a>
+                </li>
+                <li>
+                    <a title="用DTcms做一个独立博客网站（响应式模板）" href="#">
+                <span class="thumbnail">
+                    <img class="thumb" data-original="<%=path%>/static/postStyle/images/201610181739277776.jpg" src="<%=path%>/static/postStyle/images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）" style="display: block;" />
+                </span>
+                        <span class="text">用DTcms做一个独立博客网站（响应式模板）</span>
+                        <span class="muted">
+                    <i class="glyphicon glyphicon-time"></i>
+                    2016-11-01
+                </span>
+                        <span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span>
+                    </a>
+                </li>
+                <li>
+                    <a title="用DTcms做一个独立博客网站（响应式模板）" href="#">
+                <span class="thumbnail">
+                    <img class="thumb" data-original="<%=path%>/static/postStyle/images/201610181739277776.jpg" src="<%=path%>/static/postStyle/images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）" style="display: block;" />
+                </span>
+                        <span class="text">用DTcms做一个独立博客网站（响应式模板）</span>
+                        <span class="muted">
+                    <i class="glyphicon glyphicon-time"></i>
+                    2016-11-01
+                </span>
+                        <span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span>
+                    </a>
+                </li>
             </ul>
-          </div>
-        </nav>
-    </div>
-  </header>
-  <!-- END: header -->
-  <style>
-  .hint{
-  	margin-right:20px;
-  }
-  .info{
-      float: right;
-	  color: #999 ! important;
-  }
-  </style>
-  <!-- START: section -->
-  <section class="probootstrap-intro" style="background-image: url(${pageContext.request.contextPath}/static/images/hero_bg_2.jpg);height: 400px;" data-stellar-background-ratio="0.5">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-7 probootstrap-intro-text">
-          <h1 class="probootstrap-animate barName"></h1>
-          <div class="probootstrap-subtitle probootstrap-animate">
-            <h2 class="barDescribe">希望您可以在小贴吧里面找到自己的快乐 <a href="#" target="_blank"></a></h2>
-          </div>
         </div>
-      </div>
-    </div>
-    <a class="probootstrap-scroll-down js-next" href="#next-section">Scroll down <i class="icon-chevron-down"></i></a>
-  </section>
-  <!-- END: section -->
-	
-	<div style="position: relative;width: 100%;height: 80px;">
-		 <div class="search-wrapper">
-			<div class="input-holder">
-				<input type="text" class="search-input" placeholder="吧内搜索" />
-				<button class="search-icon" onclick="searchToggle(this, event);"><i class="fa fa-search"></i></button>
-			</div>
-			<span class="close" onclick="searchToggle(this, event);"></span>
-			<div class="result-container">
-				搜索内容不能为空
-			</div>
-		</div>
-	</div>		
-  <section id="next-section" class="probootstrap-section">
-    <div class="container">
-      <div class="row bar">
-       	<div class='col-md-12 col-sm-6 probootstrap-animate fadeInUp probootstrap-animated'>
-       		<div class='probootstrap-block-image'>
-  				<div class='text'>
-  				<h3><a href='#'>帖子标题</a>
-  				<span class='clearfix like'>
-  				<a class='hint info'href='#' title='发帖时间'><i class='fa fa-clock-o'>发帖时间</i></a>
-  				<a class='hint info' href='#' title='发帖人'><i class='fa fa-user'>作者名字</i></a>
-  				</span>
-  					</h3>
-  						<p class='dark' style='size: 12px'>这是很长的的描述这是很长的的描述这是很长的的描述这是很长的的描述这是很长的的描述</p>
-  						<p><img src="${pageContext.request.contextPath }/img/img_1.jpg" style="width:50px ;height:50px"></p>
-  						<hr>
-  						<p class='clearfix like'>
-  							<a class='pull-right hint' href='#'><i class='fa fa-thumbs-down'></i></a>	
-  							<a class='pull-right hint' href='#'><i class='fa fa-thumbs-up'></i></a>	
-  							<a class='pull-right hint' href='#'><i class='fa fa-heart'></i></a>	
-  						</p>
-					</div>
-				</div>
-			</div>
-      </div>
-      <div class="row mb60" id="send">
-        <div class="col-md-12  probootstrap-animate">
-        <h4>发表新帖</h4>
-          <form action="${pageContext.request.contextPath }/post/doInsPost" method="post" class="probootstrap-form" enctype="multipart/form-data">
-          	<input type='text' style='display:none' class='barId' name='barId' value=''>
-          	<input type='text' style='display:none' class='accountId' name='accountId' value=''>
-            <div class="form-group">
-              <label for="name">帖子标题</label>
-              <input type="text" class="form-control" id="postSubject" name="postSubject">
-            </div>
-            <div class="form-group">
-              <label for="message">帖子内容</label>
-              <textarea cols="30" rows="10" class="form-control" id="postContent" name="postContent"></textarea>
-            </div>
-            <div class="form-group">
-            		<span style="foalt:left;" class='file'>
-            			<i class="fa fa-file-image-o hint" aria-hidden="true">
-            			<input type='file' id="photo" style="display:none;" name='file'></i> 
-            		</span>
-            		<span>
-            		<i class="fa fa-file" aria-hidden="true"></i>
-            		</span>
-            </div>
-            <div class="form-group">
-              <input type="button" class="btn btn-primary" id="spend" name="submit" value="发表">
-            </div>
-          </form>
-        </div>
-       
-      </div>
-      
-      
-    </div>
-  </section>
-	
-	<!-- 登录框  -->
-  	<div class="export" >
-				<div class="modal fade" id="accountLogin" style="opacity: 1.0 !important;">
-					<div class="modal-dialog motai">
-						<div class="modal-content" style="border-radius: 30px 30px 50px 50px;background: rgba(10, 10, 10, 0.17);">
-							<div class="sub-main-w3">
-								<form id='form' action="${pageContext.request.contextPath }/account/login" method="post" target="target" style="margin: 0px;">
-									<div class="form-style-agile">
-										<label>
-											<i class="fas fa-user"></i>
-											用户名
-										</label>
-										<input class="Name" placeholder="Username" name="Name" type="text" required="">
-									</div>
-									<div class="form-style-agile">
-										<label>
-											<i class="fas fa-unlock-alt"></i>
-											密码
-										</label>
-										<input class="Password" placeholder="Password" name="Password" type="password" required="">
-									</div>
-									<!-- checkbox -->
-									<div class="wthree-text">
-										<ul>
-											<li>
-												<label class="anim">
-													<input type="checkbox" class="checkbox" required="">
-													<span>我已阅读并同意服务条款</span>
-												</label>
-											</li>
-											<li>
-												<a href="#">忘记密码</a>|<a href="${pageContext.request.contextPath }/jsp/register.jsp">注册</a>
-											</li>
-										</ul>
-									</div>
-									<!-- //checkbox -->
-									<input type="submit" class="login" value="登录">
-								</form>
-								<iframe name="target" style="display:none" ></iframe>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-  
 
-  <!-- START: section -->
-  <section class="probootstrap-section probootstrap-section-colored">
+
+    </aside>
+</section>
+<footer class="footer">
     <div class="container">
-      <div class="row text-center">
-        <div class="col-lg-8 col-md-offset-2 mb30 section-heading probootstrap-animate">
-          <h2>执谁之笔 共赴锦上添花 为谁迷离 空守盛夏光年...</h2>
-          <p class="lead">不要因为也许会改变，就不肯说出那句美丽的誓言，不要因为也许会分离，就不敢求一次倾心的相遇。——席慕容《印记》</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4 col-md-offset-4 probootstrap-animate">
-          <p class="text-center">
-            <a href="#" class="btn btn-ghost btn-ghost-white btn-lg btn-block" role="button">联系我们</a>
-          </p>
-        </div>
-      </div>
+        <p>Copyright &copy; 2016.Company name All rights reserved.</p>
     </div>
-  </section>
-  <!-- END: section -->
-  
-  <!-- START: footer -->
-  <footer role="contentinfo" class="probootstrap-footer">
-    <div class="container">
-     
-      <div class="row mt40">
-        <div class="col-md-12 text-center">
-          <p>
-            <small>小贴吧，一个畅谈的梦想的贴吧</small><br>
-            <a href="#" class="js-backtotop">回到顶部</a>
-          </p>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <!-- END: footer -->
-  
-  <script src="${pageContext.request.contextPath }/static/js/scripts.js"></script>
-  <script src="${pageContext.request.contextPath }/static/js/main.js"></script>
-  <script src="${pageContext.request.contextPath }/static/js/custom.js"></script>
-  <script src="${pageContext.request.contextPath }/static/js/js.nav.js"></script>
-<script src="${pageContext.request.contextPath }/static/js/canva_moving_effect.js"></script>
-<script src="${pageContext.request.contextPath }/static/js/jquery-form.js"></script>
-<!-- //Jquery -->
-<script type="text/javascript">
-	$(function(){
-		$("#form").ajaxForm(function(data){  
-			if(data==true||data=='true'){
-				 window.location.reload();
-			}else{
-				alert("账号或密码错误，请重新登录");
-				$(".Name").val('');
-				$(".Password").val('');
-				
-			}
-		}); 
-		$(".probootstrap-form").ajaxForm(function(data){  
-			if(data==true||data=='true'){
-				alert("发表成功");
-				 window.location.reload();
-			}else{
-				alert("发表失败");
-				$("#postSubject").val('');
-				$("#postContent").val('');
-			}
-		}); 
-		
-	});
-</script>
-  </body>
+    <div id="gotop"><a class="gotop"></a></div>
+</footer>
+<script src="<%=path%>/static/postStyle/js/bootstrap.min.js"></script>
+<script src="<%=path%>/static/postStyle/js/jquery.ias.js"></script>
+<script src="<%=path%>/static/postStyle/js/scripts.js"></script>
+</body>
 </html>
