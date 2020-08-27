@@ -64,15 +64,23 @@ public class FloorDaoImpl implements FloorDao{
     }
 
     /**
-     * 插入楼正文
-     *
+     *   插入楼正文
      * @param floor 楼所有数据
-     * @return 成功
+     * @return 返回插入后的主键ID
      */
     @Override
     public Integer insertFloor(Floor floor) {
         try {
-            return crud.insert(floor);
+            crud.insert(floor);
+            floor.setSendDate(null);
+            floor.setPostContent(null);
+            floor.setImageUrl(null);
+            floor.setIsDelete(null);
+            List<Floor> floors = crud.select(Floor.class, floor);
+            if(floors.size() == 1){
+                return floors.get(0).getFloorId();
+            }
+            throw new RuntimeException();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
