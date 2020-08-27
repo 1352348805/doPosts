@@ -73,12 +73,7 @@
 				<div class="logo">
 					<a href="index.html"><img src="<%=path%>/static/images/forumpark/logo.png" alt=" " /></a>
 				</div>
-				<div class="search">
-					<input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" >
-					<input type="submit"  value="SEARCH">
 
-				</div>
-				<div class="clearfix"> </div>
 			</div>
 <%--			<div class="header-bottom-right">--%>
 <%--				<ul class="men-grid">--%>

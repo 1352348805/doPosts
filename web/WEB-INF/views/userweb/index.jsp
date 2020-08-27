@@ -28,6 +28,7 @@
   <script type="text/javascript" src="${pageContext.request.contextPath }/static/js/jquery-1.11.0.min.js"></script>
 </head>
 <body>
+
 <script type="text/javascript">
   function searchToggle(obj, evt){
     var container = $(obj).closest('.search-wrapper');
@@ -110,7 +111,7 @@
 
     <nav role="navigation" class="probootstrap-nav hidden-xs">
       <ul class="probootstrap-main-nav">
-        <li><a href="${pageContext.request.contextPath }/user?action=toLogin">登录</a></li>
+        <li><a href="${pageContext.request.contextPath }/user?action=toLogin" >登录</a></li>
         <li><a href="${pageContext.request.contextPath }/user?action=toRegister">注册</a></li>
       </ul>
       <div class="extra-text visible-xs">
@@ -126,49 +127,50 @@
 <!-- END: header -->
 
 <START: section >
-<section class="probootstrap-intro" style="height: 300px ;" data-stellar-background-ratio="0.5">
-<a href=""><img src="<%=path%>/static/images/head/egm.png"height="360px" style="margin-left: 860px"><a/>
+<section  style="height: 300px ;" data-stellar-background-ratio="0.5">
+  <div ></div>
+ <img style="display: inline-block; background-image: " src="<%=path%>/static/images/head/gnydy.png" height="200px" width="100%" style="margin-left: 350px">
 </section>
-<div style="position: relative;width: 100%;height: 80px;">
-  <div class="search-wrapper">
-    <div class="input-holder">
-      <input type="text" class="search-input" placeholder="Type to search" />
-      <button class="search-icon" onclick="searchToggle(this, event);"><i class="fa fa-search"></i></button>
+  <a href=""><img src="<%=path%>/static/images/head/1-10.png" height="200px" style="margin-left: 550px"><a/>
+    <div style="position: absolute;width: 100%;height: 80px;transform:translate(0px,-500px)">
+      <div class="search-wrapper">
+        <div class="input-holder">
+          <input type="text" class="search-input"/>
+          <button style="dis" class="search-icon" onclick="searchToggle(this, event);"><i class="fa fa-search"></i></button>
+        </div>
+        <span class="close" onclick="searchToggle(this, event);"></span>
+        <div class="result-container">
+          搜索内容不能为空
+        </div>
+      </div>
     </div>
-    <span class="close" onclick="searchToggle(this, event);"></span>
-    <div class="result-container">
-      搜索内容不能为空
-    </div>
-  </div>
-</div>
-<section id="next-section" class="probootstrap-section">
+
   <div class="container">
     <div class="row bar">
 
     </div>
   </div>
-</section>
+
 <!-- START: section -->
-<section class="probootstrap-section probootstrap-section-colored">
-  <div class="container" style="height: 100px">
-    <div class="row text-center">
-      <div class="col-lg-8 col-md-offset-2 mb30 section-heading probootstrap-animate">
-        <h2 id="blink">执谁之笔 共赴锦上添花 为谁迷离 空守盛夏光年...</h2>
-        <p class="lead">不要因为也许会改变，就不肯说出那句美丽的誓言，不要因为也许会分离，就不敢求一次倾心的相遇。——席慕容《印记》</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4 col-md-offset-4 probootstrap-animate">
-        <p class="text-center">
-          <a href="#" class="btn btn-ghost btn-ghost-white btn-lg btn-block" role="button">联系我们</a>
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+
 <!-- END: section -->
 
 <!-- START: footer -->
+<%--    <div class="container" style="height: 100px">--%>
+<%--      <div class="row text-center">--%>
+<%--        <div class="col-lg-8 col-md-offset-2 mb30 section-heading probootstrap-animate">--%>
+<%--          <h2 id="blink">执谁之笔 共赴锦上添花 为谁迷离 空守盛夏光年...</h2>--%>
+<%--          <p class="lead">不要因为也许会改变，就不肯说出那句美丽的誓言，不要因为也许会分离，就不敢求一次倾心的相遇。——席慕容《印记》</p>--%>
+<%--        </div>--%>
+<%--      </div>--%>
+<%--      <div class="row">--%>
+<%--        <div class="col-md-4 col-md-offset-4 probootstrap-animate">--%>
+<%--          <p class="text-center">--%>
+<%--            <a href="#" class="btn btn-ghost btn-ghost-white btn-lg btn-block" role="button">联系我们</a>--%>
+<%--          </p>--%>
+<%--        </div>--%>
+<%--      </div>--%>
+<%--    </div>--%>
 <footer role="contentinfo" class="probootstrap-footer">
   <div class="container">
 
