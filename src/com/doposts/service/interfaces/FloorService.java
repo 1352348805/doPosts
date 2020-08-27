@@ -27,5 +27,5 @@ public interface FloorService {
      * @param floor 楼所有数据
      * @return 受影响的行数
      */
-    FloorWithReply insertFloor(Floor  floor);
+    FloorWithReply insertFloor(Floor floor);
 }

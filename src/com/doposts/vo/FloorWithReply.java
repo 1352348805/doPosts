@@ -11,8 +11,6 @@ import java.util.List;
  * @date 2020/8/20 14:40
  */
 public class FloorWithReply extends Floor {
-
-
     /**
      * 用户名字
      */

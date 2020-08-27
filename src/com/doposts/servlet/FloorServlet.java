@@ -41,6 +41,7 @@ public class FloorServlet extends AbstractServlet{
      * @return
      */
     public  Object  insertFloor(HttpServletRequest request,HttpServletResponse response){
+
         int maxFloorByPostId = floorService.getMaxFloorByPostId(1);
 
         Floor floor = new Floor();
@@ -54,7 +55,7 @@ public class FloorServlet extends AbstractServlet{
         if (floorWithReply != null){
             return new CommonResult().success(floorWithReply);
         }
-
+        //floorWithReply.setPostFloor();
         return new CommonResult().failed();
     }
 
