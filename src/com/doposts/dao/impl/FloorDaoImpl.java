@@ -69,6 +69,10 @@ public class FloorDaoImpl implements FloorDao{
      */
     @Override
     public Integer insertFloor(Floor floor) {
-        return null;
+        try {
+            return crud.insert(floor);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
