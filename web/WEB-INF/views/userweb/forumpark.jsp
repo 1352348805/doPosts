@@ -264,10 +264,10 @@
 					  for(var i = 0 ; i < date.length ; i++){
 						  bardiv +="<div class=\" con-sed-grid\">\n" +
 								  "\t\t\t\t\t<div class=\"elit-grid\">\n" +
-								  "\t\t\t\t\t\t<h4>consectetur  elit</h4>\n" +
-								  "\t\t\t\t\t\t<span>"+date[i].className+"</span>\n" +
+								  // "\t\t\t\t\t\t<h4>consectetur  elit</h4>\n" +
+								  "\t\t\t\t\t\t<span><a href=\"<%=path%>/user?action=postListpage&secondId="+date[i].classId+"\">"+date[i].className+"</a></span>\n" +
 								  "\t\t\t\t\t\t<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, </p>\n" +
-								  "\t\t\t\t\t\t<a class=\"now-get\" href=\"+<%=path%>/user?action=postListpage\">来吧帖子</a>\n" +
+								  "\t\t\t\t\t\t<a class=\"now-get\" href=\"<%=path%>/user?action=postListpage&secondId="+date[i].classId+"\">来吧帖子</a>\n"+
 								  "\t\t\t\t\t</div>\n" +
 								  "\t\t\t\t\t<a href=\"single.html\"><img class=\"img-responsive shoe-left\" src=\"images/sh.jpg\" alt=\" \"></a>\n" +
 								  "\t\t\t\t\t<div class=\"clearfix\"> </div>\n" +
@@ -275,10 +275,10 @@
 						  if(++i<date.length){
 							  bardiv+="\t\t\t\t<div class=\"con-sed-grid sed-left-top\">\n" +
 									  "\t\t\t\t\t<div class=\"elit-grid\">\n" +
-									  "\t\t\t\t\t\t<h4>consectetur  elit</h4>\n" +
-									  "\t\t\t\t\t\t<span>"+date[i].className+"</span>\n" +
+									  // "\t\t\t\t\t\t<h4>consectetur  elit</h4>\n" +
+									  "\t\t\t\t\t\t<span><a href=\"<%=path%>/user?action=postListpage&second="+date[i].classId+"\">"+date[i].className+"</a></span>\n" +
 									  "\t\t\t\t\t\t<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, </p>\n" +
-									  "\t\t\t\t\t\t<a class=\"now-get\" href=\"#\">GET NOW</a>\n" +
+									  "\t\t\t\t\t\t<a class=\"now-get\" href=\"<%=path%>/user?action=postListpage&second="+date[i].classId+"\">来吧帖子</a>\n" +
 									  "\t\t\t\t\t</div>\n" +
 									  "\t\t\t\t\t<a href=\"single.html\"><img class=\"img-responsive shoe-left\" src=\"images/wa.jpg\" alt=\" \"></a>\n" +
 									  "\t\t\t\t\t<div class=\"clearfix\"> </div>\n" +
@@ -312,9 +312,6 @@
 			        },'json'
 			);
 		}
-
-
-
 	  });
   </script>
 </body>
