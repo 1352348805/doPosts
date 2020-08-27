@@ -131,19 +131,21 @@
   <div ></div>
  <img style="display: inline-block; background-image: " src="<%=path%>/static/images/head/gnydy.png" height="200px" width="100%" style="margin-left: 350px">
 </section>
-  <a href=""><img src="<%=path%>/static/images/head/1-10.png" height="200px" style="margin-left: 550px"><a/>
-    <div style="position: absolute;width: 100%;height: 80px;transform:translate(0px,-500px)">
-      <div class="search-wrapper">
-        <div class="input-holder">
-          <input type="text" class="search-input"/>
-          <button style="dis" class="search-icon" onclick="searchToggle(this, event);"><i class="fa fa-search"></i></button>
-        </div>
-        <span class="close" onclick="searchToggle(this, event);"></span>
-        <div class="result-container">
-          搜索内容不能为空
-        </div>
-      </div>
-    </div>
+
+   <img style="position: absolute; left: 25%;top: -1%" src="<%=path%>/static/images/head/1-10.png" height="200px" style="margin-left: 550px">
+
+<%--    <div style="position: absolute;width: 100%;height: 80px;transform:translate(0px,-500px)">--%>
+<%--      <div class="search-wrapper">--%>
+<%--        <div class="input-holder">--%>
+<%--          <input type="text" class="search-input"/>--%>
+<%--          <button style="dis" class="search-icon" onclick="searchToggle(this, event);"><i class="fa fa-search"></i></button>--%>
+<%--        </div>--%>
+<%--        <span class="close" onclick="searchToggle(this, event);"></span>--%>
+<%--        <div class="result-container">--%>
+<%--          搜索内容不能为空--%>
+<%--        </div>--%>
+<%--      </div>--%>
+<%--    </div>--%>
 
   <div class="container">
     <div class="row bar">
