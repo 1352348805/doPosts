@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/default.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/search-form.css">
 
-  <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet">
+<%--  <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet">--%>
   <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/styles-merged.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/style.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/custom.css">
@@ -27,7 +27,7 @@
   <script type="text/javascript" src="${pageContext.request.contextPath }/static/js/jquery-3.3.1.min.js"></script>
   <script type="text/javascript" src="${pageContext.request.contextPath }/static/js/jquery-1.11.0.min.js"></script>
 </head>
-<body style="overflow:-Scroll;overflow-y:hidden">
+<body style="overflow:scroll;overflow-y:hidden">
 
 <script type="text/javascript">
   function searchToggle(obj, evt){
@@ -104,12 +104,13 @@
 
 </style>
 <!-- START: header -->
-<header role="banner" class="probootstrap-header">
+<header role="banner" style="padding-top: 0px;height: 200px; background: url('<%=path%>/static/images/head/gnydy.png') no-repeat" class="probootstrap-header">
   <div class="container-fluid">
 
     <div class="mobile-menu-overlay"></div>
-
+    <img style="position: absolute; left: 23%;height: 180px" src="<%=path%>/static/images/head/1-10.png">
     <nav role="navigation" class="probootstrap-nav hidden-xs">
+
       <ul class="probootstrap-main-nav">
         <li><a href="${pageContext.request.contextPath }/user?action=toLogin" >登录</a></li>
         <li><a href="${pageContext.request.contextPath }/user?action=toRegister">注册</a></li>
@@ -122,23 +123,38 @@
         </ul>
       </div>
     </nav>
+    <div style="position: relative;width: 100%;height: 80px;">
+      <div class="search-wrapper active">
+        <div class="input-holder">
+          <input type="text" class="search-input" placeholder="吧内搜索" />
+          <button class="search-icon" onclick="searchToggle(this, event);"><i class="fa fa-search"></i></button>
+        </div>
+<%--        <span class="close" onclick="searchToggle(this, event);"></span>--%>
+        <div style="font-size: 20px;color: red;" class="result-container">
+          搜索内容不能为空
+        </div>
+      </div>
+    </div>
   </div>
+<%--  <img style="display: inline-block;" src="<%=path%>/static/images/head/gnydy.png" height="200px" width="100%">--%>
 </header>
 <!-- END: header -->
 
-<START: section >
-<section  style="height: 300px ;" data-stellar-background-ratio="0.5">
-  <div ></div>
- <img style="display: inline-block; background-image: " src="<%=path%>/static/images/head/gnydy.png" height="200px" width="100%" style="margin-left: 350px">
+<!-- START: section -->
+<section style="padding: 280px 0px 0px;" id="next-section" class="probootstrap-section">
+  <div class="container">
+    <div class="row bar">
+
+    </div>
+  </div>
 </section>
 
-   <img style="position: absolute; left: 25%;top: -1%" src="<%=path%>/static/images/head/1-10.png" height="200px" style="margin-left: 550px">
 
 <%--    <div style="position: absolute;width: 100%;height: 80px;transform:translate(0px,-500px)">--%>
 <%--      <div class="search-wrapper">--%>
 <%--        <div class="input-holder">--%>
 <%--          <input type="text" class="search-input"/>--%>
-<%--          <button style="dis" class="search-icon" onclick="searchToggle(this, event);"><i class="fa fa-search"></i></button>--%>
+<%--          <button style="display: block" class="search-icon" onclick="searchToggle(this, event);"><i class="fa fa-search"></i></button>--%>
 <%--        </div>--%>
 <%--        <span class="close" onclick="searchToggle(this, event);"></span>--%>
 <%--        <div class="result-container">--%>
@@ -147,15 +163,7 @@
 <%--      </div>--%>
 <%--    </div>--%>
 
-  <div class="container">
-    <div class="row bar">
 
-    </div>
-  </div>
-
-<!-- START: section -->
-
-<!-- END: section -->
 
 <!-- START: footer -->
 <%--    <div class="container" style="height: 100px">--%>
@@ -180,7 +188,7 @@
       <div class="col-md-12 text-center">
         <p>
           <small>来贴吧，一个畅谈的梦想的贴吧</small><br>
-          <a href="#" class="js-backtotop">回到顶部</a>
+<%--          <a href="#" class="js-backtotop">回到顶部</a>--%>
         </p>
       </div>
     </div>
@@ -189,14 +197,14 @@
 <!-- END: footer -->
 
 <%-- h2 闪烁字体--%>
-<script language="javascript">
-  function changeColor(){
-    var color="#f00|bai#0f0|#00f|#880|#808|#088|yellow|green|blue|gray";
-    color=color.split("|");
-    document.getElementById("blink").style.color=color[parseInt(Math.random() * color.length)];
-  }
-  setInterval("changeColor()",200);
-</script>
+<%--<script language="javascript">--%>
+<%--  function changeColor(){--%>
+<%--    var color="#f00|bai#0f0|#00f|#880|#808|#088|yellow|green|blue|gray";--%>
+<%--    color=color.split("|");--%>
+<%--    document.getElementById("blink").style.color=color[parseInt(Math.random() * color.length)];--%>
+<%--  }--%>
+<%--  setInterval("changeColor()",200);--%>
+<%--</script>--%>
 
 <script src="${pageContext.request.contextPath }/static/js/scripts.js"></script>
 <script src="${pageContext.request.contextPath }/static/js/main.js"></script>
