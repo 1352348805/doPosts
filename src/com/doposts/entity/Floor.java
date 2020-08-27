@@ -55,6 +55,8 @@ public class Floor {
      */
     private String imageUrl;
 
+
+
     /**
      *  是否被删除
      */
@@ -115,6 +117,14 @@ public class Floor {
     public void setCreateUserId(Integer createUserId) {
         this.createUserId = createUserId;
     }
+    public Boolean getIsDelete() {
+        return isDelete;
+    }
+
+    public Floor setIsDelete(Boolean delete) {
+        isDelete = delete;
+        return this;
+    }
 
     @Override
     public String toString() {
@@ -123,8 +133,10 @@ public class Floor {
                 ", postId=" + postId +
                 ", postFloor=" + postFloor +
                 ", postContent='" + postContent + '\'' +
+                ", createUserId=" + createUserId +
                 ", sendDate=" + sendDate +
                 ", imageUrl='" + imageUrl + '\'' +
+                ", isDelete=" + isDelete +
                 '}';
     }
 }

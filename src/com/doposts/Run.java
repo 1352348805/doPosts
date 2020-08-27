@@ -17,6 +17,6 @@ public class Run {
     public static void main(String[] args) throws Exception{
         DatabaseMonitorServlet monitorServlet = new DatabaseMonitorServlet();
         monitorServlet.init();
-        PostItDatabase.FLOOR_DAO.getMaxFloorByPostId(1);
+        PostItDatabase.FLOOR_DAO.getFloorById(1);
     }
 }

@@ -1,5 +1,6 @@
 package com.doposts.dao.impl;
 
+import com.doposts.Run;
 import com.doposts.dao.Count;
 import com.doposts.dao.CrudHandler;
 import com.doposts.dao.PostItDatabase;
@@ -85,6 +86,20 @@ public class FloorDaoImpl implements FloorDao{
      */
     @Override
     public FloorWithReply getFloorById(Integer id) {
-        return null;
+        try {
+            return crud.executeQueryToBean("SELECT\n" +
+                    "\tfloor.*, \n" +
+                    "\tcreateUser.userName AS createUserName\n" +
+                    "FROM\n" +
+                    "\tfloor\n" +
+                    "\tLEFT JOIN\n" +
+                    "\t`user` AS createUser\n" +
+                    "\tON \n" +
+                    "\t\tfloor.createUserId = createUser.userId\n" +
+                    "WHERE\n" +
+                    "\tfloor.floorId=?", FloorWithReply.class, id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
