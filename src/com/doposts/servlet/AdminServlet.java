@@ -131,9 +131,6 @@ public class AdminServlet extends AbstractServlet {
         user.setUserName(userName);
         user.setGroup(group);
         boolean b = userService.updateUser(user);
-        if (b) {
-            return "admin/user/user_list";
-        }
         return "admin/user/user_update";
     }
 

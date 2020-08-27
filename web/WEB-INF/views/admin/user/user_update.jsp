@@ -14,17 +14,16 @@
 </head>
 <body>
 <div>
+    <input type="hidden" value="<%=request.getHeader("Referer")%>" id="hiddenid"/>
     <table>
-        <p>ID:<input name="userId" readonly="readonly" id="userid" value="${sb.userId}"></p>
+<%--        <p style="visibility:hidden">ID:<input type="hidden" name="userId" readonly="readonly" id="userid" value="${sb.userId}"></p>--%>
         <p>账号:<input name="userLoginName" type="text" id="userLoginName" value="${sb.userLoginName}"></p>
         <p>密码:<input name="userPassword" type="text" id="userPassword" value="${sb.userPassword}"></p>
         <p>昵称:<input name="userName" type="text" id="userName" value="${sb.userName}"></p>
         <p>权限:
-            <select name="${sb.group}" id="group">
-                <option value="管理员">管理员</option>
+            <select id="group">
+                <option value="管理员" >管理员</option>
                 <option value="user">user</option>
-                <option value="奥特曼打爹摇" style="background-color: rgba(219,160,200,0.88)">奥特曼爹打瑶</option>
-                <option value="我是李二狗">我是李二狗</option>
             </select>
         </p>
         <p>
@@ -37,6 +36,7 @@
 <script>
 
     $("#buttons").click(function () {
+
         $.ajax({
             url: "<%=path%>/admin?action=updateTwa",
             type: "post",
@@ -48,14 +48,14 @@
                 'userId': ${sb.userId}
             },
             success: function (jsonStr) {
-
+                alert("修改成功"+$("#hiddenid").val());
+                window.location.href=$("#hiddenid").val();
             }, error: function () {
-                alert("11-0");
+                alert("修改失败");
             }
 
         })
     });
-
 
     $(function () {
         layui.use('layer', function () {

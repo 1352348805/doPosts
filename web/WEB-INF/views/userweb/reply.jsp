@@ -292,9 +292,9 @@
   <section id="next-section" class="probootstrap-section">
     <div class="container" >
         <c:forEach items="${floor}" var="floor">
-      <div class="row bar" style="border:rgb(225 226 230) solid 1px ; border-bottom: none ">
-       	<div class='col-md-12 col-sm-6 probootstrap-animate fadeInUp probootstrap-animated' style="padding: 0px 0px 0px 0px; height: 100%;display: inline-block;" >
-            <div style=" float: left; display: inline-block; background: rgb(251,251,253);width: 130px; height:100%; padding: 20px" >
+      <div  class="row bar wyggd" style="border:rgb(225 226 230) solid 1px ; border-bottom: none ">
+       	<div  class='col-md-12 col-sm-6 probootstrap-animate fadeInUp probootstrap-animated' style="padding: 0px 0px 0px 0px; height: 100%;display: inline-block;" >
+            <div class="gd" style=" float: left; display: inline-block; background: rgb(251,251,253);width: 130px; height:266px; padding: 20px" >
                 <ul style="width: 130px; height: 170px">
                     <li>
                         <div>
@@ -323,7 +323,7 @@
 
                     </div>
                     <div style=" float: right;  width: 230px; height: 20px;margin: 10px">
-                        <div style="float: right">
+                        <div class="hf" style="float: right">
                             <span><a href="javascript:;" onclick="ShowOrHideReply(this)" >回复</a>&nbsp;</span>
                         </div>
 
@@ -355,7 +355,7 @@
                                    </li>
                                </c:forEach>
                                <li style="height: 45px">
-                                   <div style="float: right; padding: 4px 8px 4px 8px; border: 1px solid rgb(240, 241, 242); background:#FFFFFF">
+                                   <div class="wysyg" style="float: right; padding: 4px 8px 4px 8px; border: 1px solid rgb(240, 241, 242); background:#FFFFFF">
                                        <a href="javascript:;" style="color: #1a1919" onclick="conceal(this)">我也说一句</a>
                                    </div>
                                </li>
@@ -398,8 +398,8 @@
         </div>
        
       </div>
-      
-      
+
+
     </div>
   </section>
 	
@@ -569,4 +569,21 @@
 
 </script>
   </body>
+  <script>
+
+    var hg;
+    var em;
+        $(".hf").click(function(){
+            $(this).parent().parent().parent().prev().css("height",""+ $(this).parent().parent().parent().height()+"px");
+            hg=$(this).parent().parent().parent().height();
+            em=$(this).parent().parent().parent().prev();
+            console.log($(this).parent().parent());
+        });
+
+
+
+$(".wysyg").click(function(){
+    em.css("height",""+ (hg+150)+"px");
+});
+  </script>
 </html>

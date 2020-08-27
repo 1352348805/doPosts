@@ -17,7 +17,23 @@
     <script src="<%=path%>/static/layuiadmin/layui/layui.js"></script>
     <script src="<%=path%>/static/js/jquery.js"></script>
 </head>
-<body style="overflow:hidden" ondragstart="return false" onselectstart="return false">
-
+<body style="overflow:hidden" ondragstart="return false" onselectstart="return false"
+    onresize="{
+        loginBody.css('left', body.innerWidth()/2 - 500/2);
+        loginBody.css('top', body.innerHeight()/2 - 500/2);
+    }"
+>
+    <div style="margin: 0; border: 0; padding: 0; height: 100%; width: 100%;">
+        <div id="loginBody" style="position: absolute; margin: 0; border: 0; padding: 0; height: 500px; width: 500px; background-color: rgba(255,255,255,0.5); border-radius: 15px;"></div>
+        <div style="position: absolute; margin: 0; border: 0; padding: 0; height: 100%; width: 100%; box-shadow: 2px 2px 2px 2px rgba(0,0,0,.3); z-index: -1; filter: blur(4px);">
+            <img src="<%=path%>/static/images/database/bg.jpg" alt="???">
+        </div>
+        <script>
+            loginBody = $('#loginBody');
+            body = $(document.body);
+            loginBody.css('left', body.innerWidth()/2 - 500/2);
+            loginBody.css('top', body.innerHeight()/2 - 500/2);
+        </script>
+    </div>
 </body>
 </html>

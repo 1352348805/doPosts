@@ -9,6 +9,7 @@ import com.dxhualuo.database.connectionpool.config.C3P0_Config;
 import com.dxhualuo.database.handler.MySQLSuperCrudHandler;
 import com.dxhualuo.database.handler.base.DatabaseCrudHandler;
 import com.dxhualuo.database.handler.interfaces.DatabaseCrud;
+import com.dxhualuo.database.handler.interfaces.SuperCrud;
 import com.dxhualuo.database.interfaces.Database;
 
 import java.lang.reflect.Proxy;

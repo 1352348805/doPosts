@@ -20,5 +20,12 @@ public interface FloorDao {
      *  通过postId获得当前帖子的最大楼数
      * @return 最大楼数
      */
-    int getMaxFloorByPostId(Integer postId);
+   int getMaxFloorByPostId(Integer postId);
+
+    /**
+     *   插入楼正文
+     * @param floor 楼所有数据
+     * @return 受影响的行数
+     */
+    Integer insertFloor(Floor floor);
 }

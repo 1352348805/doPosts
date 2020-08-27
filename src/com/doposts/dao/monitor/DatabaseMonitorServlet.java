@@ -68,7 +68,7 @@ public class DatabaseMonitorServlet extends HttpServlet {
                 request.getRequestDispatcher("/WEB-INF/views/database/groupError.jsp");
             }
         } else {
-            request.getRequestDispatcher("/WEB-INF/views/database/DX_DatabaseMonitor.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/database/groupError.jsp").forward(request, response);
         }
     }
 }
