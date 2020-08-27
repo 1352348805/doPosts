@@ -60,4 +60,15 @@ public class FloorDaoImpl implements FloorDao{
         }
         return 0;
     }
+
+    /**
+     * 插入楼正文
+     *
+     * @param floor 楼所有数据
+     * @return 成功
+     */
+    @Override
+    public Integer insertFloor(Floor floor) {
+        return null;
+    }
 }
