@@ -27,7 +27,7 @@
   <script type="text/javascript" src="${pageContext.request.contextPath }/static/js/jquery-3.3.1.min.js"></script>
   <script type="text/javascript" src="${pageContext.request.contextPath }/static/js/jquery-1.11.0.min.js"></script>
 </head>
-<body style="overflow:-Scroll;overflow-y:hidden">
+<body>
 
 <script type="text/javascript">
   function searchToggle(obj, evt){
@@ -133,7 +133,6 @@
 </section>
 
    <img style="position: absolute; left: 25%;top: -1%" src="<%=path%>/static/images/head/1-10.png" height="200px" style="margin-left: 550px">
-
 <%--    <div style="position: absolute;width: 100%;height: 80px;transform:translate(0px,-500px)">--%>
 <%--      <div class="search-wrapper">--%>
 <%--        <div class="input-holder">--%>
