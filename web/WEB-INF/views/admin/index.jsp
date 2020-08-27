@@ -33,7 +33,7 @@
     </div>
 </section>
 <footer class="footer">
-    版权归来贴项目组
+    <%@include file="../common/admin/footer.jsp"%>
 </footer>
 <script type="text/javascript" src="<%=path%>/static/js/admin/time.js"></script>
 <script type="text/javascript" src="<%=path%>/static/js/jquery.js"></script>

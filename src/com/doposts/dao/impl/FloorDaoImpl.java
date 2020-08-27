@@ -1,5 +1,6 @@
 package com.doposts.dao.impl;
 
+import com.doposts.dao.Count;
 import com.doposts.dao.CrudHandler;
 import com.doposts.dao.PostItDatabase;
 import com.doposts.dao.interfaces.FloorDao;
@@ -37,6 +38,39 @@ public class FloorDaoImpl implements FloorDao{
         floor.setPostId(postId);
         try {
             return crud.select(Floor.class, floor);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     *  通过postId获得当前帖子的最大楼数
+     * @return 最大楼数
+     */
+    @Override
+    public int getMaxFloorByPostId(Integer postId) {
+        Count count;
+        try {
+            count = crud.executeQueryToBean("SELECT MAX(`postFloor`) as count FROM `floor` WHERE `postId` = ?", Count.class, postId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        if(count != null){
+            return (int)(long)count.getCount();
+        }
+        return 0;
+    }
+
+    /**
+     * 插入楼正文
+     *
+     * @param floor 楼所有数据
+     * @return 成功
+     */
+    @Override
+    public Integer insertFloor(Floor floor) {
+        try {
+            return crud.insert(floor);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

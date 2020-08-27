@@ -57,11 +57,17 @@ public interface UserDao {
      * @return 影响行数
      */
     int deleteUser(int id);
-
     /**
      * 修改用户昵称、密码等。。。
      * @param user 实体类
      * @return 受影响行数
      */
     int updateUserInfo(User user);
+
+    /**
+     * 以id获取用户信息
+     * @param id
+     * @return user
+     */
+    User getUserById(int id);
 }

@@ -59,4 +59,7 @@ public interface UserService {
      * @return 是否成功
      */
     boolean updateUser(User user);
+
+
+    User getUserById(int id);
 }

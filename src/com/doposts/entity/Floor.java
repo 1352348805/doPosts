@@ -40,8 +40,10 @@ public class Floor {
      */
     private String postContent;
 
+    /**
+     *  创建的用户id
+     */
     private Integer createUserId;
-
 
     /**
      * 发送时间
@@ -52,6 +54,11 @@ public class Floor {
      * 图片地址
      */
     private String imageUrl;
+
+    /**
+     *  是否被删除
+     */
+    private Boolean isDelete;
 
     public Integer getFloorId() {
         return floorId;

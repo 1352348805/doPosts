@@ -49,52 +49,73 @@ public class PostClass {
      */
     private Boolean isEnable;
 
-    public Boolean getEnable() {
-        return isEnable;
-    }
-
-    public void setEnable(Boolean enable) {
-        isEnable = enable;
-    }
-
-    public String getClassDescribe() {
-        return classDescribe;
-    }
-
-    public void setClassDescribe(String classDescribe) {
-        this.classDescribe = classDescribe;
-    }
+    /**
+     *  分类图片
+     */
+    @FieldMapping("classImageUrl")
+    private String imageUrl;
 
     public Integer getClassId() {
         return classId;
     }
 
-    public void setClassId(Integer classId) {
+    public PostClass setClassId(Integer classId) {
         this.classId = classId;
+        return this;
     }
 
     public String getClassName() {
         return className;
     }
 
-    public void setClassName(String className) {
+    public PostClass setClassName(String className) {
         this.className = className;
+        return this;
     }
 
     public Integer getClassLevel() {
         return classLevel;
     }
 
-    public void setClassLevel(Integer classLevel) {
+    public PostClass setClassLevel(Integer classLevel) {
         this.classLevel = classLevel;
+        return this;
     }
 
     public Integer getClassFatherId() {
         return classFatherId;
     }
 
-    public void setClassFatherId(Integer classFatherId) {
+    public String getClassDescribe() {
+        return classDescribe;
+    }
+
+    public PostClass setClassDescribe(String classDescribe) {
+        this.classDescribe = classDescribe;
+        return this;
+    }
+
+    public Boolean getEnable() {
+        return isEnable;
+    }
+
+    public PostClass setEnable(Boolean enable) {
+        isEnable = enable;
+        return this;
+    }
+
+    public PostClass setClassFatherId(Integer classFatherId) {
         this.classFatherId = classFatherId;
+        return this;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public PostClass setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+        return this;
     }
 
     @Override
@@ -106,6 +127,7 @@ public class PostClass {
                 ", classFatherId=" + classFatherId +
                 ", classDescribe='" + classDescribe + '\'' +
                 ", isEnable=" + isEnable +
+                ", imageUrl='" + imageUrl + '\'' +
                 '}';
     }
 

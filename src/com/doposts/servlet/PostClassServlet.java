@@ -6,6 +6,7 @@ import com.doposts.service.impl.PostClassServiceImpl;
 import com.doposts.service.interfaces.PostClassService;
 import com.doposts.to.CommonResult;
 import com.doposts.vo.PostClassWithChildren;
+import com.sun.deploy.net.HttpRequest;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -98,4 +99,8 @@ public class PostClassServlet extends AbstractServlet{
          List<PostClass> list = postClassService.getThreePostClassListByParent(barid);
          return new CommonResult().success(list);
      }
+
+
+
+
 }

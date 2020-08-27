@@ -14,6 +14,7 @@
     <meta charset="UTF-8">
     <title>来贴管理系统</title>
     <link type="text/css" rel="stylesheet" href="<%=path%>/static/css/admin.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="<%=path%>/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=path%>/static/layuiadmin/layui/css/layui.css" media="all"/>
 </head>
 <body>
@@ -84,8 +85,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2" align="right">
-                        <button class="layui-btn layui-btn-sm" onclick="addClass();">
+                    <td colspan="2">
+                        <button style="background-color: #5994d6;margin-left: 40%;" class="layui-btn layui-btn-sm" onclick="addClass();">
                             <i class="layui-icon">&#xe608;</i> 确定
                         </button>
                     </td>
@@ -96,7 +97,7 @@
     </div>
 </section>
 <footer class="footer">
-    版权归来贴项目组
+    <%@include file="../../common/admin/footer.jsp"%>
 </footer>
 <input type="hidden" id="path" value="<%=path%>"/>
 <script type="text/javascript" src="<%=path%>/static/js/admin/time.js"></script>

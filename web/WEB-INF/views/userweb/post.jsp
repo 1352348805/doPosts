@@ -12,8 +12,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/style.login.css" type="text/css" media="all" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/default.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/search-form.css">
-    <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/static/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/vendor/bootstrap.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/style.nav.css">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet"> 
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/styles-merged.css">
@@ -21,8 +20,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/custom.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/font-awesome/css/font-awesome.css">
     <!--[if lt IE 9]>
-      <script src="js/vendor/html5shiv.min.js"></script>
-      <script src="js/vendor/respond.min.js"></script>
+      <script src="${pageContext.request.contextPath }/static/js/vendor/html5shiv.min.js"></script>
+      <script src="${pageContext.request.contextPath }/static/js/vendor/respond.min.js"></script>
     <![endif]-->
     <script type="text/javascript" src="${pageContext.request.contextPath }/static/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath }/static/js/jquery-1.11.0.min.js"></script>
@@ -247,7 +246,7 @@
   }
   </style>
   <!-- START: section -->
-  <section class="probootstrap-intro" style="background-image: url(img/hero_bg_2.jpg);height: 400px;" data-stellar-background-ratio="0.5">
+  <section class="probootstrap-intro" style="background-image: url(${pageContext.request.contextPath}/static/images/hero_bg_2.jpg);height: 400px;" data-stellar-background-ratio="0.5">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-7 probootstrap-intro-text">
@@ -286,7 +285,7 @@
   				<a class='hint info' href='#' title='发帖人'><i class='fa fa-user'>作者名字</i></a>
   				</span>
   					</h3>
-  						<p class='dark' style='80px'>这是很长的的描述这是很长的的描述这是很长的的描述这是很长的的描述这是很长的的描述</p>
+  						<p class='dark' style='size: 12px'>这是很长的的描述这是很长的的描述这是很长的的描述这是很长的的描述这是很长的的描述</p>
   						<p><img src="${pageContext.request.contextPath }/img/img_1.jpg" style="width:50px ;height:50px"></p>
   						<hr>
   						<p class='clearfix like'>
