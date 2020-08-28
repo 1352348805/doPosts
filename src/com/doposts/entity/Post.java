@@ -16,6 +16,7 @@ import java.util.Date;
  * @email 1352348805@qq.com
  */
 @JavaBean
+@SuppressWarnings("all")
 @TableMapping("post")
 public class Post {
 
