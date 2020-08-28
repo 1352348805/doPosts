@@ -298,7 +298,7 @@
         <c:forEach items="${floor}" var="floor">
       <div  class="row bar wyggd" id="sx" style="border:rgb(225 226 230) solid 1px ; border-bottom: none;">
        	<div  class='col-md-12 col-sm-6 probootstrap-animate fadeInUp probootstrap-animated' style="padding: 0px 0px 0px 0px; height: 100%;display: inline-block;width: 100%;height: 100% " >
-            <div class="gd" style=" float: left; display: inline-block; background: rgb(251,251,253);width: 130px; height:266px; padding: 20px" >
+            <div class="gd" style=" float: left; display: inline-block; background: rgb(251,251,253);width: 130px; height:280px; padding: 20px" >
                 <ul style="width: 130px; height: 170px">
                     <li>
                         <div>
@@ -319,11 +319,7 @@
                     <i class='fa fa-clock-o'>发帖时间&nbsp;:&nbsp;${floor.sendDate}</i>
                 </a>
   				</span>
-                        <div style="margin: 20px">
-                            <p class='dark' style='height: 150px' style="margin: 10px">
-                                    ${floor.postContent}
-                            </p>
-                        </div>
+                        <div style="margin: 20px">${floor.postContent}</div>
 
                     </div>
                     <div style=" float: right;  width: 240px; height: 20px;margin: 10px">
@@ -396,7 +392,7 @@
 <%--            		</span>--%>
 <%--            </div>--%>
             <div id="editor">
-                <p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p>
+
             </div>
             <div class="form-group">
               <input type="button" class="btn btn-primary" id="spend" name="submit" value="发表">
@@ -519,33 +515,12 @@
       var E = window.wangEditor
       var editor = new E('#editor')
       // 或者 var editor = new E( document.getElementById('editor') )
-      editor.create()
+      editor.customConfig.uploadImgServer = '/upload';
+      // editor.customConfig.uploadImgShowBase64 = true;
+      editor.create();
   </script>
 <!-- //Jquery -->
 <script type="text/javascript">
-	$(function(){
-		$("#form").ajaxForm(function(data){
-			if(data==true||data=='true'){
-				 window.location.reload();
-			}else{
-				alert("账号或密码错误，请重新登录");
-				$(".Name").val('');
-				$(".Password").val('');
-
-			}
-		});
-		$(".probootstrap-form").ajaxForm(function(data){
-			if(data==true||data=='true'){
-				alert("发表成功");
-				 window.location.reload();
-			}else{
-				alert("发表失败");
-				$("#postSubject").val('');
-				$("#postContent").val('');
-			}
-		});
-
-	});
 
 
 	function ShowOrHideReply(obj) {
@@ -581,7 +556,6 @@
    
 
    $("#spend").click(function () {
-
        $.ajax({
            url:  "<%=path%>/floor",
            method: "post",
@@ -589,7 +563,7 @@
            data :{
                action: "insertFloor",
                postid:1,
-               replyContent: $("#replyContent").val()
+               replyContent: editor.txt.html()
            },
            success: function (jsonStr) {
            if (jsonStr.code===200){
@@ -617,11 +591,7 @@
                    "                    <i class=\"fa fa-clock-o\">发帖时间&nbsp;:&nbsp;"+data.sendDate+"</i>\n" +
                    "                </a>\n" +
                    "  \t\t\t\t</span>\n" +
-                   "                        <div style=\"margin: 20px\">\n" +
-                   "                            <p class=\"dark\" style=\"height: 150px\">\n" +
-                   "                                    "+data.postContent+"\n" +
-                   "                            </p>\n" +
-                   "                        </div>\n" +
+                   "                        <div style=\"margin: 20px\">\n" +data.postContent+"\n" + "</div>\n" +
                    "\n" +
                    "                    </div>\n" +
                    "                    <div style=\" float: right;  width: 240px; height: 20px;margin: 10px\">\n" +
