@@ -57,6 +57,20 @@ public class Post {
     @JSONField(format = "yyyy-MM-dd HH:mm")
     private Date createDate;
 
+    /**
+     *  帖子描述
+     */
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Post setDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
     public Integer getPostId() {
         return postId;
     }
