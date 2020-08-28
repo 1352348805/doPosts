@@ -150,7 +150,6 @@ public class AdminServlet extends AbstractServlet {
         int count = userService.getselectUserConut();
         return new CommonResult().success(count);
     }
-
     /**
      * 分页查询
      *
@@ -268,7 +267,7 @@ public class AdminServlet extends AbstractServlet {
         PostClass postClass = new PostClass(null, className, type, parentId, classDescribe);
         boolean b = postClassService.addPostClass(postClass);
         if (b) {
-            invalidMenuCache(request);
+             invalidMenuCache(request);
             return new CommonResult().success(null);
         }
         return new CommonResult().failed("删除失败!");
