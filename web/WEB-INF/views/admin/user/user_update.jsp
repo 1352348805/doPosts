@@ -13,7 +13,7 @@
     <script src="<%=path%>/static/layuiadmin/layui/layui.js"></script>
 </head>
 <body>
-<div>
+<div>                           <!--跳转上一级页面 -->
     <input type="hidden" value="<%=request.getHeader("Referer")%>" id="hiddenid"/>
     <table>
 <%--        <p style="visibility:hidden">ID:<input type="hidden" name="userId" readonly="readonly" id="userid" value="${sb.userId}"></p>--%>
@@ -22,8 +22,9 @@
         <p>昵称:<input name="userName" type="text" id="userName" value="${sb.userName}"></p>
         <p>权限:
             <select id="group">
-                <option value="管理员" >管理员</option>
-                <option value="user">user</option>
+                <option value="admin" >超级管理员</option>
+                <option value="user">用户</option>
+                <option value="">用户</option>
             </select>
         </p>
         <p>
@@ -48,52 +49,18 @@
                 'userId': ${sb.userId}
             },
             success: function (jsonStr) {
-                alert("修改成功"+$("#hiddenid").val());
+                if("false" == jsonStr){
+                    alert("当前用户名已存在");
+                }
+                else{
+                   alert("修改成功"+$("#hiddenid").val());
+                }
+                <!--返回上一级页面-->
                 window.location.href=$("#hiddenid").val();
             }, error: function () {
-                alert("修改失败");
+                alert("修改失败,可能是用户名已存在");
             }
-
         })
     });
-
-    $(function () {
-        layui.use('layer', function () {
-            let layer = layui.layer;
-
-        })
-    });
-
-    function CheckInput() {
-        let userName = $("#userName").val();
-        let userLoginName = $("#userLoginName").val();
-        let userPassword = $("#userPassword").val();
-        let group = $("#group").val();
-        if (userLoginName == null || userLoginName.length == 0) {
-            layer.msg('请输入你的账号', {
-                time: 2000
-            });
-            return false;
-        }
-        if (userPassword == null || userPassword.length == 0) {
-            layer.msg('请输入你的密码', {
-                time: 2000
-            });
-            return false;
-        }
-        if (userName == null || userName.length == 0) {
-            layer.msg('请输入你的昵称', {
-                time: 2000
-            });
-            return false;
-        }
-
-        //  $("#buttons").click(function () {
-        //      if (!CheckInput()) {
-        //          return false;
-        //      }
-        //
-        // })
-    }
 </script>
 </html>
