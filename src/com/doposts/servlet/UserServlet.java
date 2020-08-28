@@ -129,7 +129,6 @@ public class UserServlet extends AbstractServlet{
      *@Time 19:01
      */
     public String forumpark(HttpServletRequest request , HttpServletResponse response){
-        System.out.println(request.getParameter("barId"));
         request.setAttribute("barid",request.getParameter("barId"));
         return "userweb/forumpark";
     }
@@ -143,16 +142,8 @@ public class UserServlet extends AbstractServlet{
     *@Time 22:20
     */
    public String postListpage(HttpServletRequest request , HttpServletResponse response){
+       request.setAttribute("secondId",request.getParameter("secondId"));
        return "userweb/post";
    }
-
-
-   /**
-    *@Description
-    *@Param
-    *@Author Wang.li.ming
-    *@Date 2020/8/27
-    *@Time 16:12
-    */
 
 }

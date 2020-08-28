@@ -2,7 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%
-   String path = request.getContextPath();
+    String path = request.getContextPath();
+    String secondId = (String)request.getAttribute("secondId");
 %>
 <html lang="zh-CN">
 <head>
@@ -13,12 +14,13 @@
     <title>list</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
+    <link rel="shortcut icon" href="<%=path%>/static/images/head/500415.ico" />
     <link rel="stylesheet" type="text/css" href="<%=path%>/static/postStyle/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="<%=path%>/static/postStyle/css/nprogress.css">
     <link rel="stylesheet" type="text/css" href="<%=path%>/static/postStyle/css/style.css">
     <link rel="stylesheet" type="text/css" href="<%=path%>/static/postStyle/css/font-awesome.min.css">
     <link rel="apple-touch-icon-precomposed" href="<%=path%>/static/postStyle/images/icon.png">
-    <link rel="shortcut icon" href="<%=path%>/static/postStyle/images/favicon.ico">
+<%--    <link rel="shortcut icon" href="<%=path%>/static/postStyle/images/favicon.ico">--%>
     <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
     <script src="<%=path%>/static/postStyle/js/nprogress.js"></script>
     <script src="<%=path%>/static/postStyle/js/jquery.lazyload.min.js"></script>
@@ -79,21 +81,41 @@
             <div class="title">
                 <h3 style="line-height: 1.3">MZ-NetBlog主题</h3>
             </div>
+            <div  id="articleid"></div>
+<%--            <article class="excerpt excerpt-1">--%>
+<%--                <a class="focus" href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank">--%>
+<%--                    <img class="thumb" data-original="<%=path%>/static/postStyle/images/201610181739277776.jpg" src="<%=path%>/static/postStyle/images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）" style="display: inline;" />--%>
+<%--                </a>--%>
+<%--                <header>--%>
+<%--                    <a class="cat" href="#" title="MZ-NetBlog主题">MZ-NetBlog主题<i></i></a>--%>
+<%--                    <h2><a href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank">用DTcms做一个独立博客网站（响应式模板）</a></h2>--%>
+<%--                </header>--%>
+<%--                <p class="meta">--%>
+<%--                    <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-10-14</time>--%>
+<%--                    <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 217</span> <a class="comment" href="##comment" title="评论" target="_blank"><i class="glyphicon glyphicon-comment"></i> 4</a>--%>
+<%--                </p>--%>
+<%--                <p class="note">用DTcms做一个独立博客网站（响应式模板），采用DTcms V4.0正式版(MSSQL)</p>--%>
+<%--            </article>--%>
+            <div class="title" id="comment" style="margin-top: 45px">
+                <h3>帖子标题</h3>
+            </div>
+            <div id="respond">
+                <form id="comment-form" name="comment-form" action="" method="POST">
+                    <div class="comment">
+                        <input name="" id="" class="form-control" size="22" placeholder="帖子标题（必填）" maxlength="15" autocomplete="off" tabindex="1" type="text">
+                        <div name="" id="" class="form-control"></div>
+                        <div class="comment-box">
+                            <textarea placeholder="您想要发布帖子的内容（必填）" name="comment-textarea" id="comment-textarea" cols="100%" rows="3" tabindex="3"></textarea>
+                            <div class="comment-ctrl">
+                                <div class="comment-prompt" style="display: none;"> <i class="fa fa-spin fa-circle-o-notch"></i> <span class="comment-prompt-text">发帖正在提交中...请稍后</span> </div>
+                                <div class="comment-success" style="display: none;"> <i class="fa fa-check"></i> <span class="comment-prompt-text">发帖提交成功...</span> </div>
+                                <button type="submit" name="comment-submit" id="comment-submit" tabindex="4">发帖</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
 
-            <article class="excerpt excerpt-1">
-                <a class="focus" href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank">
-                    <img class="thumb" data-original="<%=path%>/static/postStyle/images/201610181739277776.jpg" src="<%=path%>/static/postStyle/images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）" style="display: inline;" />
-                </a>
-                <header>
-                    <a class="cat" href="#" title="MZ-NetBlog主题">MZ-NetBlog主题<i></i></a>
-                    <h2><a href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank">用DTcms做一个独立博客网站（响应式模板）</a></h2>
-                </header>
-                <p class="meta">
-                    <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-10-14</time>
-                    <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 217</span> <a class="comment" href="##comment" title="评论" target="_blank"><i class="glyphicon glyphicon-comment"></i> 4</a>
-                </p>
-                <p class="note">用DTcms做一个独立博客网站（响应式模板），采用DTcms V4.0正式版（MSSQL）。开发环境：SQL2008R2+VS2010。DTcms V4.0正式版功能修复和优化：1、favicon.ico图标后台上传。（解决要换图标时要连FTP或者开服务器的麻烦）</p>
-            </article>
+            </div>
 
         </div>
     </div>
@@ -246,5 +268,39 @@
 <script src="<%=path%>/static/postStyle/js/bootstrap.min.js"></script>
 <script src="<%=path%>/static/postStyle/js/jquery.ias.js"></script>
 <script src="<%=path%>/static/postStyle/js/scripts.js"></script>
+<script type="text/javascript">
+      $(function () {
+          postlist();
+          function postlist(){
+              $.post("<%=path%>/post?action=selectPostList&secondId=<%=secondId%>",
+                  function (result) {
+                      let date = result.data;
+                      var articleDiv = "";
+                      for( var i = 0 ; i < date.length ; i++){
+                          articleDiv += " <article class=\"excerpt excerpt-1\"  style=\"margin-top: 15px\">" +
+                              "                <header>\n" +
+                              // "                    <a class=\"cat\" href=\"#\" title=\"MZ-NetBlog主题\">MZ-NetBlog主题<i></i></a>\n" +
+                              "                    <h2><a href=\"#\" title=\""+date[i].postName+"\" target=\"_blank\">"+date[i].postName+"</a></h2>\n" +
+                              "                </header>\n" +
+                              "                <p class=\"meta\">\n" +
+                              "                    <time class=\"time\"><i class=\"glyphicon glyphicon-time\"></i> "+date[i].createDate+"</time>\n" +
+                              "                    <span class=\"views\"><i class=\"glyphicon glyphicon-eye-open\"></i> 217</span> <a class=\"comment\" href=\"##comment\" title=\"评论\" target=\"_blank\"><i class=\"glyphicon glyphicon-comment\"></i> 4</a>\n" +
+                              "                </p>\n" +
+                              "                <p class=\"note\">用DTcms做一个独立博客网站（响应式模板），采用DTcms V4.0正式版(MSSQL)</p>" +
+                              "                <a class=\"focus\" href=\"#\" title=\"用DTcms做一个独立博客网站（响应式模板）\" target=\"_blank\">\n" +
+                              "                    <img class=\"thumb\" data-original=\"<%=path%>/static/postStyle/images/201610181739277776.jpg\" src=\"<%=path%>/static/postStyle/images/201610181739277776.jpg\" alt=\"用DTcms做一个独立博客网站（响应式模板）\" style=\"display: inline;\" />\n" +
+                              "                </a>\n" +
+                              "           </article>";
+                      }
+                      $("#articleid").html(articleDiv);
+                  }
+                  ,'json');
+          }
+
+
+
+      })
+</script>
+
 </body>
 </html>
