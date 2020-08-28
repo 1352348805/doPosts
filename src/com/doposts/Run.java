@@ -19,12 +19,11 @@ public class Run {
     public static void main(String[] args) throws Exception{
         DatabaseMonitorServlet monitorServlet = new DatabaseMonitorServlet();
         monitorServlet.init();
-        Floor floor = new Floor();
-        floor.setCreateUserId(28);
-        floor.setPostContent("测试结束！");
-        floor.setSendDate(new Date());
-        floor.setPostFloor(46);
-        floor.setPostId(1);
-        PostItDatabase.FLOOR_DAO.insertFloor(floor);
+        String url = "c:/1.jpg;d:/2.jpg;f:/3.jpg";
+        String[] str = url.split(";");
+        for (String item: str
+             ) {
+            System.out.println(item);
+        }
     }
 }
