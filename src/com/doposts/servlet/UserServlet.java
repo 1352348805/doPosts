@@ -103,7 +103,7 @@ public class UserServlet extends AbstractServlet{
      */
     public String postAndfloor(HttpServletRequest request, HttpServletResponse response){
 
-        SelectAllPostAndFloor id = floorService.getFloorById(1);
+        SelectAllPostAndFloor id = floorService.getFloorById(1,0,10);
         int maxFloorByPostId = floorService.getMaxFloorByPostId(1);
         Post post= postService.getPostById(1);
         List<FloorWithReply> floorWithReplies= id.getFloor();

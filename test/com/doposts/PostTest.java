@@ -23,7 +23,7 @@ public class PostTest {
      @Test
     public void f1(){
           floorService=new FloorServiceImpl();
-         SelectAllPostAndFloor floorById = floorService.getFloorById(1);
+         SelectAllPostAndFloor floorById = floorService.getFloorById(1,0,10);
 
          List<FloorWithReply> floor = floorById.getFloor();
 
