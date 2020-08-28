@@ -1,9 +1,11 @@
 package com.doposts.servlet;
 
+import com.alibaba.druid.sql.dialect.sqlserver.visitor.MSSQLServerExportParameterVisitor;
 import com.doposts.entity.Floor;
 import com.doposts.service.impl.FloorServiceImpl;
 import com.doposts.service.impl.PostClassServiceImpl;
 import com.doposts.service.interfaces.FloorService;
+import com.doposts.to.CommonResult;
 import com.doposts.vo.FloorWithReply;
 import com.doposts.vo.SelectAllPostAndFloor;
 
@@ -11,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,7 +34,29 @@ public class FloorServlet extends AbstractServlet{
         floorService = new FloorServiceImpl();
     }
 
+    /**
+     *  添加回复数据
+     * @param request
+     * @param response
+     * @return
+     */
+    public  Object  insertFloor(HttpServletRequest request,HttpServletResponse response){
 
+        int maxFloorByPostId = floorService.getMaxFloorByPostId(1);
 
+        Floor floor = new Floor();
+        floor.setPostId(1);
+        floor.setPostFloor(maxFloorByPostId+1);
+        floor.setCreateUserId(1);
+        floor.setPostContent(request.getParameter("replyContent"));
+        floor.setSendDate(new Date());
+        FloorWithReply floorWithReply = floorService.insertFloor(floor);
+
+        if (floorWithReply != null){
+            return new CommonResult().success(floorWithReply);
+        }
+        //floorWithReply.setPostFloor();
+        return new CommonResult().failed();
+    }
 
 }

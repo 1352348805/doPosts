@@ -1,10 +1,12 @@
 package com.doposts.dao.impl;
 
+import com.doposts.Run;
 import com.doposts.dao.Count;
 import com.doposts.dao.CrudHandler;
 import com.doposts.dao.PostItDatabase;
 import com.doposts.dao.interfaces.FloorDao;
 import com.doposts.entity.Floor;
+import com.doposts.vo.FloorWithReply;
 import com.dxhualuo.database.handler.interfaces.DatabaseCrud;
 import com.dxhualuo.database.handler.interfaces.SuperCrud;
 import java.sql.SQLException;
@@ -62,15 +64,48 @@ public class FloorDaoImpl implements FloorDao{
     }
 
     /**
-     * 插入楼正文
-     *
+     *   插入楼正文
      * @param floor 楼所有数据
-     * @return 成功
+     * @return 返回插入后的主键ID
      */
     @Override
     public Integer insertFloor(Floor floor) {
         try {
-            return crud.insert(floor);
+            crud.insert(floor);
+            floor.setSendDate(null);
+            floor.setPostContent(null);
+            floor.setImageUrl(null);
+            floor.setIsDelete(null);
+            List<Floor> floors = crud.select(Floor.class, floor);
+            if(floors.size() == 1){
+                return floors.get(0).getFloorId();
+            }
+            throw new RuntimeException();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 以id查询楼层信息
+     *
+     * @param id 主键
+     * @return 实体类
+     */
+    @Override
+    public FloorWithReply getFloorById(Integer id) {
+        try {
+            return crud.executeQueryToBean("SELECT\n" +
+                    "\tfloor.*, \n" +
+                    "\tcreateUser.userName AS createUserName\n" +
+                    "FROM\n" +
+                    "\tfloor\n" +
+                    "\tLEFT JOIN\n" +
+                    "\t`user` AS createUser\n" +
+                    "\tON \n" +
+                    "\t\tfloor.createUserId = createUser.userId\n" +
+                    "WHERE\n" +
+                    "\tfloor.floorId=?", FloorWithReply.class, id);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

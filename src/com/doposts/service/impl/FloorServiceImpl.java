@@ -11,6 +11,7 @@ import com.doposts.vo.SelectAllPostAndFloor;
 import com.mchange.v1.util.Sublist;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -56,4 +57,31 @@ public class FloorServiceImpl  implements FloorService {
         selectAllPostAndFloor.setFloor(floorWithReplies);
         return selectAllPostAndFloor ;
     }
+
+    /**
+     * 通过postId获得当前帖子的最大楼数
+     *
+     * @param postId
+     * @return 最大楼数
+     */
+    @Override
+    public int getMaxFloorByPostId(Integer postId) {
+        return PostItDatabase.FLOOR_DAO.getMaxFloorByPostId(postId);
+    }
+
+    /**
+     * 插入楼正文
+     *
+     * @param floor 楼所有数据
+     * @return 受影响的行数
+     */
+    @Override
+    public FloorWithReply insertFloor(Floor floor) {
+        Integer id = PostItDatabase.FLOOR_DAO.insertFloor(floor);
+        if (id == 0) {
+            return null;
+        }
+        return PostItDatabase.FLOOR_DAO.getFloorById(id);
+    }
+
 }

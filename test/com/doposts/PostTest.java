@@ -10,6 +10,7 @@ import com.doposts.vo.FloorWithReply;
 import com.doposts.vo.SelectAllPostAndFloor;
 import org.junit.Test;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,6 +40,16 @@ public class PostTest {
          postService=new PostServiceImpl();
          Post postById = postService.getPostById(2);
          System.out.println(postById);
+     }
+     @Test
+    public  void f3(){
+         FloorService floorService=new FloorServiceImpl();
+         FloorWithReply floorWithReply = floorService.insertFloor(null);
+         if (floorWithReply!=null){
+             System.out.println("成功！！！");
+         }else {
+             System.out.println("失败！！！");
+         }
      }
 
 }
