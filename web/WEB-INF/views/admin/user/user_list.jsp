@@ -99,9 +99,11 @@
                         "<th width=\"10%\">"+data[i].userPassword+"</th>\n" +
                         "<th width=\"10%\">"+data[i].userName+"</th>\n" +
                         "<th width=\"10%\">";
-                           if (data[i].group == '管理员') {
-                               html += "管理员";
-                           } else if (data[i].group == 'user') {
+                           if (data[i].group == 'admin') {
+                               html += "超级管理员";
+                           } else if (data[i].group ==null || data[i].group.length ==0) {
+                               html += "用户";
+                           }else if (data[i].group =='user') {
                                html += "用户";
                            }
                     html+="</th>"
