@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * @author xiao yao
@@ -99,6 +100,20 @@ public class PostServlet extends AbstractServlet {
             return new CommonResult().success(null);
         }
        return new CommonResult().failed("删除失败");
+    }
+
+    /**
+     *@Description 查询帖子列表
+     *@Param
+     *@Author Wang.li.ming
+     *@Date 2020/8/27
+     *@Time 18:48
+     */
+    public CommonResult selectPostList(HttpServletRequest request , HttpServletResponse response){
+
+        Integer secondid = Integer.parseInt(request.getParameter("secondId"));
+        List<Post> list = postService.selectThreeLevelClassPostList(secondid);
+        return new CommonResult().success(list);
     }
 
 }

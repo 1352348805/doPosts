@@ -90,4 +90,17 @@ public class PostServiceImpl  implements PostService {
     public Integer getPostCountByCondition(PostQueryParam queryParam) {
         return PostItDatabase.POST_DAO.getPostCountByCondition(queryParam);
     }
+
+    /**
+     *@Description  根据三级分类id条件查询帖子
+     *@Param postClassLevelThreeId
+     *@Author Wang.li.ming
+     *@Date 2020/8/27
+     *@Time 19:25
+     */
+    @Override
+    public List<Post> selectThreeLevelClassPostList(Integer postClassLevelThreeId) {
+         List<Post> list = PostItDatabase.POST_DAO.getPostByClassId(postClassLevelThreeId);
+         return list;
+    }
 }

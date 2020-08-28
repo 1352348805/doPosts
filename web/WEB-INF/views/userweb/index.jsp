@@ -108,7 +108,7 @@
   <div class="container-fluid">
 
     <div class="mobile-menu-overlay"></div>
-    <img style="position: absolute; left: 23%;height: 180px" src="<%=path%>/static/images/head/1-10.png">
+
     <nav role="navigation" class="probootstrap-nav hidden-xs">
 
       <ul class="probootstrap-main-nav">
@@ -123,14 +123,15 @@
         </ul>
       </div>
     </nav>
-    <div style="position: relative;width: 100%;height: 80px;">
+    <div style="position: ;width: 100%;height: 80px;">
+      <img style="height: 160px;margin-top: 155px;margin-left: 560px;"src="<%=path%>/static/images/head/1-10.png">
       <div class="search-wrapper active">
-        <div class="input-holder">
+        <div class="input-holder" style="margin-top: 180px">
           <input type="text" class="search-input" placeholder="吧内搜索" />
           <button class="search-icon" onclick="searchToggle(this, event);"><i class="fa fa-search"></i></button>
         </div>
 <%--        <span class="close" onclick="searchToggle(this, event);"></span>--%>
-        <div style="font-size: 20px;color: red;" class="result-container">
+        <div style="font-size: 15px;color: red; margin-top: 79px" class="result-container">
           搜索内容不能为空
         </div>
       </div>
