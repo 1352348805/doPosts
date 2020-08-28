@@ -44,7 +44,7 @@ public class DatabaseMonitorServlet extends HttpServlet {
         System.out.println("DX_Database ====》 初始化数据库表：Post");
         PostItDatabase.POST_DAO.getPostPageByClassId(0,0,0);
         System.out.println("DX_Database ====》 初始化数据库表：Floor");
-        PostItDatabase.FLOOR_DAO.getFloorByPostId(0);
+        PostItDatabase.FLOOR_DAO.getFloorByPostId(0, 0, 0);
         System.out.println("DX_Database ====》 初始化数据库表：Reply");
         PostItDatabase.REPLY_DAO.getReplyListById(0);
         System.out.println("DX_Database =====》 初始化完成！ 耗时："+ (System.currentTimeMillis() - time)+ "ms");
