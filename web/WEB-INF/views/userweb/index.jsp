@@ -124,7 +124,7 @@
       </div>
     </nav>
     <div style="position: ;width: 100%;height: 80px;">
-      <img style="height: 160px;margin-top: 155px;margin-left: 560px"src="<%=path%>/static/images/head/1-10.png">
+      <img style="height: 160px;margin-top: 155px;margin-left: 560px;"src="<%=path%>/static/images/head/1-10.png">
       <div class="search-wrapper active">
         <div class="input-holder" style="margin-top: 180px">
           <input type="text" class="search-input" placeholder="吧内搜索" />

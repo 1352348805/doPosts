@@ -26,13 +26,13 @@
     </style>
 </head>
 <body>
-
-<div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="position: absolute;left: 33%;top: -100px">
+<div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="position: absolute;left: 33%;top: -100px;background-color: white;opacity: 0.5; margin-top: 100px;margin-right: 440px;margin-left: 45%">
     <div class="layadmin-user-login-main" >
         <div class="layadmin-user-login-box layadmin-user-login-header">
             <h2>欢迎注册来贴吧</h2>
             <p>灵感 , 来源于有趣的人</p>
         </div>
+
         <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
             <div class="layui-form-item">
                 <label class="layadmin-user-login-icon layui-icon layui-icon-username"></label>
@@ -57,17 +57,29 @@
                 <button id="but-register" class="layui-btn layui-btn-fluid" lay-submit lay-filter="LAY-user-reg-submit">注 册</button>
             </div>
             <div class="layui-trans layui-form-item layadmin-user-login-other">
-                <label>社交账号注册</label>
-                <a href="javascript:;"><i class="layui-icon layui-icon-login-qq"></i></a>
-                <a href="javascript:;"><i class="layui-icon layui-icon-login-wechat"></i></a>
+<%--                <label>社交账号注册</label>--%>
+<%--                <a href="javascript:;"><i class="layui-icon layui-icon-login-qq"></i></a>--%>
+<%--                <a href="javascript:;"><i class="layui-icon layui-icon-login-wechat"></i></a>--%>
                 <a href="<%=path%>/user?action=toLogin" class="layadmin-user-jump-change layadmin-link layui-hide-xs">用已有帐号登入</a>
             </div>
         </div>
+
     </div>
 
     <jsp:include page="common/admin/footer.jsp" />
 
 </div>
+</div>
+
+<script type="text/javascript">
+    var bodyBgs = [];
+    bodyBgs[0] = "<%=path%>/static/images/backgroundList/bg1.jpg";
+    bodyBgs[1] = "<%=path%>/static/images/backgroundList/bg2.jpg";
+    bodyBgs[2] = "<%=path%>/static/images/backgroundList/bg3.jpg";
+    bodyBgs[3] = "<%=path%>/static/images/backgroundList/bg4.jpg";
+    var randomBgIndex = Math.round( Math.random() * 3 );
+    $("body").css("background-image","url("+bodyBgs[randomBgIndex]+")");
+</script>
 
 <script>
     $(function () {
