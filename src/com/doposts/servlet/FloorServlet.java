@@ -47,7 +47,7 @@ public class FloorServlet extends AbstractServlet{
         Floor floor = new Floor();
         floor.setPostId(1);
         floor.setPostFloor(maxFloorByPostId+1);
-        floor.setCreateUserId(1);
+        floor.setCreateUserId(35);
         floor.setPostContent(request.getParameter("replyContent"));
         floor.setSendDate(new Date());
         FloorWithReply floorWithReply = floorService.insertFloor(floor);

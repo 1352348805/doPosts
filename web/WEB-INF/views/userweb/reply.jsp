@@ -11,6 +11,8 @@
     <title>${post.postName}</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
+
+      <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/common.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/fontawesome-all.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/style.login.css" type="text/css" media="all" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/default.css">
@@ -20,7 +22,6 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/style.nav.css">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/styles-merged.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/static/style.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/custom.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/font-awesome/css/font-awesome.css">
     <!--[if lt IE 9]>
@@ -295,8 +296,8 @@
   <section id="next-section" class="probootstrap-section">
     <div class="container" >
         <c:forEach items="${floor}" var="floor">
-      <div  class="row bar wyggd" id="sx" style="border:rgb(225 226 230) solid 1px ; border-bottom: none ">
-       	<div  class='col-md-12 col-sm-6 probootstrap-animate fadeInUp probootstrap-animated' style="padding: 0px 0px 0px 0px; height: 100%;display: inline-block;" >
+      <div  class="row bar wyggd" id="sx" style="border:rgb(225 226 230) solid 1px ; border-bottom: none;">
+       	<div  class='col-md-12 col-sm-6 probootstrap-animate fadeInUp probootstrap-animated' style="padding: 0px 0px 0px 0px; height: 100%;display: inline-block;width: 100%;height: 100% " >
             <div class="gd" style=" float: left; display: inline-block; background: rgb(251,251,253);width: 130px; height:266px; padding: 20px" >
                 <ul style="width: 130px; height: 170px">
                     <li>
@@ -382,17 +383,20 @@
         <div class="col-md-12  probootstrap-animate">
         <h4>回复帖子</h4>
           <form action="${pageContext.request.contextPath }/floor?action=insertFloor" method="post" class="probootstrap-form" enctype="multipart/form-data">
-          	<input type='text' style='display:none' class='postId' name='postId' value=''>
-          	<input type='text' style='display:none' class='accountId' name='accountId' value=''>
-            <div class="form-group">
-              <textarea cols="30" rows="10" class="form-control" id="replyContent" name="replyContent"></textarea>
-            </div>
-            <div class="form-group">
-            		<span style="foalt:left;" class='file'>
-            			<i class="fa fa-file-image-o hint" aria-hidden="true">
-            			<input type='file' id="photo" style="display:none;" name='file'></i>
-	            		<i class="fa fa-file hint" aria-hidden="true"></i>
-            		</span>
+<%--          	<input type='text' style='display:none' class='postId' name='postId' value=''>--%>
+<%--          	<input type='text' style='display:none' class='accountId' name='accountId' value=''>--%>
+<%--            <div class="form-group">--%>
+<%--              <textarea cols="30" rows="10" class="form-control" id="replyContent" name="replyContent"></textarea>--%>
+<%--            </div>--%>
+<%--            <div class="form-group">--%>
+<%--            		<span style="foalt:left;" class='file'>--%>
+<%--            			<i class="fa fa-file-image-o hint" aria-hidden="true">--%>
+<%--            			<input type='file' id="photo" style="display:none;" name='file'></i>--%>
+<%--	            		<i class="fa fa-file hint" aria-hidden="true"></i>--%>
+<%--            		</span>--%>
+<%--            </div>--%>
+            <div id="editor">
+                <p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p>
             </div>
             <div class="form-group">
               <input type="button" class="btn btn-primary" id="spend" name="submit" value="发表">
@@ -510,6 +514,13 @@
   <script src="${pageContext.request.contextPath }/static/js/js.nav.js"></script>
 <script src="${pageContext.request.contextPath }/static/js/canva_moving_effect.js"></script>
 <script src="${pageContext.request.contextPath }/static/js/jquery-form.js"></script>
+  <script type="text/javascript" src="${pageContext.request.contextPath }/static/wangEditor-3.1.1/release/wangEditor.js"></script>
+  <script type="text/javascript">
+      var E = window.wangEditor
+      var editor = new E('#editor')
+      // 或者 var editor = new E( document.getElementById('editor') )
+      editor.create()
+  </script>
 <!-- //Jquery -->
 <script type="text/javascript">
 	$(function(){
@@ -570,6 +581,7 @@
    
 
    $("#spend").click(function () {
+
        $.ajax({
            url:  "<%=path%>/floor",
            method: "post",
@@ -580,10 +592,9 @@
                replyContent: $("#replyContent").val()
            },
            success: function (jsonStr) {
-               alert(jsonStr);
            if (jsonStr.code===200){
                let data = jsonStr.data;
-               let html = "<div class=\"row bar wyggd\" id=\"sx\" style=\"border:rgb(225 226 230) solid 1px ; border-bottom: none \">\n" +
+               let html = "<div class=\"row bar wyggd\" id=\"sx\" style=\"border:rgb(225 226 230) solid 1px ; border-bottom: none; width: 1168px; height: 100%; margin: 0px; 0px 0px 0px;border-bottom :1px solid rgb(240, 241, 242) \">\n"+
                    "       \t<div class=\"col-md-12 col-sm-6 probootstrap-animate fadeInUp probootstrap-animated\" style=\"padding: 0px 0px 0px 0px; height: 100%;display: inline-block;\">\n" +
                    "            <div class=\"gd\" style=\" float: left; display: inline-block; background: rgb(251,251,253);width: 130px; height:266px; padding: 20px\">\n" +
                    "                <ul style=\"width: 130px; height: 170px\">\n" +
@@ -603,12 +614,12 @@
                    "                    <div style=\"padding: 20px 20px 0px 0px \">\n" +
                    "                        <span class=\"clearfix like\">\n" +
                    "  \t\t\t\t<a class=\"hint info-right\" href=\"#\" title=\"发帖时间\" style=\"margin: 0px 0px 0px 0px\">\n" +
-                   "                    <i class=\"fa fa-clock-o\">发帖时间&nbsp;:&nbsp;2020-08-27 22:47:53.0</i>\n" +
+                   "                    <i class=\"fa fa-clock-o\">发帖时间&nbsp;:&nbsp;"+data.sendDate+"</i>\n" +
                    "                </a>\n" +
                    "  \t\t\t\t</span>\n" +
                    "                        <div style=\"margin: 20px\">\n" +
                    "                            <p class=\"dark\" style=\"height: 150px\">\n" +
-                   "                                    12356565656456456\n" +
+                   "                                    "+data.postContent+"\n" +
                    "                            </p>\n" +
                    "                        </div>\n" +
                    "\n" +
@@ -625,7 +636,7 @@
                    "                            <span class=\"tail-info\">来自\n" +
                    "                                     <a href=\"#\">Android客户端</a>\n" +
                    "                                 </span>\n" +
-                   "                            <span class=\"tail-info\">39楼</span>&nbsp;\n" +
+                   "                            <span class=\"tail-info\">"+data.postFloor+"楼</span>&nbsp;\n" +
                    "                        </div>\n" +
                    "                    </div>\n" +
                    "                        <div style=\" display: none;  border: rgb(240 241 242) solid 1px;height:100%; width: 650px; background : rgb(247 248 250); padding: 4px 15px 14px 15px\">\n" +
@@ -651,8 +662,7 @@
                    "\t\t\t\t</div>\n" +
                    "\t\t\t</div>\n" +
                    "      </div>";
-
-               $("#sx>div").last().html(html);
+               $("#sx>div").last().append(html);
            }
            }
        } );
@@ -676,5 +686,6 @@
 $(".wysyg").click(function(){
     em.css("height",""+ (hg+170)+"px");
 });
+
   </script>
 </html>

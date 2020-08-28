@@ -104,8 +104,10 @@ public class UserServlet extends AbstractServlet{
     public String postAndfloor(HttpServletRequest request, HttpServletResponse response){
 
         SelectAllPostAndFloor id = floorService.getFloorById(1);
+        int maxFloorByPostId = floorService.getMaxFloorByPostId(1);
         Post post= postService.getPostById(1);
         List<FloorWithReply> floorWithReplies= id.getFloor();
+        request.setAttribute("maxFloor",maxFloorByPostId);
         request.setAttribute("post",post);
         request.setAttribute("floor",floorWithReplies);
         return "userweb/reply";
@@ -129,7 +131,6 @@ public class UserServlet extends AbstractServlet{
      *@Time 19:01
      */
     public String forumpark(HttpServletRequest request , HttpServletResponse response){
-        System.out.println(request.getParameter("barId"));
         request.setAttribute("barid",request.getParameter("barId"));
         return "userweb/forumpark";
     }
@@ -143,16 +144,8 @@ public class UserServlet extends AbstractServlet{
     *@Time 22:20
     */
    public String postListpage(HttpServletRequest request , HttpServletResponse response){
+       request.setAttribute("secondId",request.getParameter("secondId"));
        return "userweb/post";
    }
-
-
-   /**
-    *@Description
-    *@Param
-    *@Author Wang.li.ming
-    *@Date 2020/8/27
-    *@Time 16:12
-    */
 
 }

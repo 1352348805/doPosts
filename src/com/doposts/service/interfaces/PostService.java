@@ -56,4 +56,14 @@ public interface PostService {
      * @return 记录数
      */
     Integer getPostCountByCondition(PostQueryParam queryParam);
+
+    /**
+     *@Description 根据三级分类id条件查询帖子
+     *@Param postClassLevelThreeId
+     *@Author Wang.li.ming
+     *@Date 2020/8/27
+     *@Time 19:19
+     */
+    List<Post> selectThreeLevelClassPostList(Integer postClassLevelThreeId);
+
 }

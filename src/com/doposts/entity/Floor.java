@@ -1,5 +1,6 @@
 package com.doposts.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.dxhualuo.data.annotation.JavaBean;
 import com.dxhualuo.database.annotation.AutoIncrement;
 import com.dxhualuo.database.annotation.PrimaryKey;
@@ -48,6 +49,7 @@ public class Floor {
     /**
      * 发送时间
      */
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date sendDate;
 
     /**

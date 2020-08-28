@@ -2,6 +2,7 @@ package com.doposts.servlet;
 
 
 import com.doposts.constant.SystemConstant;
+import com.doposts.dao.PostItDatabase;
 import com.doposts.entity.CreateClassRequest;
 import com.doposts.entity.PostClass;
 import com.doposts.entity.User;
@@ -118,7 +119,7 @@ public class AdminServlet extends AbstractServlet {
      * @param response
      * @return
      */
-    public String updateTwa(HttpServletRequest request, HttpServletResponse response) {
+    public Object updateTwa(HttpServletRequest request, HttpServletResponse response) {
         Integer userid = Integer.parseInt(request.getParameter("userId"));
         String userLoginName = request.getParameter("userLoginName");
         String userPassword = request.getParameter("userPassword");
@@ -130,8 +131,12 @@ public class AdminServlet extends AbstractServlet {
         user.setUserPassword(userPassword);
         user.setUserName(userName);
         user.setGroup(group);
-        boolean b = userService.updateUser(user);
-        return "admin/user/user_update";
+        if (PostItDatabase.USER_DAO.selectUserByLoginName(user.getUserLoginName())!=null){
+           return false;
+       }else{
+            userService.updateUser(user);
+            return "admin/user/user_update";
+        }
     }
 
     /**
@@ -145,7 +150,6 @@ public class AdminServlet extends AbstractServlet {
         int count = userService.getselectUserConut();
         return new CommonResult().success(count);
     }
-
     /**
      * 分页查询
      *
@@ -263,7 +267,7 @@ public class AdminServlet extends AbstractServlet {
         PostClass postClass = new PostClass(null, className, type, parentId, classDescribe);
         boolean b = postClassService.addPostClass(postClass);
         if (b) {
-            invalidMenuCache(request);
+             invalidMenuCache(request);
             return new CommonResult().success(null);
         }
         return new CommonResult().failed("删除失败!");
