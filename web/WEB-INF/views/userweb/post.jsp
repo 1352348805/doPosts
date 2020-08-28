@@ -270,7 +270,7 @@
 <script src="<%=path%>/static/postStyle/js/scripts.js"></script>
 <script type="text/javascript">
       $(function () {
-          postlist();
+          postlist(); 
           function postlist(){
               $.post("<%=path%>/post?action=selectPostList&secondId=<%=secondId%>",
                   function (result) {
