@@ -16,6 +16,7 @@ import java.util.Date;
  * @email 1352348805@qq.com
  */
 @JavaBean
+@SuppressWarnings("all")
 @TableMapping("post")
 public class Post {
 
@@ -57,60 +58,95 @@ public class Post {
     @JSONField(format = "yyyy-MM-dd HH:mm")
     private Date createDate;
 
+    /**
+     *  帖子描述
+     */
+    private String description;
+
+    /**
+     *  观看数
+     */
+    private Integer watchCount;
+
+    public Integer getWatchCount() {
+        return watchCount;
+    }
+
+    public Post setWatchCount(Integer watchCount) {
+        this.watchCount = watchCount;
+        return this;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Post setDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
     public Integer getPostId() {
         return postId;
     }
 
-    public void setPostId(Integer postId) {
+    public Post setPostId(Integer postId) {
         this.postId = postId;
+        return this;
     }
 
     public String getPostName() {
         return postName;
     }
 
-    public void setPostName(String postName) {
+    public Post setPostName(String postName) {
         this.postName = postName;
+        return this;
     }
 
     public Integer getPostClassLevel1Id() {
         return postClassLevel1Id;
     }
 
-    public void setPostClassLevel1Id(Integer postClassLevel1Id) {
+    public Post setPostClassLevel1Id(Integer postClassLevel1Id) {
         this.postClassLevel1Id = postClassLevel1Id;
+        return this;
     }
 
     public Integer getPostClassLevel2Id() {
         return postClassLevel2Id;
     }
 
-    public void setPostClassLevel2Id(Integer postClassLevel2Id) {
+    public Post setPostClassLevel2Id(Integer postClassLevel2Id) {
         this.postClassLevel2Id = postClassLevel2Id;
+        return this;
     }
 
     public Integer getPostClassLevel3Id() {
         return postClassLevel3Id;
     }
 
-    public void setPostClassLevel3Id(Integer postClassLevel3Id) {
+    public Post setPostClassLevel3Id(Integer postClassLevel3Id) {
         this.postClassLevel3Id = postClassLevel3Id;
+        return this;
     }
 
     public Integer getCreateUserId() {
         return createUserId;
     }
 
-    public void setCreateUserId(Integer createUserId) {
+    public Post setCreateUserId(Integer createUserId) {
         this.createUserId = createUserId;
+        return this;
     }
 
     public Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public Post setCreateDate(Date createDate) {
         this.createDate = createDate;
+        return this;
     }
 
     @Override

@@ -50,10 +50,6 @@ public class Reply {
      */
     private Date replyDate;
 
-    /**
-     * 回复时使用的图片地址
-     */
-    private String imageUrl;
 
     public Integer getReplyId() {
         return replyId;
@@ -103,13 +99,6 @@ public class Reply {
         this.replyDate = replyDate;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 
     @Override
     public String toString() {
@@ -120,7 +109,6 @@ public class Reply {
                 ", replyUserId=" + replyUserId +
                 ", repliedUserId=" + repliedUserId +
                 ", replyDate=" + replyDate +
-                ", imageUrl='" + imageUrl + '\'' +
                 '}';
     }
 }
