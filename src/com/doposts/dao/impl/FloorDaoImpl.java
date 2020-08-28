@@ -35,7 +35,7 @@ public class FloorDaoImpl implements FloorDao{
      * @return 所有楼层信息
      */
     @Override
-    public List<Floor> getFloorByPostId(Integer postId) {
+    public List<Floor> getFloorByPostId(Integer postId,int offset,int pageSize) {
         Floor floor = new Floor();
         floor.setPostId(postId);
         try {

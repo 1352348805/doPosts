@@ -16,7 +16,7 @@ public interface FloorService {
      * @param PostId 帖子id
      * @return 所有楼层信息
      */
-    SelectAllPostAndFloor getFloorById(Integer PostId);
+    SelectAllPostAndFloor getFloorById(Integer PostId,int pageIndex, int pageSize);
     /**
      *  通过postId获得当前帖子的最大楼数
      * @return 最大楼数

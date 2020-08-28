@@ -6,6 +6,7 @@ import com.doposts.dao.interfaces.ReplyDao;
 import com.doposts.entity.Floor;
 import com.doposts.entity.Reply;
 import com.doposts.service.interfaces.FloorService;
+import com.doposts.utils.Page;
 import com.doposts.vo.FloorWithReply;
 import com.doposts.vo.SelectAllPostAndFloor;
 import com.mchange.v1.util.Sublist;
@@ -26,13 +27,16 @@ public class FloorServiceImpl  implements FloorService {
      * @return 所有楼层信息
      */
     @Override
-    public SelectAllPostAndFloor getFloorById(Integer postId) {
+    public SelectAllPostAndFloor getFloorById(Integer postId,int pageIndex, int pageSize) {
+        Page<Floor> page=new Page<Floor>();
+        page.setTotalCount(PostItDatabase.FLOOR_DAO.getMaxFloorByPostId(1));
+
         //创建一个加强类
         SelectAllPostAndFloor selectAllPostAndFloor=new SelectAllPostAndFloor();
         //创建一个Floor加强类
         List<FloorWithReply> floorWithReplies = new ArrayList<>();
         //拿到数据库返回楼层的数据
-        List<Floor> floorById = PostItDatabase.FLOOR_DAO.getFloorByPostId(postId);
+        List<Floor> floorById = PostItDatabase.FLOOR_DAO.getFloorByPostId(postId,0,10);
         //拿到数据库返回的回复数据
         ReplyDao dao=new ReplyDaoImpl();
         List<Reply> replyList=new ArrayList<>();
