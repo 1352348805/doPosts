@@ -72,7 +72,7 @@ public class uploadingimgServlet extends AbstractServlet {
 
         sfu.setHeaderEncoding("UTF-8");  //处理中文问题
 
-        sfu.setSizeMax(1024*1024);   //限制文件大小
+        sfu.setSizeMax(1024*1024*10);   //限制文件大小
 
         try {
             List<FileItem> fileItems= sfu.parseRequest(request);  //解码请求 得到所有表单元素

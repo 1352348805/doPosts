@@ -412,7 +412,7 @@
                     <%--	            		<i class="fa fa-file hint" aria-hidden="true"></i>--%>
                     <%--            		</span>--%>
                     <%--            </div>--%>
-                    <div id="editor">
+                    <div id="editor" >
 
                     </div>
                     <div class="form-group">
