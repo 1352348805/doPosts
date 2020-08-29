@@ -11,7 +11,7 @@
     <title>${post.postName}</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
-
+    <link rel="stylesheet" href="<%=path%>/static/layuiadmin/layui/css/layui.css" media="all"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/common.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/fontawesome-all.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/style.login.css" type="text/css"
@@ -29,6 +29,7 @@
     <script src="/static/js/vendor/html5shiv.min.js"></script>
     <script src="/static/js/vendor/respond.min.js"></script>
     <![endif]-->
+    <script type="text/javascript" src="${pageContext.request.contextPath }/static/layuiadmin/layui/layui.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath }/static/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath }/static/js/jquery-1.11.0.min.js"></script>
     <script src="${pageContext.request.contextPath }/static/js/bootstrap.min.js"
@@ -395,6 +396,10 @@
                 </div>
             </div>
         </c:forEach>
+
+        <!-- 存放分页的容器 -->
+        <div id="page"></div>
+
         <div class="row mb60" id="send">
             <div class="col-md-12  probootstrap-animate">
                 <h4>回复帖子</h4>
@@ -573,7 +578,36 @@
 </script>
 <!-- //Jquery -->
 <script type="text/javascript">
+    layui.use('laypage', function(){
+        var laypage = layui.laypage;
+        let count;
+        $.ajaxSettings.async = false;
+        $.post(path + '/post',{action :'getPostCountByCondition'},function (result) {
+            count = result.data;
+        },'json');
+        $.ajaxSettings.async = true;
 
+        //执行一个laypage实例
+        laypage.render({
+            elem: 'page' //注意，这里的 test1 是 ID，不用加 # 号
+            ,limit: 10
+            ,theme: '#5994d6'
+            ,count: count //数据总数，从服务端得到
+            ,
+            jump: function(e, first){ //触发分页后的回调
+                if(!first){ //一定要加此判断，否则初始时会无限刷新
+                    let pageIndex = e.curr; //当前页
+                    let pageSize = e.limit;
+                    let data = {
+                        action:'getPostList',
+                        pageIndex : pageIndex,
+                        pageSize : pageSize
+                    }
+                    loadRequestList(data);
+                }
+            }
+        });
+    });
 
     function ShowOrHideReply(obj) {
         $obj = $(obj);
@@ -687,6 +721,7 @@
                         "\t\t\t</div>\n" +
                         "      </div>";
                     $("#sx>div").last().append(html);
+                    editor.txt.clear();
                 }
             }
         });
