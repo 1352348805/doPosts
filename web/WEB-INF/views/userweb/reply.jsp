@@ -531,7 +531,7 @@
     </div>
 </footer>
 <!-- END: footer -->
-
+<input type="hidden" id="path" value="<%=path%>"/>
 <script src="${pageContext.request.contextPath }/static/js/scripts.min.js"></script>
 <script src="${pageContext.request.contextPath }/static/js/main.min.js"></script>
 <script src="${pageContext.request.contextPath }/static/js/custom.js"></script>
@@ -541,11 +541,34 @@
 <script type="text/javascript"
         src="${pageContext.request.contextPath }/static/wangEditor-3.1.1/release/wangEditor.js"></script>
 <script type="text/javascript">
+    var path = $("#path").val();
     var E = window.wangEditor
     var editor = new E('#editor')
     // 或者 var editor = new E( document.getElementById('editor') )
-    editor.customConfig.uploadImgServer = '/upload';
+    editor.customConfig.uploadImgServer = path + '/uploadingimg?action=uploadingimgs';
     // editor.customConfig.uploadImgShowBase64 = true;
+
+    editor.customConfig.uploadImgHooks = {
+        success: function (xhr, editor, result) {
+            // 图片上传并返回结果，图片插入成功之后触发
+            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，result 是服务器端返回的结果
+        },
+        error: function (xhr, editor) {
+            // 图片上传出错时触发
+            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象
+        }
+        // ,
+        // customInsert: function (insertImg, result, editor) {
+        //     // 图片上传并返回结果，自定义插入图片的事件（而不是编辑器自动插入图片！！！）
+        //     // insertImg 是插入图片的函数，editor 是编辑器对象，result 是服务器端返回的结果
+        //
+        //     // 举例：假如上传图片成功后，服务器端返回的是 {url:'....'} 这种格式，即可这样插入图片：
+        //     var url = result.url
+        //     insertImg(url)
+        //
+        //     // result 必须是一个 JSON 格式字符串！！！否则报错
+        // }
+    }
     editor.create();
 </script>
 <!-- //Jquery -->
