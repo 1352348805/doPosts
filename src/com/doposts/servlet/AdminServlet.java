@@ -148,22 +148,27 @@ public class AdminServlet extends AbstractServlet {
      */
     public Object updateTwa(HttpServletRequest request, HttpServletResponse response) {
         Integer userid = Integer.parseInt(request.getParameter("userId"));
-        String userLoginName = request.getParameter("userLoginName");
+//        String userLoginName = request.getParameter("userLoginName");
         String userPassword = request.getParameter("userPassword");
         String userName = request.getParameter("userName");
         String group = request.getParameter("group");
         User user = new User();
         user.setUserId(userid);
-        user.setUserLoginName(userLoginName);
+//        user.setUserLoginName(userLoginName);
         user.setUserPassword(userPassword);
         user.setUserName(userName);
         user.setGroup(group);
-        if (PostItDatabase.USER_DAO.selectUserByLoginName(user.getUserLoginName())!=null){
-           return false;
-       }else{
-            userService.updateUser(user);
-            return "admin/user/user_update";
+//        if (PostItDatabase.USER_DAO.selectUserByLoginName(user.getUserLoginName())!=null){
+//           return false;
+//       }else{
+//            userService.updateUser(user);
+//            return "admin/user/user_update";
+//        }
+        boolean b = userService.updateUser(user);
+        if (b) {
+            return new CommonResult().success(null);
         }
+        return new CommonResult().failed("更新失败");
     }
 
     /**

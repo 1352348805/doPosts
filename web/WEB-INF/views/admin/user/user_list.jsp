@@ -21,20 +21,39 @@
 </head>
 <body>
 <!--头部-->
-    <%@include file="../../common/admin/head.jsp"%>
+<%@include file="../../common/admin/head.jsp"%>
 <!--时间-->
 <%@include file="../../common/admin/time.jsp"%>
  <!--主体内容-->
  <section class="publicMian ">
      <%@include file="../../common/admin/leftnav.jsp"%>
      <input type="hidden" id="path" name="path" value="${pageContext.request.contextPath }"/>
-	<div class="right">
-        <table border="1" width="80%" id="dt-table">
+	 <div class="right">
+         <!-- 支撑高度 -->
+         <div style="height: 30px">
 
-        </table>
-        <div id="page">
-        </div>
-    </div>
+         </div>
+         <div class="layui-card-header layuiadmin-card-header-auto">
+             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                 <div>
+                     <div class="widget-body no-padding">
+                         <table id="dt-table" class="table table-striped table-bordered table-hover layui-form"
+                                style="width:100%;font-size: 14px;">
+                             <tr>
+<%--                                 <th>头像</th>--%>
+                                 <th>账号</th>
+                                 <th>密码</th>
+                                 <th>昵称</th>
+                                 <th>权限</th>
+                                 <th>操作</th>
+                             </tr>
+                         </table>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     <div id="page"></div>
 </section>
 <footer class="footer">
     <%@include file="../../common/admin/footer.jsp"%>
@@ -80,12 +99,21 @@
             }
         });
     });
+
+    function del(id) {
+        layer.confirm('确定要删除吗？', {
+            btn : [ '确定', '取消' ]
+        }, function () {
+            location.href='<%=path%>/admin?action=delete&userId='+id;
+        });
+    }
+
     function loadRequestList(data) {
         $.post(path + '/admin',data,function (result) {
             if (result.code ==200) {
                 let data = result.data;
                 let html = "<tr>\n" +
-                    "                <th>头像</th>\n" +
+                    // "                <th>头像</th>\n" +
                     "                <th>账号</th>\n" +
                     "                <th>密码</th>\n" +
                     "                <th>昵称</th>\n" +
@@ -94,7 +122,7 @@
                     "</tr>";
                 for (let i = 0;i < data.length; i++) {
                     html += "<tr>\n" +
-                        "<th width=\"10%\">"+data[i].favicon+"</th>\n" +
+                        // "<th width=\"10%\">"+data[i].favicon+"</th>\n" +
                         "<th width=\"10%\">"+data[i].userLoginName+"</th>\n" +
                         "<th width=\"10%\">"+data[i].userPassword+"</th>\n" +
                         "<th width=\"10%\">"+data[i].userName+"</th>\n" +
@@ -112,7 +140,7 @@
                         "        <i class=\"layui-icon\">\n" +
                         "        </i>\n" +
                         "    </button>\n" +
-                        "    <button class=\"layui-btn layui-btn-xs\" title=\"删除\" onclick=\"window.location.href='<%=path%>/admin?action=delete&userId="+data[i].userId+"'\">\n" +
+                        "    <button class=\"layui-btn layui-btn-xs\" title=\"删除\" onclick=\"del("+data[i].userId+")\">\n" +
                         "        <i class=\"layui-icon\">\n" +
                         "        </i>\n" +
                         "    </button>\n" +
