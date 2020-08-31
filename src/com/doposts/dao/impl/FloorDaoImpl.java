@@ -35,11 +35,11 @@ public class FloorDaoImpl implements FloorDao{
      * @return 所有楼层信息
      */
     @Override
-    public List<Floor> getFloorByPostId(Integer postId,int offset,int pageSize) {
+    public List<Floor> getFloorByPostId(Integer postId, int offset, int pageSize) {
         Floor floor = new Floor();
         floor.setPostId(postId);
         try {
-            return crud.select(Floor.class, floor);
+            return crud.select(Floor.class, floor, offset, pageSize);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -58,7 +58,7 @@ public class FloorDaoImpl implements FloorDao{
             throw new RuntimeException(e);
         }
         if(count != null){
-            return (int)(long)count.getCount();
+            return count.getCount();
         }
         return 0;
     }
