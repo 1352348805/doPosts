@@ -85,7 +85,7 @@
         //执行一个laypage实例
         laypage.render({
             elem: 'page' //注意，这里的 test1 是 ID，不用加 # 号
-            ,limit: 10
+            ,limit: 8
             ,theme: '#5994d6'
             ,count: count //数据总数，从服务端得到
             ,
@@ -136,19 +136,19 @@
         if (v == 0) {
             $obj.prev().val(v=1);
             $obj.addClass('layui-form-onswitch layui-checkbox-disbaled layui-disabled');
-        }
-        let data = {
-            action : 'processStatusChange',
-            requestId : id,
-            isProcess : v
-        }
-        $.post(path + '/admin',data,function (result) {
-            if (result.code == 200) {
-                layer.msg(result.message);
-            } else {
-                layer.msg(result.message);
+            let data = {
+                action : 'processStatusChange',
+                requestId : id,
+                isProcess : v
             }
-        },'json');
+            $.post(path + '/admin',data,function (result) {
+                if (result.code == 200) {
+                    layer.msg(result.message);
+                } else {
+                    layer.msg(result.message);
+                }
+            },'json');
+        }
     }
 
 

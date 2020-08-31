@@ -2,6 +2,7 @@ package com.doposts.service.interfaces;
 
 import com.doposts.entity.User;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -62,4 +63,13 @@ public interface UserService {
 
 
     User getUserById(int id);
+
+
+    /**
+     * 管理员登录
+     * @param userCode 用户名
+     * @param userPassword 密码
+     * @return 状态码 0成功 -1账号或密码错误 -2非管理员账号 -3账号未启用
+     */
+    int loginAdmin(String userCode, String userPassword, HttpServletRequest request);
 }
