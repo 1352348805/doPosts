@@ -58,6 +58,33 @@ public class AdminServlet extends AbstractServlet {
     }
 
     /**
+     * 跳转到后台登录页
+     */
+    public String toLogin(HttpServletRequest request, HttpServletResponse response) {
+        return "admin/login";
+    }
+
+    /**
+     * 管理员登录
+     */
+    public CommonResult login(HttpServletRequest request, HttpServletResponse response) {
+        String userCode = request.getParameter("userCode");
+        String userPassword = request.getParameter("userPassword");
+        int i = userService.loginAdmin(userCode,userPassword,request);
+        if (i == -1)
+        {
+            return new CommonResult().failed("账号或密码错误!");
+        }
+        else if (i == -2) {
+            return new CommonResult().unauthorized("管理员后台,用户止步!");
+        }
+        else if (i == -3) {
+            return new CommonResult().forbidden("该账号已被封禁!");
+        }
+        return new CommonResult().success(null);
+    }
+
+    /**
      * 跳转后台主页
      */
     public String index(HttpServletRequest request, HttpServletResponse response) {
@@ -69,7 +96,7 @@ public class AdminServlet extends AbstractServlet {
      */
     public String exit(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.getSession().invalidate();
-        response.sendRedirect(request.getContextPath() + "/user?action=toLogin");
+        response.sendRedirect(request.getContextPath() + "/admin?action=toLogin");
         return null;
     }
 
@@ -121,22 +148,27 @@ public class AdminServlet extends AbstractServlet {
      */
     public Object updateTwa(HttpServletRequest request, HttpServletResponse response) {
         Integer userid = Integer.parseInt(request.getParameter("userId"));
-        String userLoginName = request.getParameter("userLoginName");
+//        String userLoginName = request.getParameter("userLoginName");
         String userPassword = request.getParameter("userPassword");
         String userName = request.getParameter("userName");
         String group = request.getParameter("group");
         User user = new User();
         user.setUserId(userid);
-        user.setUserLoginName(userLoginName);
+//        user.setUserLoginName(userLoginName);
         user.setUserPassword(userPassword);
         user.setUserName(userName);
         user.setGroup(group);
-        if (PostItDatabase.USER_DAO.selectUserByLoginName(user.getUserLoginName())!=null){
-           return false;
-       }else{
-            userService.updateUser(user);
-            return "admin/user/user_update";
+//        if (PostItDatabase.USER_DAO.selectUserByLoginName(user.getUserLoginName())!=null){
+//           return false;
+//       }else{
+//            userService.updateUser(user);
+//            return "admin/user/user_update";
+//        }
+        boolean b = userService.updateUser(user);
+        if (b) {
+            return new CommonResult().success(null);
         }
+        return new CommonResult().failed("更新失败");
     }
 
     /**

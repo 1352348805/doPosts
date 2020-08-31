@@ -4,6 +4,7 @@ import com.doposts.dao.PostItDatabase;
 import com.doposts.entity.User;
 import com.doposts.service.interfaces.UserService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -134,5 +135,28 @@ public class UserServiceImpl implements UserService {
     public User getUserById(int id) {
         User user = PostItDatabase.USER_DAO.getUserById(id);
         return user;
+    }
+
+    /**
+     * 管理员登录
+     *
+     * @param userCode     用户名
+     * @param userPassword 密码
+     * @return 状态码 0成功 -1账号或密码错误 -2非管理员账号 -3账号未启用
+     */
+    @Override
+    public int loginAdmin(String userCode, String userPassword, HttpServletRequest request) {
+        User user = PostItDatabase.USER_DAO.selectUserByLoginName(userCode);
+        if (user == null || !userPassword.equals(user.getUserPassword())) {
+            return -1;
+        }
+        if (!"admin".equals(user.getGroup())) {
+            return -2;
+        }
+        if (user.getStatus() != 1) {
+            return -3;
+        }
+        request.getSession().setAttribute("user",user);
+        return 0;
     }
 }
