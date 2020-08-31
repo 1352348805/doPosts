@@ -10,6 +10,8 @@ import com.doposts.vo.PostInfo;
 import com.doposts.vo.PostQueryParam;
 import com.dxhualuo.database.handler.interfaces.DatabaseCrud;
 import com.dxhualuo.database.handler.interfaces.SuperCrud;
+
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -255,9 +257,9 @@ public class PostDaoImpl implements PostDao {
             builder.delete(builder.length()-7,builder.length());
         }
         try {
-            Count count = crud.executeQueryToBeanByArrayParameter(builder.toString(), Count.class, para.toArray());
-            if(count != null){
-                return Integer.parseInt(count.getCount().toString());
+            ResultSet count = basicCrud.executeQueryByArrayParameter(builder.toString(), para.toArray());
+            if(count.next()){
+                return count.getInt("count");
             }
             throw new RuntimeException();
         } catch (SQLException e) {
