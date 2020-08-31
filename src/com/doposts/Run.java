@@ -12,7 +12,7 @@ public class Run {
     public static void main(String[] args) throws Exception{
         DatabaseMonitorServlet monitorServlet = new DatabaseMonitorServlet();
         monitorServlet.init();
-        
+        PostItDatabase.FLOOR_DAO.getFloorCountByPostId(1);
 
     }
 }

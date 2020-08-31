@@ -38,6 +38,7 @@ public class FloorDaoImpl implements FloorDao{
     public List<Floor> getFloorByPostId(Integer postId, int offset, int pageSize) {
         Floor floor = new Floor();
         floor.setPostId(postId);
+        floor.setIsDelete(false);
         try {
             return crud.select(Floor.class, floor, offset, pageSize);
         } catch (SQLException e) {
@@ -115,10 +116,17 @@ public class FloorDaoImpl implements FloorDao{
      * 根据帖子id获取所有现有的楼层数
      *
      * @param postId 帖子id
-     * @return
+     * @return 可显示楼层数
      */
     @Override
     public Integer getFloorCountByPostId(int postId) {
-        return null;
+        Floor floor = new Floor();
+        floor.setPostId(postId);
+        floor.setIsDelete(false);
+        try {
+            return crud.selectCount(Floor.class, floor);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
