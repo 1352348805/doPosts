@@ -5,7 +5,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>系统登录 - 超市订单管理系统</title>
+    <title>系统登录 - 来贴后台管理系统</title>
     <link type="text/css" rel="stylesheet" href="<%=path%>/static/css/admin.css"/>
     <link rel="stylesheet" href="<%=path%>/static/layuiadmin/layui/css/layui.css" media="all">
     <script src="<%=path%>/static/js/jquery.js"></script>
@@ -46,7 +46,7 @@
 <input type="hidden" id="path" value="<%=path%>"/>
     <section class="loginBox">
         <header class="loginHeader">
-            <h1>超市订单管理系统</h1>
+            <h1>来贴后台管理系统</h1>
         </header>
         <section class="loginCont">
 	        <div class="loginForm">
