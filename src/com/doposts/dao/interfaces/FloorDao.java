@@ -37,5 +37,11 @@ public interface FloorDao {
      */
     FloorWithReply getFloorById(Integer id);
 
-
+    /**
+     * 根据帖子id获取所有现有的楼层数
+     *
+     * @param postId 帖子id
+     * @return
+     */
+    Integer getFloorCountByPostId(int postId);
 }

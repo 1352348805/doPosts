@@ -110,4 +110,15 @@ public class FloorDaoImpl implements FloorDao{
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * 根据帖子id获取所有现有的楼层数
+     *
+     * @param postId 帖子id
+     * @return
+     */
+    @Override
+    public Integer getFloorCountByPostId(int postId) {
+        return null;
+    }
 }

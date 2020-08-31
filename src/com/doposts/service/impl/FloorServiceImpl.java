@@ -28,20 +28,21 @@ public class FloorServiceImpl  implements FloorService {
      */
     @Override
     public SelectAllPostAndFloor getFloorById(Integer postId,int pageIndex, int pageSize) {
-        Page<Floor> page=new Page<Floor>();
-        page.setTotalCount(PostItDatabase.FLOOR_DAO.getMaxFloorByPostId(1));
 
+        Page<Floor> page=new Page<Floor>();
+        page.setCurrPageNo(pageIndex);
+        page.setPageSize(pageSize);
+        page.setTotalCount(PostItDatabase.FLOOR_DAO.getMaxFloorByPostId(1));
         //创建一个加强类
         SelectAllPostAndFloor selectAllPostAndFloor=new SelectAllPostAndFloor();
         //创建一个Floor加强类
         List<FloorWithReply> floorWithReplies = new ArrayList<>();
         //拿到数据库返回楼层的数据
-        List<Floor> floorById = PostItDatabase.FLOOR_DAO.getFloorByPostId(postId,0,10);
+        page.setData( PostItDatabase.FLOOR_DAO.getFloorByPostId(postId,page.getOffSet(),page.getPageSize()));
         //拿到数据库返回的回复数据
-        ReplyDao dao=new ReplyDaoImpl();
         List<Reply> replyList=new ArrayList<>();
         //循环遍历把Floor里的数据转换到Floor加强类里
-        for (Floor floor: floorById) {
+        for (Floor floor: page.getData()) {
             FloorWithReply floorWithReply = new FloorWithReply();
             floorWithReply.setFloorId(floor.getFloorId());
             floorWithReply.setPostId(floor.getPostId());
@@ -55,7 +56,6 @@ public class FloorServiceImpl  implements FloorService {
             //把回复数据装进当前楼的List里
             floorWithReply.setReplyList(replyList);
             floorWithReplies.add(floorWithReply);
-
 
         }
         selectAllPostAndFloor.setFloor(floorWithReplies);
@@ -86,6 +86,17 @@ public class FloorServiceImpl  implements FloorService {
             return null;
         }
         return PostItDatabase.FLOOR_DAO.getFloorById(id);
+    }
+
+    /**
+     * 根据帖子id获取所有现有的楼层数
+     *
+     * @param postId 帖子id
+     * @return
+     */
+    @Override
+    public Integer getFloorCountByPostId(int postId) {
+        return PostItDatabase.FLOOR_DAO.getFloorCountByPostId(postId);
     }
 
 }

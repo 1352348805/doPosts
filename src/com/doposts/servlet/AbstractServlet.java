@@ -75,7 +75,6 @@ public abstract class AbstractServlet extends HttpServlet {
 			} else {
 				write(result, response);
 			}
-
 		}
 	}
 

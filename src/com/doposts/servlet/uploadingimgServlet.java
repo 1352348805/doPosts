@@ -100,25 +100,10 @@ public class uploadingimgServlet extends AbstractServlet {
             uploadBean.setErrno(1);
             e.printStackTrace();
         }
-        
-//        String imgpath="upimgs/"+fn;
-//        //保存数据库的是相对路径
-//        JdbcUtils jdbcUtils = new JdbcUtils();
-//        jdbcUtils.getConnection();
-//
-//        String sql="insert into  img (src) values(?)";
-//        List<Object> param=new ArrayList<Object>();
-//        param.add(imgpath);
-//
-//        int r=-1;
-//        try {
-//            r = jdbcUtils.updateByPreparedStatement(sql, param);
-//        } catch (SQLException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
 
-        //去显示上传的文件
+        /**
+         *  去显示上传的文件
+         */
 
 //        request.getRequestDispatcher("toimgs").forward(request, response);
 

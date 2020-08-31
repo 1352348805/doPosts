@@ -9,6 +9,7 @@ import com.doposts.service.interfaces.FloorService;
 import com.doposts.service.interfaces.PostService;
 import com.doposts.service.interfaces.UserService;
 import com.doposts.to.CommonResult;
+import com.doposts.utils.Page;
 import com.doposts.vo.FloorWithReply;
 import com.doposts.vo.SelectAllPostAndFloor;
 
@@ -102,18 +103,31 @@ public class UserServlet extends AbstractServlet{
      * @return  楼层消息
      */
     public String postAndfloor(HttpServletRequest request, HttpServletResponse response){
-
-        SelectAllPostAndFloor id = floorService.getFloorById(1,0,10);
+        String pageIndex = request.getParameter("pageindex");
+        System.out.println("当前页码："+pageIndex);
+        String pageSize = request.getParameter("pageSize");
+        System.out.println("显示页数："+pageSize);
         int maxFloorByPostId = floorService.getMaxFloorByPostId(1);
+         Page<FloorWithReply> page=new Page<FloorWithReply>();
+        page.setTotalCount(maxFloorByPostId);
+        page.setCurrPageNo(Integer.parseInt(pageIndex));
+        page.setPageSize(Integer.parseInt(pageSize));
+
+        SelectAllPostAndFloor id = floorService.getFloorById(1,page.getCurrPageNo(),page.getPageSize());
+
         Post post= postService.getPostById(1);
-        List<FloorWithReply> floorWithReplies= id.getFloor();
-        request.setAttribute("maxFloor",maxFloorByPostId);
+       List<FloorWithReply> floorWithReplies= id.getFloor();
         request.setAttribute("post",post);
+        request.setAttribute("page",page);
         request.setAttribute("floor",floorWithReplies);
         return "userweb/reply";
     }
 
-
+    public CommonResult floorCount(HttpServletRequest request, HttpServletResponse response) {
+        String pid = request.getParameter("pid");
+        Integer count = floorService.getFloorCountByPostId(Integer.parseInt(pid));
+        return new CommonResult().success(count);
+    }
 
     /**
      * 用户主页

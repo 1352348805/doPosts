@@ -398,7 +398,53 @@
         </c:forEach>
 
         <!-- 存放分页的容器 -->
+<%--        <div id="page">--%>
+<%--            --%>
+<%--        </div>--%>
+
+
+<%--        <div class="layui-col-md12">--%>
+<%--            <div class="layui-card">--%>
+<%--                <div class="layui-card-body">--%>
+<%--                    <div id="test-laypage-demo7">--%>
+<%--                        <div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-1">--%>
+<%--                            <span class="layui-laypage-count">共 ${page.totalCount}条</span>--%>
+<%--                            <a href="<%=path%>/user?action=postAndfloor&pageindex=${page.currPageNo-1}&pageSize=${page.pageSize}" class="layui-laypage-prev layui-disabled" data-page="0">上一页</a>--%>
+<%--                            <span class="layui-laypage-curr">--%>
+<%--                                <em class="layui-laypage-em"></em>--%>
+<%--                                <em>1</em>--%>
+<%--                            </span>--%>
+<%--                            <a href="<%=path%>/user?action=postAndfloor&pageindex=${page.currPageNo=2}&pageSize=${page.pageSize}" data-page="2">2</a>--%>
+<%--                            <a href="<%=path%>/user?action=postAndfloor&pageindex=${page.currPageNo=3}&pageSize=${page.pageSize}"  data-page="3">3</a>--%>
+<%--                            <a href="<%=path%>/user?action=postAndfloor&pageindex=${page.currPageNo=4}&pageSize=${page.pageSize}" data-page="4">4</a>--%>
+<%--                            <a href="<%=path%>/user?action=postAndfloor&pageindex=${page.currPageNo=5}&pageSize=${page.pageSize}" data-page="5">5</a>--%>
+<%--                            <span class="layui-laypage-spr">…--%>
+<%--                            </span>--%>
+<%--                            <a href="<%=path%>/user?action=postAndfloor&pageindex=${page.totalPageCount}&pageSize=${page.pageSize}" class="layui-laypage-last" title="尾页" data-page="10">10</a>--%>
+<%--                            <a href="<%=path%>/user?action=postAndfloor&pageindex=${page.currPageNo+1}&pageSize=${page.pageSize}" class="layui-laypage-next" data-page="2">下一页</a>--%>
+<%--                            <span class="layui-laypage-limits">--%>
+<%--                                <select lay-ignore="">--%>
+<%--                                    <option value="10" selected="">10 条/页</option>--%>
+<%--                                    <option value="20">20 条/页</option>--%>
+<%--                                    <option value="30">30 条/页</option>--%>
+<%--                                    <option value="40">40 条/页</option>--%>
+<%--                                    <option value="50">50 条/页</option>--%>
+<%--                                </select>--%>
+<%--                            </span>--%>
+<%--                            <span class="layui-laypage-skip">到第<input type="text" min="1" value="1" class="layui-input">页--%>
+<%--                                <button type="button" class="layui-laypage-btn">确定</button>--%>
+<%--                            </span>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+
+
+
         <div id="page"></div>
+
+
 
         <div class="row mb60" id="send">
             <div class="col-md-12  probootstrap-animate">
@@ -425,10 +471,7 @@
                     </div>
                 </form>
             </div>
-
         </div>
-
-
     </div>
 </section>
 
@@ -575,39 +618,47 @@
         // }
     }
     editor.create();
-</script>
-<!-- //Jquery -->
-<script type="text/javascript">
+
+    function getQueryVariable(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
+
     layui.use('laypage', function(){
         var laypage = layui.laypage;
         let count;
+
         $.ajaxSettings.async = false;
-        $.post(path + '/post',{action :'getPostCountByCondition'},function (result) {
+        $.post(path + '/user',{action :'floorCount'},function (result) {
             count = result.data;
         },'json');
         $.ajaxSettings.async = true;
-
         //执行一个laypage实例
         laypage.render({
             elem: 'page' //注意，这里的 test1 是 ID，不用加 # 号
             ,limit: 10
-            ,theme: '#5994d6'
-            ,count: count //数据总数，从服务端得到
+            ,curr: getQueryVariable('pageindex')
+            ,count: 99 //数据总数，从服务端得到
             ,
             jump: function(e, first){ //触发分页后的回调
                 if(!first){ //一定要加此判断，否则初始时会无限刷新
                     let pageIndex = e.curr; //当前页
                     let pageSize = e.limit;
-                    let data = {
-                        action:'getPostList',
-                        pageIndex : pageIndex,
-                        pageSize : pageSize
-                    }
-                    loadRequestList(data);
+                    location.href = path + "/user?action=postAndfloor&pageindex="+pageIndex+"&pageSize="+pageSize;
+                    //有postid应拼接
                 }
             }
         });
     });
+</script>
+<!-- //Jquery -->
+<script type="text/javascript">
 
     function ShowOrHideReply(obj) {
         $obj = $(obj);

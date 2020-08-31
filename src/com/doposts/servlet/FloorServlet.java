@@ -35,7 +35,7 @@ public class FloorServlet extends AbstractServlet{
     }
 
     /**
-     *  添加回复数据
+     *  插入回复数据
      * @param request
      * @param response
      * @return

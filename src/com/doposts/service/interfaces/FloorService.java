@@ -28,4 +28,11 @@ public interface FloorService {
      * @return 受影响的行数
      */
     FloorWithReply insertFloor(Floor floor);
+
+    /**
+     * 根据帖子id获取所有现有的楼层数
+     * @param postId 帖子id
+     * @return
+     */
+    Integer getFloorCountByPostId(int postId);
 }
