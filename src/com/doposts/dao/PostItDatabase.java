@@ -78,12 +78,7 @@ public class PostItDatabase {
      *  测试连接
      */
     public static void testConnection(){
-        Connection connection;
-        try {
-            connection = CONNECTION_MANAGER.getConnection();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        Connection connection = CONNECTION_MANAGER.getConnection();
         try {
             if(connection != null){
                 connection.close();
