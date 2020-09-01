@@ -100,9 +100,9 @@
                 <h4>帖子标题</h4>
             </div>
             <div id="respond">
-                <form id="comment-form" name="comment-form" action="" method="POST">
+                <form  action="<%=path%>/floor?action=addpost" id="comment-form" name="comment-form" method="post" class="probootstrap-form" enctype="multipart/form-data">
                     <div class="comment">
-                        <input name="" id="" class="form-control" size="22" placeholder="帖子标题（必填）" maxlength="15" autocomplete="off" tabindex="1" type="text">
+                        <input name="titename" id="titeid" class="form-control" size="22" placeholder="帖子标题（必填）" maxlength="15" autocomplete="off" tabindex="1" type="text">
 
 <%--                        <div class="comment-box">--%>
 <%--                            <textarea placeholder="您想要发布帖子的内容（必填）" name="comment-textarea" id="comment-textarea" cols="100%" rows="3" tabindex="3"></textarea>--%>
@@ -115,14 +115,14 @@
                         <div class="row mb60" id="send" style="margin-top: 25px ">
                             <div class="col-md-12 probootstrap-animate ">
                                 <h4 style="padding-bottom:15px">帖子内容</h4>
-                                <form action="/doPosts/floor?action=insertFloor" method="post" class="probootstrap-form" enctype="multipart/form-data">
+<%--                                <form action="/doPosts/floor?action=insertFloor" method="post" class="probootstrap-form" enctype="multipart/form-data">--%>
                                     <div id="editor">
 
                                     </div>
                                     <div class="form-group">
                                         <input type="button" class="btn btn-primary" id="spend" name="submit" value="发 帖" style="margin-top: 15px; padding:10px 25px"/>
                                     </div>
-                                </form>
+<%--                                </form>--%>
                             </div>
                         </div>
 
@@ -279,17 +279,42 @@
     </div>
     <div id="gotop"><a class="gotop"></a></div>
 </footer>
+<input type="hidden" id="path" value="<%=path%>"/>
 <script src="<%=path%>/static/postStyle/js/bootstrap.min.js"></script>
 <script src="<%=path%>/static/postStyle/js/jquery.ias.js"></script>
 <script src="<%=path%>/static/postStyle/js/scripts.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/static/wangEditor-3.1.1/release/wangEditor.js"></script>
 <script type="text/javascript">
+    var path = $("#path").val();
     var E = window.wangEditor
     var editor = new E('#editor')
     // 或者 var editor = new E( document.getElementById('editor') )
-    editor.customConfig.uploadImgServer = '/upload';
+    editor.customConfig.uploadImgServer = path + '/uploadingimg?action=uploadingimgs';
     // editor.customConfig.uploadImgShowBase64 = true;
+
+    editor.customConfig.uploadImgHooks = {
+        success: function (xhr, editor, result) {
+            // 图片上传并返回结果，图片插入成功之后触发
+            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，result 是服务器端返回的结果
+        },
+        error: function (xhr, editor) {
+            // 图片上传出错时触发
+            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象
+        }
+        // ,
+        // customInsert: function (insertImg, result, editor) {
+        //     // 图片上传并返回结果，自定义插入图片的事件（而不是编辑器自动插入图片！！！）
+        //     // insertImg 是插入图片的函数，editor 是编辑器对象，result 是服务器端返回的结果
+        //
+        //     // 举例：假如上传图片成功后，服务器端返回的是 {url:'....'} 这种格式，即可这样插入图片：
+        //     var url = result.url
+        //     insertImg(url)
+        //
+        //     // result 必须是一个 JSON 格式字符串！！！否则报错
+        // }
+    }
     editor.create();
+
 </script>
 <!-- //Jquery -->
 
@@ -321,6 +346,37 @@
                   }
                   ,'json');
           }
+
+          $("#spend").click(function () {
+
+              $.ajax({
+                  url : "<%=path%>/post" ,
+                  type : "post" ,
+                  data : {action : "addpost" ,titeid : $("#titeid").val() , postContent : editor.txt.html() } ,
+                  dataType : "json" ,
+                  success : function(data){
+                      alert(data.message=="操作成功");
+                      if(data.code==401){
+                          alert("未登录,请登录后再操作");
+                          window.location.href="<%=path%>/user?action=toLogin";
+                      }
+                      else if(data.message=="操作成功"){
+                          $("#titeid").val("");
+                          editor.txt.clear();
+                          postlist();
+                      }
+                      else if(data.message=="操作失败"){
+                         alert("发帖失败");
+                      }
+
+                  },
+                  error : function(){
+                     alert("服务器加载时出错");
+                  }
+
+              });
+
+          });
 
 
 
