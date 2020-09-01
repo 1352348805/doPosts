@@ -330,17 +330,12 @@
                           articleDiv += " <article class=\"excerpt excerpt-1\"  style=\"margin-top: 15px\">" +
                               "                <header>\n" +
                               // "                    <a class=\"cat\" href=\"#\" title=\"MZ-NetBlog主题\">MZ-NetBlog主题<i></i></a>\n" +
-                              "                    <h2><a href=\"#\" title=\""+date[i].postName+"\" target=\"_blank\">"+date[i].postName+"</a></h2>\n" +
+                              "                    <h2><a href=\"<%=path%>/user?action=postAndfloor&postid="+date[i].postId+" \" title=\""+date[i].postName+"\" target=\"_blank\">"+date[i].postName+"</a></h2>\n" +
                               "                </header>\n" +
                               "                <p class=\"meta\">\n" +
                               "                    <time class=\"time\"><i class=\"glyphicon glyphicon-time\"></i> "+date[i].createDate+"</time>\n" +
                               "                    <span class=\"views\"><i class=\"glyphicon glyphicon-eye-open\"></i> 217</span> <a class=\"comment\" href=\"##comment\" title=\"评论\" target=\"_blank\"><i class=\"glyphicon glyphicon-comment\"></i> 4</a>\n" +
-                              "                </p>\n" +
-                              "                <p class=\"note\">用DTcms做一个独立博客网站（响应式模板），采用DTcms V4.0正式版(MSSQL)</p>" +
-                              "                <a class=\"focus\" href=\"#\" title=\"用DTcms做一个独立博客网站（响应式模板）\" target=\"_blank\">\n" +
-                              "                    <img class=\"thumb\" data-original=\"<%=path%>/static/postStyle/images/201610181739277776.jpg\" src=\"<%=path%>/static/postStyle/images/201610181739277776.jpg\" alt=\"用DTcms做一个独立博客网站（响应式模板）\" style=\"display: inline;\" />\n" +
-                              "                </a>\n" +
-                              "           </article>";
+                              "                </p>\n"+date[i].description+"</article>";
                       }
                       $("#articleid").html(articleDiv);
                   }

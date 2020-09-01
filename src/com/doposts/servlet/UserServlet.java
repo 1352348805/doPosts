@@ -104,22 +104,24 @@ public class UserServlet extends AbstractServlet{
      */
     public String postAndfloor(HttpServletRequest request, HttpServletResponse response){
         String pageIndex = request.getParameter("pageindex");
+        Integer postid = Integer.valueOf(request.getParameter("postid"));
         System.out.println("当前页码："+pageIndex);
         String pageSize = request.getParameter("pageSize");
         System.out.println("显示页数："+pageSize);
-        Integer floorCountByPostId = floorService.getFloorCountByPostId(1);
+        Integer floorCountByPostId = floorService.getFloorCountByPostId(postid);
         Page<FloorWithReply> page=new Page<FloorWithReply>();
         page.setTotalCount(floorCountByPostId);
         page.setCurrPageNo(Integer.parseInt(pageIndex));
         page.setPageSize(Integer.parseInt(pageSize));
 
-        SelectAllPostAndFloor id = floorService.getFloorById(1,page.getCurrPageNo(),page.getPageSize());
+        SelectAllPostAndFloor id = floorService.getFloorById(postid,page.getCurrPageNo(),page.getPageSize());
 
-        Post post= postService.getPostById(1);
+        Post post= postService.getPostById(postid);
        List<FloorWithReply> floorWithReplies= id.getFloor();
         request.setAttribute("post",post);
         request.setAttribute("page",page);
         request.setAttribute("floor",floorWithReplies);
+        request.setAttribute("postid",postid);
         return "userweb/reply";
     }
 
