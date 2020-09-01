@@ -97,21 +97,35 @@
 <%--                <p class="note">用DTcms做一个独立博客网站（响应式模板），采用DTcms V4.0正式版(MSSQL)</p>--%>
 <%--            </article>--%>
             <div class="title" id="comment" style="margin-top: 45px">
-                <h3>帖子标题</h3>
+                <h4>帖子标题</h4>
             </div>
             <div id="respond">
                 <form id="comment-form" name="comment-form" action="" method="POST">
                     <div class="comment">
                         <input name="" id="" class="form-control" size="22" placeholder="帖子标题（必填）" maxlength="15" autocomplete="off" tabindex="1" type="text">
-                        <div name="" id="" class="form-control"></div>
-                        <div class="comment-box">
-                            <textarea placeholder="您想要发布帖子的内容（必填）" name="comment-textarea" id="comment-textarea" cols="100%" rows="3" tabindex="3"></textarea>
-                            <div class="comment-ctrl">
-                                <div class="comment-prompt" style="display: none;"> <i class="fa fa-spin fa-circle-o-notch"></i> <span class="comment-prompt-text">发帖正在提交中...请稍后</span> </div>
-                                <div class="comment-success" style="display: none;"> <i class="fa fa-check"></i> <span class="comment-prompt-text">发帖提交成功...</span> </div>
-                                <button type="submit" name="comment-submit" id="comment-submit" tabindex="4">发帖</button>
+
+<%--                        <div class="comment-box">--%>
+<%--                            <textarea placeholder="您想要发布帖子的内容（必填）" name="comment-textarea" id="comment-textarea" cols="100%" rows="3" tabindex="3"></textarea>--%>
+<%--                            <div class="comment-ctrl">--%>
+<%--                                <div class="comment-prompt" style="display: none;"> <i class="fa fa-spin fa-circle-o-notch"></i> <span class="comment-prompt-text">发帖正在提交中...请稍后</span> </div>--%>
+<%--                                <div class="comment-success" style="display: none;"> <i class="fa fa-check"></i> <span class="comment-prompt-text">发帖提交成功...</span> </div>--%>
+<%--                                <button type="submit" name="comment-submit" id="comment-submit" tabindex="4">发帖</button>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+                        <div class="row mb60" id="send" style="margin-top: 25px ">
+                            <div class="col-md-12 probootstrap-animate ">
+                                <h4 style="padding-bottom:15px">帖子内容</h4>
+                                <form action="/doPosts/floor?action=insertFloor" method="post" class="probootstrap-form" enctype="multipart/form-data">
+                                    <div id="editor">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="button" class="btn btn-primary" id="spend" name="submit" value="发 帖" style="margin-top: 15px; padding:10px 25px"/>
+                                    </div>
+                                </form>
                             </div>
                         </div>
+
                     </div>
                 </form>
 
@@ -268,9 +282,20 @@
 <script src="<%=path%>/static/postStyle/js/bootstrap.min.js"></script>
 <script src="<%=path%>/static/postStyle/js/jquery.ias.js"></script>
 <script src="<%=path%>/static/postStyle/js/scripts.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/static/wangEditor-3.1.1/release/wangEditor.js"></script>
+<script type="text/javascript">
+    var E = window.wangEditor
+    var editor = new E('#editor')
+    // 或者 var editor = new E( document.getElementById('editor') )
+    editor.customConfig.uploadImgServer = '/upload';
+    // editor.customConfig.uploadImgShowBase64 = true;
+    editor.create();
+</script>
+<!-- //Jquery -->
+
 <script type="text/javascript">
       $(function () {
-          postlist(); 
+          postlist();
           function postlist(){
               $.post("<%=path%>/post?action=selectPostList&secondId=<%=secondId%>",
                   function (result) {

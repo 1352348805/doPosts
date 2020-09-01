@@ -85,10 +85,17 @@ public class PostClassTest {
         }
     }
 
+    @Test
+    public void f222() {
+        List<PostClass> postClassByIdWithParents = postClassService.getPostClassByIdWithParents(60);
+    }
+
 
     @After
     public void after() {
         long end = System.currentTimeMillis();
         System.out.println("耗时:" + (end - start));
     }
+
+
 }
