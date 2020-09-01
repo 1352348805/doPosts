@@ -299,7 +299,7 @@ public class AdminServlet extends AbstractServlet {
         PostClass postClass = new PostClass(null, className, type, parentId, classDescribe);
         boolean b = postClassService.addPostClass(postClass);
         if (b) {
-             invalidMenuCache(request);
+            invalidMenuCache(request);
             return new CommonResult().success(null);
         }
         return new CommonResult().failed("删除失败!");
@@ -312,7 +312,9 @@ public class AdminServlet extends AbstractServlet {
         Integer classId = Integer.parseInt(request.getParameter("classId"));
         String className = request.getParameter("className");
         String classDescribe = request.getParameter("classDescribe");
+        String imageUrl = request.getParameter("imageUrl");
         PostClass postClass = new PostClass(classId, className, null, null, classDescribe);
+        postClass.setImageUrl(imageUrl);
         boolean b = postClassService.modifyPostClass(postClass);
         if (b) {
             invalidMenuCache(request);

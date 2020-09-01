@@ -4,12 +4,13 @@
 <html>
 <head>
 	<%
-		 String path = request.getContextPath();
-	     String barid= (String) request.getAttribute("barid");
+		String path = request.getContextPath();
+		String barid= (String) request.getAttribute("barid");
 	%>
 	<link rel="shortcut icon" href="<%=path%>/static/images/head/500415.ico" />
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<title>Home</title>
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/search-form.css">
 	<link href="<%=path%>/static/css/forumpark/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 	<!--theme-style-->
 	<link href="<%=path%>/static/css/forumpark/style.css" rel="stylesheet" type="text/css" media="all" />
@@ -22,75 +23,53 @@
 	<script src="<%=path%>/static/js/forumpark/jquery.min.js"></script>
 	<script src="<%=path%>/static/js/forumpark/jquery.easydropdown.js"></script>
 	<!--script-->
+	<style>
+		.categoryImg {
+			margin-left: 15px;
+			width: 130px;
+			height: 130px;
+		}
+	</style>
 </head>
 <body>
 <!--header-->
 <div class="header">
-	<div class="top-header">
-		<div class="container">
-			<div class="top-header-left">
-				<ul class="support">
-					<li><a href="#"><label> </label></a></li>
-					<li><a href="#">24x7 live<span class="live"> support</span></a></li>
-				</ul>
-				<ul class="support">
-					<li class="van"><a href="#"><label> </label></a></li>
-					<li><a href="#">Free shipping <span class="live">on order over 500</span></a></li>
-				</ul>
-				<div class="clearfix"> </div>
-			</div>
-			<div class="top-header-right">
-				<div class="down-top">
+	<div style="padding-top: 0px;height: 200px; background: url('<%=path%>/static/images/head/gnydy.png') no-repeat">
+		<div class="container-fluid">
 
-					<select tabindex="4" class="dropdown">
-						<option value="" class="label" value="">English</option>
-						<option value="1">Japanese</option>
-						<option value="2">French</option>
-						<option value="3">German</option>
-					</select>
+			<div class="mobile-menu-overlay"></div>
+
+			<nav role="navigation" style="  padding-right: 60px;float: right;">
+				<div class="extra-text visible-xs">
+					<ul class="social-buttons">
+						<li><a href="#"><i class="icon-twitter"></i></a></li>
+						<li><a href="#"><i class="icon-facebook"></i></a></li>
+						<li><a href="#"><i class="icon-instagram2"></i></a></li>
+					</ul>
 				</div>
-				<div class="down-top top-down">
-
-
-
-
-					<select tabindex="4" class="dropdown ">
-						<option value="" class="label" value="">Currency :USD</option>
-						<option value="1">Dollar</option>
-						<option value="2">Euro</option>
-					</select>
-				</div>
-
-				<!---->
-				<div class="clearfix"> </div>
-			</div>
-			<div class="clearfix"> </div>
+			</nav>
 		</div>
 	</div>
 	<div class="bottom-header">
 		<div class="container">
 			<div class="header-bottom-left">
 				<div class="logo">
-					<a href="index.html"><img src="<%=path%>/static/images/forumpark/logo.png" alt=" " /></a>
+					<a href="index.html">
+						<img style="height: 160px; padding-left: 100px" src="<%=path%>/static/images/head/1-10.png" alt=" " />
+					</a>
 				</div>
-
 			</div>
-<%--			<div class="header-bottom-right">--%>
-<%--				<ul class="men-grid">--%>
-<%--					<li><a href="login.html"><span> </span>YOUR ACCOUNT</a></li>--%>
-<%--					<li class="login"><a href="login.html"><span> </span>LOGIN</a>|</li>--%>
-<%--					<li class="cart"><a href="#"><span> </span>CART</a></li>--%>
-<%--				</ul>--%>
-<%--				<div class="sign-up-right">--%>
-<%--					<a href="register.html">SIGNUP</a>--%>
-<%--				</div>--%>
-<%--			</div>--%>
+			<div class="header-bottom-right" style="position: absolute;left: 27%;margin-top: 130px">
+				<ul class="nav navbar-nav navbar-right" id="one_category">
+					<li><a href="<%=path%>/user?action=index">首页</a></li>
+
+				</ul>
+			</div>
 			<div class="clearfix"> </div>
 		</div>
 	</div>
 </div>
-<!---->
-<div class="tlinks">Collect from <a href="http://www.baisheng999.com/" >网页模板</a></div>
+
 <div class="container">
 	<div class="banner-menu">
 
@@ -100,72 +79,72 @@
 					<article style="position: absolute; width: 100%; opacity: 0;">
 						<div class="banner-matter">
 							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/youxi2.png" alt=" " />
-<%--							<div class="banner-off">--%>
-<%--								<h2>FLAT 50% 0FF</h2>--%>
-<%--								<span>FOR ALL PURCHASE <b>VALUE</b></span>--%>
-<%--								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>--%>
-<%--								<a class="now-get" href="#">GET NOW</a>--%>
-<%--							</div>--%>
+							<%--							<div class="banner-off">--%>
+							<%--								<h2>FLAT 50% 0FF</h2>--%>
+							<%--								<span>FOR ALL PURCHASE <b>VALUE</b></span>--%>
+							<%--								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>--%>
+							<%--								<a class="now-get" href="#">GET NOW</a>--%>
+							<%--							</div>--%>
 							<div class="clearfix"> </div>
 						</div>
 					</article>
 					<article style="position: absolute; width: 100%; opacity: 1;">
 						<div class="banner-matter">
 							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/dongman.png" alt=" " />
-<%--							<div class="banner-off">--%>
-<%--								<h2>FLAT 50% 0FF</h2>--%>
-<%--								<span>FOR ALL PURCHASE <b>VALUE</b></span>--%>
-<%--								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>--%>
-<%--								<a class="now-get" href="#">GET NOW</a>--%>
-<%--							</div>--%>
+							<%--							<div class="banner-off">--%>
+							<%--								<h2>FLAT 50% 0FF</h2>--%>
+							<%--								<span>FOR ALL PURCHASE <b>VALUE</b></span>--%>
+							<%--								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>--%>
+							<%--								<a class="now-get" href="#">GET NOW</a>--%>
+							<%--							</div>--%>
 							<div class="clearfix"> </div>
 						</div>
 					</article>
 					<article style="position: absolute; width: 100%; opacity: 2;">
 						<div class="banner-matter">
 							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/timg.png" alt=" " />
-<%--							<div class="banner-off">--%>
-<%--								<h2>FLAT 50% 0FF</h2>--%>
-<%--								<span>FOR ALL PURCHASE <b>VALUE</b></span>--%>
-<%--								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>--%>
-<%--								<a class="now-get" href="#">GET NOW</a>--%>
-<%--							</div>--%>
+							<%--							<div class="banner-off">--%>
+							<%--								<h2>FLAT 50% 0FF</h2>--%>
+							<%--								<span>FOR ALL PURCHASE <b>VALUE</b></span>--%>
+							<%--								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>--%>
+							<%--								<a class="now-get" href="#">GET NOW</a>--%>
+							<%--							</div>--%>
 							<div class="clearfix"> </div>
 						</div>
 					</article>
 					<article style="position: absolute; width: 100%; opacity: 3;">
 						<div class="banner-matter">
 							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/tiyu.png" alt=" " />
-<%--							<div class="banner-off">--%>
-<%--								<h2>FLAT 50% 0FF</h2>--%>
-<%--								<span>FOR ALL PURCHASE <b>VALUE</b></span>--%>
-<%--								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>--%>
-<%--								<a class="now-get" href="#">GET NOW</a>--%>
-<%--							</div>--%>
+							<%--							<div class="banner-off">--%>
+							<%--								<h2>FLAT 50% 0FF</h2>--%>
+							<%--								<span>FOR ALL PURCHASE <b>VALUE</b></span>--%>
+							<%--								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>--%>
+							<%--								<a class="now-get" href="#">GET NOW</a>--%>
+							<%--							</div>--%>
 							<div class="clearfix"> </div>
 						</div>
 					</article>
 					<article style="position: absolute; width: 100%; opacity: 4;">
 						<div class="banner-matter">
 							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/dianying.png" alt=" " />
-<%--							<div class="banner-off">--%>
-<%--								<h2>FLAT 50% 0FF</h2>--%>
-<%--								<span>FOR ALL PURCHASE <b>VALUE</b></span>--%>
-<%--								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>--%>
-<%--								<a class="now-get" href="#">GET NOW</a>--%>
-<%--							</div>--%>
+							<%--							<div class="banner-off">--%>
+							<%--								<h2>FLAT 50% 0FF</h2>--%>
+							<%--								<span>FOR ALL PURCHASE <b>VALUE</b></span>--%>
+							<%--								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>--%>
+							<%--								<a class="now-get" href="#">GET NOW</a>--%>
+							<%--							</div>--%>
 							<div class="clearfix"> </div>
 						</div>
 					</article>
 					<article style="position: absolute; width: 100%; opacity: 5;">
 						<div class="banner-matter">
 							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/xiaoshuo.png" alt=" " />
-<%--							<div class="banner-off">--%>
-<%--								<h2>FLAT 50% 0FF</h2>--%>
-<%--								<span>FOR ALL PURCHASE <b>VALUE</b></span>--%>
-<%--								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>--%>
-<%--								<a class="now-get" href="#">GET NOW</a>--%>
-<%--							</div>--%>
+							<%--							<div class="banner-off">--%>
+							<%--								<h2>FLAT 50% 0FF</h2>--%>
+							<%--								<span>FOR ALL PURCHASE <b>VALUE</b></span>--%>
+							<%--								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>--%>
+							<%--								<a class="now-get" href="#">GET NOW</a>--%>
+							<%--							</div>--%>
 							<div class="clearfix"> </div>
 						</div>
 					</article>
@@ -183,8 +162,8 @@
 			</script>
 			<!---->
 
-            <%--贴吧展示--%>
-            <div class="shoes-grid-left">
+			<%--贴吧展示--%>
+			<div class="shoes-grid-left">
 
 
 
@@ -207,13 +186,13 @@
 				<h3 class="cate">全部贴吧分类</h3>
 				<ul class="menu">
 					<ul class="kid-menu ">
-<%--						<li><a href="#">date[i].className</a></li>--%>
-<%--						<li><a href="product.html">Urna ac tortor sc</a></li>--%>
-<%--						<li><a href="product.html">Ornared id aliquet</a></li>--%>
-<%--						<li><a href="product.html">Urna ac tortor sc</a></li>--%>
-<%--						<li><a href="product.html">Eget nisi laoreet</a></li>--%>
-<%--						<li><a href="product.html">Faciisis ornare</a></li>--%>
-<%--						<li class="menu-kid-left"><a href="contact.html">Contact us</a></li>--%>
+						<%--						<li><a href="#">date[i].className</a></li>--%>
+						<%--						<li><a href="product.html">Urna ac tortor sc</a></li>--%>
+						<%--						<li><a href="product.html">Ornared id aliquet</a></li>--%>
+						<%--						<li><a href="product.html">Urna ac tortor sc</a></li>--%>
+						<%--						<li><a href="product.html">Eget nisi laoreet</a></li>--%>
+						<%--						<li><a href="product.html">Faciisis ornare</a></li>--%>
+						<%--						<li class="menu-kid-left"><a href="contact.html">Contact us</a></li>--%>
 					</ul>
 				</ul>
 			</div>
@@ -237,15 +216,7 @@
 
 				});
 			</script>
-			<div class=" chain-grid menu-chain">
-				<a href="single.html"><img class="img-responsive chain" src="<%=path%>/static/images/forumpark/wat.jpg" alt=" " /></a>
-				<div class="grid-chain-bottom chain-watch">
-					<span class="actual dolor-left-grid">300$</span>
-					<span class="reducedfrom">500$</span>
-					<h6>Lorem ipsum dolor</h6>
-				</div>
-			</div>
-<%--			<a class="view-all all-product" href="product.html">VIEW ALL PRODUCTS<span> </span></a>--%>
+			<%--			<a class="view-all all-product" href="product.html">VIEW ALL PRODUCTS<span> </span></a>--%>
 		</div>
 		<div class="clearfix"> </div>
 	</div>
@@ -253,66 +224,92 @@
 <input type="hidden" id="pid" value="<%=barid%>"/>
 <div style="display: inline-block"></div>
 <!---->
-  <script type="text/javascript">
+<script type="text/javascript">
 
-	  // 展示一级贴吧分类的下所有三级贴吧
-	  function threelevelbar(id){
-		  $.post("${pageContext.request.contextPath}/postCategory?action=getThreeLevelAllBarByName&barId="+id,
-				  function (result) {
-					  let date = result.data;
-					  var bardiv = "" ;
-					  for(var i = 0 ; i < date.length ; i++){
-						  bardiv +="<div class=\" con-sed-grid\">\n" +
-								  "\t\t\t\t\t<div class=\"elit-grid\">\n" +
-								  // "\t\t\t\t\t\t<h4>consectetur  elit</h4>\n" +
-								  "\t\t\t\t\t\t<span><a href=\"<%=path%>/user?action=postListpage&secondId="+date[i].classId+"\">"+date[i].className+"</a></span>\n" +
-								  "\t\t\t\t\t\t<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, </p>\n" +
-								  "\t\t\t\t\t\t<a class=\"now-get\" href=\"<%=path%>/user?action=postListpage&secondId="+date[i].classId+"\">来吧帖子</a>\n"+
-								  "\t\t\t\t\t</div>\n" +
-								  "\t\t\t\t\t<a href=\"single.html\"><img class=\"img-responsive shoe-left\" src=\"images/sh.jpg\" alt=\" \"></a>\n" +
-								  "\t\t\t\t\t<div class=\"clearfix\"> </div>\n" +
-								  "\t\t\t\t</div>\n" ;
-						  if(++i<date.length){
-							  bardiv+="\t\t\t\t<div class=\"con-sed-grid sed-left-top\">\n" +
-									  "\t\t\t\t\t<div class=\"elit-grid\">\n" +
-									  // "\t\t\t\t\t\t<h4>consectetur  elit</h4>\n" +
-									  "\t\t\t\t\t\t<span><a href=\"<%=path%>/user?action=postListpage&secondId="+date[i].classId+"\">"+date[i].className+"</a></span>\n" +
-									  "\t\t\t\t\t\t<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, </p>\n" +
-									  "\t\t\t\t\t\t<a class=\"now-get\" href=\"<%=path%>/user?action=postListpage&secondId="+date[i].classId+"\">来吧帖子</a>\n" +
-									  "\t\t\t\t\t</div>\n" +
-									  "\t\t\t\t\t<a href=\"single.html\"><img class=\"img-responsive shoe-left\" src=\"images/wa.jpg\" alt=\" \"></a>\n" +
-									  "\t\t\t\t\t<div class=\"clearfix\"> </div>\n" +
-									  "\t\t\t\t</div>";
-						  }
+	// 展示一级贴吧分类的下所有三级贴吧
+	function threelevelbar(id){
+		$.post("${pageContext.request.contextPath}/postCategory?action=getThreeLevelAllBarByName&barId="+id,
+				function (result) {
+					let date = result.data;
+					var bardiv = "" ;
+					for(var i = 0 ; i < date.length ; i++){
+						bardiv +="<div class=\" con-sed-grid\">\n" +
+								"\t\t\t\t\t<div style=\"float:right\" class=\"elit-grid\">\n" +
+								// "\t\t\t\t\t\t<h4>consectetur  elit</h4>\n" +
+								"\t\t\t\t\t\t<span style=\"margin-bottom: 20px;display: inline-block;\"><a href=\"<%=path%>/user?action=postListpage&secondId="+date[i].classId+"\">"+date[i].className+"</a></span>\n" +
+								"\t\t\t\t\t\t<p>";
+						if(!(date[i].classDescribe === undefined)) {
+							if (date[i].classDescribe.length > 40) {
+								bardiv += date[i].classDescribe.substring(0,40);
+								bardiv += "...";
+							} else {
+								bardiv += date[i].classDescribe;
+							}
+						}
 
-					  }
-					  $(".shoes-grid-left").html(bardiv);
-				  },'json');
-	  }
+						bardiv+= "</p>\n" +
+								"\t\t\t\t\t</div>\n" +
+								"\t\t\t\t\t<a href=\"single.html\"><img class=\"img-responsive shoe-left categoryImg\" src=\"<%=path%>/static/images/"+date[i].imageUrl+"\" alt=\" \"></a>\n" +
+								"\t\t\t\t\t<div class=\"clearfix\"> </div>\n" +
+								"\t\t\t\t</div>\n" ;
+						if(++i<date.length){
+							bardiv+="\t\t\t\t<div class=\"con-sed-grid sed-left-top\">\n" +
+									"\t\t\t\t\t<div style=\"float:right\" class=\"elit-grid\">\n" +
+									// "\t\t\t\t\t\t<h4>consectetur  elit</h4>\n" +
+									"\t\t\t\t\t\t<span style=\"margin-bottom: 20px;display: inline-block;\"><a href=\"<%=path%>/user?action=postListpage&secondId="+date[i].classId+"\">"+date[i].className+"</a></span>\n" +
+									"\t\t\t\t\t\t<p>";
+							if(!(date[i].classDescribe === undefined)) {
+								if (date[i].classDescribe.length > 30) {
+									bardiv += date[i].classDescribe.substring(0,40);
+									bardiv += "...";
+								} else {
+									bardiv += date[i].classDescribe;
+								}
+							}
+							bardiv+="</p>\n" +
+									"\t\t\t\t\t</div>\n" +
+									"\t\t\t\t\t<a href=\"single.html\"><img class=\"img-responsive shoe-left categoryImg\" src=\"<%=path%>/static/images/"+date[i].imageUrl+"\" alt=\" \"></a>\n" +
+									"\t\t\t\t\t<div class=\"clearfix\"> </div>\n" +
+									"\t\t\t\t</div>";
+						}
 
-	  function selectThreeClassById(id) {
-		  threelevelbar(id);
-	  }
+					}
+					$(".shoes-grid-left").html(bardiv);
+				},'json');
+	}
 
-	  $(function(){
-	  	kid_menu();
-	  	threelevelbar($("#pid").val());
-	  	// 展示页面左边导航栏
-	  	function kid_menu(){
-	  		$.post("${pageContext.request.contextPath}/postCategory?action=getSecondLevelBarByName&barId=<%=barid%>",
+	function selectThreeClassById(id) {
+		threelevelbar(id);
+	}
+
+	$(function(){
+		kid_menu();
+		threelevelbar($("#pid").val());
+		// 展示页面左边导航栏
+		function kid_menu(){
+			$.post("${pageContext.request.contextPath}/postCategory?action=getSecondLevelBarByName&barId=<%=barid%>",
 					function (result) {
-                     let date = result.data;
-                     var menu_div = "";
-                     for(var i = 0 ; i < date.length ; i++){
-                     	//date[i].classId
-						 menu_div += " <li><a href=\"javascript:;\" onclick='selectThreeClassById("+date[i].classId+");'>"+ date[i].className +"</a></li>";
-					 }
-                     $(".kid-menu").html(menu_div);
+						let date = result.data;
+						var menu_div = "";
+						for(var i = 0 ; i < date.length ; i++){
+							//date[i].classId
+							menu_div += " <li><a href=\"javascript:;\" onclick='selectThreeClassById("+date[i].classId+");'>"+ date[i].className +"</a></li>";
+						}
+						$(".kid-menu").html(menu_div);
 
-			        },'json'
+					},'json'
 			);
 		}
-	  });
-  </script>
+
+		$.post("${pageContext.request.contextPath}/postCategory?action=getAllBar",function(result){
+			let date = result.data;
+			var table="\t  <li><a href=\"<%=path%>/user?action=index\">首页</a></li>";
+			for(var i=0;i<date.length;i++){
+				table += "\t  <li><a href=\"${pageContext.request.contextPath}/user?action=forumpark&barId="+date[i].classId+"\">"+date[i].className+"</a></li>";
+			}
+			$("#one_category").html(table);
+		},'json');
+	});
+</script>
 </body>
 </html>
