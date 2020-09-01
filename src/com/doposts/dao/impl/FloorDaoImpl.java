@@ -7,8 +7,11 @@ import com.doposts.dao.PostItDatabase;
 import com.doposts.dao.interfaces.FloorDao;
 import com.doposts.entity.Floor;
 import com.doposts.vo.FloorWithReply;
+import com.dxhualuo.database.handler.base.SuperCrudHandler;
 import com.dxhualuo.database.handler.interfaces.DatabaseCrud;
 import com.dxhualuo.database.handler.interfaces.SuperCrud;
+
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -81,18 +84,18 @@ public class FloorDaoImpl implements FloorDao{
      */
     @Override
     public Integer insertFloor(Floor floor) {
+        DatabaseCrud crud = basicCrud.getTransactionCrud();
         try {
-            crud.insert(floor);
-            floor.setSendDate(null);
-            floor.setPostContent(null);
-            floor.setIsDelete(null);
-            List<Floor> floors = crud.select(Floor.class, floor);
-            if(floors.size() == 1){
-                return floors.get(0).getFloorId();
+            new SuperCrudHandler<>(crud).insert(floor);
+            ResultSet rs = crud.executeQuery("select @@IDENTITY");
+            if(rs.next()){
+                return rs.getInt(1);
             }
             throw new RuntimeException();
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }finally {
+            crud.getConnectionManager().closeConnection();
         }
     }
 
