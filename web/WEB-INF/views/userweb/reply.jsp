@@ -293,28 +293,17 @@
         </div>
     </div>
     <a class="probootstrap-scroll-down js-next" href="#next-section">Scroll down <i class="icon-chevron-down"></i></a>
-    <div>
-        <div><h1>${requestScope.post.postName}</h1></div>
-    </div>
 </section>
 <!-- END: section -->
 
-<div style="position: relative;width: 100%;height: 80px;">
-    <div class="search-wrapper">
-        <div class="input-holder">
-            <input type="text" class="search-input" placeholder="吧内搜索"/>
-            <button class="search-icon" onclick="searchToggle(this, event);"><i class="fa fa-search"></i></button>
-        </div>
-        <span class="close" onclick="searchToggle(this, event);"></span>
-        <div class="result-container">
-            搜索内容不能为空
-        </div>
-    </div>
+
+<div style="height:200px;width: 1170px;border:rgb(225 226 230) solid 1px;margin: 0px 126px 0px 126px;">
+    <div ><h1 style="margin: 0px">${requestScope.post.postName}</h1></div>
 </div>
 <section id="next-section" class="probootstrap-section">
     <div class="container">
         <c:forEach items="${floor}" var="floor">
-            <div class="row bar wyggd" id="sx" style="border:rgb(225 226 230) solid 1px ; border-bottom: none;">
+            <div class="row bar wyggd" id="sx" style="border:rgb(225 226 230) solid 1px ; border-top: none;">
                 <div class='col-md-12 col-sm-6 probootstrap-animate fadeInUp probootstrap-animated'
                      style="padding: 0px 0px 0px 0px; height: 100%;display: inline-block;width: 100%;height: 100% ">
                     <div class="gd"
@@ -387,6 +376,7 @@
                                     </li>
                                 </ul>
                                 <div style="display: none; ">
+
                                     <div style="margin: 10px">
                                         <textarea style="width: 100%; height: 100px"></textarea>
                                     </div>
@@ -403,7 +393,7 @@
         </c:forEach>
 
 
-        <div  id="page"></div>
+        <div  id="page" style="padding: 30px 0px 0px 30px; float: right"></div>
 
 
 
