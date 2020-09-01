@@ -1,5 +1,6 @@
 package com.doposts.dao.interfaces;
 
+import com.doposts.entity.Floor;
 import com.doposts.entity.Reply;
 
 import java.util.List;
@@ -15,4 +16,11 @@ public interface ReplyDao {
      * @return 回复信息
      */
    List<Reply> getReplyListById(Integer floorId);
+
+    /**
+     *   评论回复
+     * @param reply 回复数据
+     * @return 返回受影响行数
+     */
+    Integer insertReply(Reply reply);
 }

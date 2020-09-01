@@ -53,13 +53,6 @@ public class Floor {
     private Date sendDate;
 
     /**
-     * 图片地址
-     */
-    private String imageUrl;
-
-
-
-    /**
      *  是否被删除
      */
     private Boolean isDelete;
@@ -104,14 +97,6 @@ public class Floor {
         this.sendDate = sendDate;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
     public Integer getCreateUserId() {
         return createUserId;
     }
@@ -137,7 +122,6 @@ public class Floor {
                 ", postContent='" + postContent + '\'' +
                 ", createUserId=" + createUserId +
                 ", sendDate=" + sendDate +
-                ", imageUrl='" + imageUrl + '\'' +
                 ", isDelete=" + isDelete +
                 '}';
     }

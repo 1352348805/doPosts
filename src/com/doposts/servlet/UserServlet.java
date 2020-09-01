@@ -107,9 +107,9 @@ public class UserServlet extends AbstractServlet{
         System.out.println("当前页码："+pageIndex);
         String pageSize = request.getParameter("pageSize");
         System.out.println("显示页数："+pageSize);
-        int maxFloorByPostId = floorService.getMaxFloorByPostId(1);
-         Page<FloorWithReply> page=new Page<FloorWithReply>();
-        page.setTotalCount(maxFloorByPostId);
+        Integer floorCountByPostId = floorService.getFloorCountByPostId(1);
+        Page<FloorWithReply> page=new Page<FloorWithReply>();
+        page.setTotalCount(floorCountByPostId);
         page.setCurrPageNo(Integer.parseInt(pageIndex));
         page.setPageSize(Integer.parseInt(pageSize));
 

@@ -35,6 +35,11 @@
     <script src="${pageContext.request.contextPath }/static/js/bootstrap.min.js"
             type="text/javascript" charset="utf-8"></script>
     <script src="${pageContext.request.contextPath }/static/js/bootbox.min.js"></script>
+    <style>
+        .date{
+            size: 7px;
+        }
+    </style>
 </head>
 <body>
 <script type="text/javascript">
@@ -323,7 +328,7 @@
                             </li>
                             </br>
                             <li>
-                                <a class='hint info-left' href='#' title='发帖人'><i class='fa fa-user'>作者名字</i></a>
+                                <a class='hint info-left' href='#' title='发帖人'><i class='fa fa-user'>${floor.userName}</i></a>
                             </li>
                         </ul>
                     </div>
@@ -331,7 +336,7 @@
                         <div class='text' style="padding: 0px 0px 8px 20px;">
                             <div style="padding: 20px 20px 0px 0px ">
                         <span class='clearfix like'>
-  				<a class='hint info-right' href='#' title='发帖时间' style="margin: 0px 0px 0px 0px">
+  				<a class='hint info-right date' href='#' title='发帖时间' style="margin: 0px 0px 0px 0px">
                     <i class='fa fa-clock-o'>发帖时间&nbsp;:&nbsp;${floor.sendDate}</i>
                 </a>
   				</span>
@@ -397,52 +402,8 @@
             </div>
         </c:forEach>
 
-        <!-- 存放分页的容器 -->
-<%--        <div id="page">--%>
-<%--            --%>
-<%--        </div>--%>
 
-
-<%--        <div class="layui-col-md12">--%>
-<%--            <div class="layui-card">--%>
-<%--                <div class="layui-card-body">--%>
-<%--                    <div id="test-laypage-demo7">--%>
-<%--                        <div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-1">--%>
-<%--                            <span class="layui-laypage-count">共 ${page.totalCount}条</span>--%>
-<%--                            <a href="<%=path%>/user?action=postAndfloor&pageindex=${page.currPageNo-1}&pageSize=${page.pageSize}" class="layui-laypage-prev layui-disabled" data-page="0">上一页</a>--%>
-<%--                            <span class="layui-laypage-curr">--%>
-<%--                                <em class="layui-laypage-em"></em>--%>
-<%--                                <em>1</em>--%>
-<%--                            </span>--%>
-<%--                            <a href="<%=path%>/user?action=postAndfloor&pageindex=${page.currPageNo=2}&pageSize=${page.pageSize}" data-page="2">2</a>--%>
-<%--                            <a href="<%=path%>/user?action=postAndfloor&pageindex=${page.currPageNo=3}&pageSize=${page.pageSize}"  data-page="3">3</a>--%>
-<%--                            <a href="<%=path%>/user?action=postAndfloor&pageindex=${page.currPageNo=4}&pageSize=${page.pageSize}" data-page="4">4</a>--%>
-<%--                            <a href="<%=path%>/user?action=postAndfloor&pageindex=${page.currPageNo=5}&pageSize=${page.pageSize}" data-page="5">5</a>--%>
-<%--                            <span class="layui-laypage-spr">…--%>
-<%--                            </span>--%>
-<%--                            <a href="<%=path%>/user?action=postAndfloor&pageindex=${page.totalPageCount}&pageSize=${page.pageSize}" class="layui-laypage-last" title="尾页" data-page="10">10</a>--%>
-<%--                            <a href="<%=path%>/user?action=postAndfloor&pageindex=${page.currPageNo+1}&pageSize=${page.pageSize}" class="layui-laypage-next" data-page="2">下一页</a>--%>
-<%--                            <span class="layui-laypage-limits">--%>
-<%--                                <select lay-ignore="">--%>
-<%--                                    <option value="10" selected="">10 条/页</option>--%>
-<%--                                    <option value="20">20 条/页</option>--%>
-<%--                                    <option value="30">30 条/页</option>--%>
-<%--                                    <option value="40">40 条/页</option>--%>
-<%--                                    <option value="50">50 条/页</option>--%>
-<%--                                </select>--%>
-<%--                            </span>--%>
-<%--                            <span class="layui-laypage-skip">到第<input type="text" min="1" value="1" class="layui-input">页--%>
-<%--                                <button type="button" class="layui-laypage-btn">确定</button>--%>
-<%--                            </span>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-
-
-
-        <div id="page"></div>
+        <div  id="page"></div>
 
 
 
@@ -451,18 +412,6 @@
                 <h4>回复帖子</h4>
                 <form action="${pageContext.request.contextPath }/floor?action=insertFloor" method="post"
                       class="probootstrap-form" enctype="multipart/form-data">
-                    <%--          	<input type='text' style='display:none' class='postId' name='postId' value=''>--%>
-                    <%--          	<input type='text' style='display:none' class='accountId' name='accountId' value=''>--%>
-                    <%--            <div class="form-group">--%>
-                    <%--              <textarea cols="30" rows="10" class="form-control" id="replyContent" name="replyContent"></textarea>--%>
-                    <%--            </div>--%>
-                    <%--            <div class="form-group">--%>
-                    <%--            		<span style="foalt:left;" class='file'>--%>
-                    <%--            			<i class="fa fa-file-image-o hint" aria-hidden="true">--%>
-                    <%--            			<input type='file' id="photo" style="display:none;" name='file'></i>--%>
-                    <%--	            		<i class="fa fa-file hint" aria-hidden="true"></i>--%>
-                    <%--            		</span>--%>
-                    <%--            </div>--%>
                     <div id="editor" >
 
                     </div>
@@ -634,8 +583,12 @@
         var laypage = layui.laypage;
         let count;
 
+        let data = {
+            action :'floorCount',
+            pid : 1,
+        }
         $.ajaxSettings.async = false;
-        $.post(path + '/user',{action :'floorCount'},function (result) {
+        $.post(path + '/user',data,function (result) {
             count = result.data;
         },'json');
         $.ajaxSettings.async = true;
@@ -644,7 +597,7 @@
             elem: 'page' //注意，这里的 test1 是 ID，不用加 # 号
             ,limit: 10
             ,curr: getQueryVariable('pageindex')
-            ,count: 99 //数据总数，从服务端得到
+            ,count: count  //数据总数，从服务端得到
             ,
             jump: function(e, first){ //触发分页后的回调
                 if(!first){ //一定要加此判断，否则初始时会无限刷新
@@ -718,15 +671,15 @@
                         "                    </li>\n" +
                         "                    <br>\n" +
                         "                    <li>\n" +
-                        "                        <a class=\"hint info-left\" href=\"#\" title=\"发帖人\"><i class=\"fa fa-user\">" + data.createUserName + "</i></a>\n" +
+                        "                        <a class=\"hint info-left\" href=\"#\" title=\"发帖人\"><i class=\"fa fa-user\">" + data.userName + "</i></a>\n" +
                         "                    </li>\n" +
                         "                </ul>\n" +
                         "            </div>\n" +
                         "       \t\t<div style=\"display: inline-block;width: 1035px;height:100%;\" class=\"probootstrap-block-image\">\n" +
                         "  \t\t\t\t<div class=\"text\" style=\"padding: 0px 0px 8px 20px;\">\n" +
                         "                    <div style=\"padding: 20px 20px 0px 0px \">\n" +
-                        "                        <span class=\"clearfix like\">\n" +
-                        "  \t\t\t\t<a class=\"hint info-right\" href=\"#\" title=\"发帖时间\" style=\"margin: 0px 0px 0px 0px\">\n" +
+                        "                        <span class=\"clearfix like \">\n" +
+                        "  \t\t\t\t<a class=\"hint info-right date \" href=\"#\" title=\"发帖时间\" style=\"margin: 0px 0px 0px 0px\">\n" +
                         "                    <i class=\"fa fa-clock-o\">发帖时间&nbsp;:&nbsp;" + data.sendDate + "</i>\n" +
                         "                </a>\n" +
                         "  \t\t\t\t</span>\n" +

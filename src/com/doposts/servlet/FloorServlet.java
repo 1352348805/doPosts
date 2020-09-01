@@ -42,12 +42,12 @@ public class FloorServlet extends AbstractServlet{
      */
     public  Object  insertFloor(HttpServletRequest request,HttpServletResponse response){
 
-        int maxFloorByPostId = floorService.getMaxFloorByPostId(1);
+        int floorCountByPostId = floorService.getFloorCountByPostId(1);
 
         Floor floor = new Floor();
         floor.setPostId(1);
-        floor.setPostFloor(maxFloorByPostId+1);
-        floor.setCreateUserId(35);
+        floor.setPostFloor(floorCountByPostId+1);
+        floor.setCreateUserId(4);
         floor.setPostContent(request.getParameter("replyContent"));
         floor.setSendDate(new Date());
         FloorWithReply floorWithReply = floorService.insertFloor(floor);
