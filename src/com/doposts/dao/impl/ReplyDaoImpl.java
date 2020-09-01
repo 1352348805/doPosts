@@ -4,6 +4,7 @@ import com.doposts.dao.CrudHandler;
 import com.doposts.dao.DatabaseConfig;
 import com.doposts.dao.PostItDatabase;
 import com.doposts.dao.interfaces.ReplyDao;
+import com.doposts.entity.Floor;
 import com.doposts.entity.Post;
 import com.doposts.entity.Reply;
 import com.dxhualuo.database.handler.interfaces.DatabaseCrud;
@@ -40,5 +41,16 @@ public class ReplyDaoImpl implements ReplyDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * 评论回复
+     *
+     * @param floor 回复数据
+     * @return 返回受影响行数
+     */
+    @Override
+    public Integer insertReply(Reply reply) {
+        return null;
     }
 }

@@ -35,6 +35,11 @@
     <script src="${pageContext.request.contextPath }/static/js/bootstrap.min.js"
             type="text/javascript" charset="utf-8"></script>
     <script src="${pageContext.request.contextPath }/static/js/bootbox.min.js"></script>
+    <style>
+        .date{
+            size: 7px;
+        }
+    </style>
 </head>
 <body>
 <script type="text/javascript">
@@ -323,7 +328,7 @@
                             </li>
                             </br>
                             <li>
-                                <a class='hint info-left' href='#' title='发帖人'><i class='fa fa-user'>作者名字</i></a>
+                                <a class='hint info-left' href='#' title='发帖人'><i class='fa fa-user'>${floor.userName}</i></a>
                             </li>
                         </ul>
                     </div>
@@ -331,7 +336,7 @@
                         <div class='text' style="padding: 0px 0px 8px 20px;">
                             <div style="padding: 20px 20px 0px 0px ">
                         <span class='clearfix like'>
-  				<a class='hint info-right' href='#' title='发帖时间' style="margin: 0px 0px 0px 0px">
+  				<a class='hint info-right date' href='#' title='发帖时间' style="margin: 0px 0px 0px 0px">
                     <i class='fa fa-clock-o'>发帖时间&nbsp;:&nbsp;${floor.sendDate}</i>
                 </a>
   				</span>
@@ -578,8 +583,12 @@
         var laypage = layui.laypage;
         let count;
 
+        let data = {
+            action :'floorCount',
+            pid : 1,
+        }
         $.ajaxSettings.async = false;
-        $.post(path + '/user',{action :'floorCount'},function (result) {
+        $.post(path + '/user',data,function (result) {
             count = result.data;
         },'json');
         $.ajaxSettings.async = true;
@@ -662,15 +671,15 @@
                         "                    </li>\n" +
                         "                    <br>\n" +
                         "                    <li>\n" +
-                        "                        <a class=\"hint info-left\" href=\"#\" title=\"发帖人\"><i class=\"fa fa-user\">" + data.createUserName + "</i></a>\n" +
+                        "                        <a class=\"hint info-left\" href=\"#\" title=\"发帖人\"><i class=\"fa fa-user\">" + data.userName + "</i></a>\n" +
                         "                    </li>\n" +
                         "                </ul>\n" +
                         "            </div>\n" +
                         "       \t\t<div style=\"display: inline-block;width: 1035px;height:100%;\" class=\"probootstrap-block-image\">\n" +
                         "  \t\t\t\t<div class=\"text\" style=\"padding: 0px 0px 8px 20px;\">\n" +
                         "                    <div style=\"padding: 20px 20px 0px 0px \">\n" +
-                        "                        <span class=\"clearfix like\">\n" +
-                        "  \t\t\t\t<a class=\"hint info-right\" href=\"#\" title=\"发帖时间\" style=\"margin: 0px 0px 0px 0px\">\n" +
+                        "                        <span class=\"clearfix like \">\n" +
+                        "  \t\t\t\t<a class=\"hint info-right date \" href=\"#\" title=\"发帖时间\" style=\"margin: 0px 0px 0px 0px\">\n" +
                         "                    <i class=\"fa fa-clock-o\">发帖时间&nbsp;:&nbsp;" + data.sendDate + "</i>\n" +
                         "                </a>\n" +
                         "  \t\t\t\t</span>\n" +

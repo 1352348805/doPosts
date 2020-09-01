@@ -29,35 +29,22 @@ public class FloorServiceImpl  implements FloorService {
     @Override
     public SelectAllPostAndFloor getFloorById(Integer postId,int pageIndex, int pageSize) {
 
-        Page<Floor> page=new Page<Floor>();
+        Page<FloorWithReply> page=new Page<>();
         page.setCurrPageNo(pageIndex);
         page.setPageSize(pageSize);
         page.setTotalCount(PostItDatabase.FLOOR_DAO.getMaxFloorByPostId(1));
         //创建一个加强类
         SelectAllPostAndFloor selectAllPostAndFloor=new SelectAllPostAndFloor();
-        //创建一个Floor加强类
-        List<FloorWithReply> floorWithReplies = new ArrayList<>();
         //拿到数据库返回楼层的数据
-        page.setData( PostItDatabase.FLOOR_DAO.getFloorByPostId(postId,page.getOffSet(),page.getPageSize()));
+        page.setData(PostItDatabase.FLOOR_DAO.getFloorByPostId(postId,page.getOffSet(),page.getPageSize()));
         //拿到数据库返回的回复数据
         List<Reply> replyList=new ArrayList<>();
         //循环遍历把Floor里的数据转换到Floor加强类里
-        for (Floor floor: page.getData()) {
-            FloorWithReply floorWithReply = new FloorWithReply();
-            floorWithReply.setFloorId(floor.getFloorId());
-            floorWithReply.setPostId(floor.getPostId());
-            floorWithReply.setPostFloor(floor.getPostFloor());
-            floorWithReply.setPostContent(floor.getPostContent());
-            floorWithReply.setCreateUserId(floor.getCreateUserId());
-            floorWithReply.setSendDate(floor.getSendDate());
+        for (FloorWithReply list: page.getData()) {
           //拿到每一楼的回复信息
-            replyList  =  PostItDatabase.REPLY_DAO.getReplyListById(floorWithReply.getFloorId());
-            //把回复数据装进当前楼的List里
-            floorWithReply.setReplyList(replyList);
-            floorWithReplies.add(floorWithReply);
-
+            list.setReplyList(PostItDatabase.REPLY_DAO.getReplyListById(list.getFloorId()));
         }
-        selectAllPostAndFloor.setFloor(floorWithReplies);
+        selectAllPostAndFloor.setFloor(page.getData());
         return selectAllPostAndFloor ;
     }
 

@@ -35,12 +35,22 @@ public class FloorDaoImpl implements FloorDao{
      * @return 所有楼层信息
      */
     @Override
-    public List<Floor> getFloorByPostId(Integer postId, int offset, int pageSize) {
+    public List<FloorWithReply> getFloorByPostId(Integer postId, int offset, int pageSize) {
         Floor floor = new Floor();
         floor.setPostId(postId);
         floor.setIsDelete(false);
         try {
-            return crud.select(Floor.class, floor, offset, pageSize);
+            return crud.executeQueryToBeanList("SELECT\n" +
+                    "\tfloor.*, \n" +
+                    "\tcreateUser.userName AS createUserName\n" +
+                    "FROM\n" +
+                    "\tfloor\n" +
+                    "\tLEFT JOIN\n" +
+                    "\t`user` AS createUser\n" +
+                    "\tON \n" +
+                    "\t\tfloor.createUserId = createUser.userId\n" +
+                    "WHERE\n" +
+                    "\tfloor.postId=? limit ?,?", FloorWithReply.class, postId, offset, pageSize);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

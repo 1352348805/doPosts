@@ -15,7 +15,7 @@ public interface FloorDao {
      * @param postId 帖子id
      * @return 所有楼层信息
      */
-    List<Floor> getFloorByPostId(Integer postId,int offset,int pageSize);
+    List<FloorWithReply> getFloorByPostId(Integer postId,int offset,int pageSize);
 
     /**
      *  通过postId获得当前帖子的最大楼数
