@@ -103,16 +103,25 @@ public class UserServlet extends AbstractServlet{
      * @return  楼层消息
      */
     public String postAndfloor(HttpServletRequest request, HttpServletResponse response){
-        String pageIndex = request.getParameter("pageindex");
+
+        Integer pageIndex = null;
+        Integer pageSize = null;
+        try{
+            pageIndex = Integer.valueOf(request.getParameter("pageindex"));
+            System.out.println("当前页码："+pageIndex);
+            pageSize = Integer.valueOf(request.getParameter("pageSize"));
+            System.out.println("显示页数："+pageSize);
+        }
+        catch(Exception e){
+            pageIndex = 1;
+            pageSize = 10;
+        }
         Integer postid = Integer.valueOf(request.getParameter("postid"));
-        System.out.println("当前页码："+pageIndex);
-        String pageSize = request.getParameter("pageSize");
-        System.out.println("显示页数："+pageSize);
         Integer floorCountByPostId = floorService.getFloorCountByPostId(postid);
         Page<FloorWithReply> page=new Page<FloorWithReply>();
         page.setTotalCount(floorCountByPostId);
-        page.setCurrPageNo(Integer.parseInt(pageIndex));
-        page.setPageSize(Integer.parseInt(pageSize));
+        page.setCurrPageNo(pageIndex);
+        page.setPageSize(pageSize);
 
         SelectAllPostAndFloor id = floorService.getFloorById(postid,page.getCurrPageNo(),page.getPageSize());
 
