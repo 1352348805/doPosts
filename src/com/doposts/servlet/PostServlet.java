@@ -1,7 +1,12 @@
 package com.doposts.servlet;
 
+import com.doposts.entity.Floor;
 import com.doposts.entity.Post;
+import com.doposts.entity.PostClass;
+import com.doposts.entity.User;
+import com.doposts.service.impl.PostClassServiceImpl;
 import com.doposts.service.impl.PostServiceImpl;
+import com.doposts.service.interfaces.PostClassService;
 import com.doposts.service.interfaces.PostService;
 import com.doposts.to.CommonResult;
 import com.doposts.utils.Page;
@@ -12,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,6 +28,8 @@ import java.util.List;
 public class PostServlet extends AbstractServlet {
 
     private PostService postService;
+    private PostClassService postClassService;
+    private Integer postThreeLevleid;
 
     @Override
     public Class<?> getServletClass() {
@@ -31,6 +39,7 @@ public class PostServlet extends AbstractServlet {
     @Override
     public void init() throws ServletException {
         postService = new PostServiceImpl();
+        postClassService = new PostClassServiceImpl();
     }
 
     /**
@@ -112,8 +121,53 @@ public class PostServlet extends AbstractServlet {
     public CommonResult selectPostList(HttpServletRequest request , HttpServletResponse response){
 
         Integer secondid = Integer.parseInt(request.getParameter("secondId"));
+        postThreeLevleid = secondid;
+        System.out.println(postThreeLevleid);
         List<Post> list = postService.selectThreeLevelClassPostList(secondid);
         return new CommonResult().success(list);
+    }
+
+    /**
+     *@Description 添加帖子
+     *@Param
+     *@Author Wang.li.ming
+     *@Date 2020/9/1
+     *@Time 9:25
+     */
+    public CommonResult addpost(HttpServletRequest request , HttpServletResponse response){
+        Post post = new Post();
+        String postname = request.getParameter("titeid");
+        String postContent = request.getParameter("postContent");
+        Object object = request.getSession().getAttribute("user");
+        if(object==null){
+            return new CommonResult().unauthorized("未登录");
+        }
+        User user = (User)object;
+        List<PostClass> list = postClassService.getPostClassByIdWithParents(postThreeLevleid);
+//        for(int i =0 ;i < list.size();i++ ){
+//            System.out.println(list.get(i).getClassId());
+//        }
+        Integer postClassLevel1Id = list.get(0).getClassId();
+        Integer postClassLevel2Id = list.get(1).getClassId();
+        Integer postClassLevel3Id = list.get(2).getClassId();
+        post.setCreateUserId(user.getUserId());
+        post.setPostName(postname);
+        post.setDescription(postContent);
+        post.setWatchCount(0);
+        post.setCreateDate(new Date());
+        post.setPostClassLevel1Id(postClassLevel1Id);
+        post.setPostClassLevel2Id(postClassLevel2Id);
+        post.setPostClassLevel3Id(postClassLevel3Id);
+
+        boolean bool = postService.addPost(post);
+        if(bool){
+            return new CommonResult().success("发帖成功");
+        }
+        else{
+            return new CommonResult().failed();
+        }
+
+
     }
 
 }
