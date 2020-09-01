@@ -135,7 +135,7 @@ public class UserServlet extends AbstractServlet{
     }
 
     public CommonResult floorCount(HttpServletRequest request, HttpServletResponse response) {
-        String pid = request.getParameter("pid");
+        String pid = request.getParameter("postid");
         Integer count = floorService.getFloorCountByPostId(Integer.parseInt(pid));
         return new CommonResult().success(count);
     }
