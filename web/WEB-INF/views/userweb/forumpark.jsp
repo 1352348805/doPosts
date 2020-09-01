@@ -249,7 +249,7 @@
 
 						bardiv+= "</p>\n" +
 								"\t\t\t\t\t</div>\n" +
-								"\t\t\t\t\t<a href=\"single.html\"><img class=\"img-responsive shoe-left categoryImg\" src=\"<%=path%>/static/images/"+date[i].imageUrl+"\" alt=\" \"></a>\n" +
+								"\t\t\t\t\t<a href=\"single.html\"><img class=\"img-responsive shoe-left categoryImg\" src=\""+date[i].imageUrl+"\" alt=\" \"></a>\n" +
 								"\t\t\t\t\t<div class=\"clearfix\"> </div>\n" +
 								"\t\t\t\t</div>\n" ;
 						if(++i<date.length){
@@ -268,7 +268,7 @@
 							}
 							bardiv+="</p>\n" +
 									"\t\t\t\t\t</div>\n" +
-									"\t\t\t\t\t<a href=\"single.html\"><img class=\"img-responsive shoe-left categoryImg\" src=\"<%=path%>/static/images/"+date[i].imageUrl+"\" alt=\" \"></a>\n" +
+									"\t\t\t\t\t<a href=\"single.html\"><img class=\"img-responsive shoe-left categoryImg\" src=\""+date[i].imageUrl+"\" alt=\" \"></a>\n" +
 									"\t\t\t\t\t<div class=\"clearfix\"> </div>\n" +
 									"\t\t\t\t</div>";
 						}
