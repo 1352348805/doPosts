@@ -7,9 +7,11 @@ import com.doposts.dao.interfaces.ReplyDao;
 import com.doposts.entity.Floor;
 import com.doposts.entity.Post;
 import com.doposts.entity.Reply;
+import com.dxhualuo.database.handler.base.SuperCrudHandler;
 import com.dxhualuo.database.handler.interfaces.DatabaseCrud;
 import com.dxhualuo.database.handler.interfaces.SuperCrud;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -46,11 +48,25 @@ public class ReplyDaoImpl implements ReplyDao {
     /**
      * 评论回复
      *
-     * @param floor 回复数据
-     * @return 返回受影响行数
+     * @param reply 回复数据
+     * @return 返回Id
      */
     @Override
     public Integer insertReply(Reply reply) {
-        return null;
+        DatabaseCrud transactionCrud = basicCrud.getTransactionCrud();
+        try {
+            if(new SuperCrudHandler<>(transactionCrud).insert(reply) == 1){
+                ResultSet rs = transactionCrud.executeQuery("select @@IDENTITY");
+                if(rs.next()){
+                    return rs.getInt(1);
+                }
+                throw new RuntimeException();
+            }
+            throw new RuntimeException("插入失败！受影响行数为0！");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            transactionCrud.getConnectionManager().closeConnection();
+        }
     }
 }

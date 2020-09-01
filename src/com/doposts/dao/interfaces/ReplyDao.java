@@ -20,7 +20,7 @@ public interface ReplyDao {
     /**
      *   评论回复
      * @param reply 回复数据
-     * @return 返回受影响行数
+     * @return 返回ID
      */
     Integer insertReply(Reply reply);
 }
