@@ -47,7 +47,6 @@ public class FloorWithReply extends Floor {
                 ", postContent='" + getPostContent() + '\'' +
                 ", createUserId=" + getCreateUserId() +
                 ", sendDate=" + getSendDate() +
-                ", imageUrl='" + getImageUrl() + '\'' +
                 ", isDelete=" + getIsDelete() +
                 ", userName='" + userName + '\'' +
                 ", replyList=" + replyList +

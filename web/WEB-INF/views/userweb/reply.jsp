@@ -397,52 +397,8 @@
             </div>
         </c:forEach>
 
-        <!-- 存放分页的容器 -->
-<%--        <div id="page">--%>
-<%--            --%>
-<%--        </div>--%>
 
-
-<%--        <div class="layui-col-md12">--%>
-<%--            <div class="layui-card">--%>
-<%--                <div class="layui-card-body">--%>
-<%--                    <div id="test-laypage-demo7">--%>
-<%--                        <div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-1">--%>
-<%--                            <span class="layui-laypage-count">共 ${page.totalCount}条</span>--%>
-<%--                            <a href="<%=path%>/user?action=postAndfloor&pageindex=${page.currPageNo-1}&pageSize=${page.pageSize}" class="layui-laypage-prev layui-disabled" data-page="0">上一页</a>--%>
-<%--                            <span class="layui-laypage-curr">--%>
-<%--                                <em class="layui-laypage-em"></em>--%>
-<%--                                <em>1</em>--%>
-<%--                            </span>--%>
-<%--                            <a href="<%=path%>/user?action=postAndfloor&pageindex=${page.currPageNo=2}&pageSize=${page.pageSize}" data-page="2">2</a>--%>
-<%--                            <a href="<%=path%>/user?action=postAndfloor&pageindex=${page.currPageNo=3}&pageSize=${page.pageSize}"  data-page="3">3</a>--%>
-<%--                            <a href="<%=path%>/user?action=postAndfloor&pageindex=${page.currPageNo=4}&pageSize=${page.pageSize}" data-page="4">4</a>--%>
-<%--                            <a href="<%=path%>/user?action=postAndfloor&pageindex=${page.currPageNo=5}&pageSize=${page.pageSize}" data-page="5">5</a>--%>
-<%--                            <span class="layui-laypage-spr">…--%>
-<%--                            </span>--%>
-<%--                            <a href="<%=path%>/user?action=postAndfloor&pageindex=${page.totalPageCount}&pageSize=${page.pageSize}" class="layui-laypage-last" title="尾页" data-page="10">10</a>--%>
-<%--                            <a href="<%=path%>/user?action=postAndfloor&pageindex=${page.currPageNo+1}&pageSize=${page.pageSize}" class="layui-laypage-next" data-page="2">下一页</a>--%>
-<%--                            <span class="layui-laypage-limits">--%>
-<%--                                <select lay-ignore="">--%>
-<%--                                    <option value="10" selected="">10 条/页</option>--%>
-<%--                                    <option value="20">20 条/页</option>--%>
-<%--                                    <option value="30">30 条/页</option>--%>
-<%--                                    <option value="40">40 条/页</option>--%>
-<%--                                    <option value="50">50 条/页</option>--%>
-<%--                                </select>--%>
-<%--                            </span>--%>
-<%--                            <span class="layui-laypage-skip">到第<input type="text" min="1" value="1" class="layui-input">页--%>
-<%--                                <button type="button" class="layui-laypage-btn">确定</button>--%>
-<%--                            </span>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-
-
-
-        <div id="page"></div>
+        <div  id="page"></div>
 
 
 
@@ -451,18 +407,6 @@
                 <h4>回复帖子</h4>
                 <form action="${pageContext.request.contextPath }/floor?action=insertFloor" method="post"
                       class="probootstrap-form" enctype="multipart/form-data">
-                    <%--          	<input type='text' style='display:none' class='postId' name='postId' value=''>--%>
-                    <%--          	<input type='text' style='display:none' class='accountId' name='accountId' value=''>--%>
-                    <%--            <div class="form-group">--%>
-                    <%--              <textarea cols="30" rows="10" class="form-control" id="replyContent" name="replyContent"></textarea>--%>
-                    <%--            </div>--%>
-                    <%--            <div class="form-group">--%>
-                    <%--            		<span style="foalt:left;" class='file'>--%>
-                    <%--            			<i class="fa fa-file-image-o hint" aria-hidden="true">--%>
-                    <%--            			<input type='file' id="photo" style="display:none;" name='file'></i>--%>
-                    <%--	            		<i class="fa fa-file hint" aria-hidden="true"></i>--%>
-                    <%--            		</span>--%>
-                    <%--            </div>--%>
                     <div id="editor" >
 
                     </div>
@@ -644,7 +588,7 @@
             elem: 'page' //注意，这里的 test1 是 ID，不用加 # 号
             ,limit: 10
             ,curr: getQueryVariable('pageindex')
-            ,count: 99 //数据总数，从服务端得到
+            ,count: count  //数据总数，从服务端得到
             ,
             jump: function(e, first){ //触发分页后的回调
                 if(!first){ //一定要加此判断，否则初始时会无限刷新

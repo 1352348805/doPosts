@@ -75,7 +75,6 @@ public class FloorDaoImpl implements FloorDao{
             crud.insert(floor);
             floor.setSendDate(null);
             floor.setPostContent(null);
-            floor.setImageUrl(null);
             floor.setIsDelete(null);
             List<Floor> floors = crud.select(Floor.class, floor);
             if(floors.size() == 1){
