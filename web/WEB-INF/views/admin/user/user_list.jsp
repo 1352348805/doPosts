@@ -136,11 +136,11 @@
                            }
                     html+="</th>"
                     html+="<th width=10%>\n" +
-                        "    <button class=\"layui-btn layui-btn-xs\" title=\"修改\" onclick=\"window.location.href='<%=path%>/admin?action=update&userId="+data[i].userId+"'\">\n" +
+                        "    <button style=\"background-color: #5994d6;\" class=\"layui-btn layui-btn-xs\" title=\"修改\" onclick=\"window.location.href='<%=path%>/admin?action=update&userId="+data[i].userId+"'\">\n" +
                         "        <i class=\"layui-icon\">\n" +
                         "        </i>\n" +
                         "    </button>\n" +
-                        "    <button class=\"layui-btn layui-btn-xs\" title=\"删除\" onclick=\"del("+data[i].userId+")\">\n" +
+                        "    <button style=\"background-color: #5994d6;\" class=\"layui-btn layui-btn-xs\" title=\"删除\" onclick=\"del("+data[i].userId+")\">\n" +
                         "        <i class=\"layui-icon\">\n" +
                         "        </i>\n" +
                         "    </button>\n" +

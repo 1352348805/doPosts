@@ -35,188 +35,11 @@
     <script src="${pageContext.request.contextPath }/static/js/bootstrap.min.js"
             type="text/javascript" charset="utf-8"></script>
     <script src="${pageContext.request.contextPath }/static/js/bootbox.min.js"></script>
-    <style>
-        .date{
-            size: 7px;
-        }
-    </style>
+
 </head>
 <body>
-<script type="text/javascript">
-    var postId =${param.postId};
-
-    function searchToggle(obj, evt) {
-        var container = $(obj).closest('.search-wrapper');
-        if (!container.hasClass('active')) {
-            container.addClass('active');
-            evt.preventDefault();
-        } else if (container.hasClass('active') && $(obj).closest('.input-holder').length == 0) {
-            container.removeClass('active');
-            // clear input
-            container.find('.search-input').val('');
-            // clear and hide result container when we press close
-            container.find('.result-container').fadeOut(100, function () {
-                $(this).empty();
-            });
-
-        } else {
-            //执行查询
-            var seach = $(".search-input").val().trim();
-            if (seach == null || seach == '') {
-                $(".result-container").css({"display": "block"});
-                return false;
-            } else {
-                $(".result-container").css({"display": "none"});
-            }
-            $.post("${pageContext.request.contextPath}/reply/getReplyByContent", {
-                name: seach,
-                postId: postId
-            }, function (date) {
-                date = eval(date);
-                console.log(date);
-                var table = "";
-                for (var i = 0; i < date.length; i++) {
-                    table += "<div class='col-md-12 col-sm-6 probootstrap-animate fadeInUp probootstrap-animated'>" +
-                        "<div class='probootstrap-block-image'><div class='text'>" +
-                        "<span class='clearfix like'>" +
-                        "<a class='hint info-right'	href='#' title='" + date[i].replyDate + "'><i class='fa fa-clock-o'>" + date[i].replyDate + "</i></a>" +
-                        "<a class='hint info-left ' href='#' title='主题作者：" + date[i].accountName + "'><i class='fa fa-user'>" + date[i].accountName + "</i></a>" +
-                        "</span>" +
-                        "<p class='dark' style='80px'>" + date[i].replyContent + "</p>" +
-                        "<p><img src='${pageContext.request.contextPath }/img/img_1.jpg' style='width:50px ;height:50px'></p>" +
-                        "<hr><p class='clearfix like'>" +
-                        "<a class='pull-right hint unlike' href='" + date[i].replyId + "'><i class='fa fa-thumbs-down'>" + date[i].unlikeSum + "</i></a>" +
-                        "<a class='pull-right hint nlike' href='" + date[i].replyId + "'><i class='fa fa-thumbs-up'>" + date[i].likeSum + "</i></a>" +
-                        "<a class='pull-right hint' href='#'><i class='fa fa-heart'></i></a>" +
-                        "</p></div></div></div>"
-                }
-                $(".bar").html(table);
-            });
-
-        }
-    }
-</script>
-<script type="text/javascript">
-    $(function () {
-        var postId =${param.postId};
-        showPost();
-
-        //点踩
-        $(document).on("click", ".unlike", function (event) {
-            event.preventDefault();
-            var replyId = $(this).attr("href");
-            var unlikesum = $(this).children().eq(0);
-            var likesum = $(this).next().children().eq(0);
-            var accountId = "${sessionScope.account.accountId}";
-            if (accountId == null || accountId == '') {
-                $("#accountLogin").modal('show');
-                return false;
-            }
-            var param = {
-                replyId: replyId,
-                accountId: accountId,
-                EvaluateState: 2
-
-            }
-            $.post("${pageContext.request.contextPath}/replyEvaluate/doupate", param, function (date) {
-                date = eval(date);
-                if (date.unlikeSum == unlikesum.html()) {
-                    alert("你已经点踩过了");
-                } else {
-                    likesum.html(date.likeSum);
-                    unlikesum.html(date.unlikeSum);
-                }
-
-            });
-        });
-        $(document).on("click", ".nlike", function (event) {
-            event.preventDefault();
-            var replyId = $(this).attr("href");
-            var likesum = $(this).children().eq(0);
-            var unlikesum = $(this).prev().children().eq(0);
-            var accountId = "${sessionScope.account.accountId}";
-            if (accountId == null || accountId == '') {
-                $("#accountLogin").modal('show');
-                return false;
-            }
-            var param = {
-                replyId: replyId,
-                accountId: accountId,
-                EvaluateState: 1
-
-            }
-            $.post("${pageContext.request.contextPath}/replyEvaluate/doupate", param, function (date) {
-                date = eval(date);
-                if (date.likeSum == likesum.html()) {
-                    alert("你已经点赞过了");
-                } else {
-                    likesum.html(date.likeSum);
-                    unlikesum.html(date.unlikeSum);
-                }
 
 
-            });
-        });
-
-        //发表
-        $("#spend").click(function (event) {
-            event.preventDefault();
-            var account = "${sessionScope.account.accountId}";
-            if (account == null || account == '') {
-                $("#accountLogin").modal('show');
-                return false;
-            }
-            var content = $("#replyContent").val();
-            if (content == null || content == '') {
-                alert("内容不能为空");
-                return false;
-            }
-            $(".postId").val(postId);
-            $(".accountId").val("${sessionScope.account.accountId}");
-            $(".probootstrap-form").submit();
-
-        });
-
-        //查询帖子所有的回复
-        function showPost() {
-            $.post("${pageContext.request.contextPath}/reply/getAllReply", {postId: postId}, function (date) {
-                date = eval(date);
-                console.log(date);
-                var table = "";
-                for (var i = 0; i < date.length; i++) {
-                    table += "<div class='col-md-12 col-sm-6 probootstrap-animate fadeInUp probootstrap-animated'>" +
-                        "<div class='probootstrap-block-image'><div class='text'>" +
-                        "<span class='clearfix like'>" +
-                        "<a class='hint info-right'href='#' title='" + date[i].replyDate + "'><i class='fa fa-clock-o'>" + date[i].replyDate + "</i></a>" +
-                        "<a class='hint info-left ' href='#' title='主题作者：" + date[i].accountName + "'><i class='fa fa-user'>" + date[i].accountName + "</i></a>" +
-                        "</span>" +
-                        "<p class='dark' style='80px'>" + date[i].replyContent + "</p>" +
-                        "<p><img src='${pageContext.request.contextPath }/img/img_1.jpg' style='width:50px ;height:50px'></p>" +
-                        "<hr><p class='clearfix like'>" +
-                        "<a class='pull-right hint unlike' href='" + date[i].replyId + "'><i class='fa fa-thumbs-down'>" + date[i].unlikeSum + "</i></a>" +
-                        "<a class='pull-right hint nlike' href='" + date[i].replyId + "'><i class='fa fa-thumbs-up'>" + date[i].likeSum + "</i></a>" +
-                        "<a class='pull-right hint' href='#'><i class='fa fa-heart'></i></a>" +
-                        "</p></div></div></div>"
-                }
-                $(".bar").html(table);
-            });
-        }
-
-        function showBar() {
-            $.post("${pageContext.request.contextPath}/bar/skipPost", {barId: barId}, function (date) {
-                date = eval(date);
-                $(".barDescribe").html(date.barDescribe);
-                $(".barName").html(date.barName);
-            });
-        }
-
-
-        $(".file").click(function () {
-            document.getElementById("photo").click();
-        });
-
-    });
-</script>
 <style>
     /* .probootstrap-block-image {
         margin-bottom: 30px;
@@ -296,9 +119,47 @@
 </section>
 <!-- END: section -->
 
+<div style="height:100px;width: 1170px;border:rgb(225 226 230) solid 1px;margin: 0 auto;">
+    <h1 style="margin: 0px">${requestScope.post.postName}</h1>
+</div>
 
-<div style="height:200px;width: 1170px;border:rgb(225 226 230) solid 1px;margin: 0px 126px 0px 126px;">
-    <div ><h1 style="margin: 0px">${requestScope.post.postName}</h1></div>
+<div style="height:200px;width: 1170px;border:rgb(225 226 230) solid 1px;margin: 0 auto;">
+    <div class="gd" style=" float: left; display: inline-block; background: rgb(251,251,253);width: 130px; height:198px; padding: 20px">
+        <ul style="width: 130px; height: 170px">
+            <li>
+                <div>
+                    <img src="/doPosts/static/images/9527.jpg" style="width:80px ;height:80px;border: silver solid 1px; ">
+                </div>
+            </li>
+            <br>
+            <li>
+                <a class="hint info-left" href="#" title="发帖人"><i class="fa fa-user">李逍遥</i></a>
+            </li>
+        </ul>
+    </div>
+
+
+    <div style="display: inline-block;width: 1035px;height:100%;" class="probootstrap-block-image">
+        <div class="text" style="padding: 0px 0px 8px 20px;">
+            <div style="padding: 20px 20px 0px 0px ">
+                        <span class="clearfix like">
+  				<a class="hint info-right date" href="#" title="发帖时间" style="margin: 0px 0px 0px 0px">
+                    <i class="fa fa-clock-o">发帖时间&nbsp;:&nbsp;${requestScope.post.createDate}</i>
+                </a>
+  				</span>
+                <div style="margin: 20px;padding-bottom: 50px;"><p> ${requestScope.post.description}</p></div>
+
+            </div>
+            <div style=" float: right;  width: 240px; height: 20px;margin: 10px">
+                <div class="hf" style="float: right">
+                    <span><a href="javascript:;" onclick="ShowOrHideReply(this)">回复</a>&nbsp;</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
 </div>
 <section id="next-section" class="probootstrap-section">
     <div class="container">
@@ -575,7 +436,7 @@
 
         let data = {
             action :'floorCount',
-            pid : 1,
+            postid : ${postid},
         }
         $.ajaxSettings.async = false;
         $.post(path + '/user',data,function (result) {
@@ -593,7 +454,8 @@
                 if(!first){ //一定要加此判断，否则初始时会无限刷新
                     let pageIndex = e.curr; //当前页
                     let pageSize = e.limit;
-                    location.href = path + "/user?action=postAndfloor&pageindex="+pageIndex+"&pageSize="+pageSize;
+
+                    location.href = path + "/user?action=postAndfloor&postid=${postid}&pageindex="+pageIndex+"&pageSize="+pageSize;
                     //有postid应拼接
                 }
             }
@@ -644,7 +506,7 @@
             dataType: 'json',
             data: {
                 action: "insertFloor",
-                postid: 1,
+                postid: ${postid},
                 replyContent: editor.txt.html()
             },
             success: function (jsonStr) {
