@@ -139,12 +139,15 @@
                         "    <button style=\"background-color: #5994d6;\" class=\"layui-btn layui-btn-xs\" title=\"修改\" onclick=\"window.location.href='<%=path%>/admin?action=update&userId="+data[i].userId+"'\">\n" +
                         "        <i class=\"layui-icon\">\n" +
                         "        </i>\n" +
-                        "    </button>\n" +
-                        "    <button style=\"background-color: #5994d6;\" class=\"layui-btn layui-btn-xs\" title=\"删除\" onclick=\"del("+data[i].userId+")\">\n" +
-                        "        <i class=\"layui-icon\">\n" +
-                        "        </i>\n" +
-                        "    </button>\n" +
-                        "</th>"
+                        "    </button>\n";
+                        if (data[i].group =='user') {
+                            html += "    <button style=\"background-color: #5994d6;\" class=\"layui-btn layui-btn-xs\" title=\"删除\" onclick=\"del("+data[i].userId+")\">\n" +
+                                "        <i class=\"layui-icon\">\n" +
+                                "        </i>\n" +
+                                "    </button>\n";
+                        }
+
+                    html +="</th>";
 
 
                     html+="</tr>"

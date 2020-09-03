@@ -13,12 +13,17 @@ import com.doposts.utils.Page;
 import com.doposts.vo.FloorWithReply;
 import com.doposts.vo.SelectAllPostAndFloor;
 import com.doposts.vo.SuperPost;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * 用户控制器
@@ -174,5 +179,49 @@ public class UserServlet extends AbstractServlet{
        request.setAttribute("secondId",request.getParameter("secondId"));
        return "userweb/post";
    }
+
+    /**
+     * 用户中心
+     * @return
+     */
+    public String toUserCenter(HttpServletRequest request , HttpServletResponse response) {
+        return "userweb/user_center";
+    }
+
+    public String toModifyUserInfo(HttpServletRequest request , HttpServletResponse response) {
+        return "userweb/user_modify";
+    }
+
+    public CommonResult modifyUserInfo(HttpServletRequest request , HttpServletResponse response) {
+
+        DiskFileItemFactory factory = new DiskFileItemFactory();
+
+        ServletFileUpload sfu=new ServletFileUpload(factory);
+        sfu.setFileSizeMax(1024*1024*5);
+        String path=request.getServletContext().getRealPath("static/images");
+        String fn=null;
+        try {
+            List<FileItem> list=sfu.parseRequest(request);
+            for(FileItem item:list) {
+                if (item.isFormField()) {
+                    //TODO
+                } else {
+                    // 是文件
+                    //获取图片后缀名
+                    String format=item.getName().substring(item.getName().indexOf("."), item.getName().length());
+                    System.out.println(format);
+                    //图片命名
+                    fn= UUID.randomUUID().toString().replaceAll("-", "")+format;
+                    System.out.println("文件名是："+fn);  //文件名
+                    // fn 是可能是这样的 c:\abc\de\tt\fish.jpg
+                    item.write(new File(path,fn));
+                }
+            }
+        } catch (Exception e) {
+            return new CommonResult().failed("修改失败");
+        }
+
+        return new CommonResult().success(null);
+    }
 
 }
