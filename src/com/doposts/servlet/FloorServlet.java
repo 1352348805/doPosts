@@ -5,7 +5,9 @@ import com.doposts.entity.Floor;
 import com.doposts.entity.User;
 import com.doposts.service.impl.FloorServiceImpl;
 import com.doposts.service.impl.PostClassServiceImpl;
+import com.doposts.service.impl.PostServiceImpl;
 import com.doposts.service.interfaces.FloorService;
+import com.doposts.service.interfaces.PostService;
 import com.doposts.to.CommonResult;
 import com.doposts.vo.FloorWithReply;
 import com.doposts.vo.SelectAllPostAndFloor;
@@ -25,6 +27,7 @@ import java.util.List;
 public class FloorServlet extends AbstractServlet{
 
     private FloorService floorService;
+    private PostService postService;
 
     @Override
     public Class<?> getServletClass() {
@@ -33,6 +36,8 @@ public class FloorServlet extends AbstractServlet{
     @Override
     public void init() throws ServletException {
         floorService = new FloorServiceImpl();
+        postService = new PostServiceImpl();
+
     }
 
     /**
@@ -42,16 +47,17 @@ public class FloorServlet extends AbstractServlet{
      * @return
      */
     public  Object  insertFloor(HttpServletRequest request,HttpServletResponse response){
-        String postid = request.getParameter("postid");
+        Integer postid = Integer.parseInt(request.getParameter("postid"));
+        postService.postViewNumber(postid);
         Object object = request.getSession().getAttribute("user");
         if(object==null){
             return new CommonResult().unauthorized("未登录");
         }
         User user = (User)object;
-        int floorCountByPostId = floorService.getFloorCountByPostId(Integer.parseInt(postid));
+        int floorCountByPostId = floorService.getFloorCountByPostId(postid);
 
         Floor floor = new Floor();
-        floor.setPostId(Integer.valueOf(postid));
+        floor.setPostId(postid);
         floor.setPostFloor(floorCountByPostId+1);
         floor.setCreateUserId(user.getUserId());
         floor.setPostContent(request.getParameter("replyContent"));
@@ -60,10 +66,11 @@ public class FloorServlet extends AbstractServlet{
         FloorWithReply floorWithReply = floorService.insertFloor(floor);
 
         if (floorWithReply != null){
+            postService.postReplyNumber(postid);
             return new CommonResult().success(floorWithReply);
         }
         else{
-            return new CommonResult().failed();
+             return new CommonResult().failed();
         }
         //floorWithReply.setPostFloor();
        // return new CommonResult().failed();

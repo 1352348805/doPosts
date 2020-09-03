@@ -68,6 +68,22 @@ public class Post {
      */
     private Integer watchCount;
 
+
+    /**
+     * 帖子回复数量
+     */
+    private Integer PostReplyCount;
+
+
+
+    public Integer getPostReplyCount() {
+        return PostReplyCount;
+    }
+
+    public void setPostReplyCount(Integer postReplyCount) {
+        PostReplyCount = postReplyCount;
+    }
+
     public Integer getWatchCount() {
         return watchCount;
     }
@@ -151,14 +167,18 @@ public class Post {
 
     @Override
     public String toString() {
-        return "Post{" +
-                "postId=" + postId +
-                ", postName='" + postName + '\'' +
-                ", postClassLevel1Id=" + postClassLevel1Id +
-                ", postClassLevel2Id=" + postClassLevel2Id +
-                ", postClassLevel3Id=" + postClassLevel3Id +
-                ", createUserId=" + createUserId +
-                ", createDate=" + createDate +
-                '}';
+        final StringBuffer sb = new StringBuffer("Post{");
+        sb.append("postId=").append(postId);
+        sb.append(", postName='").append(postName).append('\'');
+        sb.append(", postClassLevel1Id=").append(postClassLevel1Id);
+        sb.append(", postClassLevel2Id=").append(postClassLevel2Id);
+        sb.append(", postClassLevel3Id=").append(postClassLevel3Id);
+        sb.append(", createUserId=").append(createUserId);
+        sb.append(", createDate=").append(createDate);
+        sb.append(", description='").append(description).append('\'');
+        sb.append(", watchCount=").append(watchCount);
+        sb.append(", PostReplyCount=").append(PostReplyCount);
+        sb.append('}');
+        return sb.toString();
     }
 }

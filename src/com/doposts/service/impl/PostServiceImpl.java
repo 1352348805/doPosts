@@ -8,6 +8,7 @@ import com.doposts.vo.PostInfo;
 import com.doposts.vo.PostQueryParam;
 import com.doposts.vo.SuperPost;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -103,5 +104,44 @@ public class PostServiceImpl  implements PostService {
     public List<Post> selectThreeLevelClassPostList(Integer postClassLevelThreeId) {
          List<Post> list = PostItDatabase.POST_DAO.getPostByClassId(postClassLevelThreeId);
          return list;
+    }
+
+
+    /**
+     *@Description 帖子回复数量(每发一个回复数,帖子数自增+1)
+     *@Param id 当前帖子的id
+     *@Author Wang.li.ming
+     *@Date 2020/9/3
+     *@Time 16:42
+     */
+    @Override
+    public void postReplyNumber(Integer postId) {
+
+        try {
+             PostItDatabase.getCRUD().executeUpdate("UPDATE `post` SET  `PostReplyCount`=`PostReplyCount`+1  WHERE `postId`=?",postId);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
+    }
+
+
+    /**
+     *@Description  帖子浏览数(每进入一个帖子进行观看,帖子浏览数自增+1)
+     *@Param  id 当前帖子的id
+     *@Author Wang.li.ming
+     *@Date 2020/9/3
+     *@Time 16:36
+     */
+    @Override
+    public void postViewNumber(Integer postId) {
+        try {
+            PostItDatabase.getCRUD().executeUpdate("UPDATE `post` SET  `watchCount`=`watchCount`+1  WHERE `postId`=?",postId);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
     }
 }
