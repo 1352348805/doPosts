@@ -1,11 +1,13 @@
 package com.doposts.servlet;
 
 import com.doposts.entity.Reply;
+import com.doposts.entity.User;
 import com.doposts.service.impl.FloorServiceImpl;
 import com.doposts.service.impl.ReplyServiceImpl;
 import com.doposts.service.interfaces.FloorService;
 import com.doposts.service.interfaces.ReplyService;
 import com.doposts.to.CommonResult;
+import com.doposts.vo.SuperReply;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,8 +36,8 @@ public class ReplyServlet extends AbstractServlet{
 
 
     public CommonResult ReplyAndReply(HttpServletRequest request,HttpServletResponse response){
-
         Object object = request.getSession().getAttribute("user");
+        System.out.println(object);
         if(object==null){
             return new CommonResult().unauthorized("未登录");
         }
@@ -56,6 +58,6 @@ public class ReplyServlet extends AbstractServlet{
          }catch (Exception e){
              return new CommonResult().failed();
          }
-        return new CommonResult().success(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(replyDate));
+        return new CommonResult().success(reply);
     }
 }

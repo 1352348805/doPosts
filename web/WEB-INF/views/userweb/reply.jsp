@@ -222,18 +222,18 @@
                             <div style=" display: none;  border: rgb(240 241 242) solid 1px;height:100%; width: 650px; background : rgb(247 248 250); padding: 4px 15px 14px 15px">
                                 <ul style="margin: 0px 0px 0px 0px " replyView="${item.floorId}">
                                     <c:forEach items="${item.replyList}" var="replys">
-                                        <li style=" height: 45px;">
+                                        <li style=" height: 45px;"  >
                                             <a href=""
                                                style=" width: 32px; height: 32px;display: inline-block; float: left;margin: 10px 10px 0px 0px">
                                                 <img src="${pageContext.request.contextPath }/static/images/hero_bg_2.jpg"
                                                      style="border: silver 1px solid; width: 32px; height: 32px;">
                                             </a>
-                                            <div style="display: inline-block; margin-top: 10px;width: 575px ">
-                                                <a href="">${replys.replyUserId}:</a>
+                                            <div style="display: inline-block; margin-top: 10px;width: 575px " replyUserId="${replys.replyUserId}">
+                                                <a href="">${replys.userName}:</a>
                                                 <span>${replys.replyContent}</span>
                                                 <div style=" float: right;padding: 10px 0px 0px 0px ">
                                                     <span>${replys.replyDate}</span>
-                                                    <a href="" onclick="replyUsermessage(this)">回复</a>
+                                                    <a href="javascript:;"   id="replys"   onclick="replyUsermessage(this,${replys.replyUserId},'${replys.userName}')">回复</a>
                                                 </div>
                                             </div>
                                         </li>
@@ -246,10 +246,10 @@ onclick="conceal(this)">我也说一句</a>
 </div>
 </li>
                                 </ul>
-                                <div style="display: none; ">
+                                <div    class=" replyFloors"  style="display: none;  ">
                                     <div class="layui-form-item layui-form-text">
                                         <div class="layui-input-block" style="margin: 0px">
-                                            <textarea  name="desc" placeholder="请输入内容" id="demo" class="layui-textarea" floorId="${item.floorId}"></textarea>
+                                            <textarea  name="desc" placeholder="请输入内容" id="demo" class="layui-textarea" floorId="${item.floorId}" ></textarea>
                                         </div>
                                     </div>
                                     <div style="margin: 0px 0px 0px 570px">
@@ -439,6 +439,7 @@ onclick="conceal(this)">我也说一句</a>
         return(false);
     }
 
+    //分页操作
     layui.use('laypage', function(){
         var laypage = layui.laypage;
         let count;
@@ -477,6 +478,7 @@ onclick="conceal(this)">我也说一句</a>
 <!-- //Jquery -->
 
 <script type="text/javascript">
+    //回复信息显示和隐藏
     function ShowOrHideReply(obj) {
         $obj = $(obj);
         $reply = $obj.parent().parent().parent().next();
@@ -486,7 +488,6 @@ onclick="conceal(this)">我也说一句</a>
             $reply.css('display', 'none');
         }
     }
-
     function conceal(obj) {
         $obj = $(obj);
         $conceal = $obj.parent().parent().parent().next();
@@ -495,6 +496,19 @@ onclick="conceal(this)">我也说一句</a>
         } else {
             $conceal.css('display', 'none');
         }
+    }
+
+    var replyUserId=null;
+    var  userName=null;
+
+    function replyUsermessage(obj,replyUserId,userName){
+
+        $(".replyFloors").css('display','block');
+        $(obj).parent().parent().parent().parent().parent();
+       $(obj).parent().parent().parent().parent().parent().find(".layui-textarea").val("回复"+" "+userName+":");
+
+
+
     }
 
     // $(function(){
@@ -511,6 +525,7 @@ onclick="conceal(this)">我也说一句</a>
     // })
 
 
+   //回复楼层信息动态添加
     function replyOfFloor(obj, floorId) {
         if(typeof(user) == "undefined"){
             if(confirm("您未登录要跳转到登录页面吗！")){
@@ -518,7 +533,7 @@ onclick="conceal(this)">我也说一句</a>
             }
             return;
         }
-        //获取回复文本
+        //获取回复文本内容
         var reply = $("[floorid='"+floorId+"']");
         var replyContent = reply.val();
         //获取插进那个楼ID
@@ -540,10 +555,10 @@ onclick="conceal(this)">我也说一句</a>
                     "style=\"border: silver 1px solid; width: 32px; height: 32px;\">\n" +
                     "</a>\n" +
                     "<div style=\"display: inline-block; margin-top: 10px;width: 575px \">\n" +
-                    "<a href=\"\">盖亚:</a>\n" +
+                    "<a href=\"\">"+user.userName+":</a>\n" +
                     "<span>"+replyContent+"</span>\n" +
                     "<div style=\" float: right;padding: 10px 0px 0px 0px \">\n" +
-                    "<span>"+data.data+"</span>\n" +
+                    "<span>"+data.data.replyDate+"</span>\n" +
                     "<a href=\"\" onclick=\"\">回复</a>\n" +
                     "</div>\n" +
                     "</div>\n" +
@@ -562,6 +577,7 @@ onclick="conceal(this)">我也说一句</a>
         },"json");
     }
 
+    //盖楼
     $("#spend").click(function () {
         $.ajax({
             url: "<%=path%>/floor",
@@ -573,7 +589,6 @@ onclick="conceal(this)">我也说一句</a>
                 replyContent: editor.txt.html(),
             },
             success: function (jsonStr) {
-                alert("成功！！！")
                 if(jsonStr.code==401){
                     alert("未登录,请登录后再操作");
                     window.location.href="<%=path%>/user?action=toLogin";
