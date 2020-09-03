@@ -507,7 +507,7 @@ onclick="conceal(this)">我也说一句</a>
         $(obj).parent().parent().parent().parent().parent();
        $(obj).parent().parent().parent().parent().parent().find(".layui-textarea").val("回复"+" "+userName+":");
 
-
+      alert("");
 
     }
 
