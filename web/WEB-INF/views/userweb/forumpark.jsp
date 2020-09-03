@@ -1,6 +1,5 @@
-<!DOCTYPE html>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-		 pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 	<%
@@ -13,6 +12,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/search-form.css">
 	<link href="<%=path%>/static/css/forumpark/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 	<!--theme-style-->
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/style.css">
 	<link href="<%=path%>/static/css/forumpark/style.css" rel="stylesheet" type="text/css" media="all" />
 	<!--//theme-style-->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -33,40 +33,23 @@
 </head>
 <body>
 <!--header-->
-<div class="header">
-	<div style="padding-top: 0px;height: 200px; background: url('<%=path%>/static/images/head/gnydy.png') no-repeat">
-		<div class="container-fluid">
-
-			<div class="mobile-menu-overlay"></div>
-
-			<nav role="navigation" style="  padding-right: 60px;float: right;">
-				<div class="extra-text visible-xs">
-					<ul class="social-buttons">
-						<li><a href="#"><i class="icon-twitter"></i></a></li>
-						<li><a href="#"><i class="icon-facebook"></i></a></li>
-						<li><a href="#"><i class="icon-instagram2"></i></a></li>
-					</ul>
-				</div>
-			</nav>
-		</div>
-	</div>
-	<div class="bottom-header">
-		<div class="container">
-			<div class="header-bottom-left">
-				<div class="logo">
-					<a href="index.html">
-						<img style="height: 160px; padding-left: 100px" src="<%=path%>/static/images/head/1-10.png" alt=" " />
-					</a>
-				</div>
+<jsp:include page="../common/user/head.jsp"/>
+<div class="bottom-header">
+	<div class="container">
+		<div class="header-bottom-left">
+			<div class="logo">
+				<a href="index.html">
+					<img style="height: 160px; padding-left: 100px" src="${pageContext.request.contextPath }/static/images/head/1-10.png" alt=" " />
+				</a>
 			</div>
-			<div class="header-bottom-right" style="position: absolute;left: 27%;margin-top: 130px">
-				<ul class="nav navbar-nav navbar-right" id="one_category">
-					<li><a href="<%=path%>/user?action=index">首页</a></li>
-
-				</ul>
-			</div>
-			<div class="clearfix"> </div>
 		</div>
+		<div class="header-bottom-right" style="position: absolute;left: 27%;margin-top: 130px">
+			<ul class="nav navbar-nav navbar-right" id="one_category">
+				<li><a href="${pageContext.request.contextPath }/user?action=index">首页</a></li>
+
+			</ul>
+		</div>
+		<div class="clearfix"> </div>
 	</div>
 </div>
 

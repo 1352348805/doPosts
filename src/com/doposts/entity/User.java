@@ -5,6 +5,8 @@ import com.dxhualuo.database.annotation.AutoIncrement;
 import com.dxhualuo.database.annotation.PrimaryKey;
 import com.dxhualuo.database.annotation.TableMapping;
 
+import java.util.Date;
+
 /**
  * 用户实体类
  * @author asuk
@@ -52,6 +54,20 @@ public class User {
      * 状态，-1 删除 0 封禁 1正常
      */
     private Integer status;
+
+    /**
+     * 注册日期
+     */
+    private Date createDate;
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public User setCreateDate(Date createDate) {
+        this.createDate = createDate;
+        return this;
+    }
 
     public Integer getUserId() {
         return userId;
