@@ -91,7 +91,7 @@ public class uploadingimgServlet extends AbstractServlet {
                     // fn 是可能是这样的 c:\abc\de\tt\fish.jpg
                     fi.write(new File(path,fn));
                     uploadBean.setErrno(0);
-                    imgs.add(request.getContextPath() + imgDirUrl + fn);
+                    imgs.add(imgDirUrl + fn);
                 }
             }
             uploadBean.setData(imgs);

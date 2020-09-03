@@ -209,30 +209,50 @@ public class UserServlet extends AbstractServlet{
 
         ServletFileUpload sfu=new ServletFileUpload(factory);
         sfu.setFileSizeMax(1024*1024*5);
-        String path=request.getServletContext().getRealPath("static/images");
+        final String parentPath = "/static/images/";
+        String path=request.getServletContext().getRealPath(parentPath);
         String fn=null;
         try {
+            User user = new User();
+            User userBySession = this.getUserBySession(request);
+            user.setUserId(userBySession.getUserId());
+            String userName = userBySession.getUserName();
+            String userFavicon = userBySession.getFavicon();
             List<FileItem> list=sfu.parseRequest(request);
             for(FileItem item:list) {
                 if (item.isFormField()) {
-                    //TODO
+                    if (item.getFieldName().equals("username")) {
+                        user.setUserName(item.getString("UTF-8"));
+                        userName = item.getString("UTF-8");
+                    }
                 } else {
-                    // 是文件
                     //获取图片后缀名
-                    String format=item.getName().substring(item.getName().indexOf("."), item.getName().length());
-                    System.out.println(format);
+                    String format=item.getName().substring(item.getName().indexOf("."));
                     //图片命名
                     fn= UUID.randomUUID().toString().replaceAll("-", "")+format;
-                    System.out.println("文件名是："+fn);  //文件名
+                    user.setFavicon(parentPath + fn);
+                    userFavicon = parentPath + fn;
                     // fn 是可能是这样的 c:\abc\de\tt\fish.jpg
                     item.write(new File(path,fn));
                 }
             }
+            userService.updateUser(user);
+            userBySession.setUserName(userName);
+            userBySession.setFavicon(userFavicon);
+            request.getSession().setAttribute("user",userBySession);
         } catch (Exception e) {
             return new CommonResult().failed("修改失败");
         }
 
         return new CommonResult().success(null);
+    }
+
+    private User getUserBySession(HttpServletRequest request) {
+        Object obj = request.getSession().getAttribute("user");
+        if (obj != null) {
+            return (User)obj;
+        }
+        return null;
     }
 
 }
