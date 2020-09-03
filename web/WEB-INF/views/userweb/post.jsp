@@ -327,15 +327,16 @@
                       let date = result.data;
                       var articleDiv = "";
                       for( var i = 0 ; i < date.length ; i++){
-                          articleDiv += " <article class=\"excerpt excerpt-1\"  style=\"margin-top: 15px\">" +
-                              "                <header>\n" +
+                          articleDiv += " <article class=\"excerpt excerpt-1\"  style=\"margin-top: 15px;background-color: #EEE;\">" +
+                              " <div style='margin-left:20px ; margin-bottom:20px'><header style='margin-top: 7px;margin-bottom:0px'>\n" +
                               // "                    <a class=\"cat\" href=\"#\" title=\"MZ-NetBlog主题\">MZ-NetBlog主题<i></i></a>\n" +
-                              "                    <h2><a href=\"<%=path%>/user?action=postAndfloor&postid="+date[i].postId+" \" title=\""+date[i].postName+"\" target=\"_blank\">"+date[i].postName+"</a></h2>\n" +
+                              "                    <h2 style='font-weight: 800;\n" +
+                              "    font-family: cursive'><a style='color: mediumslateblue' href=\"<%=path%>/user?action=postAndfloor&postid="+date[i].postId+" \" title=\""+date[i].postName+"\" target=\"_blank\">"+date[i].postName+"</a></h2>\n" +
                               "                </header>\n" +
                               "                <p class=\"meta\">\n" +
                               "                    <time class=\"time\"><i class=\"glyphicon glyphicon-time\"></i> "+date[i].createDate+"</time>\n" +
-                              "                    <span class=\"views\"><i class=\"glyphicon glyphicon-eye-open\"></i>"+date[i].watchCount+"</span> <span class=\"comment\"  title=\"评论\" target=\"_blank\"><i class=\"glyphicon glyphicon-comment\"></i>"+date[i].postReplyCount+"</span>\n" +
-                              "                </p>\n"+date[i].description+"</article>";
+                              "                    <span class=\"views\"><i class=\"glyphicon glyphicon-eye-open\"></i><i style='padding-left:3px'>"+date[i].watchCount+"</i></span> <span class=\"comment\"  title=\"评论\" target=\"_blank\"><i class=\"glyphicon glyphicon-comment\"></i><i style='padding-left:3px'>"+date[i].postReplyCount+"</i></span>\n" +
+                              "                </p>\n"+date[i].description+"</div></article>";
                       }
                       $("#articleid").html(articleDiv);
                   }
