@@ -154,6 +154,7 @@ public class PostServlet extends AbstractServlet {
         post.setPostName(postname);
         post.setDescription(postContent);
         post.setWatchCount(0);
+        post.setPostReplyCount(0);
         post.setCreateDate(new Date());
         post.setPostClassLevel1Id(postClassLevel1Id);
         post.setPostClassLevel2Id(postClassLevel2Id);

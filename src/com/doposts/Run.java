@@ -16,5 +16,6 @@ public class Run {
     public static void main(String[] args) throws Exception{
         DatabaseMonitorServlet monitorServlet = new DatabaseMonitorServlet();
         monitorServlet.init();
+        System.out.println(PostItDatabase.getCRUD().executeUpdate("UPDATE `post` SET  `watchCount`=`watchCount`+1  WHERE `postId`=?",3));
     }
 }

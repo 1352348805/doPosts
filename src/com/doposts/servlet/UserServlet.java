@@ -118,6 +118,7 @@ public class UserServlet extends AbstractServlet{
             pageSize = 10;
         }
         Integer postid = Integer.valueOf(request.getParameter("postid"));
+        postService.postViewNumber(postid);
         Integer floorCountByPostId = floorService.getFloorCountByPostId(postid);
         Page<FloorWithReply> page=new Page<FloorWithReply>();
         page.setTotalCount(floorCountByPostId);

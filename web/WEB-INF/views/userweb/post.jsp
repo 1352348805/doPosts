@@ -40,7 +40,7 @@
         <div class="container">
             <div class="header-topbar hidden-xs link-border">
                 <ul class="site-nav topmenu">
-                    <li><a href="#" >标签云</a></li>
+                    <li><a href="#" wangLiMing="是你们老板" >标签云</a></li>
                     <li><a href="#" rel="nofollow" >读者墙</a></li>
                     <li><a href="#" title="RSS订阅" >
                         <i class="fa fa-rss">
@@ -334,7 +334,7 @@
                               "                </header>\n" +
                               "                <p class=\"meta\">\n" +
                               "                    <time class=\"time\"><i class=\"glyphicon glyphicon-time\"></i> "+date[i].createDate+"</time>\n" +
-                              "                    <span class=\"views\"><i class=\"glyphicon glyphicon-eye-open\"></i>"+date[i].watchCount+"</span> <span class=\"comment\"  title=\"评论\" target=\"_blank\"><i class=\"glyphicon glyphicon-comment\"></i>"+date[i].postId+"</span>\n" +
+                              "                    <span class=\"views\"><i class=\"glyphicon glyphicon-eye-open\"></i>"+date[i].watchCount+"</span> <span class=\"comment\"  title=\"评论\" target=\"_blank\"><i class=\"glyphicon glyphicon-comment\"></i>"+date[i].postReplyCount+"</span>\n" +
                               "                </p>\n"+date[i].description+"</article>";
                       }
                       $("#articleid").html(articleDiv);

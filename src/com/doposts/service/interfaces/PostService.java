@@ -67,4 +67,22 @@ public interface PostService {
      */
     List<Post> selectThreeLevelClassPostList(Integer postClassLevelThreeId);
 
+    /**
+     *@Description  帖子回复数量(每发一个回复数,帖子数自增+1)
+     *@Param  id 当前帖子的id
+     *@Author Wang.li.ming
+     *@Date 2020/9/3
+     *@Time 16:36
+     */
+    void postReplyNumber(Integer postId);
+
+    /**
+     *@Description  帖子浏览数(每进入一个帖子进行观看,帖子浏览数自增+1)
+     *@Param  id 当前帖子的id
+     *@Author Wang.li.ming
+     *@Date 2020/9/3
+     *@Time 16:36
+     */
+    void postViewNumber(Integer postId);
+
 }
