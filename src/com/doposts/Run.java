@@ -4,6 +4,7 @@ import com.doposts.dao.CrudHandler;
 import com.doposts.dao.PostItDatabase;
 import com.doposts.dao.monitor.DatabaseMonitorServlet;
 import com.doposts.entity.Reply;
+import com.doposts.vo.SuperPost;
 
 import java.util.Date;
 

@@ -37,14 +37,21 @@ public class ReplyDaoImpl implements ReplyDao {
      */
     @Override
     public List<SuperReply> getReplyListById(Integer floorId) {
-//        Reply reply = new Reply();
-//        reply.setFloorId(floorId);
-//        try {
-//            return crud.select(Reply.class, reply);
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-        return null;
+        try {
+            return crud.executeQueryToBeanList("SELECT\n" +
+                    "\treply.*, \n" +
+                    "\t`user`.userName AS replyUserName\n" +
+                    "FROM\n" +
+                    "\treply\n" +
+                    "\tLEFT JOIN\n" +
+                    "\t`user`\n" +
+                    "\tON \n" +
+                    "\t\treply.replyUserId = `user`.userId\n" +
+                    "WHERE\n" +
+                    "\treply.floorId = ?", SuperReply.class, floorId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
