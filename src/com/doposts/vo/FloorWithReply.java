@@ -17,6 +17,17 @@ public class FloorWithReply extends Floor {
     @FieldMapping("createUserName")
     private String userName;
 
+    @FieldMapping("favicon")
+    private String favicon;
+
+    public String getFavicon() {
+        return favicon;
+    }
+
+    public void setFavicon(String favicon) {
+        this.favicon = favicon;
+    }
+
     /**
      * 回复列表的所有数据
      */

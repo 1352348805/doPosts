@@ -6,6 +6,7 @@ import com.doposts.service.interfaces.PostService;
 import com.doposts.utils.Page;
 import com.doposts.vo.PostInfo;
 import com.doposts.vo.PostQueryParam;
+import com.doposts.vo.SuperPost;
 
 import java.util.List;
 
@@ -21,8 +22,8 @@ public class PostServiceImpl  implements PostService {
      * @return Post
      */
     @Override
-    public Post getPostById(Integer id) {
-       Post post= PostItDatabase.POST_DAO.getPostById(id);
+    public SuperPost getPostById(Integer id) {
+        SuperPost post= PostItDatabase.POST_DAO.getSuprPostByid(id);
         return post;
     }
 

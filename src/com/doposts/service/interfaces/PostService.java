@@ -5,6 +5,7 @@ import com.doposts.utils.Page;
 import com.doposts.vo.PostInfo;
 import com.doposts.vo.PostQueryParam;
 import com.doposts.vo.SelectAllPostAndFloor;
+import com.doposts.vo.SuperPost;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface PostService {
      * @param id 帖子id
      * @return Post
      */
-    Post getPostById(Integer id);
+    SuperPost getPostById(Integer id);
 
     /**
      * 根据条件获取帖子分页数据

@@ -4,6 +4,7 @@ import com.doposts.entity.Floor;
 import com.doposts.entity.Post;
 import com.doposts.vo.PostInfo;
 import com.doposts.vo.PostQueryParam;
+import com.doposts.vo.SuperPost;
 
 import java.util.List;
 
@@ -29,11 +30,18 @@ public interface PostDao {
     List<Post> getPostByClassId(int classId);
 
     /**
-     * 用id取帖子
+     *用id取帖子
      * @param id 帖子id
      * @return Post
      */
     Post getPostById(Integer id);
+
+    /**
+     *用id取帖子
+     * @param id 帖子id
+     * @return SuperPost
+     */
+    SuperPost getSuprPostByid(Integer id);
 
     /**
      * 按条件分页查询帖子

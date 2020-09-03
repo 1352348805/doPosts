@@ -131,12 +131,20 @@
         <ul style="width: 130px; height: 170px">
             <li>
                 <div>
-                    <img src="/doPosts/static/images/9527.jpg" style="width:80px ;height:80px;border: silver solid 1px; ">
+                    <c:choose>
+                        <c:when test="${false}">
+
+                        </c:when>
+                        <c:otherwise>
+                            <img src="${pageContext.request.contextPath }/static/images/user_default_icon.png" style="width:80px ;height:80px;border: silver solid 1px; ">
+                        </c:otherwise>
+                    </c:choose>
+
                 </div>
             </li>
             <br>
             <li>
-                <a class="hint info-left" href="#" title="发帖人"><i class="fa fa-user">李逍遥</i></a>
+                <a class="hint info-left" href="#" title="发帖人"><i class="fa fa-user">${post.createUserId}</i></a>
             </li>
         </ul>
     </div>
@@ -225,7 +233,7 @@
                                                 <span>${replys.replyContent}</span>
                                                 <div style=" float: right;padding: 10px 0px 0px 0px ">
                                                     <span>${replys.replyDate}</span>
-                                                    <a href="" onclick="replyUser(this, ${item.replyUserId}, ${item.floorId})">回复</a>
+                                                    <a href="" onclick="replyUsermessage(this)">回复</a>
                                                 </div>
                                             </div>
                                         </li>
@@ -240,12 +248,12 @@ onclick="conceal(this)">我也说一句</a>
                                 </ul>
                                 <div style="display: none; ">
                                     <div class="layui-form-item layui-form-text">
-                                        <div class="layui-input-block">
-                                            <textarea name="desc" placeholder="请输入内容" id="demo" class="layui-textarea" floorId="${item.floorId}"></textarea>
+                                        <div class="layui-input-block" style="margin: 0px">
+                                            <textarea  name="desc" placeholder="请输入内容" id="demo" class="layui-textarea" floorId="${item.floorId}"></textarea>
                                         </div>
                                     </div>
                                     <div style="margin: 0px 0px 0px 570px">
-                                        <input type="button" onclick="replyOfFloor(this,${item.postFloor})"  id="submits" value="发表"/>
+                                        <input type="button" onclick="replyOfFloor(this,${item.floorId})"  id="submits" value="发表"/>
                                     </div>
                                 </div>
 
@@ -504,15 +512,19 @@ onclick="conceal(this)">我也说一句</a>
 
 
     function replyOfFloor(obj, floorId) {
-      if(typeof(user) == "undefined"){
-          if(confirm("您未登录要跳转到登录页面吗！")){
-              window.location.href="<%=path%>/user?action=toLogin";
-          }
-          return;
-      }
-      var replyContent = $(obj).parent().parent().children().first().children().children().val();
-      var floorId = $(obj).parent().parent().children().first().children().children().attr("floorid");
-      var replyView = $("[replyview='"+floorId+"']");
+        if(typeof(user) == "undefined"){
+            if(confirm("您未登录要跳转到登录页面吗！")){
+                window.location.href="<%=path%>/user?action=toLogin";
+            }
+            return;
+        }
+        //获取回复文本
+        var reply = $("[floorid='"+floorId+"']");
+        var replyContent = reply.val();
+        //获取插进那个楼ID
+        var floorId = $(obj).parent().parent().children().first().children().children().attr("floorid");
+        //获得对应的ul
+        var replyView = $("[replyview='"+floorId+"']");
         $.post("<%=path%>/reply",{
             "action": "ReplyAndReply",
             "floorid": floorId,

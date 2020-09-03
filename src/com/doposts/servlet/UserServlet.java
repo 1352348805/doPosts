@@ -12,6 +12,7 @@ import com.doposts.to.CommonResult;
 import com.doposts.utils.Page;
 import com.doposts.vo.FloorWithReply;
 import com.doposts.vo.SelectAllPostAndFloor;
+import com.doposts.vo.SuperPost;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -125,9 +126,9 @@ public class UserServlet extends AbstractServlet{
 
         SelectAllPostAndFloor id = floorService.getFloorById(postid,page.getCurrPageNo(),page.getPageSize());
 
-        Post post= postService.getPostById(postid);
+        SuperPost superPost= postService.getPostById(postid);
        List<FloorWithReply> floorWithReplies= id.getFloor();
-        request.setAttribute("post",post);
+        request.setAttribute("post",superPost);
         request.setAttribute("page",page);
         request.setAttribute("floor",floorWithReplies);
         request.setAttribute("postid",postid);
