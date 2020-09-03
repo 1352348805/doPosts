@@ -12,7 +12,7 @@ public class SuperReply  extends Reply {
     /**
      * 用户名字
      */
-    @FieldMapping("createUserName")
+    @FieldMapping("replyUserName")
     private String userName;
 
     public String getUserName() {
