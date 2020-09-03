@@ -22,6 +22,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -58,6 +59,7 @@ public class UserServlet extends AbstractServlet{
      * 跳转登录页面
      */
     public String toLogin(HttpServletRequest request, HttpServletResponse response) {
+        request.setAttribute("targetURL",request.getHeader("Referer"));
         return "login";
     }
 
@@ -74,15 +76,22 @@ public class UserServlet extends AbstractServlet{
      * @param response
      * @return
      */
-    public Object login(HttpServletRequest request, HttpServletResponse response) {
+    public String login(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
+        String targetURL = request.getParameter("targetURL");
         User user = userService.login(userName, password);
         if(user == null){
-            return new CommonResult().failed();
+            request.setAttribute("targetURL",targetURL);
+            return "login";
         }
         request.getSession().setAttribute("user", user);
-        return new CommonResult().success("");
+        if ((request.getRequestURL() + "?action=toLogin").equals(targetURL)) {
+            response.sendRedirect(request.getContextPath() + "/user?action=index");
+            return null;
+        }
+        response.sendRedirect(targetURL);
+        return null;
     }
 
     /**
