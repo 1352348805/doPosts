@@ -26,7 +26,7 @@
         }
     </style>
 </head>
-<body>
+<body onkeydown="keyLogin()">
 <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
      <div class="layadmin-user-login-main" style="background-color: white;opacity: 0.5; margin-top: 100px;margin-right: 440px;" position:absolute>
         <div class="layadmin-user-login-box layadmin-user-login-header">
@@ -154,6 +154,24 @@
       $("#login-submit").click(login);
     });
 
+
+</script>
+<script type="text/javascript">
+
+    $(function() {
+
+    });
+
+    // 回车键登陆
+    function keyLogin(){
+        console.log(event.keyCode)
+        // 13为回车键
+        if (event.keyCode==13){
+            document.getElementById("login-submit").click();
+            // 调用登陆按钮或者登陆方法
+
+        }
+    }
 
 </script>
 </body>
