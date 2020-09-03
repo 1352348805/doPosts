@@ -6,6 +6,7 @@ import com.doposts.dao.interfaces.PostDao;
 import com.doposts.entity.Post;
 import com.doposts.vo.PostInfo;
 import com.doposts.vo.PostQueryParam;
+import com.doposts.vo.SuperPost;
 import com.dxhualuo.database.handler.interfaces.DatabaseCrud;
 import com.dxhualuo.database.handler.interfaces.SuperCrud;
 import java.sql.ResultSet;
@@ -80,6 +81,17 @@ public class PostDaoImpl implements PostDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return null;
+    }
+
+    /**
+     * 用id取帖子
+     *
+     * @param id 帖子id
+     * @return SuperPost
+     */
+    @Override
+    public SuperPost getSuprPostByid(Integer id) {
         return null;
     }
 
