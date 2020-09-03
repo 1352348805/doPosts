@@ -82,6 +82,8 @@ public class UserServlet extends AbstractServlet{
         String targetURL = request.getParameter("targetURL");
         User user = userService.login(userName, password);
         if(user == null){
+            request.setAttribute("username",userName);
+            request.setAttribute("msg","账号或密码错误!");
             request.setAttribute("targetURL",targetURL);
             return "login";
         }
