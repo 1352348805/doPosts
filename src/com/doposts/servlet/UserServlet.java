@@ -13,12 +13,18 @@ import com.doposts.utils.Page;
 import com.doposts.vo.FloorWithReply;
 import com.doposts.vo.SelectAllPostAndFloor;
 import com.doposts.vo.SuperPost;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * 用户控制器
@@ -53,6 +59,7 @@ public class UserServlet extends AbstractServlet{
      * 跳转登录页面
      */
     public String toLogin(HttpServletRequest request, HttpServletResponse response) {
+        request.setAttribute("targetURL",request.getHeader("Referer"));
         return "login";
     }
 
@@ -69,15 +76,24 @@ public class UserServlet extends AbstractServlet{
      * @param response
      * @return
      */
-    public Object login(HttpServletRequest request, HttpServletResponse response) {
+    public String login(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
+        String targetURL = request.getParameter("targetURL");
         User user = userService.login(userName, password);
         if(user == null){
-            return new CommonResult().failed();
+            request.setAttribute("username",userName);
+            request.setAttribute("msg","账号或密码错误!");
+            request.setAttribute("targetURL",targetURL);
+            return "login";
         }
         request.getSession().setAttribute("user", user);
-        return new CommonResult().success("");
+        if ((request.getRequestURL() + "?action=toLogin").equals(targetURL)) {
+            response.sendRedirect(request.getContextPath() + "/user?action=index");
+            return null;
+        }
+        response.sendRedirect(targetURL);
+        return null;
     }
 
     /**
@@ -174,5 +190,49 @@ public class UserServlet extends AbstractServlet{
        request.setAttribute("secondId",request.getParameter("secondId"));
        return "userweb/post";
    }
+
+    /**
+     * 用户中心
+     * @return
+     */
+    public String toUserCenter(HttpServletRequest request , HttpServletResponse response) {
+        return "userweb/user_center";
+    }
+
+    public String toModifyUserInfo(HttpServletRequest request , HttpServletResponse response) {
+        return "userweb/user_modify";
+    }
+
+    public CommonResult modifyUserInfo(HttpServletRequest request , HttpServletResponse response) {
+
+        DiskFileItemFactory factory = new DiskFileItemFactory();
+
+        ServletFileUpload sfu=new ServletFileUpload(factory);
+        sfu.setFileSizeMax(1024*1024*5);
+        String path=request.getServletContext().getRealPath("static/images");
+        String fn=null;
+        try {
+            List<FileItem> list=sfu.parseRequest(request);
+            for(FileItem item:list) {
+                if (item.isFormField()) {
+                    //TODO
+                } else {
+                    // 是文件
+                    //获取图片后缀名
+                    String format=item.getName().substring(item.getName().indexOf("."), item.getName().length());
+                    System.out.println(format);
+                    //图片命名
+                    fn= UUID.randomUUID().toString().replaceAll("-", "")+format;
+                    System.out.println("文件名是："+fn);  //文件名
+                    // fn 是可能是这样的 c:\abc\de\tt\fish.jpg
+                    item.write(new File(path,fn));
+                }
+            }
+        } catch (Exception e) {
+            return new CommonResult().failed("修改失败");
+        }
+
+        return new CommonResult().success(null);
+    }
 
 }

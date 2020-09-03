@@ -27,17 +27,19 @@
     </style>
 </head>
 <body onkeydown="keyLogin()">
-<div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
+<form action="<%=path%>/user?action=login" method="post" onsubmit="return loginCheck()" class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
      <div class="layadmin-user-login-main" style="background-color: white;opacity: 0.5; margin-top: 100px;margin-right: 440px;" position:absolute>
         <div class="layadmin-user-login-box layadmin-user-login-header">
             <h2 style= "color:green" >.来贴吧.</h2>
             <p style="color:green">一个有趣的论坛</p>
         </div>
+         <input type="hidden" id="msg" value="${msg}" />
+         <input type="hidden" name="targetURL" value="${targetURL}" />
         <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
             <input type="hidden" name="action" value="login" />
             <div class="layui-form-item">
                 <label class="layadmin-user-login-icon layui-icon layui-icon-username" for="LAY-user-login-username"></label>
-                <input type="text" name="username" id="LAY-user-login-username" lay-verify="required" placeholder="用户名" class="layui-input">
+                <input type="text" name="username" id="LAY-user-login-username" lay-verify="required" value="${username}" placeholder="用户名" class="layui-input">
             </div>
             <div class="layui-form-item">
                 <label class="layadmin-user-login-icon layui-icon layui-icon-password" for="LAY-user-login-password"></label>
@@ -78,7 +80,7 @@
             <!--        </div>-->
         </div>
     </div>
-</div>
+</form>
 
     <jsp:include page="common/admin/footer.jsp" />
 
@@ -107,14 +109,21 @@
     $("body").css("background-image","url("+bodyBgs[randomBgIndex]+")");
 </script>
 <script>
-
-    $(function () {
-        let path = $("#path").val();
-      layui.use('layer', function(){
+    let path = $("#path").val();
+    layui.use('layer', function(){
         let layer = layui.layer;
-      });
 
-      function login() {
+        let msg = $("#msg").val();
+        if (msg != '' && msg.length > 0) {
+            layer.msg("用户名或密码不正确！", {
+                icon: 6, btn:['好的'],
+            });
+        }
+    });
+
+
+
+    function loginCheck() {
         let username = $("#LAY-user-login-username").val();
         let password = $("#LAY-user-login-password").val();
         if (username == "" || username.length == 0) {
@@ -128,39 +137,13 @@
             });
             return false;
         }
-          $.ajax({
-              url:"<%=path%>/user",
-              method:"post",
-              data:{
-                  action:"login",
-                  "username":username,
-                  "password":password
-              },
-              success:function (jsonStr) {
-                  if(jsonStr.code === 200){
-                      location.href="<%=path%>/index.jsp";
-                  }else if(jsonStr.code === 500){
-                      layer.msg("用户名或密码不正确！", {
-                          icon: 6, btn:['好的'],
-                      });
-                  }
-                  console.log(jsonStr);
-              },
-              dataType:"json"
-          })
         return true;
-      }
+    }
 
-      $("#login-submit").click(login);
-    });
 
 
 </script>
 <script type="text/javascript">
-
-    $(function() {
-
-    });
 
     // 回车键登陆
     function keyLogin(){
