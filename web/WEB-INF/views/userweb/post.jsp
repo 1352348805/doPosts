@@ -191,7 +191,7 @@
                 </li>
                 <li>
                     <a title="用DTcms做一个独立博客网站（响应式模板）" href="#">
-                <span class="thumbnail">
+                 <span class="thumbnail">
                     <img class="thumb" data-original="<%=path%>/static/postStyle/images/201610181739277776.jpg" src="<%=path%>/static/postStyle/images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）" style="display: block;" />
                 </span>
                         <span class="text">用DTcms做一个独立博客网站（响应式模板）</span>

@@ -70,7 +70,7 @@ public class FloorServlet extends AbstractServlet{
             return new CommonResult().success(floorWithReply);
         }
         else{
-            return new CommonResult().failed();
+             return new CommonResult().failed();
         }
         //floorWithReply.setPostFloor();
        // return new CommonResult().failed();
