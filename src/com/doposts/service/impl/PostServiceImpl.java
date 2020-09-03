@@ -22,9 +22,9 @@ public class PostServiceImpl  implements PostService {
      * @return Post
      */
     @Override
-    public SuperPost getPostById(Integer id) {
-        SuperPost post= PostItDatabase.POST_DAO.getSuprPostByid(id);
-        return post;
+    public SuperPost getSuperPostById(Integer id) {
+        SuperPost superPost= PostItDatabase.POST_DAO.getSuperPostById(id);
+        return superPost;
     }
 
     /**

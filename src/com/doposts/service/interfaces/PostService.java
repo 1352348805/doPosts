@@ -19,7 +19,7 @@ public interface PostService {
      * @param id 帖子id
      * @return Post
      */
-    SuperPost getPostById(Integer id);
+    SuperPost getSuperPostById(Integer id);
 
     /**
      * 根据条件获取帖子分页数据

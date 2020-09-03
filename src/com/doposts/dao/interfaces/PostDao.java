@@ -29,19 +29,14 @@ public interface PostDao {
      */
     List<Post> getPostByClassId(int classId);
 
-    /**
-     *用id取帖子
-     * @param id 帖子id
-     * @return Post
-     */
-    Post getPostById(Integer id);
+
 
     /**
      *用id取帖子
      * @param id 帖子id
      * @return SuperPost
      */
-    SuperPost getSuprPostByid(Integer id);
+    SuperPost getSuperPostById(Integer id);
 
     /**
      * 按条件分页查询帖子

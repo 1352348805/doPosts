@@ -63,26 +63,6 @@ public class PostDaoImpl implements PostDao {
         }
     }
 
-    /**
-     * 用id取帖子
-     *
-     * @param id 帖子id
-     * @return Post
-     */
-    @Override
-    public Post getPostById(Integer id) {
-        Post post = new Post();
-        post.setPostId(id);
-        try {
-            List<Post> postList = crud.select(Post.class, post);
-            if(postList.size() == 1){
-                return postList.get(0);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
-    }
 
     /**
      * 用id取帖子
@@ -91,7 +71,7 @@ public class PostDaoImpl implements PostDao {
      * @return SuperPost
      */
     @Override
-    public SuperPost getSuprPostByid(Integer id) {
+    public SuperPost getSuperPostById(Integer id) {
         try {
             return crud.executeQueryToBean("SELECT\n" +
                     "\tpost.*, \n" +
