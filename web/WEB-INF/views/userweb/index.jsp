@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%
@@ -116,8 +117,15 @@
       <nav role="navigation" class="probootstrap-nav hidden-xs">
 
         <ul class="probootstrap-main-nav">
-          <li><a href="${pageContext.request.contextPath }/user?action=toLogin" >登录</a></li>
-          <li><a href="${pageContext.request.contextPath }/user?action=toRegister">注册</a></li>
+          <c:choose>
+            <c:when test="${user == null}">
+              <li><a href="${pageContext.request.contextPath }/user?action=toLogin" >登录</a></li>
+              <li><a href="${pageContext.request.contextPath }/user?action=toRegister">注册</a></li>
+            </c:when>
+            <c:otherwise>
+              <li style="color: #fff">111wqdqwd我的我的请问</li>
+            </c:otherwise>
+          </c:choose>
         </ul>
         <div class="extra-text visible-xs">
           <ul class="social-buttons">
@@ -127,7 +135,7 @@
           </ul>
         </div>
       </nav>
-      <div style="position: ;width: 100%;height: 80px;">
+      <div style="width: 100%;height: 80px;">
 
         <div class="search-wrapper active">
           <img style="position: absolute; height: 160px; left: -160px; z-index: 9999; margin-top: 156px;"src="<%=path%>/static/images/head/1-10.png">
