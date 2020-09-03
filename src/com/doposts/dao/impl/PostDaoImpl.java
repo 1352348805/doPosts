@@ -92,7 +92,21 @@ public class PostDaoImpl implements PostDao {
      */
     @Override
     public SuperPost getSuprPostByid(Integer id) {
-        return null;
+        try {
+            return crud.executeQueryToBean("SELECT\n" +
+                    "\tpost.*, \n" +
+                    "\t`user`.userName AS createUserName\n" +
+                    "FROM\n" +
+                    "\tpost\n" +
+                    "\tLEFT JOIN\n" +
+                    "\t`user`\n" +
+                    "\tON \n" +
+                    "\t\tpost.createUserId = `user`.userId\n" +
+                    "WHERE\n" +
+                    "\tpost.postId = ?", SuperPost.class, id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**

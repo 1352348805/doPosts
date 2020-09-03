@@ -16,12 +16,5 @@ public class Run {
     public static void main(String[] args) throws Exception{
         DatabaseMonitorServlet monitorServlet = new DatabaseMonitorServlet();
         monitorServlet.init();
-        Reply reply = new Reply();
-        reply.setReplyUserId(1);
-        reply.setRepliedUserId(4);
-        reply.setReplyContent("逍遥君！");
-        reply.setReplyDate(new Date());
-        reply.setFloorId(1);
-        PostItDatabase.REPLY_DAO.insertReply(reply);
     }
 }
