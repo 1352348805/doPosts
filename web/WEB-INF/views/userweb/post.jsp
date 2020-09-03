@@ -100,9 +100,9 @@
                 <h4>帖子标题</h4>
             </div>
             <div id="respond">
-                <form  action="<%=path%>/floor?action=addpost" id="comment-form" name="comment-form" method="post" class="probootstrap-form" enctype="multipart/form-data">
+                <form  action="<%=path%>/floor?action=addpost" id="comment-form" name="comment-form" method="post" class="probootstrap-form" enctype="multipart/form-data" onsubmit="return inputcheck()">
                     <div class="comment">
-                        <input name="titename" id="titeid" class="form-control" size="22" placeholder="帖子标题（必填）" maxlength="15" autocomplete="off" tabindex="1" type="text">
+                        <input name="titename" id="titeid" class="form-control" size="22" placeholder="帖子标题（必填）" maxlength="35" autocomplete="off" tabindex="1" type="text">
 
 <%--                        <div class="comment-box">--%>
 <%--                            <textarea placeholder="您想要发布帖子的内容（必填）" name="comment-textarea" id="comment-textarea" cols="100%" rows="3" tabindex="3"></textarea>--%>
@@ -334,7 +334,7 @@
                               "                </header>\n" +
                               "                <p class=\"meta\">\n" +
                               "                    <time class=\"time\"><i class=\"glyphicon glyphicon-time\"></i> "+date[i].createDate+"</time>\n" +
-                              "                    <span class=\"views\"><i class=\"glyphicon glyphicon-eye-open\"></i> 217</span> <a class=\"comment\" href=\"##comment\" title=\"评论\" target=\"_blank\"><i class=\"glyphicon glyphicon-comment\"></i> 4</a>\n" +
+                              "                    <span class=\"views\"><i class=\"glyphicon glyphicon-eye-open\"></i>"+date[i].watchCount+"</span> <span class=\"comment\"  title=\"评论\" target=\"_blank\"><i class=\"glyphicon glyphicon-comment\"></i>"+date[i].postId+"</span>\n" +
                               "                </p>\n"+date[i].description+"</article>";
                       }
                       $("#articleid").html(articleDiv);
@@ -344,32 +344,50 @@
 
           $("#spend").click(function () {
 
-              $.ajax({
-                  url : "<%=path%>/post" ,
-                  type : "post" ,
-                  data : {action : "addpost" ,titeid : $("#titeid").val() , postContent : editor.txt.html() } ,
-                  dataType : "json" ,
-                  success : function(data){
-                      alert(data.message=="操作成功");
-                      if(data.code==401){
-                          alert("未登录,请登录后再操作");
-                          window.location.href="<%=path%>/user?action=toLogin";
-                      }
-                      else if(data.message=="操作成功"){
-                          $("#titeid").val("");
-                          editor.txt.clear();
-                          postlist();
-                      }
-                      else if(data.message=="操作失败"){
-                         alert("发帖失败");
+              var boolean = true;
+
+              if($("#titeid").val()=="" && $("#titeid").val().length==0){
+                  alert("帖子标题不能为空");
+                  boolean= false;
+              }
+              else if($("#titeid").val().length>35){
+                  alert("帖子标题长度太长,长度不能超过35个字");
+                  boolean= false;
+              }
+              else if(editor.txt.html()=="<p><br></p>"){
+                  alert("帖子内容不能为空");
+                  boolean= false;
+              }
+              else if(boolean){
+                  $.ajax({
+                      url : "<%=path%>/post" ,
+                      type : "post" ,
+                      data : {action : "addpost" ,titeid : $("#titeid").val() , postContent : editor.txt.html() } ,
+                      dataType : "json" ,
+                      success : function(data){
+                          // alert(data.message=="操作成功");
+                          if(data.code==401){
+                              alert("未登录,请登录后再操作");
+                              window.location.href="<%=path%>/user?action=toLogin";
+                          }
+                          else if(data.message=="操作成功"){
+                              $("#titeid").val("");
+                              editor.txt.clear();
+                              postlist();
+                          }
+                          else if(data.message=="操作失败"){
+                              alert("发帖失败");
+                          }
+
+                      },
+                      error : function(){
+                          alert("服务器加载时出错");
                       }
 
-                  },
-                  error : function(){
-                     alert("服务器加载时出错");
-                  }
+                  });
 
-              });
+              }
+
 
           });
 
