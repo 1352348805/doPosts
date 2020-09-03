@@ -33,12 +33,12 @@ public class UserLogFilter implements Filter {
         UserLogFilter.RequestUserInfo userInfo = new UserLogFilter.RequestUserInfo();
 
         User user = (User)request.getSession().getAttribute("user");
-        userInfo.setId(user==null?0:user.getUserId());
-        userInfo.setIp(request.getRemoteAddr());
-        userInfo.setRequestUri(request.getRequestURI());
-        userInfo.setReferer(request.getHeader("Referer"));
-        userInfo.setRequestParameterMap(request.getParameterMap());
-        userInfo.setUserAgent(request.getHeader("User-Agent"));
+        userInfo.setId(user==null?0:user.getUserId())
+                .setIp(request.getRemoteAddr())
+                .setRequestUri(request.getRequestURI())
+                .setReferer(request.getHeader("Referer"))
+                .setRequestParameterMap(request.getParameterMap())
+                .setUserAgent(request.getHeader("User-Agent"));
         logger.info("记录用户操作日志:" + JSON.toJSONString(userInfo));
 
         filterChain.doFilter(request,response);
@@ -67,48 +67,54 @@ public class UserLogFilter implements Filter {
             return id;
         }
 
-        public void setId(Integer id) {
+        public RequestUserInfo setId(Integer id) {
             this.id = id;
+            return this;
         }
 
-        private String getIp() {
+        public String getIp() {
             return ip;
         }
 
-        private void setIp(String ip) {
+        public RequestUserInfo setIp(String ip) {
             this.ip = ip;
+            return this;
         }
 
         public String getRequestUri() {
             return requestUri;
         }
 
-        public void setRequestUri(String requestUri) {
+        public RequestUserInfo setRequestUri(String requestUri) {
             this.requestUri = requestUri;
+            return this;
         }
 
         public Map<String, String[]> getRequestParameterMap() {
             return requestParameterMap;
         }
 
-        public void setRequestParameterMap(Map<String, String[]> requestParameterMap) {
+        public RequestUserInfo setRequestParameterMap(Map<String, String[]> requestParameterMap) {
             this.requestParameterMap = requestParameterMap;
+            return this;
         }
 
         public String getReferer() {
             return referer;
         }
 
-        public void setReferer(String referer) {
+        public RequestUserInfo setReferer(String referer) {
             this.referer = referer;
+            return this;
         }
 
         public String getUserAgent() {
             return userAgent;
         }
 
-        public void setUserAgent(String userAgent) {
+        public RequestUserInfo setUserAgent(String userAgent) {
             this.userAgent = userAgent;
+            return this;
         }
     }
 }
