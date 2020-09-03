@@ -2,6 +2,7 @@ package com.doposts.servlet;
 
 import com.alibaba.druid.sql.dialect.sqlserver.visitor.MSSQLServerExportParameterVisitor;
 import com.doposts.entity.Floor;
+import com.doposts.entity.User;
 import com.doposts.service.impl.FloorServiceImpl;
 import com.doposts.service.impl.PostClassServiceImpl;
 import com.doposts.service.interfaces.FloorService;
@@ -42,22 +43,30 @@ public class FloorServlet extends AbstractServlet{
      */
     public  Object  insertFloor(HttpServletRequest request,HttpServletResponse response){
         String postid = request.getParameter("postid");
-        System.out.println("inserFloor:"+postid);
+        Object object = request.getSession().getAttribute("user");
+        if(object==null){
+            return new CommonResult().unauthorized("未登录");
+        }
+        User user = (User)object;
         int floorCountByPostId = floorService.getFloorCountByPostId(Integer.parseInt(postid));
 
         Floor floor = new Floor();
         floor.setPostId(Integer.valueOf(postid));
         floor.setPostFloor(floorCountByPostId+1);
-        floor.setCreateUserId(4);
+        floor.setCreateUserId(user.getUserId());
         floor.setPostContent(request.getParameter("replyContent"));
         floor.setSendDate(new Date());
+
         FloorWithReply floorWithReply = floorService.insertFloor(floor);
 
         if (floorWithReply != null){
             return new CommonResult().success(floorWithReply);
         }
+        else{
+            return new CommonResult().failed();
+        }
         //floorWithReply.setPostFloor();
-        return new CommonResult().failed();
+       // return new CommonResult().failed();
     }
 
 }

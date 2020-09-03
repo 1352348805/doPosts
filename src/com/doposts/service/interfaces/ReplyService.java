@@ -13,7 +13,7 @@ public interface ReplyService {
     /**
      *   添加回复正文
      * @param reply 回复数据
-     * @return 受影响的行数
+     * @return 返回id
      */
     Integer insertReple(Reply reply);
 

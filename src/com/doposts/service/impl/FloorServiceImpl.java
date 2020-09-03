@@ -32,7 +32,7 @@ public class FloorServiceImpl  implements FloorService {
         Page<FloorWithReply> page=new Page<>();
         page.setCurrPageNo(pageIndex);
         page.setPageSize(pageSize);
-        page.setTotalCount(PostItDatabase.FLOOR_DAO.getMaxFloorByPostId(1));
+        page.setTotalCount(PostItDatabase.FLOOR_DAO.getFloorCountByPostId(postId));
         //创建一个加强类
         SelectAllPostAndFloor selectAllPostAndFloor=new SelectAllPostAndFloor();
         //拿到数据库返回楼层的数据

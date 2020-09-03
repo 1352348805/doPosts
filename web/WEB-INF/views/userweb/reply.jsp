@@ -1,3 +1,4 @@
+<%@ page import="com.alibaba.fastjson.JSON" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -12,11 +13,9 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <link rel="stylesheet" href="<%=path%>/static/layuiadmin/layui/css/layui.css" media="all"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/common.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/fontawesome-all.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/style.login.css" type="text/css"
           media="all"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/default.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/search-form.css">
     <link rel="stylesheet"
           href="${pageContext.request.contextPath }/static/css/vendor/bootstrap.min.css">
@@ -35,7 +34,11 @@
     <script src="${pageContext.request.contextPath }/static/js/bootstrap.min.js"
             type="text/javascript" charset="utf-8"></script>
     <script src="${pageContext.request.contextPath }/static/js/bootbox.min.js"></script>
-
+    <script>
+        <c:if test="${user != null}">
+            var user = <%=JSON.toJSONString(session.getAttribute("user"))%>;
+        </c:if>
+    </script>
 </head>
 <body>
 
@@ -119,11 +122,11 @@
 </section>
 <!-- END: section -->
 
-<div style="height:100px;width: 1170px;border:rgb(225 226 230) solid 1px;margin: 0 auto;">
-    <h1 style="margin: 0px">${requestScope.post.postName}</h1>
+<div style="height: 100px;width: 1170px;border:rgb(225 226 230) solid 1px;margin: 0 auto;">
+    <div style="padding: 20px"><h1 style="margin: 0px;">${requestScope.post.postName}</h1></div>
 </div>
 
-<div style="height:200px;width: 1170px;border:rgb(225 226 230) solid 1px;margin: 0 auto;">
+<div style="width: 1170px;border:rgb(225 226 230) solid 1px;margin: 0 auto;">
     <div class="gd" style=" float: left; display: inline-block; background: rgb(251,251,253);width: 130px; height:198px; padding: 20px">
         <ul style="width: 130px; height: 170px">
             <li>
@@ -158,12 +161,11 @@
             </div>
         </div>
     </div>
-
-
 </div>
+
 <section id="next-section" class="probootstrap-section">
     <div class="container">
-        <c:forEach items="${floor}" var="floor">
+        <c:forEach items="${floor}" var="item">
             <div class="row bar wyggd" id="sx" style="border:rgb(225 226 230) solid 1px ; border-top: none;">
                 <div class='col-md-12 col-sm-6 probootstrap-animate fadeInUp probootstrap-animated'
                      style="padding: 0px 0px 0px 0px; height: 100%;display: inline-block;width: 100%;height: 100% ">
@@ -178,7 +180,7 @@
                             </li>
                             </br>
                             <li>
-                                <a class='hint info-left' href='#' title='发帖人'><i class='fa fa-user'>${floor.userName}</i></a>
+                                <a class='hint info-left' href='#' title='发帖人'><i class='fa fa-user'>${item.userName}</i></a>
                             </li>
                         </ul>
                     </div>
@@ -187,10 +189,10 @@
                             <div style="padding: 20px 20px 0px 0px ">
                         <span class='clearfix like'>
   				<a class='hint info-right date' href='#' title='发帖时间' style="margin: 0px 0px 0px 0px">
-                    <i class='fa fa-clock-o'>发帖时间&nbsp;:&nbsp;${floor.sendDate}</i>
+                    <i class='fa fa-clock-o'>发帖时间&nbsp;:&nbsp;${item.sendDate}</i>
                 </a>
   				</span>
-                                <div style="margin: 20px;padding-bottom: 50px;">${floor.postContent}</div>
+                                <div style="margin: 20px;padding-bottom: 50px;">${item.postContent}</div>
 
                             </div>
                             <div style=" float: right;  width: 240px; height: 20px;margin: 10px">
@@ -206,12 +208,12 @@
                                     <span class="tail-info">来自
                                      <a href="#">Android客户端</a>
                                  </span>
-                                    <span class="tail-info">${floor.postFloor}楼</span>&nbsp;
+                                    <span class="tail-info" >${item.postFloor}楼</span>&nbsp;
                                 </div>
                             </div>
                             <div style=" display: none;  border: rgb(240 241 242) solid 1px;height:100%; width: 650px; background : rgb(247 248 250); padding: 4px 15px 14px 15px">
-                                <ul style="margin: 0px 0px 0px 0px ">
-                                    <c:forEach items="${floor.replyList}" var="replys">
+                                <ul style="margin: 0px 0px 0px 0px " replyView="${item.floorId}">
+                                    <c:forEach items="${item.replyList}" var="replys">
                                         <li style=" height: 45px;">
                                             <a href=""
                                                style=" width: 32px; height: 32px;display: inline-block; float: left;margin: 10px 10px 0px 0px">
@@ -223,27 +225,28 @@
                                                 <span>${replys.replyContent}</span>
                                                 <div style=" float: right;padding: 10px 0px 0px 0px ">
                                                     <span>${replys.replyDate}</span>
-                                                    <a href="" onclick="">回复</a>
+                                                    <a href="" onclick="replyUser(this, ${item.replyUserId}, ${item.floorId})">回复</a>
                                                 </div>
                                             </div>
                                         </li>
                                     </c:forEach>
-                                    <li style="height: 45px">
-                                        <div class="wysyg"
-                                             style="float: right; padding: 4px 8px 4px 8px; border: 1px solid rgb(240, 241, 242); background:#FFFFFF">
-                                            <a href="javascript:;" style="color: #1a1919"
-                                               onclick="conceal(this)">我也说一句</a>
-                                        </div>
-                                    </li>
+<li style="height: 45px">
+<div class="wysyg"
+style="float: right; padding: 4px 8px 4px 8px; border: 1px solid rgb(240, 241, 242); background:#FFFFFF">
+<a href="javascript:;" style="color: #1a1919"
+onclick="conceal(this)">我也说一句</a>
+</div>
+</li>
                                 </ul>
                                 <div style="display: none; ">
-
-                                    <div style="margin: 10px">
-                                        <textarea style="width: 100%; height: 100px"></textarea>
+                                    <div class="layui-form-item layui-form-text">
+                                        <div class="layui-input-block">
+                                            <textarea name="desc" placeholder="请输入内容" id="demo" class="layui-textarea" floorId="${item.floorId}"></textarea>
+                                        </div>
                                     </div>
-                                    <biv style="margin: 0px 0px 0px 570px">
-                                        <input type="button" name="submit" value="发表">
-                                    </biv>
+                                    <div style="margin: 0px 0px 0px 570px">
+                                        <input type="button" onclick="replyOfFloor(this,${item.postFloor})"  id="submits" value="发表"/>
+                                    </div>
                                 </div>
 
                             </div>
@@ -380,12 +383,10 @@
 </footer>
 <!-- END: footer -->
 <input type="hidden" id="path" value="<%=path%>"/>
-<script src="${pageContext.request.contextPath }/static/js/scripts.min.js"></script>
-<script src="${pageContext.request.contextPath }/static/js/main.min.js"></script>
-<script src="${pageContext.request.contextPath }/static/js/custom.js"></script>
-<script src="${pageContext.request.contextPath }/static/js/js.nav.js"></script>
-<script src="${pageContext.request.contextPath }/static/js/canva_moving_effect.js"></script>
-<script src="${pageContext.request.contextPath }/static/js/jquery-form.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/custom.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/js.nav.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/canva_moving_effect.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/jquery-form.js"></script>
 <script type="text/javascript"
         src="${pageContext.request.contextPath }/static/wangEditor-3.1.1/release/wangEditor.js"></script>
 <script type="text/javascript">
@@ -461,10 +462,13 @@
             }
         });
     });
+
+
+
 </script>
 <!-- //Jquery -->
-<script type="text/javascript">
 
+<script type="text/javascript">
     function ShowOrHideReply(obj) {
         $obj = $(obj);
         $reply = $obj.parent().parent().parent().next();
@@ -499,6 +503,53 @@
     // })
 
 
+    function replyOfFloor(obj, floorId) {
+      if(typeof(user) == "undefined"){
+          if(confirm("您未登录要跳转到登录页面吗！")){
+              window.location.href="<%=path%>/user?action=toLogin";
+          }
+          return;
+      }
+      var replyContent = $(obj).parent().parent().children().first().children().children().val();
+      var floorId = $(obj).parent().parent().children().first().children().children().attr("floorid");
+      var replyView = $("[replyview='"+floorId+"']");
+        $.post("<%=path%>/reply",{
+            "action": "ReplyAndReply",
+            "floorid": floorId,
+            "replyContent": replyContent,
+            "replyUserId": user.userId,
+        },function (data) {
+            if(data.code == 200){
+                let html = replyView.html();
+                let addHtml = "<li style=\" height: 45px;\">\n" +
+                    "<a href=\"\"\n" +
+                    "style=\" width: 32px; height: 32px;display: inline-block; float: left;margin: 10px 10px 0px 0px\">\n" +
+                    "<img src=\"${pageContext.request.contextPath}/static/images/hero_bg_2.jpg\"\n" +
+                    "style=\"border: silver 1px solid; width: 32px; height: 32px;\">\n" +
+                    "</a>\n" +
+                    "<div style=\"display: inline-block; margin-top: 10px;width: 575px \">\n" +
+                    "<a href=\"\">盖亚:</a>\n" +
+                    "<span>"+replyContent+"</span>\n" +
+                    "<div style=\" float: right;padding: 10px 0px 0px 0px \">\n" +
+                    "<span>"+data.data+"</span>\n" +
+                    "<a href=\"\" onclick=\"\">回复</a>\n" +
+                    "</div>\n" +
+                    "</div>\n" +
+                    "</li>";
+                let IAlsoSaidSomething = "<li style=\"height: 45px\">\n" +
+                    "<div class=\"wysyg\" style=\"float: right; padding: 4px 8px 4px 8px; border: 1px solid rgb(240, 241, 242); background:#FFFFFF\">\n" +
+                    "<a href=\"javascript:;\" style=\"color: #1a1919\" onclick=\"conceal(this)\">我也说一句</a>\n" +
+                    "</div>\n" +
+                    "</li>";
+                html = html.substring(0, html.indexOf(IAlsoSaidSomething));
+                replyView.html(html+addHtml+IAlsoSaidSomething);
+                $(obj).parent().parent().children().first().children().children().val("");
+            }else{
+                alert("失败");
+            }
+        },"json");
+    }
+
     $("#spend").click(function () {
         $.ajax({
             url: "<%=path%>/floor",
@@ -507,10 +558,15 @@
             data: {
                 action: "insertFloor",
                 postid: ${postid},
-                replyContent: editor.txt.html()
+                replyContent: editor.txt.html(),
             },
             success: function (jsonStr) {
-                if (jsonStr.code === 200) {
+                alert("成功！！！")
+                if(jsonStr.code==401){
+                    alert("未登录,请登录后再操作");
+                    window.location.href="<%=path%>/user?action=toLogin";
+                }
+                else if (jsonStr.message == "操作成功") {
                     let data = jsonStr.data;
                     let html = "<div class=\"row bar wyggd\" id=\"sx\" style=\"border:rgb(225 226 230) solid 1px ; border-bottom: none; width: 1168px; height: 100%; margin: 0px; 0px 0px 0px;border-bottom :1px solid rgb(240, 241, 242) \">\n" +
                         "       \t<div class=\"col-md-12 col-sm-6 probootstrap-animate fadeInUp probootstrap-animated\" style=\"padding: 0px 0px 0px 0px; height: 100%;display: inline-block;\">\n" +
@@ -567,7 +623,7 @@
                         "                                    <textarea style=\"width: 100%; height: 100px\"></textarea>\n" +
                         "                                </div>\n" +
                         "                                <biv style=\"margin: 0px 0px 0px 570px\">\n" +
-                        "                                <input type=\"button\" name=\"submit\" value=\"发表\">\n" +
+                        "                                <input type=\"button\" onclick=\"replyOfFloor("+ data.floorId +")\" name=\"submit\" value=\"发表\">\n" +
                         "                                </biv>\n" +
                         "                            </div>\n" +
                         "\n" +
@@ -579,14 +635,19 @@
                     $("#sx>div").last().append(html);
                     editor.txt.clear();
                 }
+                else if(data.message=="操作失败"){
+                    alert("回复失败");
+                }
             }
         });
     });
 
+
 </script>
+
+
 </body>
 <script>
-
     var hg;
     var em;
     $(".hf").click(function () {
@@ -594,11 +655,8 @@
         hg = $(this).parent().parent().parent().height();
         em = $(this).parent().parent().parent().prev();
     });
-
-
     $(".wysyg").click(function () {
         em.css("height", "" + (hg + 170) + "px");
     });
-
 </script>
 </html>
