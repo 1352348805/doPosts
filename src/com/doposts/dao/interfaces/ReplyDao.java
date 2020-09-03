@@ -2,6 +2,7 @@ package com.doposts.dao.interfaces;
 
 import com.doposts.entity.Floor;
 import com.doposts.entity.Reply;
+import com.doposts.vo.SuperReply;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ public interface ReplyDao {
      * @param floorId 楼层ID
      * @return 回复信息
      */
-   List<Reply> getReplyListById(Integer floorId);
+   List<SuperReply> getReplyListById(Integer floorId);
 
     /**
      *   评论回复

@@ -7,6 +7,7 @@ import com.doposts.dao.interfaces.ReplyDao;
 import com.doposts.entity.Floor;
 import com.doposts.entity.Post;
 import com.doposts.entity.Reply;
+import com.doposts.vo.SuperReply;
 import com.dxhualuo.database.handler.base.SuperCrudHandler;
 import com.dxhualuo.database.handler.interfaces.DatabaseCrud;
 import com.dxhualuo.database.handler.interfaces.SuperCrud;
@@ -35,14 +36,15 @@ public class ReplyDaoImpl implements ReplyDao {
      * @return 回复信息
      */
     @Override
-    public List<Reply> getReplyListById(Integer floorId) {
-        Reply reply = new Reply();
-        reply.setFloorId(floorId);
-        try {
-            return crud.select(Reply.class, reply);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public List<SuperReply> getReplyListById(Integer floorId) {
+//        Reply reply = new Reply();
+//        reply.setFloorId(floorId);
+//        try {
+//            return crud.select(Reply.class, reply);
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+        return null;
     }
 
     /**

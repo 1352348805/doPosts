@@ -126,7 +126,7 @@ public class UserServlet extends AbstractServlet{
 
         SelectAllPostAndFloor id = floorService.getFloorById(postid,page.getCurrPageNo(),page.getPageSize());
 
-        SuperPost superPost= postService.getPostById(postid);
+        SuperPost superPost= postService.getSuperPostById(postid);
        List<FloorWithReply> floorWithReplies= id.getFloor();
         request.setAttribute("post",superPost);
         request.setAttribute("page",page);

@@ -31,13 +31,13 @@ public class FloorWithReply extends Floor {
     /**
      * 回复列表的所有数据
      */
-    List<Reply> replyList;
+    List<SuperReply>  replyList;
 
-    public List<Reply> getReplyList() {
+    public List<SuperReply> getReplyList() {
         return replyList;
     }
 
-    public void setReplyList(List<Reply> replyList) {
+    public void setReplyList(List<SuperReply> replyList) {
         this.replyList = replyList;
     }
 

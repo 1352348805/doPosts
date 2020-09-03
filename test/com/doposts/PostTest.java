@@ -35,12 +35,12 @@ public class PostTest {
              });
          });
      }
-     @Test
-     public void  f2(){
-         postService=new PostServiceImpl();
-         Post postById = postService.getPostById(2);
-         System.out.println(postById);
-     }
+//     @Test
+//     public void  f2(){
+//         postService=new PostServiceImpl();
+//         Post postById = postService.getPostById(2);
+//         System.out.println(postById);
+//     }
      @Test
     public  void f3(){
          FloorService floorService=new FloorServiceImpl();

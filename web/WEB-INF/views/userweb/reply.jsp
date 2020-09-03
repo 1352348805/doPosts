@@ -133,7 +133,7 @@
                 <div>
                     <c:choose>
                         <c:when test="${false}">
-
+                            <img src="${pageContext.request.contextPath }/static/images/9527.png" style="width:80px ;height:80px;border: silver solid 1px; ">
                         </c:when>
                         <c:otherwise>
                             <img src="${pageContext.request.contextPath }/static/images/user_default_icon.png" style="width:80px ;height:80px;border: silver solid 1px; ">
@@ -144,7 +144,7 @@
             </li>
             <br>
             <li>
-                <a class="hint info-left" href="#" title="发帖人"><i class="fa fa-user">${post.createUserId}</i></a>
+                <a class="hint info-left" href="#" title="发帖人"><i class="fa fa-user">${post.userName}</i></a>
             </li>
         </ul>
     </div>
@@ -229,7 +229,7 @@
                                                      style="border: silver 1px solid; width: 32px; height: 32px;">
                                             </a>
                                             <div style="display: inline-block; margin-top: 10px;width: 575px ">
-                                                <a href="">盖亚:</a>
+                                                <a href="">${replys.replyUserId}:</a>
                                                 <span>${replys.replyContent}</span>
                                                 <div style=" float: right;padding: 10px 0px 0px 0px ">
                                                     <span>${replys.replyDate}</span>

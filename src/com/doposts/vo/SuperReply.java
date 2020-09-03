@@ -1,13 +1,13 @@
 package com.doposts.vo;
 
-import com.doposts.entity.Post;
+import com.doposts.entity.Reply;
 import com.dxhualuo.database.annotation.FieldMapping;
 
 /**
  * @author xiao yao
- * @date 2020/9/3 15:05
+ * @date 2020/9/3 15:56
  */
-public class SuperPost extends Post {
+public class SuperReply  extends Reply {
 
     /**
      * 用户名字
@@ -25,9 +25,8 @@ public class SuperPost extends Post {
 
     @Override
     public String toString() {
-        return "SuperPost{" +
+        return "SuperReply{" +
                 "userName='" + userName + '\'' +
                 '}';
     }
-
 }
