@@ -116,14 +116,7 @@ public class PostServiceImpl  implements PostService {
      */
     @Override
     public void postReplyNumber(Integer postId) {
-
-        try {
-             PostItDatabase.getCRUD().executeUpdate("UPDATE `post` SET  `PostReplyCount`=`PostReplyCount`+1  WHERE `postId`=?",postId);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
-
+        PostItDatabase.POST_DAO.addPostReplyConut(postId);
     }
 
 
@@ -136,12 +129,6 @@ public class PostServiceImpl  implements PostService {
      */
     @Override
     public void postViewNumber(Integer postId) {
-        try {
-            PostItDatabase.getCRUD().executeUpdate("UPDATE `post` SET  `watchCount`=`watchCount`+1  WHERE `postId`=?",postId);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
-
+        PostItDatabase.POST_DAO.addPostWatchCount(postId);
     }
 }
