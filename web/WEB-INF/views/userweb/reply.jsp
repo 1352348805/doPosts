@@ -163,9 +163,8 @@
             </div>
             <div style=" float: right;  width: 240px; height: 20px;margin: 10px">
                 <div class="hf" style="float: right">
-                    <span><a href="javascript:;" onclick="ShowOrHideReply(this)">回复</a>&nbsp;</span>
+                    <span><a href="javascript:;" onclick="window.scrollTo(0,document.body.scrollHeight)">回复</a>&nbsp;</span>
                 </div>
-
             </div>
         </div>
     </div>
@@ -205,7 +204,7 @@
                             </div>
                             <div style=" float: right;  width: 240px; height: 20px;margin: 10px">
                                 <div class="hf" style="float: right">
-                                    <span><a href="javascript:;" onclick="ShowOrHideReply(this)">回复</a>&nbsp;</span>
+                                    <span><a href="javascript:;" floor="${item.postFloor}" onclick="ShowOrHideReply(this)">回复</a>&nbsp;</span>
                                 </div>
 
                                 <div style=" float: right; ">
@@ -554,12 +553,12 @@ onclick="conceal(this)">我也说一句</a>
                     "<img src=\"${pageContext.request.contextPath}/static/images/hero_bg_2.jpg\"\n" +
                     "style=\"border: silver 1px solid; width: 32px; height: 32px;\">\n" +
                     "</a>\n" +
-                    "<div style=\"display: inline-block; margin-top: 10px;width: 575px \">\n" +
+                    "<div style=\"display: inline-block; margin-top: 10px;width: 575px\" replyuserid=\""+user.userId+"\">\n" +
                     "<a href=\"\">"+user.userName+":</a>\n" +
                     "<span>"+replyContent+"</span>\n" +
                     "<div style=\" float: right;padding: 10px 0px 0px 0px \">\n" +
                     "<span>"+data.data.replyDate+"</span>\n" +
-                    "<a href=\"\" onclick=\"\">回复</a>\n" +
+                    "<a href=\"javascript:;\" onclick=\"replyUsermessage(this, "+user.userId+", '"+user.userName+"')\">回复</a>\n" +
                     "</div>\n" +
                     "</div>\n" +
                     "</li>";
@@ -668,11 +667,7 @@ onclick="conceal(this)">我也说一句</a>
             }
         });
     });
-
-
 </script>
-
-
 </body>
 <script>
     var hg;
@@ -685,5 +680,7 @@ onclick="conceal(this)">我也说一句</a>
     $(".wysyg").click(function () {
         em.css("height", "" + (hg + 170) + "px");
     });
+    <c:forEach items="${floor}" var="item"><c:if test="${item.replyList.size() > 0}">$("[floor='${item.postFloor}']").get(0).click();console.log("第${item.postFloor}楼有回复，回复数据已展开！");
+    </c:if></c:forEach>
 </script>
 </html>
