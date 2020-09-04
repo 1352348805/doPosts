@@ -15,6 +15,9 @@ public class SuperReply  extends Reply {
     @FieldMapping("replyUserName")
     private String userName;
 
+    @FieldMapping("replyFavicon")
+    private String favicon;
+
     public String getUserName() {
         return userName;
     }
