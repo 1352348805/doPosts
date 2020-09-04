@@ -40,7 +40,8 @@ public class ReplyDaoImpl implements ReplyDao {
         try {
             return crud.executeQueryToBeanList("SELECT\n" +
                     "\treply.*, \n" +
-                    "\t`user`.userName AS replyUserName\n" +
+                    "\t`user`.userName AS replyUserName\n," +
+                    "\t`user`.favicon AS replyFavicon\n" +
                     "FROM\n" +
                     "\treply\n" +
                     "\tLEFT JOIN\n" +
