@@ -155,7 +155,7 @@
                 <div>
                     <c:choose>
                         <c:when test="${post.favicon != ''}">
-                            <img src="${pageContext.request.contextPath }/static/images/9527.png" style="width:80px ;height:80px;border: silver solid 1px; ">
+                            <img src="${pageContext.request.contextPath }/${post.favicon}" style="width:80px ;height:80px;border: silver solid 1px; ">
                         </c:when>
                         <c:otherwise>
                             <img src="${pageContext.request.contextPath }/static/images/user_default_icon.png" style="width:80px ;height:80px;border: silver solid 1px; ">
@@ -203,8 +203,14 @@
                         <ul style="width: 130px; height: 170px">
                             <li>
                                 <div>
-                                    <img src="<%=path%>/static/images/9527.jpg"
-                                         style="width:80px ;height:80px;border: silver solid 1px; ">
+                                    <c:choose>
+                                            <c:when test="${item.favicon != null}">
+                                            <img src="${pageContext.request.contextPath }/${item.favicon}" style="width:80px ;height:80px;border: silver solid 1px; ">
+                                        </c:when>
+                                        <c:otherwise>
+                                            <img src="${pageContext.request.contextPath }/static/images/user_default_icon.png" style="width:80px ;height:80px;border: silver solid 1px; ">
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                             </li>
                             </br>
@@ -629,9 +635,13 @@ onclick="conceal(this)">我也说一句</a>
                         "            <div class=\"gd\" style=\" float: left; display: inline-block; background: rgb(251,251,253);width: 130px; height:198px; padding: 20px\">\n" +
                         "                <ul style=\"width: 130px; height: 170px\">\n" +
                         "                    <li>\n" +
-                        "                        <div>\n" +
-                        "                            <img src=\"/doPosts/static/images/9527.jpg\" style=\"width:80px ;height:80px;border: silver solid 1px; \">\n" +
-                        "                        </div>\n" +
+                        "                        <div>\n";
+                    if (data.favicon != '') {
+                        html += "<img src=\"/doPosts/"+data.favicon+"\" style=\"width:80px ;height:80px;border: silver solid 1px; \">\n" +
+                    } else {
+                        html +="<img src=\"/doPosts/static/images/user_default_icon.png\" style=\"width:80px ;height:80px;border: silver solid 1px; \">\n";
+                    }
+                        html+="                        </div>\n" +
                         "                    </li>\n" +
                         "                    <br>\n" +
                         "                    <li>\n" +
