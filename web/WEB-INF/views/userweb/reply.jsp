@@ -65,7 +65,9 @@
         </li>
     </ul>
 </div>
+
 <!-- START: header -->
+
 <header role="banner" class="probootstrap-header">
     <div class="container-fluid">
 
@@ -85,6 +87,7 @@
             </div>
         </nav>
     </div>
+
 </header>
 <!-- END: header -->
 <style>
@@ -106,7 +109,7 @@
 </style>
 <!-- START: section -->
 <section class="probootstrap-intro"
-         style="background-image: url(${pageContext.request.contextPath }/static/images/1234.jpg);height: 400px; background-size: 100% 700px;"
+         style="background-image: url(${pageContext.request.contextPath }/static/images/head/gnydy.png);height: 200px; background-size: 100% 200px;"
          data-stellar-background-ratio="0.5">
     <div class="container-fluid">
         <div class="row">
@@ -501,13 +504,9 @@ onclick="conceal(this)">我也说一句</a>
     var  userName=null;
 
     function replyUsermessage(obj,replyUserId,userName){
-
-        $(".replyFloors").css('display','block');
-        $(obj).parent().parent().parent().parent().parent();
-       $(obj).parent().parent().parent().parent().parent().find(".layui-textarea").val("回复"+" "+userName+":");
-
-      alert("");
-
+        let parentNode = $(obj).parent().parent().parent().parent().parent();
+        parentNode.find(".replyFloors").css("display","block");
+        parentNode.find(".layui-textarea").val("回复"+" "+userName+":");
     }
 
     // $(function(){
@@ -535,6 +534,10 @@ onclick="conceal(this)">我也说一句</a>
         //获取回复文本内容
         var reply = $("[floorid='"+floorId+"']");
         var replyContent = reply.val();
+        if (replyContent == ""){
+            alert("回复信息不能为空！！！");
+            return;
+        }
         //获取插进那个楼ID
         var floorId = $(obj).parent().parent().children().first().children().children().attr("floorid");
         //获得对应的ul
@@ -576,8 +579,15 @@ onclick="conceal(this)">我也说一句</a>
         },"json");
     }
 
+
+
     //盖楼
     $("#spend").click(function () {
+
+        if(editor.txt.html()=="<p><br></p>"){
+            alert("帖子内容不能为空");
+          return;
+        }
         $.ajax({
             url: "<%=path%>/floor",
             method: "post",
