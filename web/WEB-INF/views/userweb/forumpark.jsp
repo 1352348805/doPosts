@@ -57,87 +57,7 @@
 	<div class="banner-menu">
 
 		<div class="shoes-grid">
-			<div class="wmuSlider example1 slide-grid">
-				<div class="wmuSliderWrapper">
-					<article style="position: absolute; width: 100%; opacity: 0;">
-						<div class="banner-matter">
-							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/youxi2.png" alt=" " />
-							<%--							<div class="banner-off">--%>
-							<%--								<h2>FLAT 50% 0FF</h2>--%>
-							<%--								<span>FOR ALL PURCHASE <b>VALUE</b></span>--%>
-							<%--								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>--%>
-							<%--								<a class="now-get" href="#">GET NOW</a>--%>
-							<%--							</div>--%>
-							<div class="clearfix"> </div>
-						</div>
-					</article>
-					<article style="position: absolute; width: 100%; opacity: 1;">
-						<div class="banner-matter">
-							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/dongman.png" alt=" " />
-							<%--							<div class="banner-off">--%>
-							<%--								<h2>FLAT 50% 0FF</h2>--%>
-							<%--								<span>FOR ALL PURCHASE <b>VALUE</b></span>--%>
-							<%--								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>--%>
-							<%--								<a class="now-get" href="#">GET NOW</a>--%>
-							<%--							</div>--%>
-							<div class="clearfix"> </div>
-						</div>
-					</article>
-					<article style="position: absolute; width: 100%; opacity: 2;">
-						<div class="banner-matter">
-							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/timg.png" alt=" " />
-							<%--							<div class="banner-off">--%>
-							<%--								<h2>FLAT 50% 0FF</h2>--%>
-							<%--								<span>FOR ALL PURCHASE <b>VALUE</b></span>--%>
-							<%--								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>--%>
-							<%--								<a class="now-get" href="#">GET NOW</a>--%>
-							<%--							</div>--%>
-							<div class="clearfix"> </div>
-						</div>
-					</article>
-					<article style="position: absolute; width: 100%; opacity: 3;">
-						<div class="banner-matter">
-							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/tiyu.png" alt=" " />
-							<%--							<div class="banner-off">--%>
-							<%--								<h2>FLAT 50% 0FF</h2>--%>
-							<%--								<span>FOR ALL PURCHASE <b>VALUE</b></span>--%>
-							<%--								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>--%>
-							<%--								<a class="now-get" href="#">GET NOW</a>--%>
-							<%--							</div>--%>
-							<div class="clearfix"> </div>
-						</div>
-					</article>
-					<article style="position: absolute; width: 100%; opacity: 4;">
-						<div class="banner-matter">
-							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/dianying.png" alt=" " />
-							<%--							<div class="banner-off">--%>
-							<%--								<h2>FLAT 50% 0FF</h2>--%>
-							<%--								<span>FOR ALL PURCHASE <b>VALUE</b></span>--%>
-							<%--								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>--%>
-							<%--								<a class="now-get" href="#">GET NOW</a>--%>
-							<%--							</div>--%>
-							<div class="clearfix"> </div>
-						</div>
-					</article>
-					<article style="position: absolute; width: 100%; opacity: 5;">
-						<div class="banner-matter">
-							<img class="img-responsive banner-bag" src="<%=path%>/static/images/forumpark/xiaoshuo.png" alt=" " />
-							<%--							<div class="banner-off">--%>
-							<%--								<h2>FLAT 50% 0FF</h2>--%>
-							<%--								<span>FOR ALL PURCHASE <b>VALUE</b></span>--%>
-							<%--								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>--%>
-							<%--								<a class="now-get" href="#">GET NOW</a>--%>
-							<%--							</div>--%>
-							<div class="clearfix"> </div>
-						</div>
-					</article>
-				</div>
-				<ul class="wmuSliderPagination">
-					<li><a href="#" class="">0</a></li>
-					<li><a href="#" class="">1</a></li>
-					<li><a href="#" class="">2</a></li>
-				</ul>
-			</div>
+
 
 			<script src="<%=path%>/static/js/forumpark/jquery.wmuSlider.js"></script>
 			<script>
@@ -232,7 +152,7 @@
 
 						bardiv+= "</p>\n" +
 								"\t\t\t\t\t</div>\n" +
-								"\t\t\t\t\t<a href=\"single.html\"><img class=\"img-responsive shoe-left categoryImg\" src=\""+date[i].imageUrl+"\" alt=\" \"></a>\n" +
+								"\t\t\t\t\t<a href=\"single.html\"><img class=\"img-responsive shoe-left categoryImg\" src=\"<%=path%>/"+date[i].imageUrl+"\" alt=\" \"></a>\n" +
 								"\t\t\t\t\t<div class=\"clearfix\"> </div>\n" +
 								"\t\t\t\t</div>\n" ;
 						if(++i<date.length){
@@ -251,7 +171,7 @@
 							}
 							bardiv+="</p>\n" +
 									"\t\t\t\t\t</div>\n" +
-									"\t\t\t\t\t<a href=\"single.html\"><img class=\"img-responsive shoe-left categoryImg\" src=\""+date[i].imageUrl+"\" alt=\" \"></a>\n" +
+									"\t\t\t\t\t<a href=\"single.html\"><img class=\"img-responsive shoe-left categoryImg\" src=\"<%=path%>/"+date[i].imageUrl+"\" alt=\" \"></a>\n" +
 									"\t\t\t\t\t<div class=\"clearfix\"> </div>\n" +
 									"\t\t\t\t</div>";
 						}
