@@ -123,7 +123,7 @@
     <div class="content-wrap" style="margin-left: 200px">
         <div class="content" style="margin-right: 450px">
             <div class="title">
-                <h3 style="line-height: 1.3">${postName}</h3>
+                <h3 style="line-height: 2.6;font-size: 28px;font-weight: 800;color: deeppink;">${postName}</h3>
             </div>
             <div  id="articleid"></div>
 <%--            <article class="excerpt excerpt-1">--%>
