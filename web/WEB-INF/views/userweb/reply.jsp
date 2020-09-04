@@ -154,8 +154,8 @@
             <li>
                 <div>
                     <c:choose>
-                        <c:when test="${false}">
-                            <img src="${pageContext.request.contextPath }/static/images/9527.png" style="width:80px ;height:80px;border: silver solid 1px; ">
+                        <c:when test="${post.favicon != ''}">
+                            <img src="${pageContext.request.contextPath }/${post.favicon}" style="width:80px ;height:80px;border: silver solid 1px; ">
                         </c:when>
                         <c:otherwise>
                             <img src="${pageContext.request.contextPath }/static/images/user_default_icon.png" style="width:80px ;height:80px;border: silver solid 1px; ">
@@ -203,8 +203,14 @@
                         <ul style="width: 130px; height: 170px">
                             <li>
                                 <div>
-                                    <img src="${pageContext.request.contextPath }/static/images/9527.jpg"
-                                         style="width:80px ;height:80px;border: silver solid 1px; ">
+                                    <c:choose>
+                                            <c:when test="${item.favicon != null}">
+                                            <img src="${pageContext.request.contextPath }/${item.favicon}" style="width:80px ;height:80px;border: silver solid 1px; ">
+                                        </c:when>
+                                        <c:otherwise>
+                                            <img src="${pageContext.request.contextPath }/static/images/user_default_icon.png" style="width:80px ;height:80px;border: silver solid 1px; ">
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                             </li>
                             </br>
@@ -246,7 +252,7 @@
                                         <li style=" height: 45px;"  >
                                             <a href=""
                                                style=" width: 32px; height: 32px;display: inline-block; float: left;margin: 10px 10px 0px 0px">
-                                                <img src="${pageContext.request.contextPath }/static/images/hero_bg_2.jpg"
+                                                <img src="${pageContext.request.contextPath }/static/images/38891f42b97e4bbdb4389d250422bd68.jpg"
                                                      style="border: silver 1px solid; width: 32px; height: 32px;">
                                             </a>
                                             <div style="display: inline-block; margin-top: 10px;width: 575px " replyUserId="${replys.replyUserId}">
@@ -565,6 +571,7 @@ onclick="conceal(this)">我也说一句</a>
             "action": "ReplyAndReply",
             "floorid": floorId,
             "replyContent": replyContent,
+            "repliedUserId": repliedUserId,
             "replyUserId": user.userId,
         },function (data) {
             if(data.code == 200){
@@ -628,9 +635,13 @@ onclick="conceal(this)">我也说一句</a>
                         "            <div class=\"gd\" style=\" float: left; display: inline-block; background: rgb(251,251,253);width: 130px; height:198px; padding: 20px\">\n" +
                         "                <ul style=\"width: 130px; height: 170px\">\n" +
                         "                    <li>\n" +
-                        "                        <div>\n" +
-                        "                            <img src=\"/doPosts/static/images/9527.jpg\" style=\"width:80px ;height:80px;border: silver solid 1px; \">\n" +
-                        "                        </div>\n" +
+                        "                        <div>\n";
+                    if (data.favicon != '') {
+                        html += "<img src=\"/doPosts/"+data.favicon+"\" style=\"width:80px ;height:80px;border: silver solid 1px; \">\n" +
+                    } else {
+                        html +="<img src=\"/doPosts/static/images/user_default_icon.png\" style=\"width:80px ;height:80px;border: silver solid 1px; \">\n";
+                    }
+                        html+="                        </div>\n" +
                         "                    </li>\n" +
                         "                    <br>\n" +
                         "                    <li>\n" +
