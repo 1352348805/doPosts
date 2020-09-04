@@ -124,7 +124,9 @@
             </c:when>
             <c:otherwise>
               <li style="color: #fff;">欢迎你: ${user.userName}</li>
+              <li style="color: #fff;"><a href="${pageContext.request.contextPath }/user?action=index">首页</a></li>
               <li style="color: #fff;"><a href="${pageContext.request.contextPath }/user?action=toUserCenter">个人中心</a></li>
+              <li style="color: #fff;"><a href="${pageContext.request.contextPath }/user?action=exit">退出</a></li>
             </c:otherwise>
           </c:choose>
         </ul>

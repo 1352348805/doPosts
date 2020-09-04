@@ -200,10 +200,60 @@ public class UserServlet extends AbstractServlet{
         return "userweb/user_center";
     }
 
+    /**
+     * 跳转用户中心修改用户信息页面
+     */
     public String toModifyUserInfo(HttpServletRequest request , HttpServletResponse response) {
         return "userweb/user_modify";
     }
 
+    /**
+     * 跳转用户中心修改密码页面
+     */
+    public String toModifyUserPwd(HttpServletRequest request , HttpServletResponse response) {
+        return "userweb/user_modify_pwd";
+    }
+
+    /**
+     * ajax验证密码
+     */
+    public CommonResult checkPwd(HttpServletRequest request , HttpServletResponse response) {
+        String oldPassword = request.getParameter("oldpassword");
+        User user = getUserBySession(request);
+        try {
+            if (oldPassword.equals(user.getUserPassword())) {
+                return new CommonResult().success(null);
+            }
+            return new CommonResult().failed("密码错误");
+        } catch (NullPointerException e) {
+            return new CommonResult().failed("未登录");
+        }
+    }
+
+    /**
+     * 用户修改密码
+     */
+    public CommonResult changePwd(HttpServletRequest request , HttpServletResponse response) {
+        String oldpassword = request.getParameter("oldpassword");
+        String newpassword = request.getParameter("newpassword");
+        User user = getUserBySession(request);
+        try {
+            if (user.getUserPassword().equals(oldpassword)) {
+                user.setUserPassword(newpassword);
+                boolean b = userService.updateUser(user);
+                if (b) {
+                    return new CommonResult().success(null);
+                }
+            }
+            return new CommonResult().failed("修改失败");
+        } catch (NullPointerException e) {
+            return new CommonResult().failed("未登录");
+        }
+    }
+
+    /**
+     * 修改用户信息
+     */
     public CommonResult modifyUserInfo(HttpServletRequest request , HttpServletResponse response) {
 
         DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -248,6 +298,19 @@ public class UserServlet extends AbstractServlet{
         return new CommonResult().success(null);
     }
 
+    /**
+     * 用户退出
+     */
+    public String exit(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        //清空session
+        request.getSession().invalidate();
+        response.sendRedirect(request.getContextPath() + "/user?action=toLogin");
+        return null;
+    }
+
+    /**
+     * 从session获取用户缓存
+     */
     private User getUserBySession(HttpServletRequest request) {
         Object obj = request.getSession().getAttribute("user");
         if (obj != null) {
