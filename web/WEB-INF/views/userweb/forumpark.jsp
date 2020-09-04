@@ -219,7 +219,7 @@
 						bardiv +="<div class=\" con-sed-grid\">\n" +
 								"\t\t\t\t\t<div style=\"float:right\" class=\"elit-grid\">\n" +
 								// "\t\t\t\t\t\t<h4>consectetur  elit</h4>\n" +
-								"\t\t\t\t\t\t<span style=\"margin-bottom: 20px;display: inline-block;\"><a href=\"<%=path%>/user?action=postListpage&secondId="+date[i].classId+"\">"+date[i].className+"</a></span>\n" +
+								"\t\t\t\t\t\t<span style=\"margin-bottom: 20px;display: inline-block;\"><a href=\"<%=path%>/user?action=postListpage&secondId="+date[i].classId+"&postname="+date[i].className+"\">"+date[i].className+"</a></span>\n" +
 								"\t\t\t\t\t\t<p>";
 						if(!(date[i].classDescribe === undefined)) {
 							if (date[i].classDescribe.length > 40) {
@@ -232,7 +232,7 @@
 
 						bardiv+= "</p>\n" +
 								"\t\t\t\t\t</div>\n" +
-								"\t\t\t\t\t<a href=\"single.html\"><img class=\"img-responsive shoe-left categoryImg\" src=\""+date[i].imageUrl+"\" alt=\" \"></a>\n" +
+								"\t\t\t\t\t<a href=\"<%=path%>/user?action=postListpage&secondId="+date[i].classId+"\"><img class=\"img-responsive shoe-left categoryImg\" src=\""+date[i].imageUrl+"\" alt=\" \"></a>\n" +
 								"\t\t\t\t\t<div class=\"clearfix\"> </div>\n" +
 								"\t\t\t\t</div>\n" ;
 						if(++i<date.length){
@@ -251,7 +251,7 @@
 							}
 							bardiv+="</p>\n" +
 									"\t\t\t\t\t</div>\n" +
-									"\t\t\t\t\t<a href=\"single.html\"><img class=\"img-responsive shoe-left categoryImg\" src=\""+date[i].imageUrl+"\" alt=\" \"></a>\n" +
+									"\t\t\t\t\t<a href=\"<%=path%>/user?action=postListpage&secondId="+date[i].classId+"\"><img class=\"img-responsive shoe-left categoryImg\" src=\""+date[i].imageUrl+"\" alt=\" \"></a>\n" +
 									"\t\t\t\t\t<div class=\"clearfix\"> </div>\n" +
 									"\t\t\t\t</div>";
 						}

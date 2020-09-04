@@ -188,6 +188,7 @@ public class UserServlet extends AbstractServlet{
     */
    public String postListpage(HttpServletRequest request , HttpServletResponse response){
        request.setAttribute("secondId",request.getParameter("secondId"));
+       request.setAttribute("postName",request.getParameter("postname"));
        return "userweb/post";
    }
 
