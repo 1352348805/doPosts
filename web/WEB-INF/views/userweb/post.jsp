@@ -21,7 +21,19 @@
     <link rel="stylesheet" type="text/css" href="<%=path%>/static/postStyle/css/style.css">
     <link rel="stylesheet" type="text/css" href="<%=path%>/static/postStyle/css/font-awesome.min.css">
     <link rel="apple-touch-icon-precomposed" href="<%=path%>/static/postStyle/images/icon.png">
-<%--    <link rel="shortcut icon" href="<%=path%>/static/postStyle/images/favicon.ico">--%>
+     <%--START 右边实用工具引用文件--%>
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/fontawesome-all.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/style.nav.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/styles-merged.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/custom.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/static/font-awesome/css/font-awesome.css">
+    <script type="text/javascript" src="${pageContext.request.contextPath }/static/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath }/static/js/jquery-1.11.0.min.js"></script>
+    <script src="${pageContext.request.contextPath }/static/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="${pageContext.request.contextPath }/static/js/bootbox.min.js"></script>
+    <%--END--%>
+
     <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
     <script src="<%=path%>/static/postStyle/js/nprogress.js"></script>
     <script src="<%=path%>/static/postStyle/js/jquery.lazyload.min.js"></script>
@@ -120,11 +132,31 @@
 <%--    </nav>--%>
 </header>
 <section class="container">
+
+    <div class="leftNav-item">
+        <ul>
+            <li>
+                <i class="fa fa-user-circle"></i>
+                <a href="${pageContext.request.contextPath }/user?action=toUserCenter" class="rota">个人中心</a>
+            </li>
+            <li title="回复">
+                <i class="fa fa-pencil-square-o"></i>
+                <a href="#send" class="rota">回复</a>
+            </li>
+            <li title="回到顶部" class="for-top" style="display: list-item;">
+                <i class="fa fa-arrow-up"></i>
+                <a href="#" class="rota" id="to_top">去顶部</a>
+            </li>
+        </ul>
+    </div>
+
     <div class="content-wrap" style="margin-left: 200px">
         <div class="content" style="margin-right: 450px">
             <div class="title">
                 <h3 style="line-height: 2.6;font-size: 28px;font-weight: 800;color: deeppink;">${postName}</h3>
             </div>
+
+
             <div  id="articleid"></div>
 <%--            <article class="excerpt excerpt-1">--%>
 <%--                <a class="focus" href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank">--%>
@@ -436,9 +468,30 @@
 
           });
 
-
-
       })
+</script>
+
+<script type="text/javascript">
+
+    $("#to_top").click(function () {
+        $('html,body').animate({ scrollTop: '0px' }, 1000);
+    })
+
+    // window.load= function(){
+    //     var oTop = document.getElementById("to_top");
+    //     var screenw = document.documentElement.clientWidth || document.body.clientWidth;
+    //     var screenh = document.documentElement.clientHeight || document.body.clientHeight;
+    //     oTop.style.left = screenw - oTop.offsetWidth +"px";
+    //     oTop.style.top = screenh - oTop.offsetHeight + "px";
+    //     window.onscroll = function(){
+    //         var scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
+    //         oTop.style.top = screenh - oTop.offsetHeight + scrolltop +"px";
+    //     }
+    //     oTop.onclick = function(){
+    //         document.documentElement.scrollTop = document.body.scrollTop =0;
+    //     }
+    // }
+
 </script>
 
 </body>

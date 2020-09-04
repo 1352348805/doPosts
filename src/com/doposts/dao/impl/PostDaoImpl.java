@@ -273,7 +273,7 @@ public class PostDaoImpl implements PostDao {
     @Override
     public Integer addPostWatchCount(Integer postId) {
         try {
-            return basicCrud.executeUpdate("UPDATE `post` SET  `PostReplyCount`=`PostReplyCount`+1  WHERE `postId`=?",postId);
+            return basicCrud.executeUpdate("UPDATE `post` SET  `watchCount`=`watchCount`+1  WHERE `postId`=?",postId);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
