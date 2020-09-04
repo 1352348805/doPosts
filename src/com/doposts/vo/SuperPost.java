@@ -15,6 +15,17 @@ public class SuperPost extends Post {
     @FieldMapping("createUserName")
     private String userName;
 
+    @FieldMapping("createFavicon")
+    private String favicon;
+
+    public String getFavicon() {
+        return favicon;
+    }
+
+    public void setFavicon(String favicon) {
+        this.favicon = favicon;
+    }
+
     public String getUserName() {
         return userName;
     }

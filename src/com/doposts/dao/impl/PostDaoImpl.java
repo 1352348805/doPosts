@@ -75,7 +75,8 @@ public class PostDaoImpl implements PostDao {
         try {
             return crud.executeQueryToBean("SELECT\n" +
                     "\tpost.*, \n" +
-                    "\t`user`.userName AS createUserName\n" +
+                    "\t`user`.userName AS createUserName\n," +
+                    "\t`user`.favicon AS createFavicon\n" +
                     "FROM\n" +
                     "\tpost\n" +
                     "\tLEFT JOIN\n" +
