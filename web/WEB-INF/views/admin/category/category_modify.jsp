@@ -102,7 +102,7 @@
                             <input onchange="uploadPic()" type="file" accept="undefined" name="file">
                             <%--                                <button type="button" class="layui-btn" id="test-upload-normal">上传图片</button>--%>
                             <div class="layui-upload-list">
-                                <img class="layui-upload-img" src="${postClassList[size-1].imageUrl}" id="test-upload-normal-img">
+                                <img class="layui-upload-img" src="<%=path%>/${postClassList[size-1].imageUrl}" id="test-upload-normal-img">
                                 <p id="test-upload-demoText"></p>
                             </div>
 
@@ -138,6 +138,8 @@
         var layer = layui.layer;
     });
 
+    var imgPath;
+
     function uploadPic() {
         // 上传设置
 
@@ -160,9 +162,8 @@
             success: function(data, status, xhr) {
 
                 // 图片显示地址
-
-                $("#test-upload-normal-img").attr("src", data.data[0]);
-
+                $("#test-upload-normal-img").attr("src", path + data.data[0]);
+                imgPath = data.data[0];
             }
 
         };
@@ -184,7 +185,7 @@
             classId : classId,
             className : className,
             classDescribe : classDescribe,
-            imageUrl : $("#test-upload-normal-img").attr("src")
+            imageUrl : imgPath
         }
         $.post(path + '/admin',data,function (result) {
             if (result.code == 200) {

@@ -44,10 +44,17 @@
                     <table class="layui-table" style="margin: 0px;">
                         <tbody>
                         <tr>
-                            <td>当前头像</td>
+                            <td>头像</td>
                             <td>
                                 <div class="layui-upload-list">
-                                    <img class="layui-upload-img" src="http://tb.himg.baidu.com/sys/portrait/item/tb.1.4104e3d4.WPDFxvSZQzvSfh4fxTGA-w?t=1453303238" id="test-upload-normal-img">
+                                    <c:choose>
+                                        <c:when test="${user.favicon!=null &&user.favicon!=''}">
+                                            <img class="layui-upload-img" src="${pageContext.request.contextPath }${user.favicon}" id="test-upload-normal-img">
+                                        </c:when>
+                                        <c:otherwise>
+                                            <img class="layui-upload-img" src="${pageContext.request.contextPath }/static/images/user_default_icon.png" id="test-upload-normal-img">
+                                        </c:otherwise>
+                                    </c:choose>
                                     <p id="test-upload-demoText"></p>
                                 </div>
                                 <div style="padding-left: 40%;"><input id="pic" onchange="selectPic(this)" type="file" accept="undefined" name="file"></div>
@@ -55,7 +62,7 @@
                         </tr>
                         <tr>
                             <td>昵称</td>
-                            <td><input type="text" value="${user.userName}"/></td>
+                            <td><input type="text" name="username" value="${user.userName}"/></td>
                         </tr>
                         <tr>
                             <td colspan="2">
@@ -87,6 +94,10 @@
 <script type="text/javascript" src="<%=path%>/static/js/jquery-form.js"></script>
 <script>
     var path = $("#path").val();
+    layui.use('layer', function(){
+        var layer = layui.layer;
+    });
+
     function selectPic(ths) {
         if (!/\.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/.test(ths.value)) {
             alert("图片类型必须是.gif,jpeg,jpg,png中的一种");
@@ -140,7 +151,13 @@
             // 请求成功时执行的回调函数
 
             success: function(data, status, xhr) {
-
+                if (data.code == 200) {
+                    layer.msg('修改成功!',{
+                        time : 1000
+                    },function () {
+                        location.href = path + '/user?action=toUserCenter';
+                    });
+                }
 
             }
 

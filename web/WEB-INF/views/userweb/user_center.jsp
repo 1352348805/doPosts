@@ -45,7 +45,14 @@
                     <tr>
                         <td>当前头像</td>
                         <td>
-                            <img id="hiphoto" src="http://tb.himg.baidu.com/sys/portrait/item/tb.1.4104e3d4.WPDFxvSZQzvSfh4fxTGA-w?t=1453303238">
+                            <c:choose>
+                                <c:when test="${user.favicon!=null &&user.favicon!=''}">
+                                    <img class="layui-upload-img" src="${pageContext.request.contextPath }${user.favicon}" id="test-upload-normal-img">
+                                </c:when>
+                                <c:otherwise>
+                                    <img class="layui-upload-img" src="${pageContext.request.contextPath }/static/images/user_default_icon.png" id="test-upload-normal-img">
+                                </c:otherwise>
+                            </c:choose>
                         </td>
                     </tr>
                     <tr>

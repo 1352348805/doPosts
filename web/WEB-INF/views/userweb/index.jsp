@@ -114,7 +114,7 @@
 
       <div class="mobile-menu-overlay"></div>
 
-      <nav role="navigation" class="probootstrap-nav hidden-xs">
+      <nav role="navigation" class="probootstrap-nav hidden-xs" style="padding-right: 60px;margin-right: 100px;float: right;">
 
         <ul class="probootstrap-main-nav">
           <c:choose>
@@ -123,7 +123,8 @@
               <li><a href="${pageContext.request.contextPath }/user?action=toRegister">注册</a></li>
             </c:when>
             <c:otherwise>
-              <li style="color: #fff">111wqdqwd我的我的请问</li>
+              <li style="color: #fff;">欢迎你: ${user.userName}</li>
+              <li style="color: #fff;"><a href="${pageContext.request.contextPath }/user?action=toUserCenter">个人中心</a></li>
             </c:otherwise>
           </c:choose>
         </ul>
