@@ -222,8 +222,8 @@
 								"\t\t\t\t\t\t<span style=\"margin-bottom: 20px;display: inline-block;\"><a href=\"<%=path%>/user?action=postListpage&secondId="+date[i].classId+"\">"+date[i].className+"</a></span>\n" +
 								"\t\t\t\t\t\t<p>";
 						if(!(date[i].classDescribe === undefined)) {
-							if (date[i].classDescribe.length > 15) {
-								bardiv += date[i].classDescribe.substring(0,15);
+							if (date[i].classDescribe.length > 40) {
+								bardiv += date[i].classDescribe.substring(0,40);
 								bardiv += "...";
 							} else {
 								bardiv += date[i].classDescribe;
@@ -232,7 +232,7 @@
 
 						bardiv+= "</p>\n" +
 								"\t\t\t\t\t</div>\n" +
-								"\t\t\t\t\t<a href=\"single.html\"><img class=\"img-responsive shoe-left categoryImg\" src=\"<%=path%>/"+date[i].imageUrl+"\" alt=\" \"></a>\n" +
+								"\t\t\t\t\t<a href=\"single.html\"><img class=\"img-responsive shoe-left categoryImg\" src=\""+date[i].imageUrl+"\" alt=\" \"></a>\n" +
 								"\t\t\t\t\t<div class=\"clearfix\"> </div>\n" +
 								"\t\t\t\t</div>\n" ;
 						if(++i<date.length){
@@ -242,8 +242,8 @@
 									"\t\t\t\t\t\t<span style=\"margin-bottom: 20px;display: inline-block;\"><a href=\"<%=path%>/user?action=postListpage&secondId="+date[i].classId+"\">"+date[i].className+"</a></span>\n" +
 									"\t\t\t\t\t\t<p>";
 							if(!(date[i].classDescribe === undefined)) {
-								if (date[i].classDescribe.length > 15) {
-									bardiv += date[i].classDescribe.substring(0,15);
+								if (date[i].classDescribe.length > 30) {
+									bardiv += date[i].classDescribe.substring(0,40);
 									bardiv += "...";
 								} else {
 									bardiv += date[i].classDescribe;
@@ -251,7 +251,7 @@
 							}
 							bardiv+="</p>\n" +
 									"\t\t\t\t\t</div>\n" +
-									"\t\t\t\t\t<a href=\"single.html\"><img class=\"img-responsive shoe-left categoryImg\" src=\"<%=path%>/"+date[i].imageUrl+"\" alt=\" \"></a>\n" +
+									"\t\t\t\t\t<a href=\"single.html\"><img class=\"img-responsive shoe-left categoryImg\" src=\""+date[i].imageUrl+"\" alt=\" \"></a>\n" +
 									"\t\t\t\t\t<div class=\"clearfix\"> </div>\n" +
 									"\t\t\t\t</div>";
 						}
