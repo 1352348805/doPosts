@@ -39,6 +39,19 @@
             var user = <%=JSON.toJSONString(session.getAttribute("user"))%>;
         </c:if>
     </script>
+    <style type="text/css">
+
+        .probootstrap-main-nav li{
+            margin: 0;
+            padding: 0 10px;
+            list-style: none;
+            display: inline;
+            font-size: 18px;
+        }
+        .probootstrap-main-nav li a{
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
 
@@ -67,16 +80,23 @@
 </div>
 
 <!-- START: header -->
-
-<header role="banner" class="probootstrap-header">
+<div style="padding-top: 0px;height: 200px; background: url('${pageContext.request.contextPath }/static/images/head/gnydy.png') no-repeat">
     <div class="container-fluid">
 
         <div class="mobile-menu-overlay"></div>
 
-        <nav role="navigation" class="probootstrap-nav hidden-xs">
+        <nav role="navigation" class="probootstrap-nav hidden-xs" style="padding-right: 60px;margin-right: 100px;float: right;">
             <ul class="probootstrap-main-nav">
-                <li><a href="${pageContext.request.contextPath }/user?action=toLogin">登录</a></li>
-                <li><a href="${pageContext.request.contextPath }/user?action=toRegister">注册</a></li>
+                <c:choose>
+                    <c:when test="${user == null}">
+                        <li><a href="${pageContext.request.contextPath }/user?action=toLogin" >登录</a></li>
+                        <li><a href="${pageContext.request.contextPath }/user?action=toRegister">注册</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li style="color: #fff;">欢迎你: ${user.userName}</li>
+                        <li style="color: #fff;"><a href="${pageContext.request.contextPath }/user?action=toUserCenter">个人中心</a></li>
+                    </c:otherwise>
+                </c:choose>
             </ul>
             <div class="extra-text visible-xs">
                 <ul class="social-buttons">
@@ -87,8 +107,7 @@
             </div>
         </nav>
     </div>
-
-</header>
+</div>
 <!-- END: header -->
 <style>
     .hint {
@@ -108,21 +127,21 @@
     }
 </style>
 <!-- START: section -->
-<section class="probootstrap-intro"
-         style="background-image: url(${pageContext.request.contextPath }/static/images/head/gnydy.png);height: 200px; background-size: 100% 200px;"
-         data-stellar-background-ratio="0.5">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-7 probootstrap-intro-text">
-                <h1 class="probootstrap-animate barName"></h1>
-                <div class="probootstrap-subtitle probootstrap-animate">
-                    <h2 class="barDescribe">希望您可以在小贴吧里面找到自己的快乐 <a href="#" target="_blank"></a></h2>
-                </div>
-            </div>
-        </div>
-    </div>
-    <a class="probootstrap-scroll-down js-next" href="#next-section">Scroll down <i class="icon-chevron-down"></i></a>
-</section>
+<%--<section class="probootstrap-intro"--%>
+<%--         style="background-image: url(${pageContext.request.contextPath }/static/images/head/gnydy.png);height: 200px; background-size: 100% 200px;"--%>
+<%--         data-stellar-background-ratio="0.5">--%>
+<%--    <div class="container-fluid">--%>
+<%--        <div class="row">--%>
+<%--            <div class="col-md-7 probootstrap-intro-text">--%>
+<%--                <h1 class="probootstrap-animate barName"></h1>--%>
+<%--                <div class="probootstrap-subtitle probootstrap-animate">--%>
+<%--                    <h2 class="barDescribe">希望您可以在小贴吧里面找到自己的快乐 <a href="#" target="_blank"></a></h2>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--    <a class="probootstrap-scroll-down js-next" href="#next-section">Scroll down <i class="icon-chevron-down"></i></a>--%>
+<%--</section>--%>
 <!-- END: section -->
 
 <div style="height: 100px;width: 1170px;border:rgb(225 226 230) solid 1px;margin: 0 auto;">
