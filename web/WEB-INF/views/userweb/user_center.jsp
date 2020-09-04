@@ -75,17 +75,7 @@
                 </table>
             </div>
         </div>
-        <div class="sub-cate" style="position: fixed;left: 24.3%;width: 13%;">
-            <div class=" top-nav rsidebar span_1_of_left">
-                <h3 class="cate">个人中心</h3>
-                <ul class="menu">
-                    <ul class="kid-menu ">
-                        <li><a href="${pageContext.request.contextPath}/user?action=toModifyUserInfo">修改个人信息</a></li>
-
-                    </ul>
-                </ul>
-            </div>
-        </div>
+        <jsp:include page="../common/user/user_center_leftnar.jsp" />
         <div class="clearfix"> </div>
     </div>
 </div>

@@ -22,6 +22,7 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
     <!--//fonts-->
     <script src="<%=path%>/static/js/forumpark/jquery.min.js"></script>
+    <link rel="stylesheet" href="<%=path%>/static/layuiadmin/layui/css/layui.css" media="all"/>
     <script type="text/javascript" src="<%=path%>/static/layuiadmin/layui/layui.js"></script>
     <script src="<%=path%>/static/js/forumpark/jquery.easydropdown.js"></script>
     <!--script-->
@@ -76,21 +77,12 @@
                 </form>
             </div>
         </div>
-        <div class="sub-cate" style="position: fixed;left: 24.3%;width: 13%;">
-            <div class=" top-nav rsidebar span_1_of_left">
-                <h3 class="cate">个人中心</h3>
-                <ul class="menu">
-                    <ul class="kid-menu ">
-                        <li><a href="${pageContext.request.contextPath}/user?action=toModifyUserInfo">修改个人信息</a></li>
-
-                    </ul>
-                </ul>
-            </div>
-        </div>
+        <jsp:include page="../common/user/user_center_leftnar.jsp" />
         <div class="clearfix"> </div>
     </div>
 </div>
 <input type="hidden" id="path" value="<%=path%>"/>
+<script type="text/javascript" src="<%=path%>/static/layuiadmin/layui/layui.js"></script>
 <script type="text/javascript" src="<%=path%>/static/js/jquery-form.js"></script>
 <script>
     var path = $("#path").val();
