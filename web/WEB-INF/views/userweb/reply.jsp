@@ -24,9 +24,11 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/styles-merged.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/custom.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/style.css">
     <!--[if lt IE 9]>
     <script src="/static/js/vendor/html5shiv.min.js"></script>
     <script src="/static/js/vendor/respond.min.js"></script>
+
     <![endif]-->
     <script type="text/javascript" src="${pageContext.request.contextPath }/static/layuiadmin/layui/layui.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath }/static/js/jquery-3.3.1.min.js"></script>
@@ -66,25 +68,26 @@
     </ul>
 </div>
 <!-- START: header -->
-<header role="banner" class="probootstrap-header">
-    <div class="container-fluid">
+<header>
+<%--    <div class="container-fluid">--%>
 
-        <div class="mobile-menu-overlay"></div>
+<%--        <div class="mobile-menu-overlay"></div>--%>
 
-        <nav role="navigation" class="probootstrap-nav hidden-xs">
-            <ul class="probootstrap-main-nav">
-                <li><a href="${pageContext.request.contextPath }/user?action=toLogin">登录</a></li>
-                <li><a href="${pageContext.request.contextPath }/user?action=toRegister">注册</a></li>
-            </ul>
-            <div class="extra-text visible-xs">
-                <ul class="social-buttons">
-                    <li><a href="#"><i class="icon-twitter"></i></a></li>
-                    <li><a href="#"><i class="icon-facebook"></i></a></li>
-                    <li><a href="#"><i class="icon-instagram2"></i></a></li>
-                </ul>
-            </div>
-        </nav>
-    </div>
+<%--        <nav role="navigation" class="probootstrap-nav hidden-xs">--%>
+<%--            <ul class="probootstrap-main-nav">--%>
+<%--                <li><a href="${pageContext.request.contextPath }/user?action=toLogin">登录</a></li>--%>
+<%--                <li><a href="${pageContext.request.contextPath }/user?action=toRegister">注册</a></li>--%>
+<%--            </ul>--%>
+<%--            <div class="extra-text visible-xs">--%>
+<%--                <ul class="social-buttons">--%>
+<%--                    <li><a href="#"><i class="icon-twitter"></i></a></li>--%>
+<%--                    <li><a href="#"><i class="icon-facebook"></i></a></li>--%>
+<%--                    <li><a href="#"><i class="icon-instagram2"></i></a></li>--%>
+<%--                </ul>--%>
+<%--            </div>--%>
+<%--        </nav>--%>
+<%--    </div>--%>
+    <jsp:include page="../common/user/head.jsp"/>
 </header>
 <!-- END: header -->
 <style>
@@ -105,21 +108,21 @@
     }
 </style>
 <!-- START: section -->
-<section class="probootstrap-intro"
-         style="background-image: url(${pageContext.request.contextPath }/static/images/1234.jpg);height: 400px; background-size: 100% 700px;"
-         data-stellar-background-ratio="0.5">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-7 probootstrap-intro-text">
-                <h1 class="probootstrap-animate barName"></h1>
-                <div class="probootstrap-subtitle probootstrap-animate">
-                    <h2 class="barDescribe">希望您可以在小贴吧里面找到自己的快乐 <a href="#" target="_blank"></a></h2>
-                </div>
-            </div>
-        </div>
-    </div>
-    <a class="probootstrap-scroll-down js-next" href="#next-section">Scroll down <i class="icon-chevron-down"></i></a>
-</section>
+<%--<section class="probootstrap-intro"--%>
+<%--&lt;%&ndash;         style="background-image: url(${pageContext.request.contextPath }/static/images/head/gnydy.png);height: 400px; background-size: 100% 700px;"&ndash;%&gt;--%>
+<%--         data-stellar-background-ratio="0.5">--%>
+<%--    <div class="container-fluid">--%>
+<%--        <div class="row">--%>
+<%--            <div class="col-md-7 probootstrap-intro-text">--%>
+<%--                <h1 class="probootstrap-animate barName"></h1>--%>
+<%--                <div class="probootstrap-subtitle probootstrap-animate">--%>
+<%--                    <h2 class="barDescribe">希望您可以在小贴吧里面找到自己的快乐 <a href="#" target="_blank"></a></h2>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--    <a class="probootstrap-scroll-down js-next" href="#next-section">Scroll down <i class="icon-chevron-down"></i></a>--%>
+<%--</section>--%>
 <!-- END: section -->
 
 <div style="height: 100px;width: 1170px;border:rgb(225 226 230) solid 1px;margin: 0 auto;">
