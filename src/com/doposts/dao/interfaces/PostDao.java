@@ -77,4 +77,17 @@ public interface PostDao {
      */
     Integer getPostCountByCondition(PostQueryParam postQueryParam);
 
+    /**
+     *  指定帖子浏览量+1
+     * @param postId 帖子id
+     * @return 受影响行数
+     */
+    Integer addPostWatchCount(Integer postId);
+
+    /**
+     *  指定帖子回复量+1
+     * @param postId 帖子id
+     * @return 受影响行数
+     */
+    Integer addPostReplyConut(Integer postId);
 }
