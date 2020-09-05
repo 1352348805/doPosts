@@ -91,6 +91,22 @@ public class PostServlet extends AbstractServlet {
     }
 
     /**
+     *@Descri100ption 查询帖子数量
+     *@Param
+     *@Author Wang.li.ming
+     *@Date 2020/9/5
+     *@Time 12:24
+     */
+
+    public CommonResult getPostCount(HttpServletRequest request, HttpServletResponse response){
+        Integer postSecondId = Integer.parseInt(request.getParameter("postsecondid"));
+        PostQueryParam queryParam = new PostQueryParam();
+        queryParam.setPostClassLevel3Id(postSecondId);
+        Integer count = postService.getPostCountByCondition(queryParam);
+        return new CommonResult().success(count);
+    }
+
+    /**
      * 按条件获取总记录数
      */
     public CommonResult getPostCountByCondition(HttpServletRequest request, HttpServletResponse response) {
@@ -118,14 +134,14 @@ public class PostServlet extends AbstractServlet {
      *@Date 2020/8/27
      *@Time 18:48
      */
-    public CommonResult selectPostList(HttpServletRequest request , HttpServletResponse response){
-
-        Integer secondid = Integer.parseInt(request.getParameter("secondId"));
-        postThreeLevleid = secondid;
-        System.out.println(postThreeLevleid);
-        List<Post> list = postService.selectThreeLevelClassPostList(secondid);
-        return new CommonResult().success(list);
-    }
+//    public CommonResult selectPostList(HttpServletRequest request , HttpServletResponse response){
+//
+//        Integer secondid = Integer.parseInt(request.getParameter("secondId"));
+//        postThreeLevleid = secondid;
+//        System.out.println(postThreeLevleid);
+//        List<Post> list = postService.selectThreeLevelClassPostList(secondid);
+//        return new CommonResult().success(list);
+//    }
 
     /**
      *@Description 添加帖子

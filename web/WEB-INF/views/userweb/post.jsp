@@ -1,10 +1,10 @@
 <!doctype html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
     String path = request.getContextPath();
-    String secondId = (String)request.getAttribute("secondId");
+  //  String secondId = (String)request.getAttribute("secondId");
 %>
 <html lang="zh-CN">
 <head>
@@ -163,10 +163,31 @@
             </div>
 
             <%-- 存放帖子列表--%>
-            <div  id="articleid"></div>
+            <div  id="articleid">
+               <%-- JSTL标签的中forEach 遍历标签items属性存的是list集合 ，不能存对象  --%>
+               <c:forEach items="${postPageInation}" var="item">
+                   <article class="excerpt excerpt-1" style="margin-top: 15px; background-color: #eee;">
+                       <div style="margin-left: 20px; margin-bottom: 20px;">
+                           <header style="margin-top: 7px; margin-bottom: 0px;">
+                               <h2 style="font-weight: 800; font-family: cursive;">
+                                   <a style="color: mediumslateblue;" href="<%=path%>/user?action=postAndfloor&postid=${item.postId}" title="${item.postName}" target="_blank">
+                                  ${item.postName}
+                                   </a>
+                               </h2>
+                           </header>
+                           <p class="meta">
+                               <time class="time"><i class="glyphicon glyphicon-time"></i>${item.createDate}</time>
+                               <span class="views"><i class="glyphicon glyphicon-eye-open"></i><i style="padding-left: 3px;">${item.watchCount}</i></span>
+                               <span class="comment" title="评论" target="_blank"><i class="glyphicon glyphicon-comment"></i><i style="padding-left: 3px;">${item.postReplyCount}</i></span>
+                           </p>
+                           ${item.description}
+                       </div>
+                   </article>
+               </c:forEach>
+            </div>
 
             <%-- 存放分页的容器 --%>
-            <div id="page"></div>
+            <div id="page" style="margin-top: 20px; margin-left: 260px;"></div>
 
 <%--            <article class="excerpt excerpt-1">--%>
 <%--                <a class="focus" href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank">--%>
@@ -406,28 +427,28 @@
 
 <script type="text/javascript">
       $(function () {
-          postlist();
-          function postlist(){
-              $.post("<%=path%>/post?action=selectPostList&secondId=<%=secondId%>",
-                  function (result) {
-                      let date = result.data;
-                      var articleDiv = "";
-                      for( var i = 0 ; i < date.length ; i++){
-                          articleDiv += " <article class=\"excerpt excerpt-1\"  style=\"margin-top: 15px;background-color: #EEE;\">" +
-                              " <div style='margin-left:20px ; margin-bottom:20px'><header style='margin-top: 7px;margin-bottom:0px'>\n" +
-                              // "                    <a class=\"cat\" href=\"#\" title=\"MZ-NetBlog主题\">MZ-NetBlog主题<i></i></a>\n" +
-                              "                    <h2 style='font-weight: 800;\n" +
-                              "    font-family: cursive'><a style='color: mediumslateblue' href=\"<%=path%>/user?action=postAndfloor&postid="+date[i].postId+" \" title=\""+date[i].postName+"\" target=\"_blank\">"+date[i].postName+"</a></h2>\n" +
-                              "                </header>\n" +
-                              "                <p class=\"meta\">\n" +
-                              "                    <time class=\"time\"><i class=\"glyphicon glyphicon-time\"></i> "+date[i].createDate+"</time>\n" +
-                              "                    <span class=\"views\"><i class=\"glyphicon glyphicon-eye-open\"></i><i style='padding-left:3px'>"+date[i].watchCount+"</i></span> <span class=\"comment\"  title=\"评论\" target=\"_blank\"><i class=\"glyphicon glyphicon-comment\"></i><i style='padding-left:3px'>"+date[i].postReplyCount+"</i></span>\n" +
-                              "                </p>\n"+date[i].description+"</div></article>";
-                      }
-                      $("#articleid").html(articleDiv);
-                  }
-                  ,'json');
-          }
+          <%--postlist();--%>
+          <%--function postlist(){--%>
+          <%--    $.post("<%=path%>/post?action=selectPostList&secondId=<%=secondId%>",--%>
+          <%--        function (result) {--%>
+          <%--            let date = result.data;--%>
+          <%--            var articleDiv = "";--%>
+          <%--            for( var i = 0 ; i < date.length ; i++){--%>
+          <%--                articleDiv += " <article class=\"excerpt excerpt-1\"  style=\"margin-top: 15px;background-color: #EEE;\">" +--%>
+          <%--                    " <div style='margin-left:20px ; margin-bottom:20px'><header style='margin-top: 7px;margin-bottom:0px'>\n" +--%>
+          <%--                    // "                    <a class=\"cat\" href=\"#\" title=\"MZ-NetBlog主题\">MZ-NetBlog主题<i></i></a>\n" +--%>
+          <%--                    "                    <h2 style='font-weight: 800;\n" +--%>
+          <%--                    "    font-family: cursive'><a style='color: mediumslateblue' href=\"<%=path%>/user?action=postAndfloor&postid="+date[i].postId+" \" title=\""+date[i].postName+"\" target=\"_blank\">"+date[i].postName+"</a></h2>\n" +--%>
+          <%--                    "                </header>\n" +--%>
+          <%--                    "                <p class=\"meta\">\n" +--%>
+          <%--                    "                    <time class=\"time\"><i class=\"glyphicon glyphicon-time\"></i> "+date[i].createDate+"</time>\n" +--%>
+          <%--                    "                    <span class=\"views\"><i class=\"glyphicon glyphicon-eye-open\"></i><i style='padding-left:3px'>"+date[i].watchCount+"</i></span> <span class=\"comment\"  title=\"评论\" target=\"_blank\"><i class=\"glyphicon glyphicon-comment\"></i><i style='padding-left:3px'>"+date[i].postReplyCount+"</i></span>\n" +--%>
+          <%--                    "                </p>\n"+date[i].description+"</div></article>";--%>
+          <%--            }--%>
+          <%--            $("#articleid").html(articleDiv);--%>
+          <%--        }--%>
+          <%--        ,'json');--%>
+          <%--}--%>
 
           $("#spend").click(function () {
 
@@ -478,12 +499,23 @@
 
           });
 
-
+          function getQueryVariable(variable)
+          {
+              var query = window.location.search.substring(1); //获得了当前链接(url路径)的中?号后的参数
+              var vars = query.split("&");
+              for (var i=0;i<vars.length;i++) {
+                  var pair = vars[i].split("=");
+                  if(pair[0] == variable){return pair[1];}
+              }
+              return(false);
+          }
+          // 分页操作
           layui.use('laypage', function(){
               var laypage = layui.laypage;
               let count;
               $.ajaxSettings.async = false;
-              $.post(path + '/post',{action :'getPostCountByCondition'},function (result) {
+              let data={ action :'getPostCount' ,postsecondid : ${secondId} }
+              $.post(path + '/post',data,function (result) {
                   count = result.data;
               },'json');
               $.ajaxSettings.async = true;
@@ -491,7 +523,8 @@
               //执行一个laypage实例
               laypage.render({
                   elem: 'page' //注意，这里的 test1 是 ID，不用加 # 号
-                  ,limit: 10
+                  ,limit: 5
+                  ,curr: getQueryVariable('pageindex')
                   ,theme: '#5994d6'
                   ,count: count //数据总数，从服务端得到
                   ,
@@ -499,12 +532,8 @@
                       if(!first){ //一定要加此判断，否则初始时会无限刷新
                           let pageIndex = e.curr; //当前页
                           let pageSize = e.limit;
-                          let data = {
-                              action:'getPostList',
-                              pageIndex : pageIndex,
-                              pageSize : pageSize
-                          }
-                          loadRequestList(data);
+
+                          location.href = path + "/user?action=postListpage&secondId=${secondId}&pageindex="+pageIndex+"&pageSize="+pageSize;
                       }
                   }
               });

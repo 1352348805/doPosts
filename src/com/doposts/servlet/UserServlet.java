@@ -10,9 +10,7 @@ import com.doposts.service.interfaces.PostService;
 import com.doposts.service.interfaces.UserService;
 import com.doposts.to.CommonResult;
 import com.doposts.utils.Page;
-import com.doposts.vo.FloorWithReply;
-import com.doposts.vo.SelectAllPostAndFloor;
-import com.doposts.vo.SuperPost;
+import com.doposts.vo.*;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -180,15 +178,34 @@ public class UserServlet extends AbstractServlet{
 
 
    /**
-    *@Description 转发到帖子列表
+    *@Description 转发到帖子列表 并进行分页
     *@Param
     *@Author Wang.li.ming
     *@Date 2020/8/26
     *@Time 22:20
     */
    public String postListpage(HttpServletRequest request , HttpServletResponse response){
-       request.setAttribute("secondId",request.getParameter("secondId"));
+
+       Integer postSecondLevleId = Integer.parseInt(request.getParameter("secondId"));
+       request.setAttribute("secondId",postSecondLevleId);
        request.setAttribute("postName",request.getParameter("postname"));
+
+       Integer pageIndex = null;
+       Integer pageSize = null;
+       try{
+           pageIndex = Integer.valueOf(request.getParameter("pageindex"));
+           pageSize = Integer.valueOf(request.getParameter("pageSize"));
+       }catch(Exception e){
+            pageIndex = 1;
+            pageSize = 5;
+       }
+       PostQueryParam param = new PostQueryParam();
+       param.setPostClassLevel3Id(postSecondLevleId);
+       Page<PostInfo> pageData = postService.getPostPageByCondition(param,pageIndex,pageSize);
+       List<PostInfo>postPageInation = pageData.getData();
+       // JSTL标签的中forEach 遍历标签items属性存的是list集合 ，不能存对象
+       request.setAttribute("postPageInation",postPageInation);
+
        return "userweb/post";
    }
 
