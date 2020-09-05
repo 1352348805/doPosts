@@ -111,7 +111,8 @@ public class FloorDaoImpl implements FloorDao{
         try {
             return crud.executeQueryToBean("SELECT\n" +
                     "\tfloor.*, \n" +
-                    "\tcreateUser.userName AS createUserName\n" +
+                    "\tcreateUser.userName AS createUserName,\n" +
+                    "\tcreateUser.favicon AS favicon\n" +
                     "FROM\n" +
                     "\tfloor\n" +
                     "\tLEFT JOIN\n" +

@@ -78,7 +78,7 @@ public class PostServlet extends AbstractServlet {
 
         String postName = request.getParameter("postName");
         if (postName == null || postName.length() == 0) {
-            postName = null;
+            postName = "";
         }
         String createUserName = request.getParameter("createUserName");
         if (createUserName == null || createUserName.length() == 0) {

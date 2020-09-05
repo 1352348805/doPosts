@@ -58,7 +58,7 @@ public class AdminFilter implements Filter {
         Object userObj = request.getSession().getAttribute("user");
         if (userObj != null) {
             User user = (User)userObj;
-            if ("admin".equals(user.getGroup()) && user.getStatus() == 1) {
+            if (("admin".equals(user.getGroup()) || "root".equals(user.getGroup())) && user.getStatus() == 1) {
                 filterChain.doFilter(request,response);
                 return;
             }

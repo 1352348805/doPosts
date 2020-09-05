@@ -12,7 +12,6 @@
     <link href="<%=path%>/static/css/forumpark/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <!--theme-style-->
     <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/style.css">
-    <link rel="stylesheet" href="<%=path%>/static/layuiadmin/layui/css/layui.css" media="all"/>
 
     <link href="<%=path%>/static/css/forumpark/style.css" rel="stylesheet" type="text/css" media="all" />
     <!--//theme-style-->
@@ -40,7 +39,7 @@
     <div class="banner-menu">
 
         <div class="shoes-grid">
-            <div class="layui-inline wmuSlider example1 slide-grid" >
+            <div class="layui-inline wmuSlider example1 slide-grid">
                 <form id="u-m-form" enctype="multipart/form-data" action="javascript:;" method="post">
                     <table class="layui-table" style="margin: 0px;">
                         <tbody>
@@ -67,7 +66,7 @@
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <button onclick="modifyUser()" style="background-color: #5994d6;" class="layui-btn" >
+                                <button onclick="modifyUser()" class="layui-btn" >
                                     <i class="layui-icon">&#xe608;</i> 修改
                                 </button>
                             </td>
