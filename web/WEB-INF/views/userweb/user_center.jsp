@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <%
@@ -46,8 +47,8 @@
                         <td>当前头像</td>
                         <td>
                             <c:choose>
-                                <c:when test="${user.favicon!=null &&user.favicon!=''}">
-                                    <img class="layui-upload-img" src="${pageContext.request.contextPath }${user.favicon}" id="test-upload-normal-img">
+                                <c:when test="${u.favicon!=null &&u.favicon!=''}">
+                                    <img class="layui-upload-img" src="${pageContext.request.contextPath }${u.favicon}" id="test-upload-normal-img">
                                 </c:when>
                                 <c:otherwise>
                                     <img class="layui-upload-img" src="${pageContext.request.contextPath }/static/images/user_default_icon.png" id="test-upload-normal-img">
@@ -57,19 +58,36 @@
                     </tr>
                     <tr>
                         <td>昵称</td>
-                        <td>${user.userName}</td>
+                        <td>${u.userName}</td>
                     </tr>
                     <tr>
                         <td>账号</td>
-                        <td>${user.userLoginName}</td>
+                        <td>${u.userLoginName}</td>
                     </tr>
                     <tr>
                         <td>注册时间</td>
-                        <td>${user.createDate}</td>
+                        <td>
+                            <fmt:formatDate value="${u.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+                        </td>
                     </tr>
                     <tr>
                         <td>用户状态</td>
-                        <td>${user.status==1?'正常':'封禁'}</td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${u.status==1}">
+                                    正常
+                                </c:when>
+                                <c:when test="${u.status==0}">
+                                    封禁
+                                </c:when>
+                                <c:when test="${u.status==-1}">
+                                    账号已注销
+                                </c:when>
+                                <c:when test="${u.status==-100}">
+                                    禁言
+                                </c:when>
+                            </c:choose>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
