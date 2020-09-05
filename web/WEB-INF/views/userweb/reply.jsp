@@ -36,7 +36,7 @@
     <script src="${pageContext.request.contextPath }/static/js/bootbox.min.js"></script>
     <script>
         <c:if test="${user != null}">
-            var user = <%=JSON.toJSONString(session.getAttribute("user"))%>;
+        var user = <%=JSON.toJSONString(session.getAttribute("user"))%>;
         </c:if>
     </script>
     <style type="text/css">
@@ -193,9 +193,11 @@
 </div>
 
 <section id="next-section" class="probootstrap-section">
-    <div class="container">
+    <div class="container" id="sx">
+        <div class="row bar wyggd sxx" style=" border-top: none;">
+        </div>
         <c:forEach items="${floor}" var="item">
-            <div class="row bar wyggd" id="sx" style="border:rgb(225 226 230) solid 1px ; border-top: none;">
+            <div class="row bar wyggd sxx" style="border:rgb(225 226 230) solid 1px ; border-top: none;">
                 <div class='col-md-12 col-sm-6 probootstrap-animate fadeInUp probootstrap-animated'
                      style="padding: 0px 0px 0px 0px; height: 100%;display: inline-block;width: 100%;height: 100% ">
                     <div class="gd"
@@ -204,7 +206,7 @@
                             <li>
                                 <div>
                                     <c:choose>
-                                            <c:when test="${item.favicon != null}">
+                                        <c:when test="${item.favicon != null}">
                                             <img src="${pageContext.request.contextPath }/${item.favicon}" style="width:80px ;height:80px;border: silver solid 1px; ">
                                         </c:when>
                                         <c:otherwise>
@@ -265,13 +267,13 @@
                                             </div>
                                         </li>
                                     </c:forEach>
-<li style="height: 45px">
-<div class="wysyg"
-style="float: right; padding: 4px 8px 4px 8px; border: 1px solid rgb(240, 241, 242); background:#FFFFFF">
-<a href="javascript:;" style="color: #1a1919"
-onclick="conceal(this)">我也说一句</a>
-</div>
-</li>
+                                    <li style="height: 45px">
+                                        <div class="wysyg"
+                                             style="float: right; padding: 4px 8px 4px 8px; border: 1px solid rgb(240, 241, 242); background:#FFFFFF">
+                                            <a href="javascript:;" style="color: #1a1919"
+                                               onclick="conceal(this)">我也说一句</a>
+                                        </div>
+                                    </li>
                                 </ul>
                                 <div    class=" replyFloors"  style="display: none;  ">
                                     <div class="layui-form-item layui-form-text">
@@ -548,7 +550,7 @@ onclick="conceal(this)">我也说一句</a>
     // })
 
 
-   //回复楼层信息动态添加
+    //回复楼层信息动态添加
     function replyOfFloor(obj, floorId) {
         if(typeof(user) == "undefined"){
             if(confirm("您未登录要跳转到登录页面吗！")){
@@ -612,7 +614,7 @@ onclick="conceal(this)">我也说一句</a>
 
         if(editor.txt.html()=="<p><br></p>"){
             alert("帖子内容不能为空");
-          return;
+            return;
         }
         $.ajax({
             url: "<%=path%>/floor",
@@ -630,18 +632,18 @@ onclick="conceal(this)">我也说一句</a>
                 }
                 else if (jsonStr.message == "操作成功") {
                     let data = jsonStr.data;
-                    let html = "<div class=\"row bar wyggd\" id=\"sx\" style=\"border:rgb(225 226 230) solid 1px ; border-bottom: none; width: 1168px; height: 100%; margin: 0px; 0px 0px 0px;border-bottom :1px solid rgb(240, 241, 242) \">\n" +
+                    let html = "<div class=\"row bar wyggd sxx\" style=\"border:rgb(225 226 230) solid 1px ; border-bottom: none; width: 1170px; height: 100%; margin: 0px; 0px 0px 0px;border-bottom :1px solid rgb(240, 241, 242) \">\n" +
                         "       \t<div class=\"col-md-12 col-sm-6 probootstrap-animate fadeInUp probootstrap-animated\" style=\"padding: 0px 0px 0px 0px; height: 100%;display: inline-block;\">\n" +
                         "            <div class=\"gd\" style=\" float: left; display: inline-block; background: rgb(251,251,253);width: 130px; height:198px; padding: 20px\">\n" +
                         "                <ul style=\"width: 130px; height: 170px\">\n" +
                         "                    <li>\n" +
                         "                        <div>\n";
                     if (data.favicon != '') {
-                        html += "<img src=\"/doPosts/"+data.favicon+"\" style=\"width:80px ;height:80px;border: silver solid 1px; \">\n" +
+                        html += "<img src=\"/doPosts/"+data.favicon+"\" style=\"width:80px ;height:80px;border: silver solid 1px; \">\n";
                     } else {
                         html +="<img src=\"/doPosts/static/images/user_default_icon.png\" style=\"width:80px ;height:80px;border: silver solid 1px; \">\n";
                     }
-                        html+="                        </div>\n" +
+                    html+="                        </div>\n" +
                         "                    </li>\n" +
                         "                    <br>\n" +
                         "                    <li>\n" +
@@ -698,7 +700,7 @@ onclick="conceal(this)">我也说一句</a>
                         "\t\t\t\t</div>\n" +
                         "\t\t\t</div>\n" +
                         "      </div>";
-                    $("#sx>div").last().append(html);
+                    $("#sx .sxx:last").append(html);
                     editor.txt.clear();
                 }
                 else if(data.message=="操作失败"){
