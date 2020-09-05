@@ -59,6 +59,7 @@
     <%@include file="../../common/admin/footer.jsp"%>
 </footer>
 <input id="path" type="hidden" value="<%=path%>" />
+<input id="role" type="hidden" value="${sessionScope.user.group}">
 <script type="text/javascript" src="<%=path%>/static/js/admin/time.js"></script>
 <script type="text/javascript" src="<%=path%>/static/js/jquery.js"></script>
 <script type="text/javascript" src="<%=path%>/static/calendar/WdatePicker.js"></script>
@@ -109,6 +110,7 @@
     }
 
     function loadRequestList(data) {
+        let role = $("#role").val();
         $.post(path + '/admin',data,function (result) {
             if (result.code ==200) {
                 let data = result.data;
@@ -128,24 +130,44 @@
                         "<th width=\"10%\">"+data[i].userName+"</th>\n" +
                         "<th width=\"10%\">";
                            if (data[i].group == 'admin') {
-                               html += "超级管理员";
-                           } else if (data[i].group ==null || data[i].group.length ==0) {
-                               html += "用户";
-                           }else if (data[i].group =='user') {
+                               html += "管理员";
+                           }
+                           // else if (data[i].group ==null || data[i].group.length ==0) {
+                           //     html += "用户";
+                           // }
+                           else if (data[i].group =='user') {
                                html += "用户";
                            }
-                    html+="</th>"
-                    html+="<th width=10%>\n" +
-                        "    <button style=\"background-color: #5994d6;\" class=\"layui-btn layui-btn-xs\" title=\"修改\" onclick=\"window.location.href='<%=path%>/admin?action=update&userId="+data[i].userId+"'\">\n" +
-                        "        <i class=\"layui-icon\">\n" +
-                        "        </i>\n" +
-                        "    </button>\n";
-                        if (data[i].group =='user') {
+                           else if (data[i].group =='root') {
+                               html += "超级管理员";
+                           }
+                    html+="</th>";
+                    html+="<th width=10%>\n";
+                    if (role == 'root') {
+
+                        if (data[i].group !='root') {
+                            html+="    <button style=\"background-color: #5994d6;\" class=\"layui-btn layui-btn-xs\" title=\"修改\" onclick=\"window.location.href='<%=path%>/admin?action=update&userId="+data[i].userId+"'\">\n" +
+                                "        <i class=\"layui-icon\">\n" +
+                                "        </i>\n" +
+                                "    </button>\n";
                             html += "    <button style=\"background-color: #5994d6;\" class=\"layui-btn layui-btn-xs\" title=\"删除\" onclick=\"del("+data[i].userId+")\">\n" +
                                 "        <i class=\"layui-icon\">\n" +
                                 "        </i>\n" +
                                 "    </button>\n";
                         }
+                    }
+                    if (role == 'admin') {
+                        if (data[i].group =='user') {
+                            html+="    <button style=\"background-color: #5994d6;\" class=\"layui-btn layui-btn-xs\" title=\"修改\" onclick=\"window.location.href='<%=path%>/admin?action=update&userId="+data[i].userId+"'\">\n" +
+                                "        <i class=\"layui-icon\">\n" +
+                                "        </i>\n" +
+                                "    </button>\n";
+                            html += "    <button style=\"background-color: #5994d6;\" class=\"layui-btn layui-btn-xs\" title=\"删除\" onclick=\"del("+data[i].userId+")\">\n" +
+                                "        <i class=\"layui-icon\">\n" +
+                                "        </i>\n" +
+                                "    </button>\n";
+                        }
+                    }
 
                     html +="</th>";
 

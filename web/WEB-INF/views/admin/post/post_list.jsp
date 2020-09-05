@@ -41,18 +41,18 @@
                      <div class="layui-inline">
                          <select class="jj" name="categoryLevel1Id" style="background-color:#f6f6f6;" id="categoryLevel1Id"
                                  onchange="queryCategoryList(this,'categoryLevel2Id');">
-                             <option value="0" selected="selected">请选择...</option>
+                             <option value="-1" selected="selected">请选择...</option>
                          </select>
                      </div>
                      <div class="layui-inline">
                          <select class="jj" name="categoryLevel2Id" style="background-color:#f6f6f6;" id="categoryLevel2Id"
                                  onchange="queryCategoryList(this,'categoryLevel3Id');">
-                             <option value="0" selected="selected">请选择...</option>
+                             <option value="-1" selected="selected">请选择...</option>
                          </select>
                      </div>
                      <div class="layui-inline">
                          <select class="jj" name="categoryLevel3Id" style="background-color:#f6f6f6;" id="categoryLevel3Id">
-                             <option value="0" selected="selected">请选择</option>
+                             <option value="-1" selected="selected">请选择</option>
                          </select>
                      </div>
                  </div>
@@ -225,7 +225,7 @@
                     "</tr>";
                 for (let i = 0;i < data.length; i++) {
                     html += "<tr>\n" +
-                        "<th width=\"10%\">"+data[i].postName+"</th>\n" +
+                        "<th width=\"10%\"><a style='color: blue' href='" + path + "/user?action=postAndfloor&postid="+data[i].postId+"'>"+data[i].postName+"</a></th>\n" +
                         "<th width=\"10%\">"+data[i].postClassLevel1Name+"</th>\n" +
                         "<th width=\"10%\">"+data[i].postClassLevel2Name+"</th>\n" +
                         "<th width=\"10%\">"+data[i].postClassLevel3Name+"</th>\n" +

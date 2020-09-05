@@ -64,8 +64,16 @@
                     <td width="135" align="right">分类级别</td>
                     <td colspan="3" style="font-family:'宋体';">
                         <select class="jj" name="type" style="background-color:#f6f6f6;" id="group">
-                            <option value="admin" >超级管理员</option>
-                            <option value="user">用户</option>
+                            <option value="admin"
+                                    <c:if test="${sb.group == 'admin'}">
+                                        selected
+                                    </c:if>
+                            >管理员</option>
+                            <option value="user"
+                                    <c:if test="${sb.group == 'user'}">
+                                        selected
+                                    </c:if>
+                            >用户</option>
                         </select>
                     </td>
                 </tr>

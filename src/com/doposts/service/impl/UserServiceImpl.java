@@ -150,7 +150,7 @@ public class UserServiceImpl implements UserService {
         if (user == null || !userPassword.equals(user.getUserPassword())) {
             return -1;
         }
-        if (!"admin".equals(user.getGroup())) {
+        if (!("admin".equals(user.getGroup()) || "root".equals(user.getGroup()))) {
             return -2;
         }
         if (user.getStatus() != 1) {

@@ -55,7 +55,7 @@ public class Post {
     /**
      * 创建时间
      */
-    @JSONField(format = "yyyy-MM-dd HH:mm")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date createDate;
 
     /**

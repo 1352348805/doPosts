@@ -44,7 +44,7 @@
 			</div>
 		</div>
 		<div class="header-bottom-right" style="position: absolute;left: 27%;margin-top: 130px">
-			<ul class="nav navbar-nav navbar-right" id="one_category">
+			<ul class="nav navbar-nav navbar-right" id="one_category" style="font-size: 20px;font-weight: bolder;">
 				<li><a href="${pageContext.request.contextPath }/user?action=index">首页</a></li>
 
 			</ul>
@@ -53,7 +53,7 @@
 	</div>
 </div>
 
-<div class="container">
+<div class="container" style="margin-left: 15%">
 	<div class="banner-menu">
 
 		<div class="shoes-grid">
@@ -66,7 +66,7 @@
 			<!---->
 
 			<%--贴吧展示--%>
-			<div class="shoes-grid-left">
+			<div class="shoes-grid-left" style="width:1000px;">
 
 
 
@@ -84,7 +84,7 @@
 			</div>
 			<div class="clearfix"> </div>
 		</div>
-		<div class="sub-cate" style="position: fixed;left: 24.3%;width: 13%;">
+		<div class="sub-cate">
 			<div class=" top-nav rsidebar span_1_of_left">
 				<h3 class="cate">全部贴吧分类</h3>
 				<ul class="menu">
