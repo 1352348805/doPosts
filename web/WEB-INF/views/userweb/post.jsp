@@ -34,6 +34,11 @@
     <script src="${pageContext.request.contextPath }/static/js/bootbox.min.js"></script>
     <%--END--%>
 
+    <%-- START  分页引用文件 layui --%>
+    <link rel="stylesheet" href="<%=path%>/static/layuiadmin/layui/css/layui.css" media="all"/>
+    <script type="text/javascript" src="<%=path%>/static/layuiadmin/layui/layui.js"></script>
+    <%--   END   --%>
+
     <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
     <script src="<%=path%>/static/postStyle/js/nprogress.js"></script>
     <script src="<%=path%>/static/postStyle/js/jquery.lazyload.min.js"></script>
@@ -63,6 +68,7 @@
 </head>
 <body class="user-select">
 <header class="header">
+    <input type="hidden" id="path" name="path" value="${pageContext.request.contextPath}"/>
     <div style="padding-top: 0px;height: 200px; background: url('${pageContext.request.contextPath }/static/images/head/gnydy.png') no-repeat">
         <div class="container-fluid">
 
@@ -156,8 +162,12 @@
                 <h3 style="line-height: 2.6;font-size: 28px;font-weight: 800;color: deeppink;">${postName}</h3>
             </div>
 
-
+            <%-- 存放帖子列表--%>
             <div  id="articleid"></div>
+
+            <%-- 存放分页的容器 --%>
+            <div id="page"></div>
+
 <%--            <article class="excerpt excerpt-1">--%>
 <%--                <a class="focus" href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank">--%>
 <%--                    <img class="thumb" data-original="<%=path%>/static/postStyle/images/201610181739277776.jpg" src="<%=path%>/static/postStyle/images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）" style="display: inline;" />--%>
@@ -466,6 +476,38 @@
               }
 
 
+          });
+
+
+          layui.use('laypage', function(){
+              var laypage = layui.laypage;
+              let count;
+              $.ajaxSettings.async = false;
+              $.post(path + '/post',{action :'getPostCountByCondition'},function (result) {
+                  count = result.data;
+              },'json');
+              $.ajaxSettings.async = true;
+
+              //执行一个laypage实例
+              laypage.render({
+                  elem: 'page' //注意，这里的 test1 是 ID，不用加 # 号
+                  ,limit: 10
+                  ,theme: '#5994d6'
+                  ,count: count //数据总数，从服务端得到
+                  ,
+                  jump: function(e, first){ //触发分页后的回调
+                      if(!first){ //一定要加此判断，否则初始时会无限刷新
+                          let pageIndex = e.curr; //当前页
+                          let pageSize = e.limit;
+                          let data = {
+                              action:'getPostList',
+                              pageIndex : pageIndex,
+                              pageSize : pageSize
+                          }
+                          loadRequestList(data);
+                      }
+                  }
+              });
           });
 
       })
