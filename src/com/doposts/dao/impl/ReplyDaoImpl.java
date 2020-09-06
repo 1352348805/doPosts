@@ -38,18 +38,26 @@ public class ReplyDaoImpl implements ReplyDao {
     @Override
     public List<SuperReply> getReplyListById(Integer floorId) {
         try {
-            return crud.executeQueryToBeanList("SELECT\n" +
-                    "\treply.*, \n" +
-                    "\t`user`.userName AS replyUserName\n," +
-                    "\t`user`.favicon AS replyFavicon\n" +
-                    "FROM\n" +
-                    "\treply\n" +
-                    "\tLEFT JOIN\n" +
-                    "\t`user`\n" +
-                    "\tON \n" +
-                    "\t\treply.replyUserId = `user`.userId\n" +
-                    "WHERE\n" +
-                    "\treply.floorId = ?", SuperReply.class, floorId);
+            return crud.executeQueryToBeanList("    SELECT\n" +
+                    "        reply.*,\n" +
+                    "        `replyUser`.userName AS replyUserName,\n" +
+                    "        `replyUser`.favicon AS replyFavicon,\n" +
+                    "        `repliedUser`.`userName` AS repliedUserName,\n" +
+                    "        `repliedUser`.`favicon` AS repliedFavicon \n" +
+                    "    FROM\n" +
+                    "        reply   \n" +
+                    "    LEFT JOIN\n" +
+                    "        `user` replyUser  \n" +
+                    "            ON   (\n" +
+                    "                reply.replyUserId = `replyUser`.userId\n" +
+                    "            ) \n" +
+                    "    LEFT JOIN\n" +
+                    "        `user` repliedUser  \n" +
+                    "            ON (\n" +
+                    "                reply.`repliedUserId` = repliedUser.userId\n" +
+                    "            )  \n" +
+                    "    WHERE\n" +
+                    "        reply.floorId = ?", SuperReply.class, floorId);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

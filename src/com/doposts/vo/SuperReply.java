@@ -21,6 +21,18 @@ public class SuperReply  extends Reply {
     @FieldMapping("replyFavicon")
     private String favicon;
 
+    @FieldMapping("repliedFavicon")
+    private String repliedFavicon;
+
+    public String getRepliedFavicon() {
+        return repliedFavicon;
+    }
+
+    public SuperReply setRepliedFavicon(String repliedFavicon) {
+        this.repliedFavicon = repliedFavicon;
+        return this;
+    }
+
     public String getUserName() {
         return userName;
     }
