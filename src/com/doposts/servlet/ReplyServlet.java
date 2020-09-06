@@ -13,6 +13,10 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -41,16 +45,22 @@ public class ReplyServlet extends AbstractServlet{
         if(object==null){
             return new CommonResult().unauthorized("未登录");
         }
+
         String floorid = request.getParameter("floorid");
         String replyContent = request.getParameter("replyContent");
         String replyUserId = request.getParameter("replyUserId");
+         String repliedUserId=request.getParameter("repliedUserId");
         System.out.println("floorid:"+floorid);
         System.out.println("replyContent:"+replyContent);
         System.out.println("replyUserId:"+replyUserId);
+        System.out.println("repliedUserId:"+repliedUserId);
         Reply reply=new Reply();
          reply.setFloorId(Integer.valueOf(floorid));
          reply.setReplyContent(replyContent);
          reply.setReplyUserId(Integer.valueOf(replyUserId));
+         if (repliedUserId != null && !"".equals(repliedUserId) && !"0".equals(repliedUserId)){
+             reply.setRepliedUserId(Integer.valueOf(repliedUserId));
+         }
          Date replyDate = new Date();
          reply.setReplyDate(replyDate);
          try {

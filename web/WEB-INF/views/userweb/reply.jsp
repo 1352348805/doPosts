@@ -194,7 +194,7 @@
 
 <section id="next-section" class="probootstrap-section">
     <div class="container" id="sx">
-        <div class="row bar wyggd sxx" style=" border-top: none;">
+        <div class="row bar wyggd sxx" style="border:rgb(225 226 230) none 1px ; border-top: none;">
         </div>
         <c:forEach items="${floor}" var="item">
             <div class="row bar wyggd sxx" style="border:rgb(225 226 230) solid 1px ; border-top: none;">
@@ -258,16 +258,23 @@
                                                      style="border: silver 1px solid; width: 32px; height: 32px;">
                                             </a>
                                             <div style="display: inline-block; margin-top: 10px;width: 575px " replyUserId="${replys.replyUserId}">
-                                                <a href="">${replys.userName}:</a>
+                                                <c:choose>
+                                                    <c:when test="${replys.repliedUserId==null}">
+                                                        <a href="">${replys.userName}:</a>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <a href=\"javascript:;">${user.userName}</a> 回复 <a href="javascript:;">${replys.userName}</a>：;
+                                                    </c:otherwise>
+                                                </c:choose>
                                                 <span>${replys.replyContent}</span>
                                                 <div style=" float: right;padding: 10px 0px 0px 0px ">
                                                     <span>${replys.replyDate}</span>
-                                                    <a href="javascript:;"   id="replys"   onclick="replyUsermessage(this,${replys.replyUserId},'${replys.userName}')">回复</a>
+                                                    <a href="javascript:;" id="replys" onclick="replyUsermessage(this,${replys.replyUserId},'${replys.userName}',${item.postFloor})">回复</a>
                                                 </div>
                                             </div>
                                         </li>
                                     </c:forEach>
-                                    <li style="height: 45px">
+                                    <li class="sssssss" style="height: 45px">
                                         <div class="wysyg"
                                              style="float: right; padding: 4px 8px 4px 8px; border: 1px solid rgb(240, 241, 242); background:#FFFFFF">
                                             <a href="javascript:;" style="color: #1a1919"
@@ -278,11 +285,11 @@
                                 <div    class=" replyFloors"  style="display: none;  ">
                                     <div class="layui-form-item layui-form-text">
                                         <div class="layui-input-block" style="margin: 0px">
-                                            <textarea  name="desc" placeholder="请输入内容" id="demo" class="layui-textarea" floorId="${item.floorId}" ></textarea>
+                                            <textarea name="desc" placeholder="请输入内容" class="layui-textarea" floorId="${item.floorId}" ></textarea>
                                         </div>
                                     </div>
                                     <div style="margin: 0px 0px 0px 570px">
-                                        <input type="button" onclick="replyOfFloor(this,${item.floorId})"  id="submits" value="发表"/>
+                                        <input type="button" onclick="replyOfFloor(this,${item.floorId},${item.postFloor})"  id="submits" value="发表"/>
                                     </div>
                                 </div>
 
@@ -528,13 +535,24 @@
     }
 
     var replyUserId=null;
+
     var  userName=null;
 
-    function replyUsermessage(obj,replyUserId,userName){
+    var floor = {};
+
+    function replyUsermessage(obj,replyUserId,userName, postfloor){
         let parentNode = $(obj).parent().parent().parent().parent().parent();
         parentNode.find(".replyFloors").css("display","block");
-        parentNode.find(".layui-textarea").val("回复"+" "+userName+":");
+        var finalText = "回复 "+userName+"：";
+        parentNode.find(".layui-textarea").val(finalText);
+        this.replyUserId=replyUserId;
+        this.userName=userName;
+        //楼层位置，加用户id和用户姓名
+        floor["f"+postfloor] = {'userId': replyUserId, 'userName': userName, 'finalText': finalText};
+
+
     }
+
 
     // $(function(){
     //     $('.hf').click(function(){
@@ -551,7 +569,7 @@
 
 
     //回复楼层信息动态添加
-    function replyOfFloor(obj, floorId) {
+    function replyOfFloor(obj, floorId, postFloor) {
         if(typeof(user) == "undefined"){
             if(confirm("您未登录要跳转到登录页面吗！")){
                 window.location.href="<%=path%>/user?action=toLogin";
@@ -561,44 +579,57 @@
         //获取回复文本内容
         var reply = $("[floorid='"+floorId+"']");
         var replyContent = reply.val();
-        if (replyContent == ""){
+        console.log(replyContent);
+        if (replyContent.trim() == "" || replyContent.trim().length==0){
             alert("回复信息不能为空！！！");
-            return;
+           return;
         }
-        //获取插进那个楼ID
-        var floorId = $(obj).parent().parent().children().first().children().children().attr("floorid");
         //获得对应的ul
         var replyView = $("[replyview='"+floorId+"']");
-        $.post("<%=path%>/reply",{
+        var formData = {
             "action": "ReplyAndReply",
             "floorid": floorId,
             "replyContent": replyContent,
-            "repliedUserId": repliedUserId,
+            // "repliedUserId":replyUserId,
             "replyUserId": user.userId,
-        },function (data) {
+        }
+        let isReplyUser = false;
+        if(typeof(floor["f"+postFloor]) != "undefined"){
+            if(formData.replyContent.indexOf(floor["f"+postFloor].finalText) == 0){
+                formData.repliedUserId = floor["f"+postFloor].userId;
+                formData.replyContent = formData.replyContent.substring(floor["f"+postFloor].finalText.length , formData.replyContent.length);
+                isReplyUser = true;
+            }
+        }
+        $.post("<%=path%>/reply",formData,function (data) {
             if(data.code == 200){
                 let html = replyView.html();
                 let addHtml = "<li style=\" height: 45px;\">\n" +
                     "<a href=\"\"\n" +
                     "style=\" width: 32px; height: 32px;display: inline-block; float: left;margin: 10px 10px 0px 0px\">\n" +
-                    "<img src=\"${pageContext.request.contextPath}/static/images/hero_bg_2.jpg\"\n" +
+                    "<img src=\"${pageContext.request.contextPath}/static/images/38891f42b97e4bbdb4389d250422bd68.jpg\"\n" +
                     "style=\"border: silver 1px solid; width: 32px; height: 32px;\">\n" +
                     "</a>\n" +
-                    "<div style=\"display: inline-block; margin-top: 10px;width: 575px\" replyuserid=\""+user.userId+"\">\n" +
-                    "<a href=\"\">"+user.userName+":</a>\n" +
-                    "<span>"+replyContent+"</span>\n" +
+                    "<div style=\"display: inline-block; margin-top: 10px;width: 575px\" replyuserid=\""+user.userId+"\">\n" ;
+                if(isReplyUser){
+                    addHtml += "<a href=\"javascript:;\">"+user.userName+"</a> 回复 <a href=\"javascript:;\">"+floor["f"+postFloor].userName+"</a>：";
+                }else{
+                    addHtml += "<a href=\"\">"+user.userName+"</a>：\n";
+                }
+                addHtml +=
+                    "<span>"+formData.replyContent+"</span>\n" +
                     "<div style=\" float: right;padding: 10px 0px 0px 0px \">\n" +
                     "<span>"+data.data.replyDate+"</span>\n" +
-                    "<a href=\"javascript:;\" onclick=\"replyUsermessage(this, "+user.userId+", '"+user.userName+"')\">回复</a>\n" +
+                    "<a href=\"javascript:;\" onclick=\"replyUsermessage(this,"+user.userId+",'"+user.userName+"',"+postFloor+")\">回复</a>\n" +
                     "</div>\n" +
                     "</div>\n" +
                     "</li>";
-                let IAlsoSaidSomething = "<li style=\"height: 45px\">\n" +
+                let IAlsoSaidSomething = "<li class=\"sssssss\" style=\"height: 45px\">\n" +
                     "<div class=\"wysyg\" style=\"float: right; padding: 4px 8px 4px 8px; border: 1px solid rgb(240, 241, 242); background:#FFFFFF\">\n" +
                     "<a href=\"javascript:;\" style=\"color: #1a1919\" onclick=\"conceal(this)\">我也说一句</a>\n" +
                     "</div>\n" +
                     "</li>";
-                html = html.substring(0, html.indexOf(IAlsoSaidSomething));
+                html = html.substring(0, html.indexOf('<li class="sssssss"'));
                 replyView.html(html+addHtml+IAlsoSaidSomething);
                 $(obj).parent().parent().children().first().children().children().val("");
             }else{
@@ -607,13 +638,27 @@
         },"json");
     }
 
-
+    function fanzhuanyi(str){
+        var temp = "";
+        if(str.length == 0) return "";
+        temp = str.replace(/&amp;/g,"&");
+        temp = temp.replace(/&lt;/g,"<");
+        temp = temp.replace(/&gt;/g,">");
+        temp = temp.replace(/&nbsp;/g," ");
+        temp = temp.replace(/&#39;/g,"\'");
+        temp = temp.replace(/&quot;/g,"\"");
+        return temp;
+    }
 
     //盖楼
     $("#spend").click(function () {
-
-        if(editor.txt.html()=="<p><br></p>"){
+        let text =  editor.txt.text();
+        let s = fanzhuanyi(text);
+        if(text==""){
             alert("帖子内容不能为空");
+            return;
+        } else if (s.trim()=='') {
+            alert("内容不能为空格");
             return;
         }
         $.ajax({
@@ -632,13 +677,13 @@
                 }
                 else if (jsonStr.message == "操作成功") {
                     let data = jsonStr.data;
-                    let html = "<div class=\"row bar wyggd sxx\" style=\"border:rgb(225 226 230) solid 1px ; border-bottom: none; width: 1170px; height: 100%; margin: 0px; 0px 0px 0px;border-bottom :1px solid rgb(240, 241, 242) \">\n" +
+                    let html = "<div class=\"row bar wyggd sxx\" style=\"border:rgb(225 226 230) solid 1px ; border-top: none; \">\n" +
                         "       \t<div class=\"col-md-12 col-sm-6 probootstrap-animate fadeInUp probootstrap-animated\" style=\"padding: 0px 0px 0px 0px; height: 100%;display: inline-block;\">\n" +
                         "            <div class=\"gd\" style=\" float: left; display: inline-block; background: rgb(251,251,253);width: 130px; height:198px; padding: 20px\">\n" +
                         "                <ul style=\"width: 130px; height: 170px\">\n" +
                         "                    <li>\n" +
                         "                        <div>\n";
-                    if (data.favicon != '') {
+                    if (typeof(data.favicon) != "undefined") {
                         html += "<img src=\"/doPosts/"+data.favicon+"\" style=\"width:80px ;height:80px;border: silver solid 1px; \">\n";
                     } else {
                         html +="<img src=\"/doPosts/static/images/user_default_icon.png\" style=\"width:80px ;height:80px;border: silver solid 1px; \">\n";
@@ -678,7 +723,7 @@
                         "                        </div>\n" +
                         "                    </div>\n" +
                         "                        <div style=\" display: none;  border: rgb(240 241 242) solid 1px;height:100%; width: 650px; background : rgb(247 248 250); padding: 4px 15px 14px 15px\">\n" +
-                        "                           <ul style=\"margin: 0px 0px 0px 0px \">\n" +
+                        "                           <ul replyView=\""+data.floorId+"\" style=\"margin: 0px 0px 0px 0px \">\n" +
                         "                               \n" +
                         "                               <li style=\"height: 45px\">\n" +
                         "                                   <div class=\"wysyg\" style=\"float: right; padding: 4px 8px 4px 8px; border: 1px solid rgb(240, 241, 242); background:#FFFFFF\">\n" +
@@ -688,10 +733,10 @@
                         "                           </ul>\n" +
                         "                            <div style=\"display: none; \">\n" +
                         "                                <div style=\"margin: 10px\">\n" +
-                        "                                    <textarea style=\"width: 100%; height: 100px\"></textarea>\n" +
+                        "                                    <textarea "+"name=\"desc\" placeholder=\"请输入内容\" class=\"layui-textarea\""+" style=\"width: 100%; height: 100px\"floorId=\""+ data.floorId+"\"></textarea>\n" +
                         "                                </div>\n" +
                         "                                <biv style=\"margin: 0px 0px 0px 570px\">\n" +
-                        "                                <input type=\"button\" onclick=\"replyOfFloor("+ data.floorId +")\" name=\"submit\" value=\"发表\">\n" +
+                        "                                <input type=\"button\" onclick=\"replyOfFloor(this, "+ data.floorId +","+ data.postFloor +")\" name=\"submit\" value=\"发表\">\n" +
                         "                                </biv>\n" +
                         "                            </div>\n" +
                         "\n" +
@@ -700,7 +745,7 @@
                         "\t\t\t\t</div>\n" +
                         "\t\t\t</div>\n" +
                         "      </div>";
-                    $("#sx .sxx:last").append(html);
+                    $("#sx .sxx:last").after(html);
                     editor.txt.clear();
                 }
                 else if(data.message=="操作失败"){

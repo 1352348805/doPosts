@@ -25,11 +25,19 @@ public class SuperReply  extends Reply {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+    public String getFavicon() {
+        return favicon;
+    }
+
+    public void setFavicon(String favicon) {
+        this.favicon = favicon;
+    }
 
     @Override
     public String toString() {
         return "SuperReply{" +
                 "userName='" + userName + '\'' +
+                ", favicon='" + favicon + '\'' +
                 '}';
     }
 }
