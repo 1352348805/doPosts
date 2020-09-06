@@ -17,8 +17,7 @@ public class FloorWithReply extends Floor {
     @FieldMapping("createUserName")
     private String userName;
 
-    @FieldMapping("repliedUserName")
-    private String repliedUserName;
+
 
     @FieldMapping("favicon")
     private String favicon;
@@ -50,14 +49,6 @@ public class FloorWithReply extends Floor {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getRepliedUserName() {
-        return repliedUserName;
-    }
-
-    public void setRepliedUserName(String repliedUserName) {
-        this.repliedUserName = repliedUserName;
     }
 
     @Override

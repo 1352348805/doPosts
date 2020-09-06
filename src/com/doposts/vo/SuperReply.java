@@ -15,6 +15,9 @@ public class SuperReply  extends Reply {
     @FieldMapping("replyUserName")
     private String userName;
 
+    @FieldMapping("repliedUserName")
+    private String repliedUserName;
+
     @FieldMapping("replyFavicon")
     private String favicon;
 
@@ -25,6 +28,15 @@ public class SuperReply  extends Reply {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
+    public String getRepliedUserName() {
+        return repliedUserName;
+    }
+
+    public void setRepliedUserName(String repliedUserName) {
+        this.repliedUserName = repliedUserName;
+    }
+
     public String getFavicon() {
         return favicon;
     }
@@ -37,6 +49,7 @@ public class SuperReply  extends Reply {
     public String toString() {
         return "SuperReply{" +
                 "userName='" + userName + '\'' +
+                ", repliedUserName='" + repliedUserName + '\'' +
                 ", favicon='" + favicon + '\'' +
                 '}';
     }
