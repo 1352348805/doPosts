@@ -9,11 +9,11 @@
 <div class="sub-cate" style="position: fixed;left: 24.3%;width: 13%;">
     <div class=" top-nav rsidebar span_1_of_left">
         <h3 class="cate">
-            ${u.userId==user.userId ? '个人中心':'Ta的主页'}
+            ${u.userId eq user.userId ? '个人中心':'Ta的主页'}
         </h3>
         <ul class="menu">
             <ul class="kid-menu ">
-                <c:if test="${u.userId==user.userId}">
+                <c:if test="${u.userId eq user.userId}">
                     <li><a href="${pageContext.request.contextPath}/user?action=toModifyUserInfo">修改个人信息</a></li>
                     <li><a href="${pageContext.request.contextPath}/user?action=toModifyUserPwd">修改密码</a></li>
                 </c:if>

@@ -227,7 +227,7 @@ public class UserServlet extends AbstractServlet{
         String uid = request.getParameter("uid");
         User user = userService.getUserById(Integer.parseInt(uid));
         user.setUserPassword("");
-        request.setAttribute("u",user);
+        request.getSession().setAttribute("u",user);
         return "userweb/user_center";
     }
 
