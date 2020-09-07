@@ -142,7 +142,7 @@ public class UserServlet extends AbstractServlet{
         SelectAllPostAndFloor id = floorService.getFloorById(postid,page.getCurrPageNo(),page.getPageSize());
 
         SuperPost superPost= postService.getSuperPostById(postid);
-       List<FloorWithReply> floorWithReplies= id.getFloor();
+        List<FloorWithReply> floorWithReplies= id.getFloor();
         request.setAttribute("post",superPost);
         request.setAttribute("page",page);
         request.setAttribute("floor",floorWithReplies);
@@ -176,38 +176,48 @@ public class UserServlet extends AbstractServlet{
         return "userweb/forumpark";
     }
 
+    /**
+     *@Description 跳转到帖子列表页面
+     *@Param request/response
+     *@Author Wang.li.ming
+     *@Date 2020/8/23
+     *@Time 19:01
+     */
+    public String postpage(HttpServletRequest request , HttpServletResponse response){
+        Integer postSecondLevleId = Integer.parseInt(request.getParameter("secondId"));
+        request.setAttribute("secondId",postSecondLevleId);
+        request.setAttribute("postName",request.getParameter("postname"));
+        return "userweb/post";
+    }
 
-   /**
-    *@Description 转发到帖子列表 并进行分页
-    *@Param
-    *@Author Wang.li.ming
-    *@Date 2020/8/26
-    *@Time 22:20
-    */
-   public String postListpage(HttpServletRequest request , HttpServletResponse response){
+    /**
+     *@Description 转发到帖子列表 并进行分页
+     *@Param
+     *@Author Wang.li.ming
+     *@Date 2020/8/26
+     *@Time 22:20
+     */
+    public CommonResult postListpage(HttpServletRequest request , HttpServletResponse response){
 
-       Integer postSecondLevleId = Integer.parseInt(request.getParameter("secondId"));
-       request.setAttribute("secondId",postSecondLevleId);
-       request.setAttribute("postName",request.getParameter("postname"));
+        Integer postSecondLevleId = Integer.parseInt(request.getParameter("secondId"));
 
-       Integer pageIndex = null;
-       Integer pageSize = null;
-       try{
-           pageIndex = Integer.valueOf(request.getParameter("pageindex"));
-           pageSize = Integer.valueOf(request.getParameter("pageSize"));
-       }catch(Exception e){
+        Integer pageIndex = null;
+        Integer pageSize = null;
+        try{
+            pageIndex = Integer.valueOf(request.getParameter("pageindex"));
+            pageSize = Integer.valueOf(request.getParameter("pageSize"));
+        }catch(Exception e){
             pageIndex = 1;
             pageSize = 5;
-       }
-       PostQueryParam param = new PostQueryParam();
-       param.setPostClassLevel3Id(postSecondLevleId);
-       Page<PostInfo> pageData = postService.getPostPageByCondition(param,pageIndex,pageSize);
-       List<PostInfo>postPageInation = pageData.getData();
-       // JSTL标签的中forEach 遍历标签items属性存的是list集合 ，不能存对象
-       request.setAttribute("postPageInation",postPageInation);
+        }
+        PostQueryParam param = new PostQueryParam();
+        param.setPostClassLevel3Id(postSecondLevleId);
+        Page<PostInfo> pageData = postService.getPostPageByCondition(param,pageIndex,pageSize);
+        // List<PostInfo>postPageInation = pageData.getData();
+        // JSTL标签的中forEach 遍历标签items属性存的是list集合 ，不能存对象
 
-       return "userweb/post";
-   }
+        return new CommonResult().success(pageData) ;
+    }
 
     /**
      * 用户中心
