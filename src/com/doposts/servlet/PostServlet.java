@@ -160,6 +160,9 @@ public class PostServlet extends AbstractServlet {
             return new CommonResult().unauthorized("未登录");
         }
         User user = (User)object;
+        if (user.getStatus().equals(-100)) {
+            return new CommonResult().forbidden("该用户已被禁言");
+        }
         List<PostClass> list = postClassService.getPostClassByIdWithParents(secondid);
 //        for(int i =0 ;i < list.size();i++ ){
 //            System.out.println(list.get(i).getClassId());

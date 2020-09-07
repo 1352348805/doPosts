@@ -534,8 +534,8 @@
                             editor.txt.clear();
                             postlist({action : 'postListpage',secondId :${secondId} });
                         }
-                        else if(result.message=="操作失败"){
-                            alert("发帖失败");
+                        else{
+                            alert(result.data);
                         }
 
                     },
