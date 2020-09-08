@@ -15,8 +15,7 @@ public abstract class AbstractServlet extends HttpServlet {
 
 	
 	@Override
-	protected void doPost(HttpServletRequest request,
-                          HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String action = request.getParameter("action");
 		Method method = null;
@@ -37,12 +36,8 @@ public abstract class AbstractServlet extends HttpServlet {
 			
 		} else {
 			try {
-				method = getServletClass().getDeclaredMethod(
-						action,
-						new Class[] { HttpServletRequest.class,
-								HttpServletResponse.class });
-				result = method
-						.invoke(this, new Object[] { request, response });
+				method = getServletClass().getDeclaredMethod(action, new Class[] { HttpServletRequest.class, HttpServletResponse.class });
+				result = method.invoke(this, new Object[] { request, response });
 				toView(request, response, result);
 			} catch (NoSuchMethodException e) {
 				request.getRequestDispatcher("404.jsp").forward(request,
@@ -58,20 +53,16 @@ public abstract class AbstractServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest request,
-                         HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		doPost(request, response);
 	}
 
-	public void toView(HttpServletRequest request,
-                       HttpServletResponse response, Object result) throws Exception {
+	public void toView(HttpServletRequest request, HttpServletResponse response, Object result) throws Exception {
 		if (result != null) {
 			if (result instanceof String) {
 				String viewName = "/WEB-INF/views/"+result.toString() + ".jsp";
-				request.getRequestDispatcher(viewName).forward(request,
-						response);
-
+				request.getRequestDispatcher(viewName).forward(request, response);
 			} else {
 				write(result, response);
 			}

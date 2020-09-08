@@ -14,4 +14,8 @@ public class SystemConstant {
      */
     public static final String CATEGORY_MENU_KEY = "category_menu";
 
+    /**
+     * 用户日志凭证
+     */
+    public static final String USER_LOG_TOKEN = "user_log_token";
 }

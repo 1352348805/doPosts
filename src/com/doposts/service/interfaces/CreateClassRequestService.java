@@ -42,4 +42,7 @@ public interface CreateClassRequestService {
      */
     Integer getCreateClassRequestCount();
 
+
+    boolean requestAddPostClass(CreateClassRequest classRequest);
+
 }

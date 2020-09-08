@@ -1,11 +1,15 @@
 package com.doposts.servlet;
 
 
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.doposts.constant.SystemConstant;
 import com.doposts.dao.PostItDatabase;
 import com.doposts.entity.CreateClassRequest;
 import com.doposts.entity.PostClass;
 import com.doposts.entity.User;
+import com.doposts.log.entity.RequesterItem;
+import com.doposts.log.monitor.UserLogMonitor;
 import com.doposts.service.impl.CreateClassRequestServiceImpl;
 import com.doposts.service.impl.PostClassServiceImpl;
 import com.doposts.service.impl.UserServiceImpl;
@@ -22,8 +26,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author asuk
@@ -37,6 +44,7 @@ public class AdminServlet extends AbstractServlet {
     private PostClassService postClassService;
     private CreateClassRequestService createClassRequestService;
     private UserService userService;
+    private UserLogMonitor userLogMonitor;
 
     @Override
     public Class<?> getServletClass() {
@@ -48,6 +56,7 @@ public class AdminServlet extends AbstractServlet {
         postClassService = new PostClassServiceImpl();
         createClassRequestService = new CreateClassRequestServiceImpl();
         userService = new UserServiceImpl();
+        userLogMonitor = UserLogMonitor.getInstance();
     }
 
     /**
@@ -427,5 +436,32 @@ public class AdminServlet extends AbstractServlet {
             return new CommonResult().success(null);
         }
         return new CommonResult().failed("修改失败");
+    }
+
+    public String toUserMonitor(HttpServletRequest request, HttpServletResponse response) {
+        return "admin/monitor/user_monitor";
+    }
+
+    /**
+     * 获取用户日志容器
+     */
+    public CommonResult userLogList(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Map<String, ArrayList<RequesterItem>> logContainer = userLogMonitor.getLogContainer();
+        List<ArrayList<RequesterItem>> list = new ArrayList<>(logContainer.values());
+
+        PrintWriter out = response.getWriter();
+        String jsonString = JSONObject.toJSONString(list, SerializerFeature.DisableCircularReferenceDetect);
+        out.print(new CommonResult().success(JSONObject.toJSONString(list, SerializerFeature.DisableCircularReferenceDetect)));
+        out.flush();
+        out.close();
+        return null;
+    }
+
+    /**
+     * 清除不活跃用户日志
+     */
+    public CommonResult clearInactiveData(HttpServletRequest request, HttpServletResponse response) {
+        userLogMonitor.clearInactiveData();
+        return new CommonResult().success(null);
     }
 }

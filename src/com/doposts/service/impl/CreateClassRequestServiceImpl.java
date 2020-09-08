@@ -7,6 +7,7 @@ import com.doposts.service.interfaces.CreateClassRequestService;
 import com.doposts.utils.Page;
 import com.doposts.vo.PostClassRequestInfo;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,5 +86,20 @@ public class CreateClassRequestServiceImpl implements CreateClassRequestService 
     @Override
     public Integer getCreateClassRequestCount() {
         return PostItDatabase.CREATE_CLASS_REQUEST_DAO.selectAllCreateClassRequestCount();
+    }
+
+    @Override
+    public boolean requestAddPostClass(CreateClassRequest classRequest) {
+        try {
+            String sql = "INSERT INTO `create_class_request`(`requestUserId`,`className`,`fatherClassId`,`requestDate`) VALUES(?,?,?,?)";
+            return PostItDatabase.getCRUD().executeUpdate(sql,
+                    classRequest.getRequestUserId(),
+                    classRequest.getClassName(),
+                    classRequest.getFatherClassId(),
+                    classRequest.getRequestDate()) > 0;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
     }
 }

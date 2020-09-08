@@ -102,8 +102,8 @@ public class PostServiceImpl  implements PostService {
      */
     @Override
     public List<Post> selectThreeLevelClassPostList(Integer postClassLevelThreeId) {
-         List<Post> list = PostItDatabase.POST_DAO.getPostByClassId(postClassLevelThreeId);
-         return list;
+        List<Post> list = PostItDatabase.POST_DAO.getPostByClassId(postClassLevelThreeId);
+        return list;
     }
 
 
@@ -130,5 +130,15 @@ public class PostServiceImpl  implements PostService {
     @Override
     public void postViewNumber(Integer postId) {
         PostItDatabase.POST_DAO.addPostWatchCount(postId);
+    }
+
+    /**
+     * 查找分类名是否存在
+     * @param postClassName
+     * @return
+     */
+    @Override
+    public boolean findPostClassExists(String postClassName) {
+        return PostItDatabase.POST_CLASS_DAO.findPostClassByClassName(postClassName)!=null;
     }
 }

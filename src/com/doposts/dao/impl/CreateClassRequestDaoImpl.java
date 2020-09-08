@@ -49,7 +49,7 @@ public class CreateClassRequestDaoImpl implements CreateClassRequestDao {
     @Override
     public List<PostClassRequestInfo> selectAllCreateClassRequestByCondition(int offset, int pageSize) {
         try {
-             return crud.executeQueryToBeanList("SELECT\n" +
+            return crud.executeQueryToBeanList("SELECT\n" +
                     "\trequest.requestId, \n" +
                     "\trequest.requestUserId, \n" +
                     "\trequest.className, \n" +
@@ -66,7 +66,7 @@ public class CreateClassRequestDaoImpl implements CreateClassRequestDao {
                     "\tcreate_class_request AS request\n" +
                     "LEFT JOIN `user` AS requestUser ON request.requestUserId = requestUser.userId\n" +
                     "LEFT JOIN post_classification AS postClass ON request.fatherClassId = postClass.classId\n" +
-                    "LEFT JOIN `user` AS reviewerUser ON request.reviewerId = reviewerUser.userId ORDER BY request.isProcess limit ?,?", PostClassRequestInfo.class, offset, pageSize);
+                    "LEFT JOIN `user` AS reviewerUser ON request.reviewerId = reviewerUser.userId ORDER BY request.isProcess,request.requestId limit ?,?", PostClassRequestInfo.class, offset, pageSize);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

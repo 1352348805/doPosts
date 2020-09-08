@@ -1,13 +1,11 @@
 package com.doposts.servlet;
 
+import com.doposts.entity.CreateClassRequest;
 import com.doposts.entity.Post;
+import com.doposts.entity.PostClass;
 import com.doposts.entity.User;
-import com.doposts.service.impl.FloorServiceImpl;
-import com.doposts.service.impl.PostServiceImpl;
-import com.doposts.service.impl.UserServiceImpl;
-import com.doposts.service.interfaces.FloorService;
-import com.doposts.service.interfaces.PostService;
-import com.doposts.service.interfaces.UserService;
+import com.doposts.service.impl.*;
+import com.doposts.service.interfaces.*;
 import com.doposts.to.CommonResult;
 import com.doposts.utils.Page;
 import com.doposts.vo.*;
@@ -21,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,6 +36,8 @@ public class UserServlet extends AbstractServlet{
     UserService userService;
     FloorService floorService;
     PostService postService;
+    PostClassService postClassService;
+    CreateClassRequestService createClassRequestService;
 
     @Override
     public Class<?> getServletClass() {
@@ -51,6 +52,10 @@ public class UserServlet extends AbstractServlet{
         floorService = new FloorServiceImpl();
 
         postService = new PostServiceImpl();
+
+        postClassService = new PostClassServiceImpl();
+
+        createClassRequestService = new CreateClassRequestServiceImpl();
     }
 
     /**
@@ -245,6 +250,10 @@ public class UserServlet extends AbstractServlet{
         return "userweb/user_modify_pwd";
     }
 
+    public String toCategoryCreate(HttpServletRequest request , HttpServletResponse response) {
+        return "userweb/user_category_create";
+    }
+
     /**
      * ajax验证密码
      */
@@ -286,7 +295,7 @@ public class UserServlet extends AbstractServlet{
      * 修改用户信息
      */
     public CommonResult modifyUserInfo(HttpServletRequest request , HttpServletResponse response) {
-
+        User userBySession = this.getUserBySession(request);
         DiskFileItemFactory factory = new DiskFileItemFactory();
 
         ServletFileUpload sfu=new ServletFileUpload(factory);
@@ -296,7 +305,6 @@ public class UserServlet extends AbstractServlet{
         String fn=null;
         try {
             User user = new User();
-            User userBySession = this.getUserBySession(request);
             user.setUserId(userBySession.getUserId());
             String userName = userBySession.getUserName();
             String userFavicon = userBySession.getFavicon();
@@ -326,7 +334,31 @@ public class UserServlet extends AbstractServlet{
             return new CommonResult().failed("修改失败");
         }
 
-        return new CommonResult().success(null);
+        return new CommonResult().success(userBySession.getUserId());
+    }
+
+
+    public CommonResult requestCategory(HttpServletRequest request,HttpServletResponse response) {
+        String className = request.getParameter("className");
+        Integer parentId = Integer.valueOf(request.getParameter("parentId"));
+        CreateClassRequest classRequest = new CreateClassRequest();
+        User userBySession = getUserBySession(request);
+        if (userBySession == null) {
+            return new CommonResult().forbidden("未登录");
+        }
+        boolean exists = postService.findPostClassExists(className);
+        if (exists) {
+            return new CommonResult().failed("分类已存在!");
+        }
+        classRequest.setRequestUserId(userBySession.getUserId());
+        classRequest.setRequestDate(new Date());
+        classRequest.setClassName(className);
+        classRequest.setFatherClassId(parentId);
+        boolean b = createClassRequestService.requestAddPostClass(classRequest);
+        if (b) {
+            return new CommonResult().success(null);
+        }
+        return new CommonResult().failed();
     }
 
     /**

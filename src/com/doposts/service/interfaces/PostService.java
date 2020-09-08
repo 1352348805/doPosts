@@ -85,4 +85,6 @@ public interface PostService {
      */
     void postViewNumber(Integer postId);
 
+    boolean findPostClassExists(String postClassName);
+
 }
