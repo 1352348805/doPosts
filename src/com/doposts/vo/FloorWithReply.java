@@ -17,8 +17,6 @@ public class FloorWithReply extends Floor {
     @FieldMapping("createUserName")
     private String userName;
 
-
-
     @FieldMapping("favicon")
     private String favicon;
 

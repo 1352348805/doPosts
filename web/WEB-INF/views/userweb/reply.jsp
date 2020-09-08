@@ -174,8 +174,6 @@
             </li>
         </ul>
     </div>
-
-
     <div style="display: inline-block;width: 1035px;height:100%;" class="probootstrap-block-image">
         <div class="text" style="padding: 0px 0px 8px 20px;">
             <div style="padding: 20px 20px 0px 0px ">
@@ -258,8 +256,16 @@
                                         <li style=" height: 45px;"  >
                                             <a href=""
                                                style=" width: 32px; height: 32px;display: inline-block; float: left;margin: 10px 10px 0px 0px">
-                                                <img src="${pageContext.request.contextPath }/static/images/38891f42b97e4bbdb4389d250422bd68.jpg"
-                                                     style="border: silver 1px solid; width: 32px; height: 32px;">
+                                                <c:choose>
+                                                    <c:when test="${replys.favicon != ''}">
+                                                        <img src="${pageContext.request.contextPath }/${replys.favicon}"
+                                                             style="border: silver 1px solid; width: 32px; height: 32px;">
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <img id="wcnm" src="${pageContext.request.contextPath }/static/images/38891f42b97e4bbdb4389d250422bd68.jpg"
+                                                             style="border: silver 1px solid; width: 32px; height: 32px;">
+                                                    </c:otherwise>
+                                                </c:choose>
                                             </a>
                                             <div style="display: inline-block; margin-top: 10px;width: 575px " replyUserId="${replys.replyUserId}">
                                                 <c:choose>
@@ -607,14 +613,20 @@
             }
         }
         $.post("<%=path%>/reply",formData,function (data) {
+            alert(data.data.favicon);
             if(data.code == 200){
                 let html = replyView.html();
                 let addHtml = "<li style=\" height: 45px;\">\n" +
                     "<a href=\"\"\n" +
-                    "style=\" width: 32px; height: 32px;display: inline-block; float: left;margin: 10px 10px 0px 0px\">\n" +
-                    "<img src=\"${pageContext.request.contextPath}/static/images/38891f42b97e4bbdb4389d250422bd68.jpg\"\n" +
-                    "style=\"border: silver 1px solid; width: 32px; height: 32px;\">\n" +
-                    "</a>\n" +
+                    "style=\" width: 32px; height: 32px;display: inline-block; float: left;margin: 10px 10px 0px 0px\">\n";
+                if (typeof(data.data.favicon) != "undefined" && data.data.favicon != "") {
+                    addHtml+= "<img src=\"/doPosts/"+data.data.favicon+"\" " +
+                        "style=\"border: silver 1px solid; width: 32px; height: 32px;\">\n";
+                } else {
+                    addHtml += "<img src=\"/doPosts/static/images/user_default_icon.png\" " +
+                        "style=\"border: silver 1px solid; width: 32px; height: 32px;\">\n";
+                }
+                   addHtml += "</a>\n" +
                     "<div style=\"display: inline-block; margin-top: 10px;width: 575px\" replyuserid=\""+user.userId+"\">\n" ;
                 if(isReplyUser){
                     addHtml += "<a href=\"javascript:;\">"+user.userName+"</a> 回复 <a href=\"javascript:;\">"+floor["f"+postFloor].userName+"</a>：";
