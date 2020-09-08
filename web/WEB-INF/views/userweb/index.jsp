@@ -119,11 +119,11 @@
         <ul class="probootstrap-main-nav">
           <c:choose>
             <c:when test="${user == null}">
-              <li><a href="${pageContext.request.contextPath }/user?action=toLogin" >登录</a></li>
-              <li><a href="${pageContext.request.contextPath }/user?action=toRegister">注册</a></li>
+              <li><a href="${pageContext.request.contextPath }/user?action=toLogin" style="color: red" >登录</a></li>
+              <li><a href="${pageContext.request.contextPath }/user?action=toRegister" style="color: red">注册</a></li>
             </c:when>
             <c:otherwise>
-              <li style="color: #fff;">欢迎你: ${user.userName}</li>
+              <li style="color: red;">欢迎你: ${user.userName}</li>
               <li style="color: #fff;"><a href="${pageContext.request.contextPath }/user?action=index">首页</a></li>
               <li style="color: #fff;"><a href="${pageContext.request.contextPath }/user?action=toUserCenter">个人中心</a></li>
               <li style="color: #fff;"><a href="${pageContext.request.contextPath }/user?action=exit">退出</a></li>
