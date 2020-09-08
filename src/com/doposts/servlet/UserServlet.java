@@ -473,7 +473,6 @@ public class UserServlet extends AbstractServlet{
         if(object==null){
             return new CommonResult().unauthorized("未登录");
         }
-
         String floorid = request.getParameter("floorid");
         String replyContent = request.getParameter("replyContent");
         String replyUserId = request.getParameter("replyUserId");
@@ -486,6 +485,7 @@ public class UserServlet extends AbstractServlet{
         reply.setFloorId(Integer.valueOf(floorid));
         reply.setReplyContent(replyContent);
         reply.setReplyUserId(Integer.valueOf(replyUserId));
+//         reply.setFavicon(((User)object).getFavicon());
         if (repliedUserId != null && !"".equals(repliedUserId) && !"0".equals(repliedUserId)){
             reply.setRepliedUserId(Integer.valueOf(repliedUserId));
         }
@@ -496,7 +496,14 @@ public class UserServlet extends AbstractServlet{
         }catch (Exception e){
             return new CommonResult().failed();
         }
-        return new CommonResult().success(reply);
+        SuperReply superReply = new SuperReply();
+        superReply.setFloorId(reply.getFloorId());
+        superReply.setReplyContent(reply.getReplyContent());
+        superReply.setReplyUserId(reply.getReplyUserId());
+        superReply.setReplyDate(reply.getReplyDate());
+        superReply.setFavicon(((User)object).getFavicon());
+        return new CommonResult().success(superReply);
     }
+
 
 }
