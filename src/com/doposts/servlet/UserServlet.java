@@ -445,6 +445,9 @@ public class UserServlet extends AbstractServlet{
             return new CommonResult().unauthorized("未登录");
         }
         User user = (User)object;
+        if (user.getStatus().equals(-100)) {
+            return new CommonResult().forbidden("该用户已被禁言");
+        }
         int floorCountByPostId = floorService.getFloorCountByPostId(postid);
 
         Floor floor = new Floor();
@@ -469,11 +472,13 @@ public class UserServlet extends AbstractServlet{
 
     public CommonResult ReplyAndReply(HttpServletRequest request,HttpServletResponse response){
         Object object = request.getSession().getAttribute("user");
-        System.out.println(object);
         if(object==null){
             return new CommonResult().unauthorized("未登录");
         }
-
+        User user = (User)object;
+        if (user.getStatus().equals(-100)) {
+            return new CommonResult().forbidden("该用户已被禁言");
+        }
         String floorid = request.getParameter("floorid");
         String replyContent = request.getParameter("replyContent");
         String replyUserId = request.getParameter("replyUserId");
@@ -496,7 +501,14 @@ public class UserServlet extends AbstractServlet{
         }catch (Exception e){
             return new CommonResult().failed();
         }
-        return new CommonResult().success(reply);
+        SuperReply superReply = new SuperReply();
+        superReply.setFloorId(reply.getFloorId());
+        superReply.setReplyContent(reply.getReplyContent());
+        superReply.setReplyUserId(reply.getReplyUserId());
+        superReply.setReplyDate(reply.getReplyDate());
+        superReply.setFavicon(((User)object).getFavicon());
+        return new CommonResult().success(superReply);
     }
+
 
 }
