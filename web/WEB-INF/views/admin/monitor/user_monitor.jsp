@@ -170,14 +170,10 @@
         $("#box").html("");
         loadLogData();
     }
-    function clearInActiveLog() {
-        $.post(path + "/admin",{action:'clearInactiveData'});
-    }
     $(function () {
+        $.post(path + "/admin",{action:'clearInactiveData'});
         loadLogData();
         setInterval(dynamicLoad,10000);
-        //五分钟清除一次不活跃用户日志记录
-        setInterval(clearInActiveLog,300000);
     });
 </script>
 </body>
