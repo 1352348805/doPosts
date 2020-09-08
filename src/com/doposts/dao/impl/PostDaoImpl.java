@@ -263,7 +263,9 @@ public class PostDaoImpl implements PostDao {
         try {
             ResultSet count = basicCrud.executeQueryByArrayParameter(builder.toString(), para.toArray());
             if(count.next()){
-                return count.getInt("count");
+                int c = count.getInt("count");
+                count.close();
+                return c;
             }
             throw new RuntimeException();
         } catch (SQLException e) {
