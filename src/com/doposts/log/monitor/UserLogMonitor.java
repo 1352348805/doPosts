@@ -30,7 +30,7 @@ public class UserLogMonitor {
     /**
      * 用户日志容器
      */
-    private Map<String, ArrayList<RequesterItem>> logContainer = new ConcurrentHashMap<>();
+    private Map<String, LinkedList<RequesterItem>> logContainer = new ConcurrentHashMap<>();
 
     /**
      * 超时阈值 单位:分钟
@@ -41,16 +41,16 @@ public class UserLogMonitor {
      * 记录操作日志
      */
     public void recordInLogContainer(RequesterItem item) {
-        ArrayList<RequesterItem> items = logContainer.get(item.getId());
+        LinkedList<RequesterItem> items = logContainer.get(item.getId());
         if (items == null) {
-            logContainer.put(item.getId(), new ArrayList<>(Arrays.asList(item)));
+            logContainer.put(item.getId(), new LinkedList<>(Arrays.asList(item)));
             return;
         }
-        items.add(item);
+        items.addFirst(item);
         logContainer.put(item.getId(),items);
     }
 
-    public Map<String, ArrayList<RequesterItem>> getLogContainer() {
+    public Map<String, LinkedList<RequesterItem>> getLogContainer() {
         return logContainer;
     }
 
@@ -59,7 +59,7 @@ public class UserLogMonitor {
      */
     public void clearInactiveData() {
         logContainer.keySet().forEach(key -> {
-            ArrayList<RequesterItem> items = logContainer.get(key);
+            LinkedList<RequesterItem> items = logContainer.get(key);
             if ((System.currentTimeMillis()-items.get(items.size()-1).getRequestTimestamp())/60000.00 > maxTimeThreshold) {
                 logContainer.remove(key);
             }

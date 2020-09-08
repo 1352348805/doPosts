@@ -1,14 +1,20 @@
 package com.doposts.filter;
 
 import com.alibaba.fastjson.JSON;
+import com.doposts.constant.SystemConstant;
 import com.doposts.entity.User;
+import com.doposts.log.entity.RequesterItem;
+import com.doposts.log.monitor.UserLogMonitor;
 import org.apache.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * 用户日志监控
@@ -20,28 +26,53 @@ import java.util.Map;
 public class UserLogFilter implements Filter {
 
     private static Logger logger = Logger.getLogger(UserLogFilter.class);
-
+    private UserLogMonitor userLogMonitor;
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
+        userLogMonitor = UserLogMonitor.getInstance();
     }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest)servletRequest;
         HttpServletResponse response = (HttpServletResponse)servletResponse;
-        UserLogFilter.RequestUserInfo userInfo = new UserLogFilter.RequestUserInfo();
+        RequesterItem item = new RequesterItem();
 
-        User user = (User)request.getSession().getAttribute("user");
-        userInfo.setId(user==null?0:user.getUserId())
-                .setIp(request.getRemoteAddr())
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("user");
+        //未登录
+        if (user==null) {
+            String uid = "";
+            Object attribute = session.getAttribute(SystemConstant.USER_LOG_TOKEN);
+            if (attribute == null) {
+                uid = UUID.randomUUID().toString();
+                session.setAttribute(SystemConstant.USER_LOG_TOKEN,uid);
+            } else {
+                uid = attribute.toString();
+            }
+            item.setId(uid);
+        } else {
+            item.setId(user.getUserId().toString());
+        }
+
+        Map<String, String[]> parameterMap = new HashMap<>();
+        request.getParameterMap().keySet().forEach(key -> {
+            parameterMap.put(key,request.getParameterMap().get(key));
+        });
+
+        item.setIp(request.getRemoteAddr())
                 .setRequestUri(request.getRequestURI())
                 .setReferer(request.getHeader("Referer"))
-                .setRequestParameterMap(request.getParameterMap())
-                .setUserAgent(request.getHeader("User-Agent"));
-        logger.info("记录用户操作日志:" + JSON.toJSONString(userInfo));
+                .setRequestParameterMap(parameterMap)
+                .setUserAgent(request.getHeader("User-Agent"))
+                .setRequestTimestamp(System.currentTimeMillis());
+        logger.info("记录用户操作日志:" + JSON.toJSONString(item));
+
+        //记录到日志容器
+        userLogMonitor.recordInLogContainer(item);
 
         filterChain.doFilter(request,response);
+
     }
 
     @Override
@@ -49,72 +80,4 @@ public class UserLogFilter implements Filter {
 
     }
 
-    private static class RequestUserInfo {
-        //用户id 0为未登录
-        private Integer id;
-        //用户ip
-        private String ip;
-        //请求的URL
-        private String requestUri;
-        //请求的参数
-        private Map<String,String[]> requestParameterMap;
-        //上一个URL
-        private String referer;
-        //用户软件信息
-        private String userAgent;
-
-        public Integer getId() {
-            return id;
-        }
-
-        public RequestUserInfo setId(Integer id) {
-            this.id = id;
-            return this;
-        }
-
-        public String getIp() {
-            return ip;
-        }
-
-        public RequestUserInfo setIp(String ip) {
-            this.ip = ip;
-            return this;
-        }
-
-        public String getRequestUri() {
-            return requestUri;
-        }
-
-        public RequestUserInfo setRequestUri(String requestUri) {
-            this.requestUri = requestUri;
-            return this;
-        }
-
-        public Map<String, String[]> getRequestParameterMap() {
-            return requestParameterMap;
-        }
-
-        public RequestUserInfo setRequestParameterMap(Map<String, String[]> requestParameterMap) {
-            this.requestParameterMap = requestParameterMap;
-            return this;
-        }
-
-        public String getReferer() {
-            return referer;
-        }
-
-        public RequestUserInfo setReferer(String referer) {
-            this.referer = referer;
-            return this;
-        }
-
-        public String getUserAgent() {
-            return userAgent;
-        }
-
-        public RequestUserInfo setUserAgent(String userAgent) {
-            this.userAgent = userAgent;
-            return this;
-        }
-    }
 }
