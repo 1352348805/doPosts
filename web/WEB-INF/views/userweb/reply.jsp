@@ -586,7 +586,6 @@
             }
         }
         $.post("<%=path%>/user",formData,function (data) {
-            alert(data.data.favicon);
             if(data.code == 200){
                 let html = replyView.html();
                 let addHtml = "<li style=\" height: 45px;\">\n" +
@@ -623,7 +622,7 @@
                 replyView.html(html+addHtml+IAlsoSaidSomething);
                 $(obj).parent().parent().children().first().children().children().val("");
             }else{
-                alert("失败");
+                alert(data.data);
             }
         },"json");
     }
@@ -738,8 +737,8 @@
                     $("#sx .sxx:last").after(html);
                     editor.txt.clear();
                 }
-                else if(data.message=="操作失败"){
-                    alert("回复失败");
+                else {
+                   alert(jsonStr.data);
                 }
             }
         });
