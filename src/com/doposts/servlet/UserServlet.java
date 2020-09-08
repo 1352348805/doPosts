@@ -1,9 +1,6 @@
 package com.doposts.servlet;
 
-import com.doposts.entity.CreateClassRequest;
-import com.doposts.entity.Post;
-import com.doposts.entity.PostClass;
-import com.doposts.entity.User;
+import com.doposts.entity.*;
 import com.doposts.service.impl.*;
 import com.doposts.service.interfaces.*;
 import com.doposts.to.CommonResult;
@@ -36,6 +33,7 @@ public class UserServlet extends AbstractServlet{
     UserService userService;
     FloorService floorService;
     PostService postService;
+    ReplyService replyService;
     PostClassService postClassService;
     CreateClassRequestService createClassRequestService;
 
@@ -52,6 +50,8 @@ public class UserServlet extends AbstractServlet{
         floorService = new FloorServiceImpl();
 
         postService = new PostServiceImpl();
+
+        replyService = new ReplyServiceImpl();
 
         postClassService = new PostClassServiceImpl();
 
@@ -338,6 +338,9 @@ public class UserServlet extends AbstractServlet{
     }
 
 
+    /**
+     * 提交分类申请
+     */
     public CommonResult requestCategory(HttpServletRequest request,HttpServletResponse response) {
         String className = request.getParameter("className");
         Integer parentId = Integer.valueOf(request.getParameter("parentId"));
@@ -380,6 +383,120 @@ public class UserServlet extends AbstractServlet{
             return (User)obj;
         }
         return null;
+    }
+
+    /**
+     *@Description 添加帖子
+     *@Param
+     *@Author Wang.li.ming
+     *@Date 2020/9/1
+     *@Time 9:25
+     */
+    public CommonResult addpost(HttpServletRequest request , HttpServletResponse response){
+        Post post = new Post();
+        Integer secondid = Integer.parseInt(request.getParameter("secondId"));
+        String postname = request.getParameter("titeid");
+        String postContent = request.getParameter("postContent");
+        Object object = request.getSession().getAttribute("user");
+        if(object==null){
+            return new CommonResult().unauthorized("未登录");
+        }
+        User user = (User)object;
+        if (user.getStatus().equals(-100)) {
+            return new CommonResult().forbidden("该用户已被禁言");
+        }
+        List<PostClass> list = postClassService.getPostClassByIdWithParents(secondid);
+//        for(int i =0 ;i < list.size();i++ ){
+//            System.out.println(list.get(i).getClassId());
+//        }
+        Integer postClassLevel1Id = list.get(0).getClassId();
+        Integer postClassLevel2Id = list.get(1).getClassId();
+        Integer postClassLevel3Id = list.get(2).getClassId();
+        post.setCreateUserId(user.getUserId());
+        post.setPostName(postname);
+        post.setDescription(postContent);
+        post.setWatchCount(0);
+        post.setPostReplyCount(0);
+        post.setCreateDate(new Date());
+        post.setPostClassLevel1Id(postClassLevel1Id);
+        post.setPostClassLevel2Id(postClassLevel2Id);
+        post.setPostClassLevel3Id(postClassLevel3Id);
+
+        boolean bool = postService.addPost(post);
+        if(bool){
+            return new CommonResult().success("发帖成功");
+        }
+        else{
+            return new CommonResult().failed();
+        }
+    }
+
+    /**
+     *  插入回复数据
+     * @param request
+     * @param response
+     * @return
+     */
+    public  Object  insertFloor(HttpServletRequest request,HttpServletResponse response){
+        Integer postid = Integer.parseInt(request.getParameter("postid"));
+        postService.postViewNumber(postid);
+        Object object = request.getSession().getAttribute("user");
+        if(object==null){
+            return new CommonResult().unauthorized("未登录");
+        }
+        User user = (User)object;
+        int floorCountByPostId = floorService.getFloorCountByPostId(postid);
+
+        Floor floor = new Floor();
+        floor.setPostId(postid);
+        floor.setPostFloor(floorCountByPostId+1);
+        floor.setCreateUserId(user.getUserId());
+        floor.setPostContent(request.getParameter("replyContent"));
+        floor.setSendDate(new Date());
+
+        FloorWithReply floorWithReply = floorService.insertFloor(floor);
+
+        if (floorWithReply != null){
+            postService.postReplyNumber(postid);
+            return new CommonResult().success(floorWithReply);
+        }
+        else{
+            return new CommonResult().failed();
+        }
+        //floorWithReply.setPostFloor();
+        // return new CommonResult().failed();
+    }
+
+    public CommonResult ReplyAndReply(HttpServletRequest request,HttpServletResponse response){
+        Object object = request.getSession().getAttribute("user");
+        System.out.println(object);
+        if(object==null){
+            return new CommonResult().unauthorized("未登录");
+        }
+
+        String floorid = request.getParameter("floorid");
+        String replyContent = request.getParameter("replyContent");
+        String replyUserId = request.getParameter("replyUserId");
+        String repliedUserId=request.getParameter("repliedUserId");
+        System.out.println("floorid:"+floorid);
+        System.out.println("replyContent:"+replyContent);
+        System.out.println("replyUserId:"+replyUserId);
+        System.out.println("repliedUserId:"+repliedUserId);
+        Reply reply=new Reply();
+        reply.setFloorId(Integer.valueOf(floorid));
+        reply.setReplyContent(replyContent);
+        reply.setReplyUserId(Integer.valueOf(replyUserId));
+        if (repliedUserId != null && !"".equals(repliedUserId) && !"0".equals(repliedUserId)){
+            reply.setRepliedUserId(Integer.valueOf(repliedUserId));
+        }
+        Date replyDate = new Date();
+        reply.setReplyDate(replyDate);
+        try {
+            replyService.insertReple(reply);
+        }catch (Exception e){
+            return new CommonResult().failed();
+        }
+        return new CommonResult().success(reply);
     }
 
 }

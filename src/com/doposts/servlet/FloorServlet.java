@@ -40,40 +40,4 @@ public class FloorServlet extends AbstractServlet{
 
     }
 
-    /**
-     *  插入回复数据
-     * @param request
-     * @param response
-     * @return
-     */
-    public  Object  insertFloor(HttpServletRequest request,HttpServletResponse response){
-        Integer postid = Integer.parseInt(request.getParameter("postid"));
-        postService.postViewNumber(postid);
-        Object object = request.getSession().getAttribute("user");
-        if(object==null){
-            return new CommonResult().unauthorized("未登录");
-        }
-        User user = (User)object;
-        int floorCountByPostId = floorService.getFloorCountByPostId(postid);
-
-        Floor floor = new Floor();
-        floor.setPostId(postid);
-        floor.setPostFloor(floorCountByPostId+1);
-        floor.setCreateUserId(user.getUserId());
-        floor.setPostContent(request.getParameter("replyContent"));
-        floor.setSendDate(new Date());
-
-        FloorWithReply floorWithReply = floorService.insertFloor(floor);
-
-        if (floorWithReply != null){
-            postService.postReplyNumber(postid);
-            return new CommonResult().success(floorWithReply);
-        }
-        else{
-             return new CommonResult().failed();
-        }
-        //floorWithReply.setPostFloor();
-       // return new CommonResult().failed();
-    }
-
 }
