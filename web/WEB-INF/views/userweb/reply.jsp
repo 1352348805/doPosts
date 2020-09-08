@@ -94,7 +94,7 @@
                     </c:when>
                     <c:otherwise>
                         <li style="color: #fff;">欢迎你: ${user.userName}</li>
-                        <li style="color: #fff;"><a href="${pageContext.request.contextPath }/user?action=toUserCenter">个人中心</a></li>
+                        <li style="color: #fff;"><a href="${pageContext.request.contextPath }/user?action=toUserCenter&uid=${user.userId}">个人中心</a></li>
                     </c:otherwise>
                 </c:choose>
             </ul>
@@ -260,10 +260,10 @@
                                             <div style="display: inline-block; margin-top: 10px;width: 575px " replyUserId="${replys.replyUserId}">
                                                 <c:choose>
                                                     <c:when test="${replys.repliedUserId==null}">
-                                                        <a href="">${replys.userName}:</a>
+                                                        <a href="${pageContext.request.contextPath }/user?action=toUserCenter&uid=${replys.replyUserId}">${replys.userName}:</a>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <a href=\"javascript:;">${user.userName}</a> 回复 <a href="javascript:;">${replys.userName}</a>：;
+                                                        <a href="${pageContext.request.contextPath }/user?action=toUserCenter&uid=${replys.replyUserId}">${user.userName}</a> 回复 <a href="${pageContext.request.contextPath }/user?action=toUserCenter&uid=${replys.repliedUserId}">${replys.repliedUserName}</a>：;
                                                     </c:otherwise>
                                                 </c:choose>
                                                 <span>${replys.replyContent}</span>
