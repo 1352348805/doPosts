@@ -11,6 +11,9 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="<%=path%>/static/css/test/style.css">
+    <script>
+        var i = 0;
+    </script>
 </head>
 <body>
 <div class="camera -x">

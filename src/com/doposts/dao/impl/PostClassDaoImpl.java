@@ -17,7 +17,6 @@ public class PostClassDaoImpl implements PostClassDao {
     SuperCrud<PostClass> crud;
     DatabaseCrud basicCrud;
 
-
     public PostClassDaoImpl() {
         this.crud = CrudHandler.postClassCrud;
         this.basicCrud = PostItDatabase.getCRUD();
