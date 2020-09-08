@@ -66,7 +66,7 @@
     <ul>
         <li>
             <i class="fa fa-user-circle"></i>
-            <a href="javascript:void(0)" class="rota">个人中心</a>
+            <a href="${pageContext.request.contextPath }/user?action=toUserCenter&uid=${user.userId}" class="rota">个人中心</a>
         </li>
         <li title="回复">
             <i class="fa fa-pencil-square-o"></i>
@@ -155,10 +155,14 @@
                 <div>
                     <c:choose>
                         <c:when test="${post.favicon != ''}">
-                            <img src="${pageContext.request.contextPath }/${post.favicon}" style="width:80px ;height:80px;border: silver solid 1px; ">
+                            <a href="${pageContext.request.contextPath }/user?action=toUserCenter&uid=${user.userId}">
+                                <img src="${pageContext.request.contextPath }/${post.favicon}" style="width:80px ;height:80px;border: silver solid 1px; ">
+                            </a>
                         </c:when>
                         <c:otherwise>
+                        <a href="${pageContext.request.contextPath }/user?action=toUserCenter&uid=${user.userId}">
                             <img src="${pageContext.request.contextPath }/static/images/user_default_icon.png" style="width:80px ;height:80px;border: silver solid 1px; ">
+                            </a>
                         </c:otherwise>
                     </c:choose>
 
@@ -166,7 +170,7 @@
             </li>
             <br>
             <li>
-                <a class="hint info-left" href="#" title="发帖人"><i class="fa fa-user">${post.userName}</i></a>
+                <a class="hint info-left" href="${pageContext.request.contextPath }/user?action=toUserCenter&uid=${post.createUserId}" title="发帖人"><i class="fa fa-user">${post.userName}</i></a>
             </li>
         </ul>
     </div>
@@ -217,7 +221,7 @@
                             </li>
                             </br>
                             <li>
-                                <a class='hint info-left' href='#' title='发帖人'><i class='fa fa-user'>${item.userName}</i></a>
+                                <a class='hint info-left' href='${pageContext.request.contextPath }/user?action=toUserCenter&uid=${item.createUserId}' title='发帖人'><i class='fa fa-user'>${item.userName}</i></a>
                             </li>
                         </ul>
                     </div>
