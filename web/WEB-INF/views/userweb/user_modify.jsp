@@ -146,7 +146,7 @@
                     layer.msg('修改成功!',{
                         time : 1000
                     },function () {
-                        location.href = path + '/user?action=toUserCenter';
+                        location.href = path + '/user?action=toUserCenter&uid='+data.data;
                     });
                 }
 

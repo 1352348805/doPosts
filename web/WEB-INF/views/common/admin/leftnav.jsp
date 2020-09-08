@@ -5,6 +5,7 @@
         <ul class="list">
             <li><a href="<%=path%>/admin?action=categoryList">分类管理</a></li>
             <li ><a href="<%=path%>/admin?action=postList">帖子管理</a></li>
+            <li ><a href="<%=path%>/admin?action=toUserMonitor">用户监控</a></li>
             <li><a href="<%=path%>/admin?action=tUser">用户管理</a></li>
             <li><a href="<%=path%>/admin?action=toModifyPwd">密码修改</a></li>
             <li><a href="<%=path%>/admin?action=exit">退出系统</a></li>

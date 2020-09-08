@@ -68,35 +68,7 @@
 </head>
 <body class="user-select" style="overflow: hidden; width: 100%; height: 100%">
 <div style="margin: 0;padding: 0;border: 0; width: 100%; height: 100%; overflow-y: scroll; position: absolute; z-index: 9999">
-    <header class="header">
-        <input type="hidden" id="path" name="path" value="${pageContext.request.contextPath}"/>
-        <div style="padding-top: 0px;height: 200px; background: url('${pageContext.request.contextPath }/static/images/head/gnydy.png') no-repeat">
-            <div class="container-fluid">
-                <div class="mobile-menu-overlay"></div>
-                <nav role="navigation" class="probootstrap-nav hidden-xs" style="padding-right: 60px;margin-right: 100px;float: right;">
-                    <ul class="probootstrap-main-nav">
-                        <c:choose>
-                            <c:when test="${user == null}">
-                                <li><a href="${pageContext.request.contextPath }/user?action=toLogin" style="color: red" >登录</a></li>
-                                <li><a href="${pageContext.request.contextPath }/user?action=toRegister" style="color: red">注册</a></li>
-                            </c:when>
-                            <c:otherwise>
-                                <li style="color: red;">欢迎你: ${user.userName}</li>
-                                <li style="color: #fff;"><a href="${pageContext.request.contextPath }/user?action=toUserCenter">个人中心</a></li>
-                            </c:otherwise>
-                        </c:choose>
-                    </ul>
-                    <div class="extra-text visible-xs">
-                        <ul class="social-buttons">
-                            <li><a href="#"><i class="icon-twitter"></i></a></li>
-                            <li><a href="#"><i class="icon-facebook"></i></a></li>
-                            <li><a href="#"><i class="icon-instagram2"></i></a></li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-        </div>
-    </header>
+    <jsp:include page="../common/user/head.jsp"/>
     <section class="container">
         <div class="leftNav-item">
             <ul>
@@ -3693,7 +3665,7 @@
             }
             else if(boolean){
                 $.ajax({
-                    url : "<%=path%>/post" ,
+                    url : "<%=path%>/user" ,
                     type : "post" ,
                     data : {action : "addpost" ,titeid : $("#titeid").val() , postContent : editor.txt.html() ,secondId :${secondId} } ,
                     dataType : "json" ,

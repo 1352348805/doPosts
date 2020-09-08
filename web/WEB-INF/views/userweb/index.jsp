@@ -15,7 +15,7 @@
   <meta name="keywords" content="">
   <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/search-form.css">
   <link rel="stylesheet" href="<%=path%>/static/css/dynamic/indexDynamic.css">
-<%--  <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet">--%>
+  <%--  <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet">--%>
   <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/styles-merged.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/style.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/custom.css">
@@ -114,19 +114,19 @@
 
       <div class="mobile-menu-overlay"></div>
 
-      <nav role="navigation" class="probootstrap-nav hidden-xs" style="padding-right: 60px;margin-right: 100px;float: right;">
+      <nav role="navigation" class="probootstrap-nav hidden-xs" style="padding-right: 60px;margin:56px 50px 0px 0px;float: right;">
 
         <ul class="probootstrap-main-nav">
           <c:choose>
             <c:when test="${user == null}">
-              <li><a href="${pageContext.request.contextPath }/user?action=toLogin" style="color: red" >登录</a></li>
-              <li><a href="${pageContext.request.contextPath }/user?action=toRegister" style="color: red">注册</a></li>
+              <li><a id="blink" href="${pageContext.request.contextPath }/user?action=toLogin" style="color: red;font-size: 25px;font-weight: bolder;" >登录</a></li>
+              <li><a href="${pageContext.request.contextPath }/user?action=toRegister" style="color: red;font-size: 25px;font-weight: bolder;">注册</a></li>
             </c:when>
             <c:otherwise>
-              <li style="color: red;">欢迎你: ${user.userName}</li>
-              <li style="color: #fff;"><a href="${pageContext.request.contextPath }/user?action=index">首页</a></li>
-              <li style="color: #fff;"><a href="${pageContext.request.contextPath }/user?action=toUserCenter">个人中心</a></li>
-              <li style="color: #fff;"><a href="${pageContext.request.contextPath }/user?action=exit">退出</a></li>
+              <li style="color: blue;font-size: 25px;font-weight: bolder;">欢迎你: ${user.userName}</li>
+              <li><a style="color: blue;font-size: 25px;font-weight: bolder;" href="${pageContext.request.contextPath }/user?action=index">首页</a></li>
+              <li><a style="color: blue;font-size: 25px;font-weight: bolder;" href="${pageContext.request.contextPath }/user?action=toUserCenter&uid=${user.userId}">个人中心</a></li>
+              <li><a style="color: blue;font-size: 25px;font-weight: bolder;" href="${pageContext.request.contextPath }/user?action=exit">退出</a></li>
             </c:otherwise>
           </c:choose>
         </ul>

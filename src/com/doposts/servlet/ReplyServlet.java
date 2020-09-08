@@ -37,37 +37,4 @@ public class ReplyServlet extends AbstractServlet{
         replyService = new ReplyServiceImpl();
     }
 
-
-
-    public CommonResult ReplyAndReply(HttpServletRequest request,HttpServletResponse response){
-        Object object = request.getSession().getAttribute("user");
-        System.out.println(object);
-        if(object==null){
-            return new CommonResult().unauthorized("未登录");
-        }
-
-        String floorid = request.getParameter("floorid");
-        String replyContent = request.getParameter("replyContent");
-        String replyUserId = request.getParameter("replyUserId");
-         String repliedUserId=request.getParameter("repliedUserId");
-        System.out.println("floorid:"+floorid);
-        System.out.println("replyContent:"+replyContent);
-        System.out.println("replyUserId:"+replyUserId);
-        System.out.println("repliedUserId:"+repliedUserId);
-        Reply reply=new Reply();
-         reply.setFloorId(Integer.valueOf(floorid));
-         reply.setReplyContent(replyContent);
-         reply.setReplyUserId(Integer.valueOf(replyUserId));
-         if (repliedUserId != null && !"".equals(repliedUserId) && !"0".equals(repliedUserId)){
-             reply.setRepliedUserId(Integer.valueOf(repliedUserId));
-         }
-         Date replyDate = new Date();
-         reply.setReplyDate(replyDate);
-         try {
-             replyService.insertReple(reply);
-         }catch (Exception e){
-             return new CommonResult().failed();
-         }
-        return new CommonResult().success(reply);
-    }
 }

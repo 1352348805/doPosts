@@ -10,6 +10,16 @@
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<title>Home</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/search-form.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/fontawesome-all.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/vendor/bootstrap.min.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/style.nav.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/styles-merged.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/custom.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/font-awesome/css/font-awesome.css">
+	<script type="text/javascript" src="${pageContext.request.contextPath }/static/js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/static/js/jquery-1.11.0.min.js"></script>
+	<script src="${pageContext.request.contextPath }/static/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="${pageContext.request.contextPath }/static/js/bootbox.min.js"></script>
 	<link href="<%=path%>/static/css/forumpark/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 	<!--theme-style-->
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/style.css">
@@ -33,6 +43,18 @@
 	</style>
 </head>
 <body>
+<div class="leftNav-item">
+	<ul>
+		<li>
+			<i class="fa fa-user-circle"></i>
+			<a href="javascript:void(0)" class="rota">个人中心</a>
+		</li>
+		<li title="都不感兴趣?创建一个">
+			<i class="fa fa-pencil-square-o"></i>
+			<a href="${pageContext.request.contextPath}/user?action=toCategoryCreate" class="rota">建吧</a>
+		</li>
+	</ul>
+</div>
 <!--header-->
 <jsp:include page="../common/user/head.jsp"/>
 <div class="bottom-header">
@@ -54,7 +76,7 @@
 	</div>
 </div>
 
-<div class="container" style="margin-left: 15%">
+<div class="container" style="margin-left: 10%">
 	<div class="banner-menu">
 
 		<div class="shoes-grid">
@@ -143,8 +165,8 @@
 								"\t\t\t\t\t\t<span style=\"margin-bottom: 20px;display: inline-block;\"><a href=\"<%=path%>/user?action=postpage&secondId="+date[i].classId+"&postname="+date[i].className+"\">"+date[i].className+"</a></span>\n" +
 								"\t\t\t\t\t\t<p>";
 						if(!(date[i].classDescribe === undefined)) {
-							if (date[i].classDescribe.length > 40) {
-								bardiv += date[i].classDescribe.substring(0,40);
+							if (date[i].classDescribe.length > 30) {
+								bardiv += date[i].classDescribe.substring(0,30);
 								bardiv += "...";
 							} else {
 								bardiv += date[i].classDescribe;
@@ -164,7 +186,7 @@
 									"\t\t\t\t\t\t<p>";
 							if(!(date[i].classDescribe === undefined)) {
 								if (date[i].classDescribe.length > 30) {
-									bardiv += date[i].classDescribe.substring(0,40);
+									bardiv += date[i].classDescribe.substring(0,30);
 									bardiv += "...";
 								} else {
 									bardiv += date[i].classDescribe;
