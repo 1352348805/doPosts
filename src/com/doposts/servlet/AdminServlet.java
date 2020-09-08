@@ -149,12 +149,14 @@ public class AdminServlet extends AbstractServlet {
     public Object updateTwa(HttpServletRequest request, HttpServletResponse response) {
         Integer userid = Integer.parseInt(request.getParameter("userId"));
 //        String userLoginName = request.getParameter("userLoginName");
+        Integer status = Integer.parseInt(request.getParameter("status"));
         String userPassword = request.getParameter("userPassword");
         String userName = request.getParameter("userName");
         String group = request.getParameter("group");
         User user = new User();
         user.setUserId(userid);
 //        user.setUserLoginName(userLoginName);
+        user.setStatus(status);
         user.setUserPassword(userPassword);
         user.setUserName(userName);
         user.setGroup(group);

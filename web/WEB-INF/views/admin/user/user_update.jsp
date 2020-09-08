@@ -61,7 +61,31 @@
                     </td>
                 </tr>
                 <tr>
-                    <td width="135" align="right">分类级别</td>
+                    <td align="right">
+                        状态
+                    </td>
+                    <td colspan="3" style="font-family:'宋体';">
+                        <select class="jj" name="type" style="background-color:#f6f6f6;" id="status">
+                            <option value="1"
+                                    <c:if test="${sb.status == 1}">
+                                        selected
+                                    </c:if>
+                            >正常</option>
+                            <option value="0"
+                                    <c:if test="${sb.status == 0}">
+                                        selected
+                                    </c:if>
+                            >封禁</option>
+                            <option value="-100"
+                                    <c:if test="${sb.status == -100}">
+                                        selected
+                                    </c:if>
+                            >禁言</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="135" align="right">角色</td>
                     <td colspan="3" style="font-family:'宋体';">
                         <select class="jj" name="type" style="background-color:#f6f6f6;" id="group">
                             <option value="admin"
@@ -111,6 +135,7 @@
                 'userLoginName': $("#userLoginName").val(),
                 'userPassword': $("#userPassword").val(),
                 'userName': $("#userName").val(),
+                'status': $("#status").val(),
                 'group': $("#group").val(),
                 'userId': ${sb.userId}
             },
