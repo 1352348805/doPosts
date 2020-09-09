@@ -114,7 +114,7 @@
 <script type="text/javascript" src="<%=path%>/static/calendar/WdatePicker.js"></script>
 <script>
     var path = $("#path").val();
-
+    var laypage;
     //加载列表
     loadRequestList({action:'getPostList'});
     //加载分类数据
@@ -123,9 +123,10 @@
     layui.use('layer', function(){
         var layer = layui.layer;
     });
+    var count = 0;
     layui.use('laypage', function(){
-        var laypage = layui.laypage;
-        let count;
+        laypage = layui.laypage;
+
         $.ajaxSettings.async = false;
         $.post(path + '/post',{action :'getPostCountByCondition'},function (result) {
             count = result.data;
@@ -209,9 +210,9 @@
         ajaxQuery(parentId,selectId);
     }
 
-
     function loadRequestList(data) {
         $.post(path + '/post',data,function (result) {
+            count = result.data.totalCount;
             if (result.code ==200) {
                 let data = result.data.data;
                 let html = "<tr>\n" +
@@ -225,7 +226,7 @@
                     "</tr>";
                 for (let i = 0;i < data.length; i++) {
                     html += "<tr>\n" +
-                        "<th width=\"10%\"><a style='color: blue' href='" + path + "/user?action=postAndfloor&postid="+data[i].postId+"'>"+data[i].postName+"</a></th>\n" +
+                        "<th width=\"10%\"><a style='color: blue' href='" + path + "/admin?action=toPostReplyManag&postid="+data[i].postId+"'>"+data[i].postName+"</a></th>\n" +
                         "<th width=\"10%\">"+data[i].postClassLevel1Name+"</th>\n" +
                         "<th width=\"10%\">"+data[i].postClassLevel2Name+"</th>\n" +
                         "<th width=\"10%\">"+data[i].postClassLevel3Name+"</th>\n" +
@@ -252,7 +253,34 @@
             postClassLevel2Id : categoryLevel2Id,
             postClassLevel3Id : categoryLevel3Id
         }
+        $.ajaxSettings.async = false;
         loadRequestList(data);
+        $.ajaxSettings.async = true;
+        //执行一个laypage实例
+        laypage.render({
+            elem: 'page' //注意，这里的 test1 是 ID，不用加 # 号
+            ,limit: 10
+            ,theme: '#5994d6'
+            ,count: count //数据总数，从服务端得到
+            ,
+            jump: function(e, first){ //触发分页后的回调
+                if(!first){ //一定要加此判断，否则初始时会无限刷新
+                    let pageIndex = e.curr; //当前页
+                    let pageSize = e.limit;
+                    let data = {
+                        action:'getPostList',
+                        pageIndex : pageIndex,
+                        pageSize : pageSize,
+                        postName : postName,
+                        createUserName : createUserName,
+                        postClassLevel1Id : categoryLevel1Id,
+                        postClassLevel2Id : categoryLevel2Id,
+                        postClassLevel3Id : categoryLevel3Id
+                    }
+                    loadRequestList(data);
+                }
+            }
+        });
     });
 </script>
 </body>

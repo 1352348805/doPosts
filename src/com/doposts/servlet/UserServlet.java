@@ -91,7 +91,7 @@ public class UserServlet extends AbstractServlet{
             return "login";
         }
         request.getSession().setAttribute("user", user);
-        if (targetURL.isEmpty()) {
+        if (targetURL.isEmpty() || targetURL.contains("toRegister")) {
             response.sendRedirect(request.getContextPath() + "/user?action=index");
             return null;
         }

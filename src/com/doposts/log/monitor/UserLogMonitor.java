@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class UserLogMonitor {
 
-    private static UserLogMonitor instance = null;
+    private static volatile UserLogMonitor instance = null;
 
     public static UserLogMonitor getInstance() {
         if (instance == null) {
@@ -30,7 +30,7 @@ public class UserLogMonitor {
     /**
      * 用户日志容器
      */
-    private Map<String, LinkedList<RequesterItem>> logContainer = new ConcurrentHashMap<>();
+    private final Map<String, LinkedList<RequesterItem>> logContainer = new ConcurrentHashMap<>();
 
     /**
      * 超时阈值 单位:分钟
@@ -43,7 +43,7 @@ public class UserLogMonitor {
     public void recordInLogContainer(RequesterItem item) {
         LinkedList<RequesterItem> items = logContainer.get(item.getId());
         if (items == null) {
-            logContainer.put(item.getId(), new LinkedList<>(Arrays.asList(item)));
+            logContainer.put(item.getId(), new LinkedList<>(Collections.singletonList(item)));
             return;
         }
         items.addFirst(item);
@@ -57,7 +57,11 @@ public class UserLogMonitor {
     /**
      * 清除不活跃记录
      */
-    public void clearInactiveData() {
+    public void clearInactiveData(boolean isMoment) {
+        if (isMoment) {
+            logContainer.clear();
+            return;
+        }
         logContainer.keySet().forEach(key -> {
             LinkedList<RequesterItem> items = logContainer.get(key);
             if ((System.currentTimeMillis()-items.get(items.size()-1).getRequestTimestamp())/60000.00 > maxTimeThreshold) {

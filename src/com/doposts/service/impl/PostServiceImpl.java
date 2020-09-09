@@ -79,6 +79,11 @@ public class PostServiceImpl  implements PostService {
      */
     @Override
     public boolean deletePostById(int id) {
+        try {
+            PostItDatabase.getCRUD().executeUpdate("DELETE FROM `floor` WHERE postId = ?", id);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         return PostItDatabase.POST_DAO.deletePostById(id) > 0;
     }
 

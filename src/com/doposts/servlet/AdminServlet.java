@@ -10,15 +10,14 @@ import com.doposts.entity.PostClass;
 import com.doposts.entity.User;
 import com.doposts.log.entity.RequesterItem;
 import com.doposts.log.monitor.UserLogMonitor;
-import com.doposts.service.impl.CreateClassRequestServiceImpl;
-import com.doposts.service.impl.PostClassServiceImpl;
-import com.doposts.service.impl.UserServiceImpl;
-import com.doposts.service.interfaces.CreateClassRequestService;
-import com.doposts.service.interfaces.PostClassService;
-import com.doposts.service.interfaces.UserService;
+import com.doposts.service.impl.*;
+import com.doposts.service.interfaces.*;
 import com.doposts.to.CommonResult;
 import com.doposts.utils.Page;
+import com.doposts.vo.FloorWithReply;
 import com.doposts.vo.PostClassRequestInfo;
+import com.doposts.vo.SelectAllPostAndFloor;
+import com.doposts.vo.SuperPost;
 
 import javax.jms.Message;
 import javax.servlet.ServletException;
@@ -41,6 +40,9 @@ public class AdminServlet extends AbstractServlet {
     private PostClassService postClassService;
     private CreateClassRequestService createClassRequestService;
     private UserService userService;
+    private PostService postService;
+    private FloorService floorService;
+    private ReplyService replyService;
     private UserLogMonitor userLogMonitor;
 
     @Override
@@ -53,6 +55,9 @@ public class AdminServlet extends AbstractServlet {
         postClassService = new PostClassServiceImpl();
         createClassRequestService = new CreateClassRequestServiceImpl();
         userService = new UserServiceImpl();
+        postService = new PostServiceImpl();
+        floorService = new FloorServiceImpl();
+        replyService = new ReplyServiceImpl();
         userLogMonitor = UserLogMonitor.getInstance();
     }
 
@@ -439,6 +444,64 @@ public class AdminServlet extends AbstractServlet {
         return "admin/monitor/user_monitor";
     }
 
+    public String toPostReplyManag(HttpServletRequest request, HttpServletResponse response) {
+        Integer pageIndex = null;
+        Integer pageSize = null;
+        try{
+            pageIndex = Integer.valueOf(request.getParameter("pageindex"));
+            System.out.println("当前页码："+pageIndex);
+            pageSize = Integer.valueOf(request.getParameter("pageSize"));
+            System.out.println("显示页数："+pageSize);
+        }
+        catch(Exception e){
+            pageIndex = 1;
+            pageSize = 10;
+        }
+        Integer postid = Integer.valueOf(request.getParameter("postid"));
+        postService.postViewNumber(postid);
+        Integer floorCountByPostId = floorService.getFloorCountByPostId(postid);
+        Page<FloorWithReply> page=new Page<FloorWithReply>();
+        page.setTotalCount(floorCountByPostId);
+        page.setCurrPageNo(pageIndex);
+        page.setPageSize(pageSize);
+
+        SelectAllPostAndFloor id = floorService.getFloorById(postid,page.getCurrPageNo(),page.getPageSize());
+
+        SuperPost superPost= postService.getSuperPostById(postid);
+        List<FloorWithReply> floorWithReplies= id.getFloor();
+        request.setAttribute("post",superPost);
+        request.setAttribute("page",page);
+        request.setAttribute("floor",floorWithReplies);
+        request.setAttribute("postid",postid);
+        return "admin/post/post_reply_manag";
+    }
+
+    /**
+     * 删楼
+     */
+    public CommonResult deleteFloor(HttpServletRequest request, HttpServletResponse response) {
+        Integer postId = Integer.valueOf(request.getParameter("postId"));
+        Integer floorId = Integer.valueOf(request.getParameter("floorId"));
+        boolean b = floorService.deleteFloor(postId,floorId);
+        if (b) {
+            return new CommonResult().success(null);
+        }
+        return new CommonResult().failed("删除失败");
+    }
+
+
+    /**
+     * 删回复
+     */
+    public CommonResult deleteReply(HttpServletRequest request, HttpServletResponse response) {
+        Integer replyId = Integer.valueOf(request.getParameter("replyId"));
+        boolean b = replyService.deleteReply(replyId);
+        if (b) {
+            return new CommonResult().success(null);
+        }
+        return new CommonResult().failed("删除失败");
+    }
+
     /**
      * 获取用户日志容器
      */
@@ -457,7 +520,8 @@ public class AdminServlet extends AbstractServlet {
      * 清除不活跃用户日志
      */
     public CommonResult clearInactiveData(HttpServletRequest request, HttpServletResponse response) {
-        userLogMonitor.clearInactiveData();
+        userLogMonitor.clearInactiveData(true);
         return new CommonResult().success(null);
     }
+
 }

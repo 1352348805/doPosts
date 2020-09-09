@@ -17,4 +17,12 @@ public interface ReplyService {
      */
     Integer insertReple(Reply reply);
 
+
+    /**
+     * 删除回复
+     * @param replyId 主键
+     * @return
+     */
+    boolean deleteReply(Integer replyId);
+
 }

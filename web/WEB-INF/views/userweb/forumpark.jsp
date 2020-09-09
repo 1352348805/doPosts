@@ -61,13 +61,13 @@
 	<div class="container">
 		<div class="header-bottom-left">
 			<div class="logo">
-				<a href="index.html">
-					<img style="height: 160px; padding-left: 100px" src="${pageContext.request.contextPath }/static/images/head/1-10.png" alt=" " />
+				<a href="${pageContext.request.contextPath }/user?action=index">
+					<img style="height: 200px; padding-left: 20px" src="${pageContext.request.contextPath }/static/images/head/1-10.png" alt=" " />
 				</a>
 			</div>
 		</div>
 		<div class="header-bottom-right" style="position: absolute;left: 27%;margin-top: 130px">
-			<ul class="nav navbar-nav navbar-right" id="one_category" style="font-size: 20px;font-weight: bolder;">
+			<ul class="nav navbar-nav navbar-right" id="one_category" style="font-size: 22px;font-weight: bolder;">
 				<li><a href="${pageContext.request.contextPath }/user?action=index">首页</a></li>
 
 			</ul>

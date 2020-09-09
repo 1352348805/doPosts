@@ -5,7 +5,12 @@ import com.doposts.dao.PostItDatabase;
 import com.doposts.dao.monitor.DatabaseMonitorServlet;
 import com.doposts.entity.Reply;
 import com.doposts.vo.SuperPost;
+import com.dxhualuo.database.connection.ConnectionManager;
+import com.dxhualuo.database.handler.base.TransactionCrudHandler;
+import com.dxhualuo.database.handler.interfaces.DatabaseCrud;
+import com.dxhualuo.database.interfaces.Database;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -18,8 +23,8 @@ import java.util.List;
 @SuppressWarnings("RedundantThrows")
 public class Run {
     public static void main(String[] args) throws Exception{
-//        DatabaseMonitorServlet monitorServlet = new DatabaseMonitorServlet();
-//        monitorServlet.init();
+        DatabaseMonitorServlet monitorServlet = new DatabaseMonitorServlet();
+        monitorServlet.init();
 //        System.out.println(PostItDatabase.getCRUD().executeUpdate("UPDATE `post` SET  `watchCount`=`watchCount`+1  WHERE `postId`=?",3));
 //          String url = "action=postAndfloor&postid=8&pageindex=2&pageSize=10";
 //          String[] list =url.split("&");
@@ -30,8 +35,6 @@ public class Run {
 //            }
 //            System.out.println(list[i]);
 //        }
-
-
          Object oo = new Object() ;
         System.out.println(oo);
         System.out.println(oo = new Object());

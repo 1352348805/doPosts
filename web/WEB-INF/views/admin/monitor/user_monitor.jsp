@@ -30,9 +30,13 @@
     <%@include file="../../common/admin/leftnav.jsp"%>
     <input type="hidden" id="path" name="path" value="${pageContext.request.contextPath }"/>
     <div class="right">
+        <button class="layui-btn" onclick="clearLog()">
+            清除用户日志
+        </button>
         <div id="box" class="layui-table-box" style="overflow: auto;height: 100%; padding: 20px;">
 
         </div>
+
     </div>
 </section>
 <footer class="footer">
@@ -44,6 +48,15 @@
 <script type="text/javascript" src="<%=path%>/static/calendar/WdatePicker.js"></script>
 <script>
     var path = $("#path").val();
+    function clearLog() {
+        let data = {
+            action : 'clearInactiveData'
+        }
+        $.post(path + "/admin",data,function (result) {
+            alert('清除成功');
+            location.reload();
+        })
+    }
     function str2utf8(str) {
         encoder = new TextEncoder('utf8');
         return encoder.encode(str);
@@ -171,7 +184,6 @@
         loadLogData();
     }
     $(function () {
-        $.post(path + "/admin",{action:'clearInactiveData'});
         loadLogData();
         setInterval(dynamicLoad,10000);
     });

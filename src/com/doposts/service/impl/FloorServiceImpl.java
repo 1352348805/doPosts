@@ -11,6 +11,7 @@ import com.doposts.vo.FloorWithReply;
 import com.doposts.vo.SelectAllPostAndFloor;
 import com.mchange.v1.util.Sublist;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -83,6 +84,23 @@ public class FloorServiceImpl  implements FloorService {
     @Override
     public Integer getFloorCountByPostId(int postId) {
         return PostItDatabase.FLOOR_DAO.getFloorCountByPostId(postId);
+    }
+
+    /**
+     * 删除楼层
+     *
+     * @param postId  帖子id
+     * @param floorId 楼id
+     * @return
+     */
+    @Override
+    public boolean deleteFloor(Integer postId, Integer floorId) {
+        try {
+            return PostItDatabase.getCRUD().executeUpdate("DELETE FROM `floor` WHERE postId = ? AND postFloor = ?",postId,floorId) > 0;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
     }
 
 }
