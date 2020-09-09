@@ -27,10 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author asuk
@@ -446,12 +443,11 @@ public class AdminServlet extends AbstractServlet {
      * 获取用户日志容器
      */
     public CommonResult userLogList(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Map<String, ArrayList<RequesterItem>> logContainer = userLogMonitor.getLogContainer();
-        List<ArrayList<RequesterItem>> list = new ArrayList<>(logContainer.values());
+        Map<String, LinkedList<RequesterItem>> logContainer = userLogMonitor.getLogContainer();
+        List<LinkedList<RequesterItem>> list = new LinkedList<>(logContainer.values());
 
         PrintWriter out = response.getWriter();
-        String jsonString = JSONObject.toJSONString(list, SerializerFeature.DisableCircularReferenceDetect);
-        out.print(new CommonResult().success(JSONObject.toJSONString(list, SerializerFeature.DisableCircularReferenceDetect)));
+        out.print(JSONObject.toJSONString(new CommonResult().success(list), SerializerFeature.DisableCircularReferenceDetect));
         out.flush();
         out.close();
         return null;
