@@ -296,7 +296,7 @@
                     <div id="editor" >
 
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" style="float:right;">
                         <input type="button" class="btn btn-primary" id="spend" name="submit" value="发表">
                     </div>
                 </form>
