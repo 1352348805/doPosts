@@ -14,10 +14,7 @@ import com.doposts.service.impl.*;
 import com.doposts.service.interfaces.*;
 import com.doposts.to.CommonResult;
 import com.doposts.utils.Page;
-import com.doposts.vo.FloorWithReply;
-import com.doposts.vo.PostClassRequestInfo;
-import com.doposts.vo.SelectAllPostAndFloor;
-import com.doposts.vo.SuperPost;
+import com.doposts.vo.*;
 
 import javax.jms.Message;
 import javax.servlet.ServletException;
@@ -282,12 +279,23 @@ public class AdminServlet extends AbstractServlet {
         } catch (Exception e) {
             return new CommonResult().validateFailed("非法参数!!!");
         }
-
-        if (level != 3) {
-            Integer count = postClassService.getPostClassChildrenCountById(classId);
-            if (count > 0) {
-                return new CommonResult().failed("该分类下还有" + count + "条数据,不能删除!");
-            }
+//        if (level != 3) {
+//            Integer count = postClassService.getPostClassChildrenCountById(classId);
+//            if (count > 0) {
+//                return new CommonResult().failed("该分类下还有" + count + "个子分类,不能删除!");
+//            }
+//        }
+        PostQueryParam queryParam = new PostQueryParam();
+        if (level == 1) {
+            queryParam.setPostClassLevel1Id(classId);
+        } else if (level == 2) {
+            queryParam.setPostClassLevel2Id(classId);
+        } else if (level == 3) {
+            queryParam.setPostClassLevel3Id(classId);
+        }
+        Integer postCountByCondition = postService.getPostCountByCondition(queryParam);
+        if (postCountByCondition > 0) {
+            return new CommonResult().failed("该分类下还有" + postCountByCondition + "条帖子,不能删除!");
         }
         boolean b = postClassService.deletePostClassById(classId);
         if (b) {
