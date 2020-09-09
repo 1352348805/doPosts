@@ -113,7 +113,10 @@ public class UserServiceImpl implements UserService {
     public int getDeleteUser(int id) {
         int qwq=0;
         try {
-            qwq=PostItDatabase.USER_DAO.deleteUser(id);
+            User user = new User();
+            user.setUserId(id);
+            user.setStatus(-1);
+            qwq=PostItDatabase.USER_DAO.updateUserInfo(user);
         }catch (Exception e){
             e.printStackTrace();
         }

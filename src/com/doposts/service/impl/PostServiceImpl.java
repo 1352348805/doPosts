@@ -8,7 +8,9 @@ import com.doposts.vo.PostInfo;
 import com.doposts.vo.PostQueryParam;
 import com.doposts.vo.SuperPost;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -80,7 +82,24 @@ public class PostServiceImpl  implements PostService {
     @Override
     public boolean deletePostById(int id) {
         try {
-            PostItDatabase.getCRUD().executeUpdate("DELETE FROM `floor` WHERE postId = ?", id);
+            List<Integer> floorNum = new ArrayList<>();
+            ResultSet rs = PostItDatabase.getCRUD().executeQuery("SELECT postFloor FROM `floor` WHERE postId = ?", id);
+            String p = "";
+            while (rs.next()) {
+                Integer i = rs.getInt(1);
+                p += "?,";
+                floorNum.add(i);
+            }
+            if (!"".equals(p)) {
+                PostItDatabase.getCRUD().executeUpdate("DELETE FROM `reply` WHERE floorId IN("+p.substring(0,p.length()-1)+")", floorNum.toArray());
+            }
+            new Thread(()->{
+                try {
+                    PostItDatabase.getCRUD().executeUpdate("DELETE FROM `floor` WHERE postId = ?", id);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }).start();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

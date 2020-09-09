@@ -117,16 +117,14 @@
                 let html = "<tr>\n" +
                     // "                <th>头像</th>\n" +
                     "                <th>账号</th>\n" +
-                    "                <th>密码</th>\n" +
                     "                <th>昵称</th>\n" +
-                    "                <th>权限</th>\n" +
+                    "                <th>角色</th>\n" +
                     "                <th>操作</th>\n" +
                     "</tr>";
                 for (let i = 0;i < data.length; i++) {
                     html += "<tr>\n" +
                         // "<th width=\"10%\">"+data[i].favicon+"</th>\n" +
                         "<th width=\"10%\">"+data[i].userLoginName+"</th>\n" +
-                        "<th width=\"10%\">"+data[i].userPassword+"</th>\n" +
                         "<th width=\"10%\">"+data[i].userName+"</th>\n" +
                         "<th width=\"10%\">";
                            if (data[i].group == 'admin') {

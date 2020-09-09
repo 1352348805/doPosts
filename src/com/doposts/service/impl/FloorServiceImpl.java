@@ -96,6 +96,7 @@ public class FloorServiceImpl  implements FloorService {
     @Override
     public boolean deleteFloor(Integer postId, Integer floorId) {
         try {
+            PostItDatabase.getCRUD().executeUpdate("DELETE FROM `reply` WHERE floorId = ?",floorId);
             return PostItDatabase.getCRUD().executeUpdate("DELETE FROM `floor` WHERE postId = ? AND postFloor = ?",postId,floorId) > 0;
         } catch (SQLException throwables) {
             throwables.printStackTrace();

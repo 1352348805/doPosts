@@ -47,7 +47,14 @@
 	<ul>
 		<li>
 			<i class="fa fa-user-circle"></i>
-			<a href="javascript:void(0)" class="rota">个人中心</a>
+			<c:choose>
+				<c:when test="${user == null}">
+					<a href="${pageContext.request.contextPath }/user?action=toLogin" class="rota">登录</a>
+				</c:when>
+				<c:otherwise>
+					<a href="${pageContext.request.contextPath }/user?action=toUserCenter&uid=${user.userId}" class="rota">个人中心</a>
+				</c:otherwise>
+			</c:choose>
 		</li>
 		<li title="都不感兴趣?创建一个">
 			<i class="fa fa-pencil-square-o"></i>

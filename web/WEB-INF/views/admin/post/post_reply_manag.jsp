@@ -458,7 +458,7 @@
                     let pageIndex = e.curr; //当前页
                     let pageSize = e.limit;
 
-                    location.href = path + "/user?action=postAndfloor&postid=${postid}&pageindex="+pageIndex+"&pageSize="+pageSize;
+                    location.href = path + "/admin?action=toPostReplyManag&postid=${postid}&pageindex="+pageIndex+"&pageSize="+pageSize;
                     //有postid应拼接
                 }
             }
