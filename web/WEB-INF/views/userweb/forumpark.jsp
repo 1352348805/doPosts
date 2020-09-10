@@ -29,7 +29,7 @@
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<!--fonts-->
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/js/assets/waifu.min.css?v=1.4.2"/><%--伴娘css样式>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/js/assets/waifu.min.css?v=1.4.2"/>
 	<!--//fonts-->
 	<script src="<%=path%>/static/js/forumpark/jquery.min.js"></script>
 	<script src="<%=path%>/static/js/forumpark/jquery.easydropdown.js"></script>
@@ -47,7 +47,14 @@
 	<ul>
 		<li>
 			<i class="fa fa-user-circle"></i>
-			<a href="javascript:void(0)" class="rota">个人中心</a>
+			<c:choose>
+				<c:when test="${user == null}">
+					<a href="${pageContext.request.contextPath }/user?action=toLogin" class="rota">登录</a>
+				</c:when>
+				<c:otherwise>
+					<a href="${pageContext.request.contextPath }/user?action=toUserCenter&uid=${user.userId}" class="rota">个人中心</a>
+				</c:otherwise>
+			</c:choose>
 		</li>
 		<li title="都不感兴趣?创建一个">
 			<i class="fa fa-pencil-square-o"></i>
@@ -55,7 +62,7 @@
 		</li>
 		<li title="返回" class="for-top" style="display: list-item;">
 			<i class="fa fa-arrow-up"></i>
-			<a href="#" class="rota" id="to_top">返回</a>
+			<a href="${pageContext.request.contextPath}/user?action=index" class="rota" id="to_top">返回</a>
 		</li>
 	</ul>
 </div>
@@ -65,13 +72,13 @@
 	<div class="container">
 		<div class="header-bottom-left">
 			<div class="logo">
-				<a href="${pageContext.request.contextPath}/user?action=index">
-					<img style="height: 160px; padding-left: 100px" src="${pageContext.request.contextPath }/static/images/head/1-10.png" alt=" " />
+				<a href="${pageContext.request.contextPath }/user?action=index">
+					<img style="height: 200px; padding-left: 20px" src="${pageContext.request.contextPath }/static/images/head/1-10.png" alt=" " />
 				</a>
 			</div>
 		</div>
 		<div class="header-bottom-right" style="position: absolute;left: 27%;margin-top: 130px">
-			<ul class="nav navbar-nav navbar-right" id="one_category" style="font-size: 20px;font-weight: bolder;">
+			<ul class="nav navbar-nav navbar-right" id="one_category" style="font-size: 22px;font-weight: bolder;">
 				<li><a href="${pageContext.request.contextPath }/user?action=index">首页</a></li>
 
 			</ul>
@@ -115,7 +122,7 @@
 			<div class=" top-nav rsidebar span_1_of_left">
 				<h3 class="cate">全部贴吧分类</h3>
 				<ul class="menu">
-					<ul class="kid-menu">
+					<ul class="kid-menu ">
 						<%--						<li><a href="#">date[i].className</a></li>--%>
 						<%--						<li><a href="product.html">Urna ac tortor sc</a></li>--%>
 						<%--						<li><a href="product.html">Ornared id aliquet</a></li>--%>
@@ -143,11 +150,6 @@
 							$(this).next().stop(true,true).slideUp('normal');
 						}
 					});
-					$("#to_top").click(function () {
-
-						window.location.href="${pageContext.request.contextPath}/user?action=index";
-
-					})
 
 				});
 			</script>
@@ -159,7 +161,6 @@
 <input type="hidden" id="pid" value="<%=barid%>"/>
 <div style="display: inline-block"></div>
 <!---->
-
 <script type="text/javascript">
 
 	// 展示一级贴吧分类的下所有三级贴吧
@@ -219,7 +220,6 @@
 	}
 
 	$(function(){
-
 		kid_menu();
 		threelevelbar($("#pid").val());
 		// 展示页面左边导航栏
@@ -248,10 +248,6 @@
 		},'json');
 	});
 </script>
-
-
-
-
 <!-- waifu-tips.js 依赖 JQuery 库 -->
 <script src="${pageContext.request.contextPath}/static/js/assets/jquery.min.js?v=3.3.1"></script>
 <!-- 实现拖动效果，需引入 JQuery UI -->
@@ -287,7 +283,7 @@
 	live2d_settings['waifuDraggable'] = 'axis-x';    // 拖拽样式
 	live2d_settings['waifuEdgeSide'] = 'left:30';     // 看板娘贴边方向
 	/* 在 initModel 前添加 */
-	initModel("${pageContext.request.contextPath}/static/js/assets/waifu-tips.json?v=1.4.2")<%--板娘的初始化模型>
+	initModel("${pageContext.request.contextPath}/static/js/assets/waifu-tips.json?v=1.4.2")
 </script>
 </body>
 </html>

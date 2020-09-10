@@ -74,7 +74,14 @@
             <ul>
                 <li>
                     <i class="fa fa-user-circle"></i>
-                    <a href="${pageContext.request.contextPath }/user?action=toUserCenter" class="rota">个人中心</a>
+                    <c:choose>
+                        <c:when test="${user == null}">
+                            <a href="${pageContext.request.contextPath }/user?action=toLogin" class="rota">登录</a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="${pageContext.request.contextPath }/user?action=toUserCenter&uid=${user.userId}" class="rota">个人中心</a>
+                        </c:otherwise>
+                    </c:choose>
                 </li>
                 <li title="回复">
                     <i class="fa fa-pencil-square-o"></i>
@@ -3611,7 +3618,7 @@
             //执行一个laypage实例
             laypage.render({
                 elem: 'page' //注意，这里的 test1 是 ID，不用加 # 号
-                ,limit: 5
+                ,limit: 10
                 ,curr: getQueryVariable('pageindex')
                 ,theme: '#5994d6'
                 ,count: count //数据总数，从服务端得到
