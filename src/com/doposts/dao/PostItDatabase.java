@@ -24,7 +24,6 @@ import static com.dxhualuo.database.connection.ConnectionManager.URL_PARAMETER;
  */
 @SuppressWarnings("unused")
 public class PostItDatabase {
-    //初始化顺序不要动，C3P0连接配置在第一个FloorDaoImpl类中
     //代理对象请放到这里
     public static final FloorDao FLOOR_DAO;
     public static final PostClassDao POST_CLASS_DAO;
@@ -57,7 +56,7 @@ public class PostItDatabase {
         CrudHandler.replyCrud = new MySQLSuperCrudHandler<>(CRUD);
         CrudHandler.userCrud = new MySQLSuperCrudHandler<>(CRUD);
         CrudHandler.createClassRequestCrud = new MySQLSuperCrudHandler<>(CRUD);
-        //创建数据库接口实现
+        //创建数据库接口实现，动态代理
         FLOOR_DAO = (FloorDao)Proxy.newProxyInstance(FloorDaoImpl.class.getClassLoader(), new Class[]{FloorDao.class}, new InterfaceInvokeHandler(new FloorDaoImpl()));
         POST_CLASS_DAO = (PostClassDao)Proxy.newProxyInstance(PostClassDaoImpl.class.getClassLoader(), new Class[]{Database.class, PostClassDao.class}, new InterfaceInvokeHandler(new PostClassDaoImpl()));
         POST_DAO = (PostDao)Proxy.newProxyInstance(PostDaoImpl.class.getClassLoader(), new Class[]{Database.class, PostDao.class}, new InterfaceInvokeHandler(new PostDaoImpl()));
@@ -66,10 +65,18 @@ public class PostItDatabase {
         CREATE_CLASS_REQUEST_DAO = (CreateClassRequestDao)Proxy.newProxyInstance(CreateClassRequestDaoImpl.class.getClassLoader(), new Class[]{Database.class, CreateClassRequestDao.class}, new InterfaceInvokeHandler(new CreateClassRequestDaoImpl()));
     }
 
+    /**
+     *  获得基本的增删改查处理器
+     * @return DatabaseCrud
+     */
     public static DatabaseCrud getCRUD() {
         return CRUD;
     }
 
+    /**
+     *  获得项目使用的连接管理器
+     * @return ConnectionManager连接管理器
+     */
     public static ConnectionManager getConnectionManager() {
         return CONNECTION_MANAGER;
     }
