@@ -29,7 +29,7 @@
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<!--fonts-->
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/js/assets/waifu.min.css?v=1.4.2"/>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/js/assets/waifu.min.css?v=1.4.2"/><%--伴娘css样式>
 	<!--//fonts-->
 	<script src="<%=path%>/static/js/forumpark/jquery.min.js"></script>
 	<script src="<%=path%>/static/js/forumpark/jquery.easydropdown.js"></script>
@@ -287,7 +287,7 @@
 	live2d_settings['waifuDraggable'] = 'axis-x';    // 拖拽样式
 	live2d_settings['waifuEdgeSide'] = 'left:30';     // 看板娘贴边方向
 	/* 在 initModel 前添加 */
-	initModel("${pageContext.request.contextPath}/static/js/assets/waifu-tips.json?v=1.4.2")
+	initModel("${pageContext.request.contextPath}/static/js/assets/waifu-tips.json?v=1.4.2")<%--板娘的初始化模型>
 </script>
 </body>
 </html>
