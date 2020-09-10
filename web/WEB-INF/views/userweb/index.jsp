@@ -14,7 +14,7 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/search-form.css">
-  <link rel="stylesheet" href="<%=path%>/static/css/dynamic/indexDynamic.css">
+  <link rel="stylesheet" href="<%=path%>/static/css/dynamic/indexDynamic.css">  <%--背景飘页的css样式>
   <%--  <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet">--%>
   <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/styles-merged.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath }/static/css/style.css">
