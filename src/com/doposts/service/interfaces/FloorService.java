@@ -35,4 +35,12 @@ public interface FloorService {
      * @return
      */
     Integer getFloorCountByPostId(int postId);
+
+    /**
+     * 删除楼层
+     * @param postId 帖子id
+     * @param floorId 楼id
+     * @return
+     */
+    boolean deleteFloor(Integer postId, Integer floorId);
 }

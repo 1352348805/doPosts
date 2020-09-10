@@ -6,6 +6,8 @@ import com.doposts.dao.interfaces.UserDao;
 import com.doposts.entity.User;
 import com.dxhualuo.database.handler.interfaces.DatabaseCrud;
 import com.dxhualuo.database.handler.interfaces.SuperCrud;
+
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -65,10 +67,19 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> selectUserByStartIndexAndLength(int startIndex, int length) {
         try {
-            return crud.select(User.class, startIndex, length);
+            return crud.executeQueryToBeanListByArrayParameter(
+                    "SELECT `userId`,`userName`,`userLoginName`,`userPassword`,`group`,`favicon`,`status`,`createDate` FROM `user` " +
+                            "WHERE `status` != -1 LIMIT ?,?",
+                    User.class,
+                    new Object[]{startIndex, length});
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+//        try {
+//            return crud.select(User.class, startIndex, length);
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
     /**
@@ -77,7 +88,14 @@ public class UserDaoImpl implements UserDao {
      */
     @Override
     public int selectUserCount() {
-        return crud.selectCount(User.class);
+        try {
+            ResultSet rs = PostItDatabase.getCRUD().executeQuery("SELECT COUNT(*) FROM `user` WHERE `status` != -1");
+            rs.next();
+            return rs.getInt(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+//        return crud.selectCount(User.class);
     }
 
     /**

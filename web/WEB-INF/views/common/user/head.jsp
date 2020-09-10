@@ -21,6 +21,20 @@
                         </c:otherwise>
                     </c:choose>
                 </ul>
+<%--                <ul class="probootstrap-main-nav" style="text-shadow: 0 1px 1px rgba(0,0,0,.3);">--%>
+<%--                    <c:choose>--%>
+<%--                        <c:when test="${user == null}">--%>
+<%--                            <li><a id="blink" href="${pageContext.request.contextPath }/user?action=toLogin" style="color: red;font-size: 25px;font-weight: bolder;" >登录</a></li>--%>
+<%--                            <li><a href="${pageContext.request.contextPath }/user?action=toRegister" style="color: red;font-size: 25px;font-weight: bolder;">注册</a></li>--%>
+<%--                        </c:when>--%>
+<%--                        <c:otherwise>--%>
+<%--                            <li style="color: blue;font-size: 25px;font-weight: bolder;">欢迎你: ${user.userName}</li>--%>
+<%--                            <li><a style="color: blue;font-size: 25px;font-weight: bolder;" href="${pageContext.request.contextPath }/user?action=index">首页</a></li>--%>
+<%--                            <li><a style="color: blue;font-size: 25px;font-weight: bolder;" href="${pageContext.request.contextPath }/user?action=toUserCenter&uid=${user.userId}">个人中心</a></li>--%>
+<%--                            <li><a style="color: blue;font-size: 25px;font-weight: bolder;" href="${pageContext.request.contextPath }/user?action=exit">退出</a></li>--%>
+<%--                        </c:otherwise>--%>
+<%--                    </c:choose>--%>
+<%--                </ul>--%>
                 <div class="extra-text visible-xs">
                     <ul class="social-buttons">
                         <li><a href="#"><i class="icon-twitter"></i></a></li>

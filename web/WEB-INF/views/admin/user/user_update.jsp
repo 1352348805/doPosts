@@ -30,7 +30,7 @@
     <div class="right" style="text-align: center;">
         <input type="hidden" value="<%=request.getHeader("Referer")%>" id="hiddenid"/>
         <div class="layui-inline" >
-            <table class="layui-table" style="margin: 20% auto;">
+            <table class="layui-table" style="margin: 20% auto; width: 400px">
                 <tbody>
                 <tr>
                     <td colspan="2" style="text-align: center;font-size: 20px;">
@@ -46,10 +46,17 @@
 <%--                </tr>--%>
                 <tr>
                     <td align="right">
-                        密码
+                        头像
                     </td>
                     <td>
-                        <input type="text" id="userPassword" value="${sb.userPassword}" class="add_ipt">
+                        <c:choose>
+                            <c:when test="${sb.favicon!=null &&sb.favicon!=''}">
+                                <img class="layui-upload-img" src="${pageContext.request.contextPath }${sb.favicon}" id="test-upload-normal-img">
+                            </c:when>
+                            <c:otherwise>
+                                <img class="layui-upload-img" src="${pageContext.request.contextPath }/static/images/user_default_icon.png" id="test-upload-normal-img">
+                            </c:otherwise>
+                        </c:choose>
                     </td>
                 </tr>
                 <tr>
@@ -57,7 +64,7 @@
                         昵称
                     </td>
                     <td>
-                        <input type="text" id="userName" value="${sb.userName}" class="add_ipt">
+                        ${sb.userName}
                     </td>
                 </tr>
                 <tr>

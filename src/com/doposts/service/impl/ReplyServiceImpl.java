@@ -7,6 +7,8 @@ import com.doposts.service.interfaces.ReplyService;
 import com.doposts.vo.FloorWithReply;
 import org.jsoup.Connection;
 
+import java.sql.SQLException;
+
 /**
  * @author xiao yao
  * @date 2020/8/20 15:19
@@ -24,5 +26,21 @@ public class ReplyServiceImpl implements ReplyService {
     @Override
     public Integer insertReple(Reply reply) {
         return  PostItDatabase.REPLY_DAO.insertReply(reply);
+    }
+
+    /**
+     * 删除回复
+     *
+     * @param replyId 主键
+     * @return
+     */
+    @Override
+    public boolean deleteReply(Integer replyId) {
+        try {
+            return PostItDatabase.getCRUD().executeUpdate("DELETE FROM `reply` WHERE replyId = ?",replyId) > 0;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
     }
 }
