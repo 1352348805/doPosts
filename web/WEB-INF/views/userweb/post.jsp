@@ -80,9 +80,9 @@
                     <i class="fa fa-pencil-square-o"></i>
                     <a href="#send" class="rota">回复</a>
                 </li>
-                <li title="回到顶部" class="for-top" style="display: list-item;">
+                <li title="返回" class="for-top" style="display: list-item;">
                     <i class="fa fa-arrow-up"></i>
-                    <a href="#" class="rota" id="to_top">去顶部</a>
+                    <a href="#" class="rota" id="to_top">返回</a>
                 </li>
             </ul>
         </div>
@@ -126,7 +126,11 @@
     </section>
     <footer class="footer">
         <div class="container">
+            <p>
+                <img src="${pageContext.request.contextPath }/static/images/uugai_com_1599649694317.png" alt="dfdsf" style="width: 140px;height: 60px;"/>
+            </p>
             <p>Copyright &copy; 2020.Company name All rights reserved.</p>
+
         </div>
         <div id="gotop"><a class="gotop"></a></div>
     </footer>
@@ -3643,6 +3647,7 @@
                                 "                <p class=\"meta\">\n" +
                                 "                    <time class=\"time\"><i class=\"glyphicon glyphicon-time\"></i> "+date[i].createDate+"</time>\n" +
                                 "                    <span class=\"views\"><i class=\"glyphicon glyphicon-eye-open\"></i><i style='padding-left:3px'>"+date[i].watchCount+"</i></span> <span class=\"comment\"  title=\"评论\" target=\"_blank\"><i class=\"glyphicon glyphicon-comment\"></i><i style='padding-left:3px'>"+date[i].postReplyCount+"</i></span>\n" +
+                                "                    <span><i class=\"fa fa-user-circle\" aria-hidden=\"true\"></i><i style='padding-left:7px'>"+date[i].createUserName+"</i></span>\n" +
                                 "                </p>\n"+date[i].description+"</div></article>";
                         }
                         $("#articleid").html(articleDiv);
@@ -3693,11 +3698,15 @@
         });
     })
 </script>
-
+<%--<%--%>
+<%--    String urlHeader = request.getHeader("Referer");--%>
+<%--%>--%>
+<%--<input id="urlheader" value="<%=urlHeader%>"/>--%>
 <script type="text/javascript">
 
     $("#to_top").click(function () {
-        $('html,body').animate({ scrollTop: '0px' }, 1000);
+        // let URLheader = $("#urlheader").val();
+      window.location.href="${pageContext.request.contextPath}/user?action=forumpark&barId="+1;
     })
 
     // window.load= function(){

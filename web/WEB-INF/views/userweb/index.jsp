@@ -198,13 +198,19 @@
   <%--        </div>--%>
   <%--      </div>--%>
   <%--    </div>--%>
+  <p style="margin-left: 900px; margin-top: 150px ">
+    <img src="${pageContext.request.contextPath }/static/images/uugai_com_1599649694317.png" alt="dfdsf" style="width: 140px;height: 60px;"/>
+  </p>
   <footer style="background-color: rgba(0,0,0,0)" role="contentinfo" class="probootstrap-footer">
-    <p style="background-color: rgba(0,0,0,0);margin: auto; width: 200px;">
-      <br>
-      <small>来贴吧，一个畅谈的梦想的贴吧</small><br>
-      <%--          <a href="#" class="js-backtotop">回到顶部</a>--%>
-    </p>
+
+<%--    <p style="background-color: rgba(0,0,0,0);margin: auto; width: 200px;">--%>
+<%--      <br>--%>
+<%--      <small>来贴吧，一个畅谈的梦想的贴吧</small><br>--%>
+<%--      &lt;%&ndash;          <a href="#" class="js-backtotop">回到顶部</a>&ndash;%&gt;--%>
+<%--    </p>--%>
+
   </footer>
+
   <!-- END: footer -->
 
   <%-- h2 闪烁字体--%>

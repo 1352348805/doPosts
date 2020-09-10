@@ -53,6 +53,10 @@
 			<i class="fa fa-pencil-square-o"></i>
 			<a href="${pageContext.request.contextPath}/user?action=toCategoryCreate" class="rota">建吧</a>
 		</li>
+		<li title="返回" class="for-top" style="display: list-item;">
+			<i class="fa fa-arrow-up"></i>
+			<a href="#" class="rota" id="to_top">返回</a>
+		</li>
 	</ul>
 </div>
 <!--header-->
@@ -61,7 +65,7 @@
 	<div class="container">
 		<div class="header-bottom-left">
 			<div class="logo">
-				<a href="index.html">
+				<a href="${pageContext.request.contextPath}/user?action=index">
 					<img style="height: 160px; padding-left: 100px" src="${pageContext.request.contextPath }/static/images/head/1-10.png" alt=" " />
 				</a>
 			</div>
@@ -111,7 +115,7 @@
 			<div class=" top-nav rsidebar span_1_of_left">
 				<h3 class="cate">全部贴吧分类</h3>
 				<ul class="menu">
-					<ul class="kid-menu ">
+					<ul class="kid-menu">
 						<%--						<li><a href="#">date[i].className</a></li>--%>
 						<%--						<li><a href="product.html">Urna ac tortor sc</a></li>--%>
 						<%--						<li><a href="product.html">Ornared id aliquet</a></li>--%>
@@ -139,6 +143,11 @@
 							$(this).next().stop(true,true).slideUp('normal');
 						}
 					});
+					$("#to_top").click(function () {
+
+						window.location.href="${pageContext.request.contextPath}/user?action=index";
+
+					})
 
 				});
 			</script>
@@ -150,6 +159,7 @@
 <input type="hidden" id="pid" value="<%=barid%>"/>
 <div style="display: inline-block"></div>
 <!---->
+
 <script type="text/javascript">
 
 	// 展示一级贴吧分类的下所有三级贴吧
@@ -209,6 +219,7 @@
 	}
 
 	$(function(){
+
 		kid_menu();
 		threelevelbar($("#pid").val());
 		// 展示页面左边导航栏
@@ -237,6 +248,10 @@
 		},'json');
 	});
 </script>
+
+
+
+
 <!-- waifu-tips.js 依赖 JQuery 库 -->
 <script src="${pageContext.request.contextPath}/static/js/assets/jquery.min.js?v=3.3.1"></script>
 <!-- 实现拖动效果，需引入 JQuery UI -->
