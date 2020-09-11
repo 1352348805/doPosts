@@ -150,7 +150,7 @@ public class PostDaoImpl implements PostDao {
         if(para.size() == 0){
             builder.delete(builder.length()-7,builder.length());
         }
-        builder.append("ORDER BY createUser.`createDate` DESC LIMIT ?, ?");
+        builder.append("ORDER BY post.`createDate` DESC LIMIT ?, ?");
         para.add(offset);
         para.add(size);
         try {
