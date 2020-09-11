@@ -213,7 +213,7 @@ public class UserServlet extends AbstractServlet{
             pageSize = Integer.valueOf(request.getParameter("pageSize"));
         }catch(Exception e){
             pageIndex = 1;
-            pageSize = 5;
+            pageSize = 10;
         }
         PostQueryParam param = new PostQueryParam();
         param.setPostClassLevel3Id(postSecondLevleId);
