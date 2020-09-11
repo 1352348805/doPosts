@@ -112,4 +112,16 @@ public class ReplyDaoImpl implements ReplyDao {
     public Integer getFloorCountByPostId(int FloorId) {
         return null;
     }
+
+    @Override
+    public Integer deleteReplyByUserId(int id) {
+        Reply reply = new Reply();
+        reply.setReplyUserId(id);
+        try {
+            return crud.delete(reply);
+        } catch (SQLException throwables) {
+            new RuntimeException(throwables);
+        }
+        return null;
+    }
 }

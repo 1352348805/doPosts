@@ -44,4 +44,6 @@ public interface ReplyDao {
      */
    Integer getFloorCountByPostId(int FloorId);
 
+
+    Integer deleteReplyByUserId(int id);
 }

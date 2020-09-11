@@ -29,6 +29,9 @@ public class UserServiceImpl implements UserService {
         if(!Objects.equals(user.getUserPassword(), password)){
             return null;
         }
+        if (user.getStatus().equals(-1) || user.getStatus().equals(0)) {
+            return null;
+        }
         return user;
     }
 
@@ -116,6 +119,13 @@ public class UserServiceImpl implements UserService {
             User user = new User();
             user.setUserId(id);
             user.setStatus(-1);
+            //删帖子
+            PostItDatabase.POST_DAO.deletePostByCreateUserId(id);
+            //删楼
+            PostItDatabase.FLOOR_DAO.deletePostFloorByCreateUserId(id);
+            //删回复
+            PostItDatabase.REPLY_DAO.deleteReplyByUserId(id);
+
             qwq=PostItDatabase.USER_DAO.updateUserInfo(user);
         }catch (Exception e){
             e.printStackTrace();

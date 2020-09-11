@@ -44,4 +44,11 @@ public interface FloorDao {
      * @return 数量
      */
     Integer getFloorCountByPostId(int postId);
+
+    /**
+     * 根据创建者id删除楼层
+     * @param id 创建者id
+     * @return
+     */
+    Integer deletePostFloorByCreateUserId(int id);
 }

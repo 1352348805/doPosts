@@ -90,4 +90,11 @@ public interface PostDao {
      * @return 受影响行数
      */
     Integer addPostReplyConut(Integer postId);
+
+    /**
+     * 根据创建者id删除帖子
+     * @param id 创建者id
+     * @return 受影响行数
+     */
+    Integer deletePostByCreateUserId(int id);
 }

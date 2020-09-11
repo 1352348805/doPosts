@@ -150,7 +150,7 @@ public class PostDaoImpl implements PostDao {
         if(para.size() == 0){
             builder.delete(builder.length()-7,builder.length());
         }
-        builder.append(" LIMIT ?, ?");
+        builder.append("ORDER BY createUser.`createDate` DESC LIMIT ?, ?");
         para.add(offset);
         para.add(size);
         try {
@@ -286,6 +286,21 @@ public class PostDaoImpl implements PostDao {
     public Integer addPostReplyConut(Integer postId) {
         try {
             return basicCrud.executeUpdate("UPDATE `post` SET  `PostReplyCount`=`PostReplyCount`+1  WHERE `postId`=?",postId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 根据创建者id删除帖子
+     *
+     * @param id 创建者id
+     * @return 受影响行数
+     */
+    @Override
+    public Integer deletePostByCreateUserId(int id) {
+        try {
+            return basicCrud.executeUpdate("DELETE FROM `post`  WHERE `createUserId` = ?",id);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

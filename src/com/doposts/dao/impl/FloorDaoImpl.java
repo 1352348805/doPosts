@@ -143,4 +143,22 @@ public class FloorDaoImpl implements FloorDao{
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * 根据创建者id删除楼层
+     *
+     * @param id 创建者id
+     * @return
+     */
+    @Override
+    public Integer deletePostFloorByCreateUserId(int id) {
+        Floor floor = new Floor();
+        floor.setCreateUserId(id);
+        try {
+            return crud.delete(floor);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
 }
