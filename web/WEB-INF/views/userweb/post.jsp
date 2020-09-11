@@ -39,7 +39,6 @@
     <link rel="stylesheet" href="<%=path%>/static/layuiadmin/layui/css/layui.css" media="all"/>
     <script type="text/javascript" src="<%=path%>/static/layuiadmin/layui/layui.js"></script>
     <%--   END   --%>
-
     <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
     <script src="<%=path%>/static/postStyle/js/nprogress.js"></script>
     <script src="<%=path%>/static/postStyle/js/jquery.lazyload.min.js"></script>
@@ -63,85 +62,21 @@
         .probootstrap-main-nav li a{
             color: #fff;
         }
+        #iframeHtml{
+            margin: 0;
+            padding: 0;
+            border: 0;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 9999;
+        }
     </style>
-
 </head>
 <body class="user-select" style="overflow: hidden; width: 100%; height: 100%">
-<div style="margin: 0;padding: 0;border: 0; width: 100%; height: 100%; overflow-y: scroll; position: absolute; z-index: 9999">
-    <jsp:include page="../common/user/head.jsp"/>
-    <section class="container">
-        <div class="leftNav-item">
-            <ul>
-                <li>
-                    <i class="fa fa-user-circle"></i>
-                    <c:choose>
-                        <c:when test="${user == null}">
-                            <a href="${pageContext.request.contextPath }/user?action=toLogin" class="rota">登录</a>
-                        </c:when>
-                        <c:otherwise>
-                            <a href="${pageContext.request.contextPath }/user?action=toUserCenter&uid=${user.userId}" class="rota">个人中心</a>
-                        </c:otherwise>
-                    </c:choose>
-                </li>
-                <li title="回复">
-                    <i class="fa fa-pencil-square-o"></i>
-                    <a href="#send" class="rota">回复</a>
-                </li>
-                <li title="返回" class="for-top" style="display: list-item;">
-                    <i class="fa fa-arrow-up"></i>
-                    <a href="#" class="rota" id="to_top">返回</a>
-                </li>
-            </ul>
-        </div>
+<iframe id="iframeHtml" style="" src="<%=path%>/post?action=innerPostPage&secondId=<%=request.getParameter("secondId")%>&postname=<%=request.getParameter("postname")%>" allowtransparency="true">
 
-        <div class="content-wrap" style="margin-left: 200px">
-            <div class="content" style="margin-right: 450px">
-                <div class="title">
-                    <h3 style="line-height: 2.6;font-size: 28px;font-weight: 800;color: deeppink;">${postName}</h3>
-                </div>
-
-                <%-- 存放帖子列表--%>
-                <div  id="articleid">
-                </div>
-
-                <%-- 存放分页的容器 --%>
-                <div id="page" style="margin-top: 20px; margin-left: 230px;"></div>
-
-                <div class="title" id="comment" style="margin-top: 45px">
-                    <h4>帖子标题</h4>
-                </div>
-                <div id="respond">
-                    <form  action="<%=path%>/floor?action=addpost" id="comment-form" name="comment-form" method="post" class="probootstrap-form" enctype="multipart/form-data" onsubmit="return inputcheck()">
-                        <div class="comment">
-                            <input name="titename" id="titeid" class="form-control" size="22" placeholder="帖子标题（必填）" maxlength="35" autocomplete="off" tabindex="1" type="text">
-                            <div class="row mb60" id="send" style="margin-top: 25px ">
-                                <div class="col-md-12 probootstrap-animate ">
-                                    <h4 style="padding-bottom:15px">帖子内容</h4>
-                                    <div id="editor">
-
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="button" class="btn btn-primary" id="spend" name="submit" value="发 帖" style="margin-top: 15px; padding:10px 25px"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-    <footer class="footer">
-        <div class="container">
-            <p>
-                <img src="${pageContext.request.contextPath }/static/images/uugai_com_1599649694317.png" alt="dfdsf" style="width: 140px;height: 60px;"/>
-            </p>
-            <p>Copyright &copy; 2020.Company name All rights reserved.</p>
-
-        </div>
-        <div id="gotop"><a class="gotop"></a></div>
-    </footer>
-</div>
+</iframe>
 <div style="margin: 0;padding: 0;border: 0; width: 100%; height: 100%; position: absolute;overflow: hidden; z-index: -500" class="dynamic">
     <div class="camera -x ">
     <div class="camera -y">
@@ -3549,189 +3484,5 @@
         </div>
     </div>
 </div></div>
-
-<input type="hidden" id="_path" value="<%=path%>"/>
-<script src="<%=path%>/static/postStyle/js/bootstrap.min.js"></script>
-<script src="<%=path%>/static/postStyle/js/jquery.ias.js"></script>
-<script src="<%=path%>/static/postStyle/js/scripts.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/static/wangEditor-3.1.1/release/wangEditor.js"></script>
-<script type="text/javascript">
-    var path = $("#_path").val();
-    var E = window.wangEditor
-    var editor = new E('#editor')
-    // 或者 var editor = new E( document.getElementById('editor') )
-    editor.customConfig.uploadImgServer = path + '/uploadingimg?action=uploadingimgs';
-    // editor.customConfig.uploadImgShowBase64 = true;
-
-    editor.customConfig.uploadImgHooks = {
-        success: function (xhr, editor, result) {
-            // 图片上传并返回结果，图片插入成功之后触发
-            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，result 是服务器端返回的结果
-        },
-        error: function (xhr, editor) {
-            // 图片上传出错时触发
-            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象
-        }
-        ,
-        customInsert: function (insertImg, result, editor) {
-            // 图片上传并返回结果，自定义插入图片的事件（而不是编辑器自动插入图片！！！）
-            // insertImg 是插入图片的函数，editor 是编辑器对象，result 是服务器端返回的结果
-
-            // 举例：假如上传图片成功后，服务器端返回的是 {url:'....'} 这种格式，即可这样插入图片：
-            var url = path + result.data[0];
-            insertImg(url)
-
-            // result 必须是一个 JSON 格式字符串！！！否则报错
-        }
-    }
-    editor.create();
-
-</script>
-<!-- //Jquery -->
-
-<script type="text/javascript">
-    $(function () {
-
-        postlist({action : 'postListpage',secondId :${secondId} });
-
-        function getQueryVariable(variable)
-        {
-            var query = window.location.search.substring(1); //获得了当前链接(url路径)的中?号后的参数
-            var vars = query.split("&");
-            for (var i=0;i<vars.length;i++) {
-                var pair = vars[i].split("=");
-                if(pair[0] == variable){return pair[1];}
-            }
-            return(false);
-        }
-        // 分页操作
-        layui.use('laypage', function(){
-            var laypage = layui.laypage;
-            let count;
-            $.ajaxSettings.async = false;
-            let datas={ action :'getPostCount' ,postsecondid : ${secondId} }
-            $.post(path + '/post',datas,function (result) {
-                count = result.data;
-            },'json');
-            $.ajaxSettings.async = true;
-
-            //执行一个laypage实例
-            laypage.render({
-                elem: 'page' //注意，这里的 test1 是 ID，不用加 # 号
-                ,limit: 10
-                ,curr: getQueryVariable('pageindex')
-                ,theme: '#5994d6'
-                ,count: count //数据总数，从服务端得到
-                ,
-                jump: function(e, first){ //触发分页后的回调
-                    if(!first){ //一定要加此判断，否则初始时会无限刷新
-                        let pageIndex = e.curr; //当前页
-                        let pageSize = e.limit;
-                        let data={
-                            action : 'postListpage',
-                            secondId : ${secondId},
-                            pageindex : pageIndex,
-                            pageSize : pageSize
-                        }
-                        postlist(data);
-                    }
-                }
-            });
-        });
-        function postlist(data){
-            $.post("<%=path%>/user",data,
-                function (result) {
-                    if(result.code==200){
-                        let date = result.data.data;
-                        var articleDiv = "";
-                        for( var i = 0 ; i < date.length ; i++){
-                            articleDiv += " <article class=\"excerpt excerpt-1\"  style=\"margin-top: 15px;background-color: #EEE;\">" +
-                                " <div style='margin-left:20px ; margin-bottom:20px'><header style='margin-top: 7px;margin-bottom:0px'>\n" +
-                                // "                    <a class=\"cat\" href=\"#\" title=\"MZ-NetBlog主题\">MZ-NetBlog主题<i></i></a>\n" +
-                                "                    <h2 style='font-weight: 800;\n" +
-                                "    font-family: cursive'><a style='color: mediumslateblue' href=\"<%=path%>/user?action=postAndfloor&postid="+date[i].postId+" \" title=\""+date[i].postName+"\" target=\"_blank\">"+date[i].postName+"</a></h2>\n" +
-                                "                </header>\n" +
-                                "                <p class=\"meta\">\n" +
-                                "                    <time class=\"time\"><i class=\"glyphicon glyphicon-time\"></i> "+date[i].createDate+"</time>\n" +
-                                "                    <span class=\"views\"><i class=\"glyphicon glyphicon-eye-open\"></i><i style='padding-left:3px'>"+date[i].watchCount+"</i></span> <span class=\"comment\"  title=\"评论\" target=\"_blank\"><i class=\"glyphicon glyphicon-comment\"></i><i style='padding-left:3px'>"+date[i].postReplyCount+"</i></span>\n" +
-                                "                    <span><i class=\"fa fa-user-circle\" aria-hidden=\"true\"></i><i style='padding-left:7px'>"+date[i].createUserName+"</i></span>\n" +
-                                "                </p>\n"+date[i].description+"</div></article>";
-                        }
-                        $("#articleid").html(articleDiv);
-                    }
-                },'json');
-        }
-        $("#spend").click(function () {
-            var boolean = true;
-            if($("#titeid").val()=="" && $("#titeid").val().length==0){
-                alert("帖子标题不能为空");
-                boolean= false;
-            }
-            else if($("#titeid").val().length>35){
-                alert("帖子标题长度太长,长度不能超过35个字");
-                boolean= false;
-            }
-            else if(editor.txt.html()=="<p><br></p>"){
-                alert("帖子内容不能为空");
-                boolean= false;
-            }
-            else if(boolean){
-                $.ajax({
-                    url : "<%=path%>/user" ,
-                    type : "post" ,
-                    data : {action : "addpost" ,titeid : $("#titeid").val() , postContent : editor.txt.html() ,secondId :${secondId} } ,
-                    dataType : "json" ,
-                    success : function(result){
-                        // alert(data.message=="操作成功");
-                        if(result.code==401){
-                            alert("未登录,请登录后再操作");
-                            window.location.href="<%=path%>/user?action=toLogin";
-                        }
-                        else if(result.message=="操作成功"){
-                            $("#titeid").val("");
-                            editor.txt.clear();
-                            postlist({action : 'postListpage',secondId :${secondId} });
-                        }
-                        else{
-                            alert(result.data);
-                        }
-
-                    },
-                    error : function(){
-                        alert("服务器加载时出错");
-                    }
-                });
-            }
-        });
-    })
-</script>
-<%--<%--%>
-<%--    String urlHeader = request.getHeader("Referer");--%>
-<%--%>--%>
-<%--<input id="urlheader" value="<%=urlHeader%>"/>--%>
-<script type="text/javascript">
-
-    $("#to_top").click(function () {
-        // let URLheader = $("#urlheader").val();
-      window.location.href="${pageContext.request.contextPath}/user?action=forumpark&barId="+1;
-    })
-
-    // window.load= function(){
-    //     var oTop = document.getElementById("to_top");
-    //     var screenw = document.documentElement.clientWidth || document.body.clientWidth;
-    //     var screenh = document.documentElement.clientHeight || document.body.clientHeight;
-    //     oTop.style.left = screenw - oTop.offsetWidth +"px";
-    //     oTop.style.top = screenh - oTop.offsetHeight + "px";
-    //     window.onscroll = function(){
-    //         var scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
-    //         oTop.style.top = screenh - oTop.offsetHeight + scrolltop +"px";
-    //     }
-    //     oTop.onclick = function(){
-    //         document.documentElement.scrollTop = document.body.scrollTop =0;
-    //     }
-    // }
-
-</script>
-
 </body>
 </html>

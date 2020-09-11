@@ -135,7 +135,6 @@ public class PostServlet extends AbstractServlet {
      *@Time 18:48
      */
     public CommonResult selectPostList(HttpServletRequest request , HttpServletResponse response){
-
         Integer secondid = Integer.parseInt(request.getParameter("secondId"));
         postThreeLevleid = secondid;
         System.out.println(postThreeLevleid);
@@ -143,4 +142,10 @@ public class PostServlet extends AbstractServlet {
         return new CommonResult().success(list);
     }
 
+    public String innerPostPage(HttpServletRequest request , HttpServletResponse response){
+        Integer postSecondLevleId = Integer.parseInt(request.getParameter("secondId"));
+        request.setAttribute("secondId",postSecondLevleId);
+        request.setAttribute("postName",request.getParameter("postname"));
+        return "userweb/postHtml";
+    }
 }
