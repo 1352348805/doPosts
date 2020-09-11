@@ -79,7 +79,7 @@ public class FloorServiceImpl  implements FloorService {
      * 根据帖子id获取所有现有的楼层数
      *
      * @param postId 帖子id
-     * @return
+     * @return 数量
      */
     @Override
     public Integer getFloorCountByPostId(int postId) {

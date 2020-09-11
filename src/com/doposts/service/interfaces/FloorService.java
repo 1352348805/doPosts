@@ -32,7 +32,7 @@ public interface FloorService {
     /**
      * 根据帖子id获取所有现有的楼层数
      * @param postId 帖子id
-     * @return
+     * @return 数量
      */
     Integer getFloorCountByPostId(int postId);
 

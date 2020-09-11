@@ -88,4 +88,28 @@ public class ReplyDaoImpl implements ReplyDao {
             transactionCrud.getConnectionManager().closeConnection();
         }
     }
+
+    /**
+     * 用id获取正文
+     *
+     * @param FloorId  楼层id
+     * @param offset
+     * @param pageSize
+     * @return 所有楼层信息
+     */
+    @Override
+    public List<SuperReply> getReplyByFloorId(Integer FloorId, int offset, int pageSize) {
+        return null;
+    }
+
+    /**
+     * 根据帖子id获取所有现有的回复数
+     *
+     * @param FloorId 帖子id
+     * @return 数量
+     */
+    @Override
+    public Integer getFloorCountByPostId(int FloorId) {
+        return null;
+    }
 }

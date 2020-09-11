@@ -2,7 +2,11 @@ package com.doposts.service.interfaces;
 
 import com.doposts.entity.Floor;
 import com.doposts.entity.Reply;
+import com.doposts.utils.Page;
 import com.doposts.vo.FloorWithReply;
+import com.doposts.vo.SuperReply;
+
+import java.util.List;
 
 /**
  * @author xiao yao
@@ -24,5 +28,13 @@ public interface ReplyService {
      * @return
      */
     boolean deleteReply(Integer replyId);
+
+
+    /**
+     *  用id获取正文
+     * @param FloorId 楼层id
+     * @return 所有回复信息
+     */
+    Page<SuperReply> getReplyByFloorId(Integer FloorId, int pageIndex, int pageSize);
 
 }

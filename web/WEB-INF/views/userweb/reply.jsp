@@ -1,5 +1,6 @@
 <%@ page import="com.alibaba.fastjson.JSON" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
@@ -74,7 +75,7 @@
         </li>
         <li title="回到顶部" class="for-top">
             <i class="fa fa-arrow-up"></i>
-            <a href="javascript:;" class="rota">去顶部</a>
+            <a href="javascript:;" class="rota">返回帖子列表</a>
         </li>
     </ul>
 </div>
@@ -122,7 +123,7 @@
 </div>
 
 <div style="width: 1170px;border:rgb(225 226 230) solid 1px;margin: 0 auto;">
-    <div class="gd" style=" float: left; display: inline-block; background: rgb(251,251,253);width: 130px; height:198px; padding: 20px">
+    <div class="gd" style=" float: left; display: inline-block; background: rgb(251,251,253);width: 130px; height:190px; padding: 20px">
         <ul style="width: 130px; height: 170px">
             <li>
                 <div>
@@ -152,7 +153,7 @@
             <div style="padding: 20px 20px 0px 0px ">
                         <span class="clearfix like">
   				<a class="hint info-right date" href="#" title="发帖时间" style="margin: 0px 0px 0px 0px">
-                    <i class="fa fa-clock-o">发帖时间&nbsp;:&nbsp;${requestScope.post.createDate}</i>
+                    <i class="fa fa-clock-o">发帖时间&nbsp;:&nbsp;${fn:substring(requestScope.post.createDate, 0, 19)}</i>
                 </a>
   				</span>
                 <div style="margin: 20px;padding-bottom: 50px;"><p> ${requestScope.post.description}</p></div>
@@ -201,7 +202,7 @@
                             <div style="padding: 20px 20px 0px 0px ">
                         <span class='clearfix like'>
   				<a class='hint info-right date' href='#' title='发帖时间' style="margin: 0px 0px 0px 0px">
-                    <i class='fa fa-clock-o'>发帖时间&nbsp;:&nbsp;${item.sendDate}</i>
+                    <i class='fa fa-clock-o'>发帖时间&nbsp;:&nbsp;${fn:substring(item.sendDate, 0, 19)}</i>
                 </a>
   				</span>
                                 <div style="margin: 20px;padding-bottom: 50px;">${item.postContent}</div>
@@ -246,12 +247,12 @@
                                                         <a href="${pageContext.request.contextPath }/user?action=toUserCenter&uid=${replys.replyUserId}">${replys.userName}:</a>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <a href="${pageContext.request.contextPath }/user?action=toUserCenter&uid=${replys.replyUserId}">${user.userName}</a> 回复 <a href="${pageContext.request.contextPath }/user?action=toUserCenter&uid=${replys.repliedUserId}">${replys.repliedUserName}</a>：;
+                                                        <a href="${pageContext.request.contextPath }/user?action=toUserCenter&uid=${replys.replyUserId}">${replys.userName}</a> 回复 <a href="${pageContext.request.contextPath }/user?action=toUserCenter&uid=${replys.repliedUserId}">${replys.repliedUserName}</a>：;
                                                     </c:otherwise>
                                                 </c:choose>
                                                 <span>${replys.replyContent}</span>
                                                 <div style=" float: right;padding: 10px 0px 0px 0px ">
-                                                    <span>${replys.replyDate}</span>
+                                                    <span>${fn:substring(replys.replyDate, 0, 19)}</span>
                                                     <a href="javascript:;" id="replys" onclick="replyUsermessage(this,${replys.replyUserId},'${replys.userName}',${item.postFloor})">回复</a>
                                                 </div>
                                             </div>
@@ -642,12 +643,10 @@
     //盖楼
     $("#spend").click(function () {
         let text =  editor.txt.text();
+        let h =  editor.txt.html();
         let s = fanzhuanyi(text);
-        if(text==""){
+        if(h.indexOf('img')=== -1 && s.trim()==''){
             alert("帖子内容不能为空");
-            return;
-        } else if (s.trim()=='') {
-            alert("内容不能为空格");
             return;
         }
         $.ajax({

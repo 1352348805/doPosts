@@ -2,12 +2,17 @@ package com.doposts.service.impl;
 
 import com.doposts.dao.PostItDatabase;
 import com.doposts.entity.Floor;
+import com.doposts.entity.Post;
 import com.doposts.entity.Reply;
 import com.doposts.service.interfaces.ReplyService;
+import com.doposts.utils.Page;
 import com.doposts.vo.FloorWithReply;
+import com.doposts.vo.SuperReply;
 import org.jsoup.Connection;
 
 import java.sql.SQLException;
+
+import java.util.List;
 
 /**
  * @author xiao yao
@@ -43,4 +48,24 @@ public class ReplyServiceImpl implements ReplyService {
         }
         return false;
     }
+
+    /**
+     * 用id获取正文
+     *
+     * @param FloorId  楼层id
+     * @param pageIndex
+     * @param pageSize
+     * @return 所有楼层信息
+     */
+    @Override
+    public Page<SuperReply> getReplyByFloorId(Integer FloorId, int pageIndex, int pageSize) {
+        Page<SuperReply> page=new Page<>();
+        page.setCurrPageNo(pageIndex);
+        page.setPageSize(pageSize);
+        page.setTotalCount(PostItDatabase.REPLY_DAO.getFloorCountByPostId(FloorId));
+        page.setData(PostItDatabase.REPLY_DAO.getReplyByFloorId(FloorId, page.getOffSet(), page.getPageSize()));
+        List<SuperReply> replyByFloorId = PostItDatabase.REPLY_DAO.getReplyByFloorId(FloorId, page.getOffSet(), page.getPageSize());
+        return page;
+    }
+
 }
