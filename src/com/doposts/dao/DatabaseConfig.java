@@ -12,18 +12,14 @@ import java.io.IOException;
 public class DatabaseConfig {
     static{
         //数据库配置文件载入过程
-        try {
-            PropertiesManager properties = new PropertiesManager(Path.resourcePath("database.properties"));
-            URL = properties.getValue("url").trim();
-            PORT = Integer.parseInt(properties.getValue("port").trim());
-            DATABASE = properties.getValue("database").trim();
-            USER_NAME = properties.getValue("username").trim();
-            PASSWORD = properties.getValue("password").trim();
-            DATA_OUT_PUT = properties.getValue("dx_database.consoleResultOutput").trim();
-            CONSOLE_OUTPUT = properties.getValue("dx_database.consoleOutput").trim();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        PropertiesManager properties = new PropertiesManager(Path.resourcePathAsStream("database.properties"));
+        URL = properties.getValue("url").trim();
+        PORT = Integer.parseInt(properties.getValue("port").trim());
+        DATABASE = properties.getValue("database").trim();
+        USER_NAME = properties.getValue("username").trim();
+        PASSWORD = properties.getValue("password").trim();
+        DATA_OUT_PUT = properties.getValue("dx_database.consoleResultOutput").trim();
+        CONSOLE_OUTPUT = properties.getValue("dx_database.consoleOutput").trim();
     }
 
     private final static String URL;
