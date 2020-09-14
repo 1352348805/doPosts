@@ -1,5 +1,6 @@
 package com.doposts.dao.impl;
 
+import com.doposts.dao.Count;
 import com.doposts.dao.CrudHandler;
 import com.doposts.dao.DatabaseConfig;
 import com.doposts.dao.PostItDatabase;
@@ -93,13 +94,35 @@ public class ReplyDaoImpl implements ReplyDao {
      * 用id获取正文
      *
      * @param FloorId  楼层id
-     * @param offset
-     * @param pageSize
+     * @param offset 从第几个开始
+     * @param pageSize 查几个
      * @return 所有楼层信息
      */
     @Override
     public List<SuperReply> getReplyByFloorId(Integer FloorId, int offset, int pageSize) {
-        return null;
+        try {
+            return crud.executeQueryToBeanList("SELECT\n" +
+                    "\treply.*, \n" +
+                    "\treplyUser.userName AS replyUserName, \n" +
+                    "\trepliedUser.userName AS repliedUserName, \n" +
+                    "\treplyUser.favicon AS replyFavicon, \n" +
+                    "\trepliedUser.favicon AS repliedFavicon\n" +
+                    "FROM\n" +
+                    "\treply AS reply\n" +
+                    "\tLEFT JOIN\n" +
+                    "\t`user` AS replyUser\n" +
+                    "\tON \n" +
+                    "\t\treply.replyUserId = replyUser.userId\n" +
+                    "\tLEFT JOIN\n" +
+                    "\t`user` AS repliedUser\n" +
+                    "\tON \n" +
+                    "\t\treply.repliedUserId = repliedUser.userId\n" +
+                    "WHERE\n" +
+                    "\treply.floorId = ?\n" +
+                    "LIMIT ?, ?", SuperReply.class, FloorId, offset, pageSize);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -109,8 +132,14 @@ public class ReplyDaoImpl implements ReplyDao {
      * @return 数量
      */
     @Override
-    public Integer getFloorCountByPostId(int FloorId) {
-        return null;
+    public Integer getReplyCountByFloorId(int FloorId) {
+        Reply reply = new Reply();
+        reply.setFloorId(FloorId);
+        try {
+            return crud.selectCount(Reply.class, reply);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -119,9 +148,8 @@ public class ReplyDaoImpl implements ReplyDao {
         reply.setReplyUserId(id);
         try {
             return crud.delete(reply);
-        } catch (SQLException throwables) {
-            new RuntimeException(throwables);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-        return null;
     }
 }

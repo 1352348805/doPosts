@@ -33,7 +33,7 @@ public interface ReplyDao {
      * @return 所有楼层信息
      */
 
-    List<SuperReply>  getReplyByFloorId(Integer FloorId, int offset, int pageSize);
+    List<SuperReply> getReplyByFloorId(Integer FloorId, int offset, int pageSize);
 
 
    /**
@@ -42,7 +42,7 @@ public interface ReplyDao {
      * @param FloorId 帖子id
      * @return 数量
      */
-   Integer getFloorCountByPostId(int FloorId);
+   Integer getReplyCountByFloorId(int FloorId);
 
 
     Integer deleteReplyByUserId(int id);
